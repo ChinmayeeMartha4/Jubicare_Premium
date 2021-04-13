@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/app_bg"
+    tools:context=".HealthRecord">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        android:padding="3dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="3dp"
+            android:text="@string/Fill_your_health_record"
+            android:textColor="@color/colorTheme"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+        <LinearLayout
+            android:id="@+id/ll_dob"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="3dp"
+                android:text="@string/DateofBirth"
+                android:textColor="@color/menuTextColor"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_of_edittext"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/et_date_of_birth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:drawableLeft="@drawable/calendar"
+                    android:hint="  DD/MM/YYYY"
+                    android:inputType="date"
+                    android:padding="10dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_height"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="3dp"
+                android:text="@string/height"
+                android:textColor="@color/menuTextColor"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_of_edittext"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/et_height"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:drawableLeft="@drawable/height"
+                    android:inputType="number"
+                    android:hint="@string/enteryourheight"
+                    android:padding="10dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_weight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="3dp"
+                android:text="@string/weight"
+                android:textColor="@color/menuTextColor"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_of_edittext"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/et_weight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:drawableLeft="@drawable/weight"
+                    android:inputType="number"
+                    android:hint="@string/enteryourweight"
+                    android:padding="10dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_diabetic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/diabetic"
+                android:textColor="@color/menuTextColor"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+            <CheckBox
+                android:id="@+id/chekcbox_diabetic"
+                android:layout_toRightOf="@+id/tv_diabetic"
+                android:layout_marginTop="18dp"
+                android:layout_marginLeft="47dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_hypertention"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hypertention"
+                android:textColor="@color/menuTextColor"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+            <CheckBox
+                android:id="@+id/chekcbox_hypertention"
+                android:layout_toRightOf="@+id/tv_hypertention"
+                android:layout_marginLeft="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_thyroid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hypertention"
+                android:textColor="@color/menuTextColor"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+            <CheckBox
+                android:id="@+id/thyroid"
+                android:layout_toRightOf="@+id/tv_thyroid"
+                android:layout_marginLeft="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rl_radiobutton"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/rb_age"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="@string/hypo"
+                />
+
+            <RadioButton
+                android:id="@+id/rb_dob"
+                android:layout_toRightOf="@+id/rb_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hyper" />
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_toRightOf="@+id/ll_oldApp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+            <TextView
+                android:id="@+id/button_submit"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:textColor="@color/white"
+                android:text="Submit"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:background="@drawable/submitbutton">
+
+            </TextView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

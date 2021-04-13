@@ -18,6 +18,28 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         setTitle(Html.fromHtml("<font color=\"#FFFFFFFF\">" + "Home" + "</font>"));
 
+        cv_home=findViewById(R.id.cv_home);
+        cv_profile=findViewById(R.id.cv_profile);
+
+        cv_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(HomeActivity.this, TakeAppointment.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        cv_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(HomeActivity.this, HealthRecord.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
 
     }
 }

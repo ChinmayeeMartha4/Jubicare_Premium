@@ -1,5 +1,25 @@
 <resources>
-    <string name="app_name">Jubicare Premium</string>
+    <string name="app_name">Jubicare_Premium</string>
+    <string name="patientName">Name</string>
+    <string name="Gender">Gender</string>
+    <string name="DateofBirth">Date of Birth</string>
+    <string name="Male">Male</string>
+    <string name="Female">Female</string>
+    <string name="Other">Other</string>
+    <string name="age_age">Age</string>
+    <string name="age">Age (in years)</string>
+    <string name="aadhar">Aadhar Number</string>
+    <string name="Fill_your_health_record">Fill your health record</string>
+    <string name="height">Height in cm</string>
+    <string name="enteryourheight">Enter your weight</string>
+    <string name="weight">Height in kg</string>
+    <string name="enteryourweight">Enter your weight</string>
+    <string name="diabetic">Diabetic</string>
+    <string name="hypertention">Hypertention</string>
+    <string name="thyroid">Thyroid</string>
+    <string name="hypo">Hypo</string>
+    <string name="hyper">Hyper</string>
+
     <string name="jubicare_premium">JUBICARE PREMIUM</string>
     <string name="mobile_no">Mobile number</string>
     <string name="Password">Password</string>

@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/app_bg"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        tools:context=".TakeAppointment">
+
+      <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_margin="5dp"
+              android:focusable="true"
+              android:focusableInTouchMode="true"
+              android:orientation="vertical"
+              android:padding="3dp">
+              <TextView
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="15dp"
+                  android:layout_marginBottom="3dp"
+                  android:text="@string/patientName"
+                  android:textColor="@color/menuTextColor"
+                  android:textSize="16sp"
+                  android:textStyle="bold" />
+              <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:background="@drawable/shape_of_edittext"
+                  android:orientation="vertical">
+
+                  <EditText
+                      android:id="@+id/et_patient_name"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:background="@android:color/transparent"
+                      android:inputType="textCapSentences"
+                      android:padding="12dp" />
+              </LinearLayout>
+              <LinearLayout
+                    android:id="@+id/ll_first"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                   >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="3dp"
+                        android:layout_marginRight="5dp"
+                        android:text="@string/Gender"
+                        android:textColor="@color/menuTextColor"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <RadioGroup
+                            android:id="@+id/rg_gender"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb_male"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/Male" />
+
+                            <RadioButton
+                                android:id="@+id/rb_female"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/Female" />
+
+                            <RadioButton
+                                android:id="@+id/rb_other"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/Other" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                  <TextView
+                      android:id="@+id/tv_what_you_know"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="15dp"
+                      android:layout_marginBottom="3dp"
+                      android:text="What did you know?"
+                      android:textColor="@color/menuTextColor"
+                      android:textSize="16sp"
+                      android:textStyle="bold"
+                      />
+
+                  <LinearLayout
+                      android:id="@+id/ll_what_you_know"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="vertical">
+
+                      <RadioGroup
+                          android:id="@+id/rg_age"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:orientation="horizontal">
+
+                          <RadioButton
+                              android:id="@+id/rb_age"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="1"
+                              android:text="@string/age_age"
+
+                              />
+
+                          <RadioButton
+                              android:id="@+id/rb_dob"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="1"
+                              android:text="@string/DateofBirth" />
+
+                      </RadioGroup>
+
+                  </LinearLayout>
+                  <LinearLayout
+                      android:id="@+id/ll_age"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="vertical">
+
+                      <TextView
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="20dp"
+                          android:layout_marginBottom="3dp"
+                          android:text="@string/age"
+                          android:textColor="@color/menuTextColor"
+                          android:textSize="16sp"
+                          android:textStyle="bold" />
+
+                      <LinearLayout
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:background="@drawable/shape_of_edittext"
+                          android:orientation="vertical">
+
+                          <EditText
+                              android:id="@+id/et_age"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:background="@android:color/transparent"
+                              android:inputType="number"
+                              android:maxLength="3"
+                              android:padding="12dp" />
+
+                      </LinearLayout>
+
+                  </LinearLayout>
+                  <LinearLayout
+                      android:id="@+id/ll_dob"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="vertical">
+
+                      <TextView
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="20dp"
+                          android:layout_marginBottom="3dp"
+                          android:text="@string/DateofBirth"
+                          android:textColor="@color/menuTextColor"
+                          android:textSize="16sp"
+                          android:textStyle="bold" />
+
+                      <LinearLayout
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:background="@drawable/shape_of_edittext"
+                          android:orientation="vertical">
+
+                          <EditText
+                              android:id="@+id/et_date_of_birth"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:background="@android:color/transparent"
+                              android:drawableLeft="@drawable/calendar"
+                              android:hint="  DD/MM/YYYY"
+                              android:inputType="date"
+                              android:padding="10dp" />
+
+                      </LinearLayout>
+
+                  </LinearLayout>
+
+                  <TextView
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="20dp"
+                      android:layout_marginBottom="3dp"
+                      android:text="@string/aadhar"
+                      android:textColor="@color/menuTextColor"
+                      android:textSize="16sp"
+                      android:textStyle="bold" />
+
+                  <LinearLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:background="@drawable/shape_of_edittext"
+                      android:orientation="vertical">
+
+                      <EditText
+                          android:id="@+id/et_aadhar_card"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:background="@android:color/transparent"
+                          android:inputType="number"
+                          android:maxLength="12"
+                          android:padding="12dp" />
+
+                  </LinearLayout>
+              </LinearLayout>
+              <RelativeLayout
+                  android:id="@+id/rl_button"
+                  android:layout_marginTop="20dp"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal">
+                  <LinearLayout
+                      android:id="@+id/ll_oldApp"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:gravity="left"
+                      android:layout_margin="5dp"
+                      >
+                      <TextView
+                          android:id="@+id/button_old_appointment"
+                          android:layout_width="150dp"
+                          android:layout_height="50dp"
+                          android:textColor="@color/white"
+                          android:text="Old Appointment"
+                          android:textSize="16sp"
+                          android:gravity="center"
+                          android:background="@drawable/oldbutton">
+
+                      </TextView>
+
+                  </LinearLayout>
+                  <LinearLayout
+                      android:layout_toRightOf="@+id/ll_oldApp"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:gravity="right"
+                      android:layout_margin="@dimen/_5dp"
+                     >
+                      <TextView
+                          android:id="@+id/button_submit"
+                          android:layout_width="150dp"
+                          android:layout_height="50dp"
+                          android:textColor="@color/white"
+                          android:text="Submit"
+                          android:textSize="@dimen/text_16"
+                          android:gravity="center"
+                          android:background="@drawable/submitbutton">
+
+                      </TextView>
+
+                  </LinearLayout>
+              </RelativeLayout>
+
+
+
+          </LinearLayout>
+       </ScrollView>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
