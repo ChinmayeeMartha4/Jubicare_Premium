@@ -2,13 +2,13 @@
     <string name="app_name">Jubicare_Premium</string>
     <string name="patientName">Name</string>
     <string name="Gender">Gender</string>
-    <string name="DateofBirth">Date of Birth</string>
+    <string name="DateofBirth">Date of birth</string>
     <string name="Male">Male</string>
     <string name="Female">Female</string>
     <string name="Other">Other</string>
     <string name="age_age">Age</string>
     <string name="age">Age (in years)</string>
-    <string name="aadhar">Aadhar Number</string>
+    <string name="aadhar">Aadhar number</string>
     <string name="enteraadharnumber">Enter your aadhar number</string>
     <string name="Fill_your_health_record">Fill your health record</string>
     <string name="height">Height in cm</string>
@@ -32,7 +32,7 @@
     <string name="mobile_no">Mobile number</string>
     <string name="Password">Password</string>
     <string name="login">Login</string>
-    <string name="forgot_password">Forgot Password</string>
+    <string name="forgot_password">Forgot password</string>
     <string name="don_t_have_an_account">Don\'t have an account ?</string>
     <string name="signup">Sign up</string>
     <string name="new_user">New user</string>
@@ -50,5 +50,41 @@
     <string name="view_prescription">View prescription</string>
     <string name="title">Title</string>
     <string name="view">View</string>
+
+
+    <string name="blood">Blood group</string>
+    <string name="caste">Caste</string>
+    <string name="Yes">Yes</string>
+    <string name="No">No</string>
+    <string name="PatientContact">Contact number</string>
+    <string name="Pincode">Pincode</string>
+    <string name="state">State</string>
+    <string name="District">District</string>
+    <string name="SelectBlock">Select block</string>
+    <string name="SelectVillage">Select village</string>
+    <string name="post_office">Post office</string>
+    <string name="is_covered_area">Is covered area?</string>
+    <string name="Address">Address</string>
+    <string name="PatientEmergencyContact">Emergency contact</string>
+    <string name="patient_image">Profile photo</string>
+    <string name="symptom_of_patient">Symptoms of the patient</string>
+    <string name="Symptom">Symptom</string>
+    <string name="select_disease">Diseases</string>
+    <string name="current_medications">Currently taking any prescribed medication</string>
+    <string name="DateofMedicinePrescribed">Date of prescribed medication</string>
+    <string name="conducted_any_tests">Conducted any tests</string>
+    <string name="DateofTestDone">Date of test</string>
+    <string name="doctor_assigned">Doctor assignment</string>
+    <string name="DocumentAttachment">Document attachment</string>
+    <string name="if_any_emergency_then_check_here">if any emergency then check the box given below.</string>
+    <string name="emergency">Emergency</string>
+    <string name="blood_oxy">Blood oxygen level (SpO2) in %</string>
+    <string name="people">People with disability (PwDs)</string>
+    <string name="all_fields_are_mandatory_with_star_in_this_screen">Note: All fields are mandatory with star (*) in this screen.</string>
+
+
+
+
+
 
 </resources>

@@ -152,7 +152,9 @@
                 android:id="@+id/chekcbox_diabetic"
                 android:layout_toRightOf="@+id/tv_diabetic"
                 android:layout_marginTop="18dp"
-                android:layout_marginLeft="45dp"
+                android:layout_marginLeft="49dp"
+                android:checked="true"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
@@ -175,7 +177,7 @@
                 android:id="@+id/chekcbox_hypertention"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
+                android:layout_marginLeft="15dp"
                 android:layout_toRightOf="@+id/tv_hypertention"
                 android:gravity="center_horizontal" />
 
@@ -194,7 +196,7 @@
             <CheckBox
                 android:id="@+id/thyroid"
                 android:layout_toRightOf="@+id/tv_thyroid"
-                android:layout_marginLeft="47dp"
+                android:layout_marginLeft="53dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
@@ -211,6 +213,7 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:text="@string/hypo"
+                android:checked="true"
                 android:fontFamily="@font/robotoregular"
                 />
 

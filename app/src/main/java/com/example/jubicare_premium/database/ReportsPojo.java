@@ -22,7 +22,7 @@ public class ReportsPojo {
 
 
 
-    private static final String TABLE_NAME= "appointment";
+    private static final String TABLE_NAME= "reports";
     private static final String COLUMN_LOCAL_ID= "local_id";
     private static final String COLUMN_REPORTS_ID= "report_id";
     private static final String COLUMN_DATE= "date";

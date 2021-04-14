@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.jubicare_premium">
 
     <application
@@ -9,15 +10,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".NewUserWelcomeHome"></activity>
-        <activity android:name=".NewUserHome" />
-        <activity android:name=".Login">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".activity.NewUserWelcomeHome"></activity>
+        <activity android:name=".activity.NewUserHome" />
+        <activity android:name=".Login"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".HomeActivity"
             android:screenOrientation="portrait" />
@@ -34,6 +30,14 @@
         <activity
             android:name=".activity.Reports"
             android:screenOrientation="portrait" />
+        <activity android:name=".activity.SplashScreen">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>

@@ -25,13 +25,13 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/margin160"
+                android:layout_height="@dimen/margin170"
                 android:background="@drawable/login_1_bg"
                 android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/margin135"
+                    android:layout_height="@dimen/margin115"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/_15dp"
 

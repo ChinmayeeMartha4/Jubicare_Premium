@@ -85,8 +85,6 @@
             android:id="@+id/reports_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/color_light_gray"
-
             android:orientation="vertical"
             />
     </LinearLayout>

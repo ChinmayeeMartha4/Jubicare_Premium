@@ -62,7 +62,6 @@ public class HomeActivity extends AppDrawer {
         appointmentPojo=new AppointmentPojo();
         reportsPojo=new ReportsPojo();
         sqliteHelper = new SqliteHelper(this);
-        sqliteHelper.openDataBase();
 
         cv_appointment=findViewById(R.id.cv_appointment);
         cv_profile=findViewById(R.id.cv_profile);
@@ -83,8 +82,10 @@ public class HomeActivity extends AppDrawer {
             public void onClick(View view) {
                 appointmentPojo.setDate(stroa1);
                 appointmentPojo.setDoctor_name(stroav1);
-//                appointmentPojo.setDate(strsc2);
-//                appointmentPojo.setDoctor_name(strscv2);
+//                appointmentPojo.setDate1(stroa2);
+//                appointmentPojo.setDoctor_name1(stroav2);
+                sqliteHelper.saveAppointmentList(appointmentPojo);
+
                 Intent intent = new Intent(HomeActivity.this, Prescription.class);
                 startActivity(intent);
                 finish();
@@ -99,6 +100,8 @@ public class HomeActivity extends AppDrawer {
                 reportsPojo.setTitle(strrev1);
 //                reportsPojo.setDate(strre2);
 //                reportsPojo.setDoctor_name(strrev1);
+                sqliteHelper.saveReportList(reportsPojo);
+
                 Intent intent = new Intent(HomeActivity.this, Reports.class);
                 startActivity(intent);
                 finish();
@@ -114,5 +117,11 @@ public class HomeActivity extends AppDrawer {
             }
         });
 
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(HomeActivity.this, Login.class);
+        startActivity(intent);
+        finish();
     }
 }
