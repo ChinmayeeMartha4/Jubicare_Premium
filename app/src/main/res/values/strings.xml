@@ -9,16 +9,24 @@
     <string name="age_age">Age</string>
     <string name="age">Age (in years)</string>
     <string name="aadhar">Aadhar Number</string>
+    <string name="enteraadharnumber">Enter your aadhar number</string>
     <string name="Fill_your_health_record">Fill your health record</string>
     <string name="height">Height in cm</string>
-    <string name="enteryourheight">Enter your weight</string>
-    <string name="weight">Height in kg</string>
+    <string name="enteryourheight">Enter your height</string>
+    <string name="weight">Weight in kg</string>
     <string name="enteryourweight">Enter your weight</string>
     <string name="diabetic">Diabetic</string>
     <string name="hypertention">Hypertention</string>
     <string name="thyroid">Thyroid</string>
     <string name="hypo">Hypo</string>
     <string name="hyper">Hyper</string>
+    <string name="welcome">Welcome to</string>
+    <string name="jubicarepremium">JUBICARE Premium </string>
+    <string name="wecareforyourhealth">(We care for your health) </string>
+    <string name="enteryourmobileno">Enter your mobile no</string>
+    <string name="welcomename">Welcome Kedar</string>
+    <string name="discount">You are eligible for a discounted corporate offer.</string>
+    <string name="discountRs">You will have to pay Rs. 99 for availing this service.</string>
 
     <string name="jubicare_premium">JUBICARE PREMIUM</string>
     <string name="mobile_no">Mobile number</string>

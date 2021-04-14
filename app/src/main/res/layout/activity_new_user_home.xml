@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/app_bg"
+    tools:context=".NewUserHome">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:padding="3dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5dp">
+            <TextView
+                android:id="@+id/tv_welcome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/welcome"
+                android:textSize="@dimen/text_16" />
+            <TextView
+                android:id="@+id/tv_jubicareprem"
+                android:layout_below="@+id/tv_welcome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5dp"
+                android:textSize="24sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="@string/jubicarepremium"/>
+            <TextView
+                android:id="@+id/tv_carefor"
+                android:layout_below="@+id/tv_jubicareprem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5dp"
+                android:text="@string/wecareforyourhealth"
+                android:textSize="@dimen/text_18" />
+
+            <TextView
+                android:id="@+id/tv_mobileNo"
+                android:layout_below="@+id/tv_carefor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="3dp"
+                android:text="@string/enteryourmobileno"
+                android:textColor="@color/menuTextColor"
+                android:textSize="16sp"
+                android:textStyle="normal" />
+
+            <LinearLayout
+                android:id="@+id/ll_mobileNo"
+                android:layout_below="@+id/tv_mobileNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_of_edittext"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/et_mobileNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_baseline_phone_android_24"
+                    android:background="@android:color/transparent"
+                    android:inputType="number"
+                    android:hint=" 9925656565"
+                    android:maxLength="10"
+                    android:padding="12dp" />
+
+            </LinearLayout>
+            <LinearLayout
+               android:id="@+id/ll_next"
+                android:layout_below="@+id/ll_mobileNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp">
+                <TextView
+                    android:id="@+id/Tv_next"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:textColor="@color/white"
+                    android:text="Next"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:background="@drawable/submitbutton">
+
+                </TextView>
+
+            </LinearLayout>
+
+
+
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

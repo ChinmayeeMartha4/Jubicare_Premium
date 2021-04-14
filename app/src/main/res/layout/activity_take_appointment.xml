@@ -35,7 +35,7 @@
                   android:text="@string/patientName"
                   android:textColor="@color/menuTextColor"
                   android:textSize="16sp"
-                  android:textStyle="bold" />
+                  android:fontFamily="@font/robotoregular" />
               <LinearLayout
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
@@ -48,6 +48,7 @@
                       android:layout_height="wrap_content"
                       android:background="@android:color/transparent"
                       android:inputType="textCapSentences"
+                      android:fontFamily="@font/robotoregular"
                       android:padding="12dp" />
               </LinearLayout>
               <LinearLayout
@@ -66,7 +67,7 @@
                         android:text="@string/Gender"
                         android:textColor="@color/menuTextColor"
                         android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:fontFamily="@font/robotoregular" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -84,6 +85,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:fontFamily="@font/robotoregular"
                                 android:text="@string/Male" />
 
                             <RadioButton
@@ -91,6 +93,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:fontFamily="@font/robotoregular"
                                 android:text="@string/Female" />
 
                             <RadioButton
@@ -98,6 +101,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:fontFamily="@font/robotoregular"
                                 android:text="@string/Other" />
 
                         </RadioGroup>
@@ -113,7 +117,7 @@
                       android:text="What did you know?"
                       android:textColor="@color/menuTextColor"
                       android:textSize="16sp"
-                      android:textStyle="bold"
+                      android:fontFamily="@font/robotoregular"
                       />
 
                   <LinearLayout
@@ -133,6 +137,7 @@
                               android:layout_width="wrap_content"
                               android:layout_height="wrap_content"
                               android:layout_weight="1"
+                              android:fontFamily="@font/robotoregular"
                               android:text="@string/age_age"
 
                               />
@@ -142,6 +147,7 @@
                               android:layout_width="wrap_content"
                               android:layout_height="wrap_content"
                               android:layout_weight="1"
+                              android:fontFamily="@font/robotoregular"
                               android:text="@string/DateofBirth" />
 
                       </RadioGroup>
@@ -161,7 +167,7 @@
                           android:text="@string/age"
                           android:textColor="@color/menuTextColor"
                           android:textSize="16sp"
-                          android:textStyle="bold" />
+                          android:fontFamily="@font/robotoregular" />
 
                       <LinearLayout
                           android:layout_width="match_parent"
@@ -176,6 +182,7 @@
                               android:background="@android:color/transparent"
                               android:inputType="number"
                               android:maxLength="3"
+                              android:fontFamily="@font/robotoregular"
                               android:padding="12dp" />
 
                       </LinearLayout>
@@ -195,7 +202,7 @@
                           android:text="@string/DateofBirth"
                           android:textColor="@color/menuTextColor"
                           android:textSize="16sp"
-                          android:textStyle="bold" />
+                          android:fontFamily="@font/robotoregular" />
 
                       <LinearLayout
                           android:layout_width="match_parent"
@@ -210,6 +217,7 @@
                               android:background="@android:color/transparent"
                               android:drawableLeft="@drawable/calendar"
                               android:hint="  DD/MM/YYYY"
+                              android:fontFamily="@font/robotoregular"
                               android:inputType="date"
                               android:padding="10dp" />
 
@@ -225,7 +233,7 @@
                       android:text="@string/aadhar"
                       android:textColor="@color/menuTextColor"
                       android:textSize="16sp"
-                      android:textStyle="bold" />
+                      android:fontFamily="@font/robotoregular" />
 
                   <LinearLayout
                       android:layout_width="match_parent"
@@ -239,8 +247,188 @@
                           android:layout_height="wrap_content"
                           android:background="@android:color/transparent"
                           android:inputType="number"
+                          android:fontFamily="@font/robotoregular"
                           android:maxLength="12"
                           android:padding="12dp" />
+
+                  </LinearLayout>
+                  <LinearLayout
+                      android:id="@+id/ll_height"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="vertical">
+
+                      <TextView
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="20dp"
+                          android:layout_marginBottom="3dp"
+                          android:text="@string/height"
+                          android:textColor="@color/menuTextColor"
+                          android:textSize="16sp"
+                          android:fontFamily="@font/robotoregular" />
+
+                      <LinearLayout
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:background="@drawable/shape_of_edittext"
+                          android:orientation="vertical">
+
+                          <EditText
+                              android:id="@+id/et_height"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:background="@android:color/transparent"
+                              android:drawableLeft="@drawable/height"
+                              android:inputType="number"
+                              android:fontFamily="@font/robotoregular"
+                              android:padding="10dp" />
+
+                      </LinearLayout>
+                  </LinearLayout>
+                  <LinearLayout
+                      android:id="@+id/ll_weight"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="vertical">
+
+                      <TextView
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="20dp"
+                          android:layout_marginBottom="3dp"
+                          android:text="@string/weight"
+                          android:textColor="@color/menuTextColor"
+                          android:textSize="16sp"
+                          android:fontFamily="@font/robotoregular" />
+
+                      <LinearLayout
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:background="@drawable/shape_of_edittext"
+                          android:orientation="vertical">
+
+                          <EditText
+                              android:id="@+id/et_weight"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:background="@android:color/transparent"
+                              android:drawableLeft="@drawable/weight"
+                              android:inputType="number"
+                              android:fontFamily="@font/robotoregular"
+                              android:padding="10dp" />
+
+                      </LinearLayout>
+
+                  </LinearLayout>
+                  <LinearLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal"
+                      android:weightSum="2">
+
+                      <LinearLayout
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_weight="1"
+                          android:orientation="vertical">
+
+                          <TextView
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_marginTop="@dimen/_20dp"
+                              android:layout_marginBottom="@dimen/_3dp"
+                              android:fontFamily="@font/robotoregular"
+                              android:text="BP Low"
+                              android:textColor="@color/menuTextColor"
+                              android:textSize="@dimen/text_16"
+                              android:textStyle="bold" />
+
+                          <LinearLayout
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:layout_marginHorizontal="@dimen/_2dp"
+                              android:background="@drawable/shape_of_edittext"
+                              android:orientation="vertical">
+
+                              <EditText
+                                  android:id="@+id/et_bplower"
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:background="@android:color/transparent"
+                                  android:fontFamily="@font/robotoregular"
+                                  android:inputType="number"
+                                  android:maxLength="3"
+                                  android:padding="@dimen/margin12" />
+
+                          </LinearLayout>
+
+                      </LinearLayout>
+
+                      <LinearLayout
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginHorizontal="@dimen/_2dp"
+                          android:layout_weight="1"
+                          android:orientation="vertical">
+
+                          <TextView
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_marginTop="@dimen/_20dp"
+                              android:layout_marginBottom="@dimen/_3dp"
+                              android:fontFamily="@font/robotoregular"
+                              android:text="BP High"
+                              android:textColor="@color/menuTextColor"
+                              android:textSize="@dimen/text_16"
+                              android:textStyle="bold" />
+
+                          <LinearLayout
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:background="@drawable/shape_of_edittext"
+                              android:orientation="vertical">
+
+                              <EditText
+                                  android:id="@+id/et_bpupper"
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:background="@android:color/transparent"
+                                  android:fontFamily="@font/robotoregular"
+                                  android:inputType="number"
+                                  android:maxLength="3"
+                                  android:padding="@dimen/margin12" />
+
+                          </LinearLayout>
+                      </LinearLayout>
+                  </LinearLayout>
+                  <TextView
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="@dimen/_20dp"
+                      android:layout_marginBottom="@dimen/_3dp"
+                      android:fontFamily="@font/robotoregular"
+                      android:text="Sugar in (mg/dL)"
+                      android:textColor="@color/menuTextColor"
+                      android:textSize="@dimen/text_16"
+                      android:textStyle="bold" />
+
+                  <LinearLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:background="@drawable/shape_of_edittext"
+                      android:orientation="vertical">
+
+                      <EditText
+                          android:id="@+id/et_sugar"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+
+                          android:background="@android:color/transparent"
+                          android:fontFamily="@font/robotoregular"
+                          android:inputType="numberDecimal"
+                          android:maxLength="4"
+                          android:padding="@dimen/margin12" />
 
                   </LinearLayout>
               </LinearLayout>
@@ -270,6 +458,7 @@
                       </TextView>
 
                   </LinearLayout>
+
                   <LinearLayout
                       android:layout_toRightOf="@+id/ll_oldApp"
                       android:layout_width="match_parent"
@@ -290,6 +479,9 @@
                       </TextView>
 
                   </LinearLayout>
+
+
+
               </RelativeLayout>
 
 

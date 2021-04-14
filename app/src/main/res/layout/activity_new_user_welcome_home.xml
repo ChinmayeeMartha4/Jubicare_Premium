@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/app_bg"
+    tools:context=".NewUserWelcomeHome">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:padding="3dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5dp">
+            <TextView
+                android:id="@+id/tv_welcomeName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="24sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="@string/welcomename"/>
+            <TextView
+                android:id="@+id/tv_carefor"
+                android:layout_below="@+id/tv_welcomeName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15dp"
+                android:text="@string/discount"
+                android:textSize="@dimen/text_18" />
+            <TextView
+                android:id="@id/tv_careforRs"
+                android:layout_below="@+id/tv_carefor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8dp"
+                android:text="@string/discountRs"
+                android:textSize="@dimen/text_18" />
+
+            <LinearLayout
+                android:id="@+id/ll_pay"
+                android:layout_below="@+id/tv_careforRs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp">
+                <TextView
+                    android:id="@+id/Tv_pay"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:textColor="@color/white"
+                    android:text="Pay Now"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:background="@drawable/submitbutton">
+
+                </TextView>
+
+            </LinearLayout>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>
