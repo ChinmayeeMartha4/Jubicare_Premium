@@ -38,7 +38,6 @@
     <string name="new_user">New user</string>
 
 
-
     <string name="home">Home</string>
     <string name="take_an_appointment">Take an appointment</string>
     <string name="prescriptions">Old prescriptions</string>
@@ -81,10 +80,6 @@
     <string name="blood_oxy">Blood oxygen level (SpO2) in %</string>
     <string name="people">People with disability (PwDs)</string>
     <string name="all_fields_are_mandatory_with_star_in_this_screen">Note: All fields are mandatory with star (*) in this screen.</string>
-
-
-
-
 
 
 </resources>
