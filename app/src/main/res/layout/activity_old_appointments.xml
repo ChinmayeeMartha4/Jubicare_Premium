@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.Reports">
+    tools:context=".activity.Prescription">
 
 
     <LinearLayout
@@ -47,7 +47,7 @@
                     android:background="@drawable/tableborder"
                     android:gravity="center"
                     android:padding="7dp"
-                    android:text="@string/title"
+                    android:text="@string/doctor_s_name"
                     android:textColor="@color/colorWhite" />
             </LinearLayout>
 
@@ -72,7 +72,7 @@
                         android:background="@drawable/tableborder"
                         android:gravity="center"
                         android:padding="7dp"
-                        android:text="@string/view"
+                        android:text="@string/view_prescription"
                         android:textColor="@color/colorWhite" />
                 </LinearLayout>
 
@@ -82,11 +82,10 @@
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/reports_recyclerView"
+            android:id="@+id/appointment_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/color_light_gray"
-
             android:orientation="vertical"
             />
     </LinearLayout>

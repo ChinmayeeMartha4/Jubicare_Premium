@@ -24,10 +24,17 @@
             android:name=".HomeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".HealthRecord"
+            android:name=".activity.HealthRecord"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".TakeAppointment"
+            android:name=".activity.TakeAppointment"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activity.Prescription"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.Reports"
             android:screenOrientation="portrait"/>
 
     </application>

@@ -1,9 +1,11 @@
-package com.example.jubicare_premium;
+package com.example.jubicare_premium.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.text.Html;
+
+import com.example.jubicare_premium.R;
 
 public class TakeAppointment extends AppCompatActivity {
 

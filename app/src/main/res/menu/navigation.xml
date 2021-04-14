@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+<!--    <item-->
+<!--        android:id="@+id/navigation_generate"-->
+<!--        android:icon="@drawable/coupon"-->
+<!--        android:title="@string/generate" />-->
+
+<!--    <item-->
+<!--        android:id="@+id/navigation_distributed"-->
+<!--        android:icon="@drawable/distribution"-->
+<!--        android:title="@string/distributed" />-->
+
+<!--    <item-->
+<!--        android:id="@+id/navigation_buy"-->
+<!--        android:icon="@drawable/pay"-->
+<!--        android:title="@string/buycoupan" />-->
+
+<!--    <item-->
+<!--        android:id="@+id/navigation_wallet"-->
+<!--        android:icon="@drawable/wallet"-->
+<!--        android:title="@string/wallet" />-->
+
+</menu>

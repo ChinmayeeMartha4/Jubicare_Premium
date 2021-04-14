@@ -25,7 +25,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/margin200"
+                android:layout_height="@dimen/margin160"
                 android:background="@drawable/login_1_bg"
                 android:orientation="vertical">
 
@@ -162,7 +162,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_15dp"
                         android:gravity="center"
-                        android:text="@string/signup"
+                        android:text="@string/new_user"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/text_16" />
                 </LinearLayout>

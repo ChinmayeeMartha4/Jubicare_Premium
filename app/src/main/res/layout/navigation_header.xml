@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="120dp"
+    android:gravity="center"
+    android:background="@color/color_blue_google"
+    >
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_imageView"
+        android:layout_width="@dimen/margin80"
+        android:layout_height="@dimen/margin80"
+        android:elevation="@dimen/margin5"
+        app:civ_border_width="@dimen/margin2"
+        android:src="@drawable/iconprofile"
+        android:layout_marginStart="@dimen/margin15"
+        android:layout_marginLeft="@dimen/margin15" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin10"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/margin10">
+        <TextView
+            android:id="@+id/tv_header_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Chinmayee Martha"
+            android:textColor="@color/colorWhite"
+            android:layout_marginStart="@dimen/margin5"
+            android:textSize="@dimen/text_18"
+            android:layout_marginLeft="@dimen/margin5" />
+
+        <TextView
+            android:id="@+id/tv_headerSubName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="chinmayee.martha@gmail.com"
+            android:textSize="@dimen/text_14"
+            android:layout_marginStart="@dimen/margin5"
+            android:layout_marginTop="@dimen/margin5"
+            android:textColor="@color/colorWhite"
+            android:singleLine="true"
+            android:layout_marginLeft="@dimen/margin5" />
+    </LinearLayout>
+
+</LinearLayout>
