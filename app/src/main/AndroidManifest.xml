@@ -10,9 +10,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.ViewPrescription"></activity>
-        <activity android:name=".activity.NewUserWelcomeHome" />
-        <activity android:name=".activity.NewUserHome" />
+        <activity
+            android:name=".activity.ViewPrescription"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.NewUserWelcomeHome"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.NewUserHome"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Login"
             android:screenOrientation="portrait" />
