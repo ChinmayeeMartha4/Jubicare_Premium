@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Jubicare_Premium</string>
+    <string name="app_name">Jubicare Premium</string>
     <string name="patientName">Name</string>
     <string name="Gender">Gender</string>
     <string name="DateofBirth">Date of birth</string>
@@ -21,7 +21,7 @@
     <string name="hypo">Hypo</string>
     <string name="hyper">Hyper</string>
     <string name="welcome">Welcome to</string>
-    <string name="jubicarepremium">JUBICARE Premium </string>
+    <string name="jubicarepremium">JUBICARE PREMIUM </string>
     <string name="wecareforyourhealth">(We care for your health) </string>
     <string name="enteryourmobileno">Enter your mobile no</string>
     <string name="welcomename">Welcome Kedar</string>
@@ -80,6 +80,12 @@
     <string name="blood_oxy">Blood oxygen level (SpO2) in %</string>
     <string name="people">People with disability (PwDs)</string>
     <string name="all_fields_are_mandatory_with_star_in_this_screen">Note: All fields are mandatory with star (*) in this screen.</string>
+
+
+
+    <string name="kedar">Dr Kedar Das</string>
+    <string name="jubicare">Jubicare</string>
+    <string name="date1">Date: 12 Feb 2020</string>
 
 
 </resources>

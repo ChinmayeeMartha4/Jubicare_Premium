@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.jubicare_premium.activity.ViewPrescription;
 import com.example.jubicare_premium.database.AppointmentPojo;
 
 import java.util.ArrayList;
@@ -45,9 +46,9 @@ public class OldAppointmentAdapter extends RecyclerView.Adapter<OldAppointmentAd
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intentDetailActivity=new Intent(context, .class);
-//                context.startActivity(intentDetailActivity);
-//                ((Activity)context).finish();
+                Intent intentDetailActivity=new Intent(context, ViewPrescription.class);
+                context.startActivity(intentDetailActivity);
+                ((Activity)context).finish();
             }
         });
 

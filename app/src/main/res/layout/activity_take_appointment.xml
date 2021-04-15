@@ -65,7 +65,6 @@
                         android:layout_marginTop="15dp"
                         android:layout_marginBottom="3dp"
                         android:layout_marginRight="5dp"
-                        android:drawableRight="@drawable/ic_star"
                         android:text="@string/Gender"
                         android:textColor="@color/menuTextColor"
                         android:textSize="16sp"
@@ -117,7 +116,6 @@
                       android:layout_marginTop="15dp"
                       android:layout_marginBottom="3dp"
                       android:text="What did you know?"
-                      android:drawableRight="@drawable/ic_star"
                       android:textColor="@color/menuTextColor"
                       android:textSize="16sp"
                       android:fontFamily="@font/robotoregular"
@@ -229,7 +227,7 @@
                   </LinearLayout>
 
                   <TextView
-                      android:layout_width="match_parent"
+                      android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:layout_marginTop="20dp"
                       android:layout_marginBottom="3dp"
@@ -603,43 +601,43 @@
 
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tv_disability"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_15dp"
-                    android:layout_marginBottom="@dimen/_3dp"
-                    android:fontFamily="@font/robotoregular"
-                    android:text="@string/people"
-                    android:textColor="@color/menuTextColor"
-                    android:textSize="@dimen/text_16"
-                    android:textStyle="bold"
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_disability"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="@dimen/_15dp"-->
+<!--                    android:layout_marginBottom="@dimen/_3dp"-->
+<!--                    android:fontFamily="@font/robotoregular"-->
+<!--                    android:text="@string/people"-->
+<!--                    android:textColor="@color/menuTextColor"-->
+<!--                    android:textSize="@dimen/text_16"-->
+<!--                    android:textStyle="bold"-->
 
-                    />
+<!--                    />-->
 
-                <RadioGroup
-                    android:id="@+id/rg_disability"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
+<!--                <RadioGroup-->
+<!--                    android:id="@+id/rg_disability"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:weightSum="2">-->
 
-                    <RadioButton
-                        android:id="@+id/rb_yes"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/Yes" />
+<!--                    <RadioButton-->
+<!--                        android:id="@+id/rb_yes"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:text="@string/Yes" />-->
 
-                    <RadioButton
-                        android:id="@+id/rb_no"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/No" />
+<!--                    <RadioButton-->
+<!--                        android:id="@+id/rb_no"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:text="@string/No" />-->
 
 
-                </RadioGroup>
+<!--                </RadioGroup>-->
 
                 <!--for patient-->
                 <TextView
@@ -1101,32 +1099,32 @@
                 </LinearLayout>
 
 
-                <TextView
-                    android:id="@+id/tv_pic"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10dp"
-                    android:layout_marginBottom="@dimen/_3dp"
-                    android:fontFamily="@font/robotoregular"
-                    android:text="@string/patient_image"
-                    android:textColor="@color/menuTextColor"
-                    android:textSize="@dimen/text_16"
-                    android:textStyle="bold"
-                    android:visibility="gone" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_pic"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="@dimen/_10dp"-->
+<!--                    android:layout_marginBottom="@dimen/_3dp"-->
+<!--                    android:fontFamily="@font/robotoregular"-->
+<!--                    android:text="@string/patient_image"-->
+<!--                    android:textColor="@color/menuTextColor"-->
+<!--                    android:textSize="@dimen/text_16"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:visibility="gone" />-->
 
-                <LinearLayout
-                    android:id="@+id/ll_camera"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:visibility="gone">
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/ll_camera"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="vertical"-->
+<!--                    android:visibility="gone">-->
 
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/iv_profile_image"
-                        android:layout_width="@dimen/margin70"
-                        android:layout_height="@dimen/margin70"
-                        android:src="@drawable/camera_icon" />
-                </LinearLayout>
+<!--                    <de.hdodenhof.circleimageview.CircleImageView-->
+<!--                        android:id="@+id/iv_profile_image"-->
+<!--                        android:layout_width="@dimen/margin70"-->
+<!--                        android:layout_height="@dimen/margin70"-->
+<!--                        android:src="@drawable/camera_icon" />-->
+<!--                </LinearLayout>-->
 
 
                   <TextView
@@ -1165,38 +1163,38 @@
 
                   </LinearLayout>
 
-                  <LinearLayout
-                      android:id="@+id/ll_symptomdiease"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:orientation="horizontal"
-                      android:weightSum="2">
+<!--                  <LinearLayout-->
+<!--                      android:id="@+id/ll_symptomdiease"-->
+<!--                      android:layout_width="match_parent"-->
+<!--                      android:layout_height="wrap_content"-->
+<!--                      android:orientation="horizontal"-->
+<!--                      android:weightSum="2">-->
 
-                      <TextView
-                          android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          android:layout_marginTop="8dp"
-                          android:layout_weight="1"
-                          android:fontFamily="@font/robotoregular"
-                          android:text="@string/Symptom"
-                          android:textColor="@color/colorBlack"
-                          android:textSize="16sp"
-                          android:textStyle="bold" />
+<!--                      <TextView-->
+<!--                          android:layout_width="match_parent"-->
+<!--                          android:layout_height="wrap_content"-->
+<!--                          android:layout_marginTop="8dp"-->
+<!--                          android:layout_weight="1"-->
+<!--                          android:fontFamily="@font/robotoregular"-->
+<!--                          android:text="@string/Symptom"-->
+<!--                          android:textColor="@color/colorBlack"-->
+<!--                          android:textSize="16sp"-->
+<!--                          android:textStyle="bold" />-->
 
-                      <TextView
-                          android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          android:layout_marginTop="8dp"
-                          android:layout_weight="1"
-                          android:fontFamily="@font/robotoregular"
-                          android:paddingLeft="5dp"
-                          android:text="@string/select_disease"
-                          android:textColor="@color/colorBlack"
-                          android:textSize="16sp"
-                          android:textStyle="bold" />
+<!--                      <TextView-->
+<!--                          android:layout_width="match_parent"-->
+<!--                          android:layout_height="wrap_content"-->
+<!--                          android:layout_marginTop="8dp"-->
+<!--                          android:layout_weight="1"-->
+<!--                          android:fontFamily="@font/robotoregular"-->
+<!--                          android:paddingLeft="5dp"-->
+<!--                          android:text="@string/select_disease"-->
+<!--                          android:textColor="@color/colorBlack"-->
+<!--                          android:textSize="16sp"-->
+<!--                          android:textStyle="bold" />-->
 
 
-                  </LinearLayout>
+<!--                  </LinearLayout>-->
 
                   <LinearLayout
                       android:id="@+id/customLinearLayout"
@@ -1371,34 +1369,34 @@
 
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tv_patient_symptoms"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_20dp"
-                    android:layout_marginBottom="@dimen/_3dp"
-                    android:fontFamily="@font/robotoregular"
-                    android:text="@string/Symptom"
-                    android:textColor="@color/menuTextColor"
-                    android:textSize="@dimen/text_16"
-                    android:textStyle="bold" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_patient_symptoms"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="@dimen/_20dp"-->
+<!--                    android:layout_marginBottom="@dimen/_3dp"-->
+<!--                    android:fontFamily="@font/robotoregular"-->
+<!--                    android:text="@string/Symptom"-->
+<!--                    android:textColor="@color/menuTextColor"-->
+<!--                    android:textSize="@dimen/text_16"-->
+<!--                    android:textStyle="bold" />-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/shape_of_edittext"
-                    android:orientation="vertical">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="@drawable/shape_of_edittext"-->
+<!--                    android:orientation="vertical">-->
 
-                    <TextView
-                        android:id="@+id/tv_symptoms_patient"
-                        style="@style/StyleTheme"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@android:color/transparent"
-                        android:fontFamily="@font/robotoregular"
-                        android:padding="@dimen/margin12" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/tv_symptoms_patient"-->
+<!--                        style="@style/StyleTheme"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:background="@android:color/transparent"-->
+<!--                        android:fontFamily="@font/robotoregular"-->
+<!--                        android:padding="@dimen/margin12" />-->
 
-                </LinearLayout>
+<!--                </LinearLayout>-->
 
                 <TextView
                     android:id="@+id/tv_attached_doc"
@@ -1412,32 +1410,7 @@
                     android:textStyle="bold"
                     android:visibility="gone" />
 
-                <TextView
-                    android:id="@+id/tv_doctor_assignment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="3dp"
-                    android:fontFamily="@font/robotoregular"
-                    android:text="@string/doctor_assigned"
-                    android:textColor="@color/menuTextColor"
-                    android:textSize="@dimen/text_16"
-                    android:textStyle="bold" />
 
-                <LinearLayout
-                    android:id="@+id/ll_spn_doctor_assigned"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/shape_of_edittext"
-                    android:orientation="vertical"
-                    android:padding="@dimen/_10dp">
-
-                    <Spinner
-                        android:id="@+id/spn_doctor_assignment"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/robotoregular" />
-                </LinearLayout>
 
                 <TextView
                     android:id="@+id/tv_document"
@@ -1522,35 +1495,7 @@
 
                     </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/tv_remarks_counselor"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_20dp"
-                        android:layout_marginBottom="@dimen/_3dp"
-                        android:fontFamily="@font/robotoregular"
-                        android:text="Counsellor Remarks"
-                        android:textColor="@color/menuTextColor"
-                        android:textSize="@dimen/text_16"
-                        android:textStyle="bold" />
 
-                    <LinearLayout
-                        android:id="@+id/ll_remarks_counselor"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/shape_of_edittext"
-                        android:orientation="vertical">
-
-                        <EditText
-                            android:id="@+id/et_remarks_counselor"
-                            style="@style/StyleTheme"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@android:color/transparent"
-                            android:fontFamily="@font/robotoregular"
-                            android:padding="@dimen/margin12" />
-
-                    </LinearLayout>
 
                     <TextView
                         android:layout_width="wrap_content"

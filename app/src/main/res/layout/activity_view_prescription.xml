@@ -21,18 +21,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:textSize="22sp"
+                android:textSize="18dp"
                 android:textColor="@color/colorPrimaryDark"
-                android:text="Jubicare"/>
+                android:text="@string/jubicare"/>
             <TextView
                 android:id="@+id/tv_doctor"
                 android:layout_below="@+id/tv_jubicare"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
-                android:textSize="26sp"
+                android:textStyle="bold"
+                android:textSize="18sp"
                 android:fontFamily="@font/robotoregular"
-                android:text="Dr Kedar Das"/>
+                android:text="@string/kedar"/>
             <TextView
                 android:id="@+id/tv_date"
                 android:layout_below="@+id/tv_doctor"
@@ -42,7 +43,7 @@
                 android:textSize="16sp"
                android:textStyle="normal"
                 android:textColor="@color/black"
-                android:text="Date: 12 Feb 2020"/>
+                android:text="@string/date1"/>
             <TextView
                 android:id="@+id/tv_symtoms"
                 android:layout_below="@+id/tv_date"
