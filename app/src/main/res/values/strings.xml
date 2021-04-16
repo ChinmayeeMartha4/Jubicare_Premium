@@ -88,7 +88,26 @@
 
     <string name="kedar">Dr Kedar Das</string>
     <string name="jubicare">Jubicare</string>
+    <string name="Village">Village</string>
+    <string name="Submit">Submit</string>
     <string name="date1">Date: 12 Feb 2020</string>
+
+
+    <string name="select_state">Select state</string>
+    <string name="select_block">Select block</string>
+    <string name="select_village">Select village</string>
+    <string name="select_district">Select district</string>
+    <string name="select_caste">Select caste</string>
+    <string name="spn_post_office">spn post office</string>
+    <string name="select_bloodgroup">Select bloodgroup</string>
+    <string name="select_post_office">Select postoffice</string>
+    <string name="simple_spinner_item">Simple spinner item</string>
+    <string name="simple_spinner_item1">Simple spinner item1</string>
+
+
+    <string name="it_s_okay_reset_your_password">It\'s okay reset your password</string>
+    <string name="enter_mobile_number">Enter mobile number</string>
+
 
 
 </resources>

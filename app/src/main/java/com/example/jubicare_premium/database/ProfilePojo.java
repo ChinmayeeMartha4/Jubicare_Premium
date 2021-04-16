@@ -9,6 +9,16 @@ public class ProfilePojo {
     private String contact_number;
     private String address;
 
+    public String getPost_office() {
+        return post_office;
+    }
+
+    public void setPost_office(String post_office) {
+        this.post_office = post_office;
+    }
+
+    private String post_office;
+
     public String getDate_of_birth() {
         return date_of_birth;
     }

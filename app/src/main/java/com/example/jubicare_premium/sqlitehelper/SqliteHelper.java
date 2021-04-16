@@ -11,13 +11,31 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import com.example.jubicare_premium.database.AppointmentPojo;
+import com.example.jubicare_premium.database.Block;
+import com.example.jubicare_premium.database.BloodGroupModel;
+import com.example.jubicare_premium.database.Caste;
+import com.example.jubicare_premium.database.DiseaseModel;
+import com.example.jubicare_premium.database.District;
+import com.example.jubicare_premium.database.MedicineListModel;
+import com.example.jubicare_premium.database.MedicineStock;
 import com.example.jubicare_premium.database.OldAppointmentPojo;
+import com.example.jubicare_premium.database.Postoffice;
+import com.example.jubicare_premium.database.PrescriptionDays;
+import com.example.jubicare_premium.database.PrescriptionEatingSchedule;
+import com.example.jubicare_premium.database.PrescriptionInterval;
 import com.example.jubicare_premium.database.ProfilePojo;
+import com.example.jubicare_premium.database.State;
+import com.example.jubicare_premium.database.SubTestsModel;
+import com.example.jubicare_premium.database.Symptom;
+import com.example.jubicare_premium.database.SymptomModel;
+import com.example.jubicare_premium.database.Test;
 import com.example.jubicare_premium.database.UserPojo;
 import com.example.jubicare_premium.database.ReportsPojo;
+import com.example.jubicare_premium.database.Village;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SqliteHelper extends SQLiteOpenHelper {
      static final String DATABASE_NAME = "jubicare_premium.db";
@@ -38,6 +56,23 @@ public class SqliteHelper extends SQLiteOpenHelper {
          db.execSQL(UserPojo.CREATE_TABLE);
          db.execSQL(ProfilePojo.CREATE_TABLE);
          db.execSQL(AppointmentPojo.CREATE_TABLE);
+         db.execSQL(DiseaseModel.CREATE_TABLE);
+         db.execSQL(MedicineListModel.CREATE_TABLE);
+         db.execSQL(SubTestsModel.CREATE_TABLE);
+         db.execSQL(Test.CREATE_TABLE);
+         db.execSQL(PrescriptionDays.CREATE_TABLE);
+         db.execSQL(PrescriptionEatingSchedule.CREATE_TABLE);
+         db.execSQL(PrescriptionInterval.CREATE_TABLE);
+
+         db.execSQL(State.CREATE_TABLE);
+         db.execSQL(District.CREATE_TABLE);
+         db.execSQL(Block.CREATE_TABLE);
+         db.execSQL(Village.CREATE_TABLE);
+         db.execSQL(BloodGroupModel.CREATE_TABLE);
+         db.execSQL(SymptomModel.CREATE_TABLE);
+         db.execSQL(Postoffice.CREATE_TABLE);
+         db.execSQL(Caste.CREATE_TABLE);
+
      }
 
      @Override
@@ -52,8 +87,15 @@ public class SqliteHelper extends SQLiteOpenHelper {
          //  checkDbVersion(dbFile);
          return SQLiteDatabase.openDatabase(dbFile.getPath(), null, SQLiteDatabase.NO_LOCALIZED_COLLATORS | SQLiteDatabase.CREATE_IF_NECESSARY);
      }
+    public void saveMasterTable(ContentValues contentValues, String tablename) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        long idsds = db.insert(tablename, null, contentValues);
+        Log.d("LOG", idsds + " id");
+        db.close();
+    }
 
-     public void dropTable(String tablename) {
+
+    public void dropTable(String tablename) {
          SQLiteDatabase db = this.getWritableDatabase();
          try {
              db.execSQL("DELETE FROM'" + tablename + "'");
@@ -62,8 +104,6 @@ public class SqliteHelper extends SQLiteOpenHelper {
              db.close();
          }
      }
-
-
 
      public UserPojo saveLoginData(UserPojo userPojo) {
          SQLiteDatabase db = this.getWritableDatabase();
@@ -350,4 +390,335 @@ public class SqliteHelper extends SQLiteOpenHelper {
         }
         return arrayList;
     }
- }
+    public HashMap<String, Integer> getAllState() {
+        HashMap<String, Integer> state = new HashMap<>();
+        State state1;
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        try {
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen() && !sqLiteDatabase.isReadOnly()) {
+                String query = "Select id, name from state";
+                Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+                if (cursor != null && cursor.getCount() > 0) {
+                    cursor.moveToFirst();
+                    while (!cursor.isAfterLast()) {
+                        state1 = new State();
+                        state1.setId(cursor.getInt(cursor.getColumnIndex("id")));
+                        state1.setName(cursor.getString(cursor.getColumnIndex("name")));
+                        cursor.moveToNext();
+                        state.put(state1.getName(), state1.getId());
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            sqLiteDatabase.close();
+        }
+        return state;
+    }
+
+    public HashMap<String, Integer> getAllDistrict(int state_id) {
+        HashMap<String, Integer> district = new HashMap<>();
+        District district1;
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        try {
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen() && !sqLiteDatabase.isReadOnly()) {
+                String query = "Select id, name from district where state_id=" + state_id;
+                Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+                if (cursor != null && cursor.getCount() > 0) {
+                    cursor.moveToFirst();
+                    while (!cursor.isAfterLast()) {
+                        district1 = new District();
+                        district1.setId(cursor.getInt(cursor.getColumnIndex("id")));
+                        district1.setName(cursor.getString(cursor.getColumnIndex("name")));
+                        cursor.moveToNext();
+                        district.put(district1.getName().trim(), district1.getId());
+                    }
+                }
+            }
+            sqLiteDatabase.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return district;
+    }
+    public HashMap<String, Integer> getAllBlock(int district_id) {
+        HashMap<String, Integer> block1 = new HashMap<>();
+        Block block;
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        try {
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen() && !sqLiteDatabase.isReadOnly()) {
+                String query="";
+                //if (sharedPrefHelper.getString("role_id","").equals("5")){
+                query  = "Select id, name from block where district_id = " +district_id;
+                /*}else {
+                    query  = "Select id, name from block where district_id = " +district_id + " and is_visual_patient = '1'";
+                }*/
+
+                Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+                if (cursor != null && cursor.getCount() > 0) {
+                    cursor.moveToFirst();
+                    while (!cursor.isAfterLast()) {
+                        /*if (!sharedPrefHelper.getString("role_id", "").equals("7")
+                                && !cursor.getString(cursor.getColumnIndex("name")).equals("Other")) {*/
+                        block = new Block();
+                        block.setId(cursor.getInt(cursor.getColumnIndex("id")));
+                        block.setName(cursor.getString(cursor.getColumnIndex("name")));
+                        cursor.moveToNext();
+                        block1.put(block.getName().trim(), block.getId());
+                        //}
+                    }
+                    /*block = new Block();
+                    block.setId(000);
+                    block.setName("Other");
+                    block1.put(block.getName().trim(), block.getId());*/
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            sqLiteDatabase.close();
+        }
+        return block1;
+    }
+    public HashMap<String, Integer> getAllVillage(int post_office_id) {
+        HashMap<String, Integer> village1 = new HashMap<>();
+        Village village;
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        try {
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen() && !sqLiteDatabase.isReadOnly()) {
+                String query="";
+                //if (sharedPrefHelper.getString("role_id","").equals("5")){
+                query = "Select id, name from village where post_office_id = " + post_office_id;
+                /*}else {
+                    query = "Select id, name from village where post_office_id = " + post_office_id +" and is_visual_patient = '1'  ";
+                }*/
+                Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+                if (cursor != null && cursor.getCount() > 0) {
+                    cursor.moveToFirst();
+                    while (!cursor.isAfterLast()) {
+                        /*if (!sharedPrefHelper.getString("role_id", "").equals("7")
+                                && !cursor.getString(cursor.getColumnIndex("name")).equals("Other")) {*/
+                        village = new Village();
+                        village.setId(cursor.getInt(cursor.getColumnIndex("id")));
+                        village.setName(cursor.getString(cursor.getColumnIndex("name")));
+                        cursor.moveToNext();
+                        village1.put(village.getName(), village.getId());
+                        //}
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            sqLiteDatabase.close();
+        }
+
+        return village1;
+    }
+    public HashMap<String, Integer> getAllPostOffice(int block_id) {
+        HashMap<String, Integer> postoffice1 = new HashMap<>();
+        Postoffice postoffice;
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        try {
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen() && !sqLiteDatabase.isReadOnly()) {
+                String query="";
+                //if (sharedPrefHelper.getString("role_id","").equals("5")){
+                query ="Select id, name from post_office where block_id = " +block_id;
+                /*}else {
+                    query = "Select id, name from post_office where block_id = " +block_id+ " and is_visual_patient = '1' ";
+                }*/
+
+                Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+                if (cursor != null && cursor.getCount() > 0) {
+                    cursor.moveToFirst();
+                    while (!cursor.isAfterLast()) {
+                        postoffice = new Postoffice();
+                        postoffice.setId(cursor.getInt(cursor.getColumnIndex("id")));
+                        postoffice.setName(cursor.getString(cursor.getColumnIndex("name")));
+                        cursor.moveToNext();
+                        postoffice1.put(postoffice.getName(), postoffice.getId());
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            sqLiteDatabase.close();
+        }
+
+        return postoffice1;
+    }
+    public ArrayList<String> getspnBloodGroupData() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<String> arrayList = new ArrayList<>();
+        try {
+            if (db != null && db.isOpen() && !db.isReadOnly()) {
+                String query = "select name from blood_group ";
+                Cursor cursor = db.rawQuery(query, null);
+                if (cursor != null && cursor.getCount() > 0) {
+                    cursor.moveToFirst();
+
+                    while (!cursor.isAfterLast()) {
+                        String name = cursor.getString(cursor.getColumnIndex("name"));
+
+                        cursor.moveToNext();
+                        arrayList.add(name);
+                    }
+                    db.close();
+                }
+            }
+        } catch (Exception e) {
+
+
+            e.printStackTrace();
+            db.close();
+        }
+        return arrayList;
+    }
+    public ArrayList<String> getspnCasteData() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<String> arrayList = new ArrayList<>();
+        try {
+            if (db != null && db.isOpen() && !db.isReadOnly()) {
+                String query = "select name from caste ";
+                Cursor cursor = db.rawQuery(query, null);
+                if (cursor != null && cursor.getCount() > 0) {
+                    cursor.moveToFirst();
+
+                    while (!cursor.isAfterLast()) {
+                        String name = cursor.getString(cursor.getColumnIndex("name"));
+
+                        cursor.moveToNext();
+                        arrayList.add(name);
+                    }
+                    db.close();
+                }
+            }
+        } catch (Exception e) {
+
+
+            e.printStackTrace();
+            db.close();
+        }
+        return arrayList;
+    }
+
+    public String getSelectedItemId(String table,String bloodGroup) {
+        String id = "";
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "select id from '"+table+"' where name = '" +bloodGroup+ "'" ;
+        if (db != null && db.isOpen() && !db.isReadOnly()) {
+            Cursor cur = db.rawQuery(query, null);
+            if (cur != null && cur.getCount() > 0) {
+                cur.move(0);
+                while (cur.moveToNext()) {
+                    try {
+                        id = cur.getString(cur.getColumnIndex("id"));
+                    } catch (Exception e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+        return id;
+    }
+    public HashMap<String, Integer> getAllCaste() {
+        HashMap<String, Integer> caste = new HashMap<>();
+        Caste state1;
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        try {
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen() && !sqLiteDatabase.isReadOnly()) {
+                String  query  = "Select id, name from caste" ;
+                Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+                if (cursor != null && cursor.getCount() > 0) {
+                    cursor.moveToFirst();
+                    while (!cursor.isAfterLast()) {
+                        state1 = new Caste();
+                        state1.setId(cursor.getInt(cursor.getColumnIndex("id")));
+                        state1.setName(cursor.getString(cursor.getColumnIndex("name")));
+                        cursor.moveToNext();
+                        caste.put(state1.getName(), state1.getId());
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            sqLiteDatabase.close();
+        }
+        return caste;
+    }
+    public String getUpdatedDate(String table_name) {
+        String date = "";
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "select created_at from '" + table_name + "' order by id desc limit 0,1 ";
+        if (db != null && db.isOpen() && !db.isReadOnly()) {
+            Cursor cur = db.rawQuery(query, null);
+            if (cur != null && cur.getCount() > 0) {
+                cur.move(0);
+                while (cur.moveToNext()) {
+                    try {
+                        date = cur.getString(cur.getColumnIndex("created_at"));
+                    } catch (Exception e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+        return date;
+
+    }
+
+    public String getUpdatedOn(String table_name) {
+        String date = "";
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "select created_on from '" + table_name + "' order by id desc limit 0,1 ";
+        if (db != null && db.isOpen() && !db.isReadOnly()) {
+            Cursor cur = db.rawQuery(query, null);
+            if (cur != null && cur.getCount() > 0) {
+                cur.move(0);
+                while (cur.moveToNext()) {
+                    try {
+                        date = cur.getString(cur.getColumnIndex("created_on"));
+                    } catch (Exception e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+        return date;
+
+    }
+    public HashMap<String, Integer> getSymptoms() {
+        HashMap<String, Integer> symptomsHM = new HashMap<>();
+        Symptom symptom;
+        SQLiteDatabase db = this.getReadableDatabase();
+        try {
+            if (db != null && db.isOpen() && !db.isReadOnly()) {
+                String query = "select * from symptom";
+                Cursor cursor = db.rawQuery(query, null);
+                if (cursor != null && cursor.getCount() > 0) {
+                    cursor.moveToFirst();
+                    while (!cursor.isAfterLast()) {
+                        symptom = new Symptom();
+                        symptom.setSymptom_id(cursor.getInt(cursor.getColumnIndex("id")));
+                        symptom.setSymptom(cursor.getString(cursor.getColumnIndex("symptom")));
+                        symptom.setUser_id(cursor.getInt(cursor.getColumnIndex("user_id")));
+                        cursor.moveToNext();
+                        symptomsHM.put(symptom.getSymptom(), symptom.getSymptom_id());
+                    }
+                }
+                db.close();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            db.close();
+        }
+        return symptomsHM;
+    }
+}

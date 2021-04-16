@@ -8,6 +8,7 @@ import android.view.View;
 import androidx.cardview.widget.CardView;
 
 import com.example.jubicare_premium.activity.HealthRecord;
+import com.example.jubicare_premium.activity.PatientFillAppointment;
 import com.example.jubicare_premium.activity.Prescription;
 import com.example.jubicare_premium.activity.Reports;
 import com.example.jubicare_premium.activity.TakeAppointment;
@@ -70,7 +71,7 @@ public class HomeActivity extends AppDrawer {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(HomeActivity.this, TakeAppointment.class);
+                Intent intent = new Intent(HomeActivity.this, PatientFillAppointment.class);
                 startActivity(intent);
                 finish();
             }

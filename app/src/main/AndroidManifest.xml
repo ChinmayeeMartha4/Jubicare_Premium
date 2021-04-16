@@ -43,6 +43,12 @@
             android:name=".HomeActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activity.ForgotPassword"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.PatientFillAppointment"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activity.HealthRecord"
             android:screenOrientation="portrait" />
         <activity
