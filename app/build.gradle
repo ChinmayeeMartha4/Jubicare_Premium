@@ -38,7 +38,25 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     //circleimageview dependencies
     implementation 'de.hdodenhof:circleimageview:3.0.1'
+//cardview dependencies
+    implementation "androidx.cardview:cardview:1.0.0"
+    //recyclerview dependencies
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    //retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.8.1'
+    implementation 'com.squareup.retrofit2:converter-gson:2.8.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
 
+//retrofit api
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.google.code.gson:gson:2.6.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.+'
+    implementation 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+//butterknife dependencies
+    implementation 'com.jakewharton:butterknife:10.2.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
 
 
 

@@ -10,9 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jubicare_premium.HomeActivity;
 import com.example.jubicare_premium.R;
-import com.example.jubicare_premium.adapter.OldAppointmentAdapter;
 import com.example.jubicare_premium.adapter.ReportsAdapter;
-import com.example.jubicare_premium.database.AppointmentPojo;
 import com.example.jubicare_premium.database.ReportsPojo;
 import com.example.jubicare_premium.sqlitehelper.SqliteHelper;
 

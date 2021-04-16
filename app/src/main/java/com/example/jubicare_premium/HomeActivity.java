@@ -1,12 +1,10 @@
 package com.example.jubicare_premium;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import com.example.jubicare_premium.activity.HealthRecord;
@@ -14,7 +12,7 @@ import com.example.jubicare_premium.activity.Prescription;
 import com.example.jubicare_premium.activity.Reports;
 import com.example.jubicare_premium.activity.TakeAppointment;
 import com.example.jubicare_premium.app_drawer.AppDrawer;
-import com.example.jubicare_premium.database.AppointmentPojo;
+import com.example.jubicare_premium.database.OldAppointmentPojo;
 import com.example.jubicare_premium.database.ReportsPojo;
 import com.example.jubicare_premium.sqlitehelper.SqliteHelper;
 
@@ -48,7 +46,7 @@ public class HomeActivity extends AppDrawer {
 
 
 
-   AppointmentPojo appointmentPojo;
+   OldAppointmentPojo oldAppointmentPojo;
    ReportsPojo reportsPojo;
    SqliteHelper sqliteHelper;
     @Override
@@ -59,7 +57,7 @@ public class HomeActivity extends AppDrawer {
         getSupportActionBar().hide();
 
         setTitle(Html.fromHtml("<font color=\"#FFFFFFFF\">" + "Home" + "</font>"));
-        appointmentPojo=new AppointmentPojo();
+        oldAppointmentPojo =new OldAppointmentPojo();
         reportsPojo=new ReportsPojo();
         sqliteHelper = new SqliteHelper(this);
 
@@ -80,11 +78,11 @@ public class HomeActivity extends AppDrawer {
         cv_prescription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                appointmentPojo.setDate(stroa1);
-                appointmentPojo.setDoctor_name(stroav1);
+                oldAppointmentPojo.setDate(stroa1);
+                oldAppointmentPojo.setDoctor_name(stroav1);
 //                appointmentPojo.setDate1(stroa2);
 //                appointmentPojo.setDoctor_name1(stroav2);
-                sqliteHelper.saveAppointmentList(appointmentPojo);
+                sqliteHelper.saveAppointmentList(oldAppointmentPojo);
 
                 Intent intent = new Intent(HomeActivity.this, Prescription.class);
                 startActivity(intent);

@@ -24,7 +24,7 @@
     <string name="jubicarepremium">JUBICARE PREMIUM </string>
     <string name="wecareforyourhealth">(We care for your health) </string>
     <string name="enteryourmobileno">Enter your mobile no</string>
-    <string name="welcomename">Welcome Kedar</string>
+    <string name="welcomename">Welcome guest</string>
     <string name="discount">You are eligible for a discounted corporate offer.</string>
     <string name="discountRs">You will have to pay Rs. 99 for availing this service.</string>
 
@@ -36,6 +36,9 @@
     <string name="don_t_have_an_account">Don\'t have an account ?</string>
     <string name="signup">Sign up</string>
     <string name="new_user">New user</string>
+    <string name="age1">Age</string>
+    <string name="height1">Height</string>
+    <string name="weight1">Weight</string>
 
 
     <string name="home">Home</string>

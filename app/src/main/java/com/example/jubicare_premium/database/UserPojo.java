@@ -2,6 +2,25 @@ package com.example.jubicare_premium.database;
 
 public class UserPojo {
     private String mobile;
+    private String local_id;
+
+    public String getLocal_id() {
+        return local_id;
+    }
+
+    public void setLocal_id(String local_id) {
+        this.local_id = local_id;
+    }
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
+    }
+
+    private String user_id;
 
     public String getMobile() {
         return mobile;

@@ -7,24 +7,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.example.jubicare_premium.R;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jubicare_premium.activity.ViewPrescription;
-import com.example.jubicare_premium.database.AppointmentPojo;
+import com.example.jubicare_premium.database.OldAppointmentPojo;
 
 import java.util.ArrayList;
 
 public class OldAppointmentAdapter extends RecyclerView.Adapter<OldAppointmentAdapter.ViewHolder> {
     private Context context;
-    private ArrayList<AppointmentPojo> arrayList;
+    private ArrayList<OldAppointmentPojo> arrayList;
 
-    public OldAppointmentAdapter(Context context, ArrayList<AppointmentPojo> arrayList) {
+    public OldAppointmentAdapter(Context context, ArrayList<OldAppointmentPojo> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
     }

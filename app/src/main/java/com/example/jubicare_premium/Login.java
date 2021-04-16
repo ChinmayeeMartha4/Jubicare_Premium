@@ -38,10 +38,11 @@ public class Login extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sqliteHelper.saveLoginData(userPojo);
 
                 userPojo.setMobile(et_mobile.getText().toString());
                 userPojo.setPassword(et_password.getText().toString());
+                sqliteHelper.saveLoginData(userPojo);
+
                 Intent intent = new Intent(Login.this, HomeActivity.class);
                 startActivity(intent);
                 finish();

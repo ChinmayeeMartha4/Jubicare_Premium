@@ -24,7 +24,7 @@ public class NewUserWelcomeHome extends AppCompatActivity {
         Tv_pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(NewUserWelcomeHome.this, HomeActivity.class);
+                Intent intent = new Intent(NewUserWelcomeHome.this, Login.class);
                 startActivity(intent);
                 finish();
             }
