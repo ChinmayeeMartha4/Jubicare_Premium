@@ -222,8 +222,6 @@ SignUpModel signUpModel;
 
         initViews();
 
-        initViews();
-
         Calendar c = Calendar.getInstance();
         mYear = c.get(Calendar.YEAR); // current year
         mMonth = c.get(Calendar.MONTH); // current month
@@ -252,17 +250,18 @@ SignUpModel signUpModel;
         rg_disability.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                switch (i) {
+                switch (i){
                     case R.id.rb_yes:
-                        disability = "Yes";
+                        disability="Yes";
                         break;
                     case R.id.rb_no:
-                        disability = "No";
+                        disability="No";
                         break;
 
                 }
             }
         });
+
 
 
         if (commomProfile.equals("commomProfile")) {
@@ -364,7 +363,6 @@ SignUpModel signUpModel;
             }
         });
     }
-
     private void setCasteSpinner() {
         casteArrayList = sqliteHelper.getspnCasteData();
         spn_caste.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -373,7 +371,7 @@ SignUpModel signUpModel;
                 if (!spn_caste.getSelectedItem().toString().trim().equalsIgnoreCase(getString(R.string.select_caste))) {
                     int index = spn_caste.getSelectedItemPosition();
                     caste = casteArrayList.get(index);
-                    caste_id = sqliteHelper.getSelectedItemId("caste", caste);
+                    caste_id = sqliteHelper.getSelectedItemId("caste",caste);
                     //Toast.makeText(context, "" + bloodGroupId, Toast.LENGTH_SHORT).show();
                 } else {
                     caste_id = String.valueOf(1);
@@ -399,7 +397,7 @@ SignUpModel signUpModel;
                 if (!spn_blood_Group.getSelectedItem().toString().trim().equalsIgnoreCase(getString(R.string.select_bloodgroup))) {
                     int index = spn_blood_Group.getSelectedItemPosition();
                     bloodGroup = bloodGroupArrayList.get(index);
-                    bloodGroupId = sqliteHelper.getSelectedItemId("blood_group", bloodGroup);
+                    bloodGroupId = sqliteHelper.getSelectedItemId("blood_group",bloodGroup);
                     //Toast.makeText(context, "" + bloodGroupId, Toast.LENGTH_SHORT).show();
                 } else {
                     bloodGroupId = String.valueOf(9);
@@ -533,13 +531,13 @@ SignUpModel signUpModel;
                                         String caste_name = singledata.getString("caste_name");
                                         String disability = singledata.getString("disability");
                                         String emergency_contact_no = singledata.getString("emergency_contact_no");
-                                        if (disability.equals("Yes")) {
+                                        if (disability.equals("Yes")){
                                             rb_yes.setChecked(true);
-                                        } else if (disability.equals("No")) {
+                                        }else if (disability.equals("No")){
                                             rb_no.setChecked(true);
                                         }
-                                        if (caste_name.equals("") || caste_name != null) {
-                                            caste_id = sqliteHelper.getSelectedItemId("caste", caste_name);
+                                        if (caste_name.equals("") || caste_name!=null){
+                                            caste_id = sqliteHelper.getSelectedItemId("caste",caste_name);
                                             spn_caste.setSelection(Integer.parseInt(caste_id));
                                         }
 
@@ -607,7 +605,6 @@ SignUpModel signUpModel;
                                 }
                             }
                         }
-
                         @Override
                         public void onFailure(Call<JsonObject> call, Throwable t) {
                             Toast.makeText(context, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
@@ -705,6 +702,8 @@ SignUpModel signUpModel;
         Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spn_state.setAdapter(Adapter);
     }
+
+
 
 
     private void setStateSpinner() {
@@ -876,7 +875,6 @@ SignUpModel signUpModel;
             }
         });
     }
-
     private void getAllCasteFromTable() {
         casteArrayList.clear();
         casteNameHM = sqliteHelper.getAllCaste();
@@ -888,7 +886,6 @@ SignUpModel signUpModel;
         Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spn_caste.setAdapter(Adapter);
     }
-
     private void initViews() {
         et_date_of_birth = findViewById(R.id.et_date_of_birth);
         et_age = findViewById(R.id.et_age);
@@ -901,7 +898,7 @@ SignUpModel signUpModel;
         blockNameHM = new HashMap<>();
         postOfficeNameHM = new HashMap<>();
         villageNameHM = new HashMap<>();
-        casteNameHM = new HashMap<>();
+        casteNameHM=new HashMap<>();
 
 
         stateArrayList = new ArrayList<>();
@@ -909,7 +906,7 @@ SignUpModel signUpModel;
         blockArrayList = new ArrayList<>();
         postOfficeArrayList = new ArrayList<>();
         villageArrayList = new ArrayList<>();
-        casteArrayList = new ArrayList<>();
+        casteArrayList=new ArrayList<>();
     }
 
     @OnClick({R.id.iv_profile_image,
@@ -931,9 +928,9 @@ SignUpModel signUpModel;
 
             @Override
             public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                mYear = i;
-                mMonth = i1;
-                mDay = i2;
+                mYear =i;
+                mMonth=i1;
+                mDay=i2;
                 Calendar c = Calendar.getInstance();
                 c.set(i, i1, i2);
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -994,15 +991,15 @@ SignUpModel signUpModel;
                     - birthDay.get(Calendar.YEAR);
             int monthsDiff = today.get(Calendar.MONTH)
                     - birthDay.get(Calendar.MONTH);
-            long ageInMonths = yearsInBetween * 12 + monthsDiff;
+            long ageInMonths = yearsInBetween*12 + monthsDiff;
             long age = yearsInBetween;
 
-            Log.e("ageInMonths", "xnxkjnc: " + ageInMonths);
-            Log.e("age", "nkjsans: " + age);
+            Log.e("ageInMonths", "xnxkjnc: "+ageInMonths);
+            Log.e("age", "nkjsans: "+age);
         }
     }
 
-    public static int getAAge(String dobString) {
+    public static int getAAge(String dobString){
         Date date = null;
         SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
         try {
@@ -1011,7 +1008,7 @@ SignUpModel signUpModel;
             e.printStackTrace();
         }
 
-        if (date == null) return 0;
+        if(date == null) return 0;
 
         Calendar dob = Calendar.getInstance();
         Calendar today = Calendar.getInstance();
@@ -1022,11 +1019,11 @@ SignUpModel signUpModel;
         int month = dob.get(Calendar.MONTH);
         int day = dob.get(Calendar.DAY_OF_MONTH);
 
-        dob.set(year, month + 1, day);
+        dob.set(year, month+1, day);
 
         int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
 
-        if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)) {
+        if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)){
             age--;
         }
         return age;
@@ -1160,10 +1157,9 @@ SignUpModel signUpModel;
                     /*here age condition for month*/
                     if (et_age.getText().toString().trim().equalsIgnoreCase("0")) {
                         if (age_in_month.length() == 1) {
-                            age_in_month = "0.0" + age_in_month;
-                        }
-                        if (age_in_month.length() == 2) {
-                            age_in_month = "0." + age_in_month;
+                            age_in_month="0.0"+age_in_month;
+                        } if (age_in_month.length() == 2) {
+                            age_in_month="0."+age_in_month;
                         }
                         signUpModel.setAge(age_in_month);
                     } else {
@@ -1398,51 +1394,51 @@ SignUpModel signUpModel;
             et_pin_code.requestFocus();
             return false;
         }
-//        if (spn_state.getSelectedItem().toString().trim().equalsIgnoreCase("Select State")) {
-//            TextView errorText = (TextView) spn_state.getSelectedView();
-//            errorText.setError("");
-//            errorText.setTextColor(Color.RED);//just to highlight that this is an error
-//            errorText.setText("Please select state!");
-//            Toast.makeText(context, "Please select state!", Toast.LENGTH_LONG).show();
-//            errorText.requestFocus();
-//            return false;
-//        }
-//        if (spn_district.getSelectedItem().toString().trim().equalsIgnoreCase("Select District")) {
-//            TextView errorText = (TextView) spn_district.getSelectedView();
-//            errorText.setError("");
-//            errorText.setTextColor(Color.RED);//just to highlight that this is an error
-//            errorText.setText("Please select district!");
-//            Toast.makeText(context, "Please select district!", Toast.LENGTH_LONG).show();
-//            errorText.requestFocus();
-//            return false;
-//        }
-//        if (spn_block.getSelectedItem().toString().trim().equalsIgnoreCase("Select Block")) {
-//            TextView errorText = (TextView) spn_block.getSelectedView();
-//            errorText.setError("");
-//            errorText.setTextColor(Color.RED);//just to highlight that this is an error
-//            errorText.setText("Please select block!");
-//            Toast.makeText(context, "Please select block!", Toast.LENGTH_LONG).show();
-//            errorText.requestFocus();
-//            return false;
-//        }
-//        if (spn_post_office.getSelectedItem().toString().trim().equalsIgnoreCase("Select Post Office")) {
-//            TextView errorText = (TextView) spn_post_office.getSelectedView();
-//            errorText.setError("");
-//            errorText.setTextColor(Color.RED);//just to highlight that this is an error
-//            errorText.setText("Please select post office!");
-//            Toast.makeText(context, "Please select post office!", Toast.LENGTH_LONG).show();
-//            errorText.requestFocus();
-//            return false;
-//        }
-//        if (spn_village.getSelectedItem().toString().trim().equalsIgnoreCase("Select Village")) {
-//            TextView errorText = (TextView) spn_village.getSelectedView();
-//            errorText.setError("");
-//            errorText.setTextColor(Color.RED);//just to highlight that this is an error
-//            errorText.setText("Please select village!");
-//            Toast.makeText(context, "Please select village!", Toast.LENGTH_LONG).show();
-//            errorText.requestFocus();
-//            return false;
-//        }
+        if (spn_state.getSelectedItem().toString().trim().equalsIgnoreCase("Select State")) {
+            TextView errorText = (TextView) spn_state.getSelectedView();
+            errorText.setError("");
+            errorText.setTextColor(Color.RED);//just to highlight that this is an error
+            errorText.setText("Please select state!");
+            Toast.makeText(context, "Please select state!", Toast.LENGTH_LONG).show();
+            errorText.requestFocus();
+            return false;
+        }
+        if (spn_district.getSelectedItem().toString().trim().equalsIgnoreCase("Select District")) {
+            TextView errorText = (TextView) spn_district.getSelectedView();
+            errorText.setError("");
+            errorText.setTextColor(Color.RED);//just to highlight that this is an error
+            errorText.setText("Please select district!");
+            Toast.makeText(context, "Please select district!", Toast.LENGTH_LONG).show();
+            errorText.requestFocus();
+            return false;
+        }
+        if (spn_block.getSelectedItem().toString().trim().equalsIgnoreCase("Select Block")) {
+            TextView errorText = (TextView) spn_block.getSelectedView();
+            errorText.setError("");
+            errorText.setTextColor(Color.RED);//just to highlight that this is an error
+            errorText.setText("Please select block!");
+            Toast.makeText(context, "Please select block!", Toast.LENGTH_LONG).show();
+            errorText.requestFocus();
+            return false;
+        }
+        if (spn_post_office.getSelectedItem().toString().trim().equalsIgnoreCase("Select Post Office")) {
+            TextView errorText = (TextView) spn_post_office.getSelectedView();
+            errorText.setError("");
+            errorText.setTextColor(Color.RED);//just to highlight that this is an error
+            errorText.setText("Please select post office!");
+            Toast.makeText(context, "Please select post office!", Toast.LENGTH_LONG).show();
+            errorText.requestFocus();
+            return false;
+        }
+        if (spn_village.getSelectedItem().toString().trim().equalsIgnoreCase("Select Village")) {
+            TextView errorText = (TextView) spn_village.getSelectedView();
+            errorText.setError("");
+            errorText.setTextColor(Color.RED);//just to highlight that this is an error
+            errorText.setText("Please select village!");
+            Toast.makeText(context, "Please select village!", Toast.LENGTH_LONG).show();
+            errorText.requestFocus();
+            return false;
+        }
         if (et_address.getText().toString().trim().length() == 0) {
             flagEditfield = et_address;
             msg = "Please enter address!";
@@ -1456,34 +1452,34 @@ SignUpModel signUpModel;
     public void getMasterTables(final Activity context) {
         final SqliteHelper sqliteHelper = new SqliteHelper(context);
         sqliteHelper.openDataBase();
-        mProgressDialog = ProgressDialog.show(context, "", "Please Wait...", true);
+        mProgressDialog= ProgressDialog.show(context, "", "Please Wait...", true);
 
         for (int j = 0; j < masterTables.length; j++) {
             DataDownloadInput dataDownloadInput = new DataDownloadInput();
             dataDownloadInput.setTable_name(masterTables[j]);
-            String date = "";
-            if (masterTables[j].equals("symptom")) {
-                date = sqliteHelper.getUpdatedOn(masterTables[j]);
-            } else if (masterTables[j].equals("disease")) {
-                date = sqliteHelper.getUpdatedOn(masterTables[j]);
+            String date="";
+            if (masterTables[j].equals("symptom")){
+                date= sqliteHelper.getUpdatedOn(masterTables[j]);
+            }else if (masterTables[j].equals("disease")){
+                date= sqliteHelper.getUpdatedOn(masterTables[j]);
 
-            } else if (masterTables[j].equals("medicine_list")) {
-                date = sqliteHelper.getUpdatedOn(masterTables[j]);
+            }else if (masterTables[j].equals("medicine_list")){
+                date= sqliteHelper.getUpdatedOn(masterTables[j]);
 
-            } else if (masterTables[j].equals("test")) {
-                date = sqliteHelper.getUpdatedOn(masterTables[j]);
+            }else if (masterTables[j].equals("test")){
+                date= sqliteHelper.getUpdatedOn(masterTables[j]);
 
-            } else if (masterTables[j].equals("sub_tests")) {
-                date = sqliteHelper.getUpdatedOn(masterTables[j]);
+            }else if (masterTables[j].equals("sub_tests")){
+                date= sqliteHelper.getUpdatedOn(masterTables[j]);
 
-            } else {
-                date = sqliteHelper.getUpdatedDate(masterTables[j]);
+            }else  {
+                date= sqliteHelper.getUpdatedDate(masterTables[j]);
             }
 
             dataDownloadInput.setUpdated_at(date);
             Gson mGson = new Gson();
             String data = mGson.toJson(dataDownloadInput);
-            Log.e("Data", data);
+            Log.e("Data",data);
             MediaType JSON = MediaType.parse("application/json; charset=utf-8");
             RequestBody body = RequestBody.create(JSON, data);
             final TELEMEDICINE_API apiService = APIClient.getClient().create(TELEMEDICINE_API.class);
@@ -1498,7 +1494,7 @@ SignUpModel signUpModel;
                         Log.e("bb", "bbb " + singledataP.toString());
                         //   sqliteHelper.dropTable(masterTables[finalJ]);
                         //String tableData=singledata.getString("tableData");
-                        JsonArray data = singledataP.getAsJsonArray("tableData");
+                        JsonArray data= singledataP.getAsJsonArray("tableData");
                         Log.e("cc", "ccc " + data.toString());
 
                         for (int i = 0; i < data.size(); i++) {
@@ -1521,7 +1517,6 @@ SignUpModel signUpModel;
                     }
 
                 }
-
                 @Override
                 public void onFailure(Call<JsonObject> call, Throwable t) {
                     Log.d("", "");

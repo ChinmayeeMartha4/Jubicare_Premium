@@ -1023,7 +1023,6 @@ AppointmentInput appointmentInput;
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 
@@ -1075,47 +1074,47 @@ AppointmentInput appointmentInput;
         });
     }
 
-    private void sendPinCodeData() {
-        String pinCode = et_pin_code.getText().toString().trim();
-
-        APIClient.getClientAddress().create(TELEMEDICINE_API.class).getPinCode(pinCode).enqueue(new Callback<JsonObject>() {
-            @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                try {
-                    JsonObject singledataP = response.body();
-                    Log.e("bcjhbHJB", "onResponse: " + singledataP.toString());
-                    String status = singledataP.get("Status").toString().trim();
-
-                    JsonArray jsonArrayPostOffice = singledataP.getAsJsonArray("PostOffice");
-                    if (!jsonArrayPostOffice.isJsonNull() && jsonArrayPostOffice.size() > 0) {
-                        for (int i = 0; i < jsonArrayPostOffice.size(); i++) {
-                            JSONObject jsonObjectPostOffice = new JSONObject(jsonArrayPostOffice.get(i).toString());
-                            String post_office_name = jsonObjectPostOffice.get("Name").toString().trim();
-                            String state = jsonObjectPostOffice.get("State").toString().trim();
-                            String district = jsonObjectPostOffice.get("District").toString().trim();
-                            String block = jsonObjectPostOffice.get("Taluk").toString().trim();
-                            et_state.setText(state);
-                            et_district.setText(district);
-                            et_block.setText(block);
-
-                            /*add all name in array list*/
-                            postOfficeNameAL.add(post_office_name);
-                            districtAL.add(district);
-                            blockAL.add(block);
-                        }
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
-                Toast.makeText(context, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
+//    private void sendPinCodeData() {
+//        String pinCode = et_pin_code.getText().toString().trim();
+//
+//        APIClient.getClientAddress().create(TELEMEDICINE_API.class).getPinCode(pinCode).enqueue(new Callback<JsonObject>() {
+//            @Override
+//            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+//                try {
+//                    JsonObject singledataP = response.body();
+//                    Log.e("bcjhbHJB", "onResponse: " + singledataP.toString());
+//                    String status = singledataP.get("Status").toString().trim();
+//
+//                    JsonArray jsonArrayPostOffice = singledataP.getAsJsonArray("PostOffice");
+//                    if (!jsonArrayPostOffice.isJsonNull() && jsonArrayPostOffice.size() > 0) {
+//                        for (int i = 0; i < jsonArrayPostOffice.size(); i++) {
+//                            JSONObject jsonObjectPostOffice = new JSONObject(jsonArrayPostOffice.get(i).toString());
+//                            String post_office_name = jsonObjectPostOffice.get("Name").toString().trim();
+//                            String state = jsonObjectPostOffice.get("State").toString().trim();
+//                            String district = jsonObjectPostOffice.get("District").toString().trim();
+//                            String block = jsonObjectPostOffice.get("Taluk").toString().trim();
+//                            et_state.setText(state);
+//                            et_district.setText(district);
+//                            et_block.setText(block);
+//
+//                            /*add all name in array list*/
+//                            postOfficeNameAL.add(post_office_name);
+//                            districtAL.add(district);
+//                            blockAL.add(block);
+//                        }
+//                    }
+//
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<JsonObject> call, Throwable t) {
+//                Toast.makeText(context, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
 
     private void setSpinnerPostOffice() {
         spn_post_office.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

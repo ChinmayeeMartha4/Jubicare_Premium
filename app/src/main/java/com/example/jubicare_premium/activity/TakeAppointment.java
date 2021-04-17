@@ -42,7 +42,7 @@ EditText et_bplower,et_bpupper,et_sugar,et_temperature,et_blood_oxygen_level,et_
         appointmentPojo=new AppointmentPojo();
 
         initId();
-        appointmentPojo = sqliteHelper.getAppointmentsData();
+//        appointmentPojo = sqliteHelper.getAppointmentsData();
 
         rgMedicationPrescribed.setOnCheckedChangeListener((radioGroup, i) -> {
             switch (i) {
@@ -78,7 +78,7 @@ EditText et_bplower,et_bpupper,et_sugar,et_temperature,et_blood_oxygen_level,et_
                 appointmentPojo.setBlood_group_id(String.valueOf(blood_id));
                 appointmentPojo.setSymptom_id(String.valueOf(symptom_id));
                 appointmentPojo.setIs_emergency(String.valueOf(emergency));
-                sqliteHelper.saveappointmentsData(appointmentPojo);
+//                sqliteHelper.saveappointmentsData(appointmentPojo);
 
                 Intent intent = new Intent(TakeAppointment.this, HomeActivity.class);
                 startActivity(intent);

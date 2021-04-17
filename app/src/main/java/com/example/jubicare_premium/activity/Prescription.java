@@ -33,7 +33,7 @@ public class Prescription extends AppCompatActivity {
 //        appointmentPojo=new AppointmentPojo();
 //
 //        sqliteHelper = new SqliteHelper(this);
-        oldAppointmentPojo = sqliteHelper.getAppointementData();
+//        oldAppointmentPojo = sqliteHelper.getAppointementData();
         oldAppointmentAdapter = new OldAppointmentAdapter(this, oldAppointmentPojo);
 
         appointment_recyclerView = (RecyclerView) findViewById(R.id.appointment_recyclerView);

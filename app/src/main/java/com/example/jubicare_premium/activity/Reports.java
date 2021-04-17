@@ -29,7 +29,7 @@ public class Reports extends AppCompatActivity {
         setContentView(R.layout.activity_reports);
         setTitle(Html.fromHtml("<font color=\"#FFFFFFFF\">" + "Reports" + "</font>"));
         sqliteHelper = new SqliteHelper(this);
-        reportsPojo= sqliteHelper.getReportsData();
+//        reportsPojo= sqliteHelper.getReportsData();
         reportsAdapter = new ReportsAdapter(this, reportsPojo);
 
         reports_recyclerView = (RecyclerView) findViewById(R.id.reports_recyclerView);

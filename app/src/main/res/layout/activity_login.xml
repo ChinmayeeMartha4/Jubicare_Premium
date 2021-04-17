@@ -16,7 +16,7 @@
         >
 
         <LinearLayout
-            android:id="@+id/ll_layout"
+            android:id="@+id/ll_main_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -50,7 +50,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ll_lay"
+                android:id="@+id/lll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -102,6 +102,13 @@
                     android:textSize="@dimen/text_16" />
             </LinearLayout>
 
+            <CheckBox
+                android:id="@+id/cb_showPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="@dimen/_20dp"
+                android:text="@string/show_password" />
 
 
             <Button
