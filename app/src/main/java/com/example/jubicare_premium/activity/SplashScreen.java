@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -21,15 +22,18 @@ import com.example.jubicare_premium.activity.datadownload.DataDownload;
 import com.example.jubicare_premium.sqlitehelper.SharedPrefHelper;
 import com.example.jubicare_premium.sqlitehelper.SqliteHelper;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SplashScreen extends AppCompatActivity {
-
-    SqliteHelper sqliteHelper;
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
+    private SqliteHelper sqliteHelper;
     SharedPrefHelper sharedPrefHelper;
     private final int SPLASH_DISPLAY_LENGTH = 3000; //3 seconds
-Context context =this;
-String splashLoaded;
+    private Context context =this;
+//String splashLoaded;
+private static String splashLoaded = "No";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,12 +49,9 @@ String splashLoaded;
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                // Intent intent1 = new Intent(context, WebViewDownload.class);
-                //  startActivity(intent1);
-                //  finish();
                 String role_id = sharedPrefHelper.getString("role_id", "");
                 splashLoaded = sharedPrefHelper.getString("isSplashLoaded", "No");
-                if (splashLoaded.equals("")) {
+                if (splashLoaded.equals("No")) {
                     DataDownload dataDownload = new DataDownload();
                     dataDownload.getMasterTables(SplashScreen.this);
                 } else {

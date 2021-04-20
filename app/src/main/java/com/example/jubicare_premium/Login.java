@@ -11,9 +11,12 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -51,20 +54,21 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 public class Login extends AppCompatActivity {
     @BindView(R.id.btn_login)
     Button btn_login;
-    @BindView(R.id.tv_sign_up)
-    TextView tv_signup;
+//    @BindView(R.id.tv_sign_up)
+//    TextView tv_signup;
     @BindView(R.id.tv_forgot_password)
     TextView tv_forgot_password;
+    @BindView(R.id.tv_new_user)
+    TextView tv_new_user;
     @BindView(R.id.et_mobile)
     EditText et_email;
     @BindView(R.id.et_password)
     EditText et_password;
-    //    @BindView(R.id.cb_showPassword)
-//    CheckBox cb_showPassword;
+        @BindView(R.id.cb_showPassword)
+        CheckBox cb_showPassword;
     public static RelativeLayout rl_technology_partner;
 //    /normal widgets/
     private ProgressDialog mProgressDialog;
@@ -88,7 +92,7 @@ public class Login extends AppCompatActivity {
         sharedPrefHelper = new SharedPrefHelper(this);
         //  btn_login=findViewById(R.id.btn_login);
         getSupportActionBar().hide();
-        //displayPassword();
+        displayPassword();
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,6 +102,15 @@ public class Login extends AppCompatActivity {
 //                Intent intent = new Intent(LoginAcivity.this, HomeActivity.class);
 //                startActivity(intent);
 //                finish();
+            }
+        });
+        tv_new_user.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(Login.this, NewUserHome.class);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -113,17 +126,17 @@ public class Login extends AppCompatActivity {
 
     }
 //
-//    private void displayPassword() {
-//        cb_showPassword.setOnCheckedChangeListener((compoundButton, isChecked) -> {
-//            if (isChecked) {
-//                // show password
-//                et_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-//            } else {
-//                // hide password
-//                et_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
-//            }
-//        });
-//    }
+    private void displayPassword() {
+        cb_showPassword.setOnCheckedChangeListener((compoundButton, isChecked) -> {
+            if (isChecked) {
+                // show password
+                et_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            } else {
+                // hide password
+                et_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            }
+        });
+    }
 
     private void callLoginApi(View view) {
         String username = et_email.getText().toString().trim();

@@ -25,6 +25,7 @@ import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -219,7 +220,8 @@ SignUpModel signUpModel;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_health_record);
         ButterKnife.bind(this);
-
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initViews();
 
         Calendar c = Calendar.getInstance();
@@ -290,12 +292,6 @@ SignUpModel signUpModel;
         setBloodGroupSpinner();
 
 
-        //callPinCodeApi();
-        //setSpinnerDistrict();
-        //setSpinnerBlock();
-        //setSpinnerPostOffice();
-        //setEditableFalse();
-
         /*get date of birth form age*/
         rg_age.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -313,9 +309,7 @@ SignUpModel signUpModel;
                 }
             }
         });
-        /*if (et_date_of_birth.getText().toString().equalsIgnoreCase("")) {
-            getDateOfBirthFromAge();
-        }*/
+
     }
 
     private void getDateOfBirthFromAge() {
@@ -416,9 +410,7 @@ SignUpModel signUpModel;
     }
 
     private void setSpinnerDistrict() {
-        /*Set<String> set = new HashSet<>(districtAL);
-        districtAL.clear();
-        districtAL.addAll(set);*/
+
         spn_district.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -480,8 +472,7 @@ SignUpModel signUpModel;
 
     private void setEditableFalse() {
         et_state.setEnabled(false);
-        /*et_district.setEnabled(false);
-        et_block.setEnabled(false);*/
+
     }
 
     private void getDetailsPatientAlreadyFilled(RequestBody body) {
@@ -917,7 +908,6 @@ SignUpModel signUpModel;
                 setProfilePhotoClick();
                 break;
             case R.id.et_date_of_birth:
-                //setDateOfBirthClick();
                 selectDate();
                 break;
         }
@@ -1394,51 +1384,51 @@ SignUpModel signUpModel;
             et_pin_code.requestFocus();
             return false;
         }
-        if (spn_state.getSelectedItem().toString().trim().equalsIgnoreCase("Select State")) {
-            TextView errorText = (TextView) spn_state.getSelectedView();
-            errorText.setError("");
-            errorText.setTextColor(Color.RED);//just to highlight that this is an error
-            errorText.setText("Please select state!");
-            Toast.makeText(context, "Please select state!", Toast.LENGTH_LONG).show();
-            errorText.requestFocus();
-            return false;
-        }
-        if (spn_district.getSelectedItem().toString().trim().equalsIgnoreCase("Select District")) {
-            TextView errorText = (TextView) spn_district.getSelectedView();
-            errorText.setError("");
-            errorText.setTextColor(Color.RED);//just to highlight that this is an error
-            errorText.setText("Please select district!");
-            Toast.makeText(context, "Please select district!", Toast.LENGTH_LONG).show();
-            errorText.requestFocus();
-            return false;
-        }
-        if (spn_block.getSelectedItem().toString().trim().equalsIgnoreCase("Select Block")) {
-            TextView errorText = (TextView) spn_block.getSelectedView();
-            errorText.setError("");
-            errorText.setTextColor(Color.RED);//just to highlight that this is an error
-            errorText.setText("Please select block!");
-            Toast.makeText(context, "Please select block!", Toast.LENGTH_LONG).show();
-            errorText.requestFocus();
-            return false;
-        }
-        if (spn_post_office.getSelectedItem().toString().trim().equalsIgnoreCase("Select Post Office")) {
-            TextView errorText = (TextView) spn_post_office.getSelectedView();
-            errorText.setError("");
-            errorText.setTextColor(Color.RED);//just to highlight that this is an error
-            errorText.setText("Please select post office!");
-            Toast.makeText(context, "Please select post office!", Toast.LENGTH_LONG).show();
-            errorText.requestFocus();
-            return false;
-        }
-        if (spn_village.getSelectedItem().toString().trim().equalsIgnoreCase("Select Village")) {
-            TextView errorText = (TextView) spn_village.getSelectedView();
-            errorText.setError("");
-            errorText.setTextColor(Color.RED);//just to highlight that this is an error
-            errorText.setText("Please select village!");
-            Toast.makeText(context, "Please select village!", Toast.LENGTH_LONG).show();
-            errorText.requestFocus();
-            return false;
-        }
+//        if (spn_state.getSelectedItem().toString().trim().equalsIgnoreCase("Select State")) {
+//            TextView errorText = (TextView) spn_state.getSelectedView();
+//            errorText.setError("");
+//            errorText.setTextColor(Color.RED);//just to highlight that this is an error
+//            errorText.setText("Please select state!");
+//            Toast.makeText(context, "Please select state!", Toast.LENGTH_LONG).show();
+//            errorText.requestFocus();
+//            return false;
+//        }
+//        if (spn_district.getSelectedItem().toString().trim().equalsIgnoreCase("Select District")) {
+//            TextView errorText = (TextView) spn_district.getSelectedView();
+//            errorText.setError("");
+//            errorText.setTextColor(Color.RED);//just to highlight that this is an error
+//            errorText.setText("Please select district!");
+//            Toast.makeText(context, "Please select district!", Toast.LENGTH_LONG).show();
+//            errorText.requestFocus();
+//            return false;
+//        }
+//        if (spn_block.getSelectedItem().toString().trim().equalsIgnoreCase("Select Block")) {
+//            TextView errorText = (TextView) spn_block.getSelectedView();
+//            errorText.setError("");
+//            errorText.setTextColor(Color.RED);//just to highlight that this is an error
+//            errorText.setText("Please select block!");
+//            Toast.makeText(context, "Please select block!", Toast.LENGTH_LONG).show();
+//            errorText.requestFocus();
+//            return false;
+//        }
+//        if (spn_post_office.getSelectedItem().toString().trim().equalsIgnoreCase("Select Post Office")) {
+//            TextView errorText = (TextView) spn_post_office.getSelectedView();
+//            errorText.setError("");
+//            errorText.setTextColor(Color.RED);//just to highlight that this is an error
+//            errorText.setText("Please select post office!");
+//            Toast.makeText(context, "Please select post office!", Toast.LENGTH_LONG).show();
+//            errorText.requestFocus();
+//            return false;
+//        }
+//        if (spn_village.getSelectedItem().toString().trim().equalsIgnoreCase("Select Village")) {
+//            TextView errorText = (TextView) spn_village.getSelectedView();
+//            errorText.setError("");
+//            errorText.setTextColor(Color.RED);//just to highlight that this is an error
+//            errorText.setText("Please select village!");
+//            Toast.makeText(context, "Please select village!", Toast.LENGTH_LONG).show();
+//            errorText.requestFocus();
+//            return false;
+//        }
         if (et_address.getText().toString().trim().length() == 0) {
             flagEditfield = et_address;
             msg = "Please enter address!";
@@ -1526,14 +1516,22 @@ SignUpModel signUpModel;
 
         }
     }
-
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        if (add.equalsIgnoreCase("addMember")) {
-            Intent intent = new Intent(context, HomeActivity.class);
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            Intent intent = new Intent(HealthRecord.this, HomeActivity.class);
             startActivity(intent);
             finish();
         }
+        return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+            Intent intent = new Intent(context, HomeActivity.class);
+            startActivity(intent);
+            finish();
+
     }
 }

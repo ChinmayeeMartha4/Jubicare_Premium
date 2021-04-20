@@ -1211,7 +1211,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:weightSum="2">
+                    android:weightSum="2"
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -1421,13 +1422,15 @@
                     android:text="@string/Symptom"
                     android:textColor="@color/menuTextColor"
                     android:textSize="@dimen/text_16"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:visibility="gone"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_of_edittext"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/tv_symptoms_patient"
@@ -1462,7 +1465,9 @@
                     android:text="@string/doctor_assigned"
                     android:textColor="@color/menuTextColor"
                     android:textSize="@dimen/text_16"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    />
 
                 <LinearLayout
                     android:id="@+id/ll_spn_doctor_assigned"
@@ -1470,7 +1475,8 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_of_edittext"
                     android:orientation="vertical"
-                    android:padding="@dimen/_10dp">
+                    android:padding="@dimen/_10dp"
+                    android:visibility="gone">
 
                     <Spinner
                         android:id="@+id/spn_doctor_assignment"

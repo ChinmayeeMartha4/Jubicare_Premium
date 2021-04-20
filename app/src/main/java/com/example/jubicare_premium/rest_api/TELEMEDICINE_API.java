@@ -25,11 +25,6 @@ public interface TELEMEDICINE_API {
     @POST("edit_profile_patient.php")
     Call<JsonObject> sendEditProfileData(@Body RequestBody body);
 
-    @POST("download_listing_patients.php")
-    Call<JsonObject> download_patientList(@Body RequestBody body);
-
-    @POST("pharmacist_patient_list.php")
-    Call<JsonObject> pharmacist_patient_list(@Body RequestBody body);
 
     @POST("download_listing_doctors.php")
     Call<JsonObject> download_DoctortList(@Body RequestBody body);
@@ -40,38 +35,9 @@ public interface TELEMEDICINE_API {
     @POST("patient_appointments.php")
     Call<JsonObject> sendAppointdata(@Body RequestBody body);
 
-    @POST("insert_doctor_prescription.php")
-    Call<JsonObject> insert_doctor_prescription(@Body RequestBody body);
-
-    @POST("pharmacist_medicine_data.php")
-    Call<JsonObject> pharmacist_medicine_data(@Body RequestBody body);
-
-    @POST("insert_test_by_pharmacists.php")
-    Call<JsonObject> insert_test_by_pharmacists(@Body RequestBody body);
-
-    @POST("set-time-duration.php")
-    Call<JsonObject> sendSetTimeDuration(@Body RequestBody body);
-
-    @Multipart
-    @POST("test_document.php")
-    Call<JsonObject> uploadFiles(
-            @Query("patient_appointment_id") String accident_reporting_id,
-            @Part List<MultipartBody.Part> file
-    );
 
 
 
-    @Multipart
-    @POST("video_calling.php")
-    Call<JsonObject> video_callingFiles(
-            @Query("ivr_call_masking_id") String ivr_call_masking_id,
-            @Query("patient_name") String patient_name,
-            @Query("call_status") String call_status,
-            @Query("start_time") String start_time,
-            @Query("end_time") String end_time,
-            @Query("time_duration") String time_duration,
-            @Part MultipartBody.Part file
-    );
 
     @POST("doctor_assign.php")
     Call<JsonObject> sendDoctorAssignmentdata(@Body RequestBody body);

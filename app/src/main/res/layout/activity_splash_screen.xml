@@ -1,25 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/splash"
     tools:context=".activity.SplashScreen">
-
-    <LinearLayout
-        android:id="@+id/progressbar"
+    <ImageView
+        android:id="@+id/iv_splash"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="320dp"
-        android:gravity="center">
+        android:layout_height="match_parent"
+        android:src="@drawable/splash"
+        />
 
-        <ProgressBar
-            android:id="@+id/spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="@dimen/_30dp"
+        android:layout_height="@dimen/_30dp"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/margin25"
+        android:indeterminateTint="@color/color_green_google"
+        />
 
-        </ProgressBar>
-    </LinearLayout>
+<!--    <LinearLayout-->
+<!--        android:id="@+id/progressbar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:layout_marginTop="320dp"-->
+<!--        android:gravity="center">-->
 
-</LinearLayout>
+<!--        <ProgressBar-->
+<!--            android:id="@+id/spinner"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content">-->
+
+<!--        </ProgressBar>-->
+<!--    </LinearLayout>-->
+
+</RelativeLayout>

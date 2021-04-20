@@ -83,7 +83,7 @@ public class HomeActivity extends AppDrawer {
                 oldAppointmentPojo.setDoctor_name(stroav1);
 //                appointmentPojo.setDate1(stroa2);
 //                appointmentPojo.setDoctor_name1(stroav2);
-//                sqliteHelper.saveAppointmentList(oldAppointmentPojo);
+                sqliteHelper.saveAppointmentList(oldAppointmentPojo);
 
                 Intent intent = new Intent(HomeActivity.this, Prescription.class);
                 startActivity(intent);
@@ -99,7 +99,7 @@ public class HomeActivity extends AppDrawer {
                 reportsPojo.setTitle(strrev1);
 //                reportsPojo.setDate(strre2);
 //                reportsPojo.setDoctor_name(strrev1);
-//                sqliteHelper.saveReportList(reportsPojo);
+                sqliteHelper.saveReportList(reportsPojo);
 
                 Intent intent = new Intent(HomeActivity.this, Reports.class);
                 startActivity(intent);

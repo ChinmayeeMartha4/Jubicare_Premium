@@ -111,4 +111,16 @@
 
 
 
+
+    <string name="enter_old_password">Enter old password</string>
+    <string name="enter_new_password">Enter new password</string>
+    <string name="enter_confirm_password">Enter confirm password</string>
+    <string name="change_password">Change password</string>
+
+    <string name="Otphint2">Please type the verification code sent to</string>
+    <string name="Otphint3">Please type the verification code shown on your popup window.</string>
+    <string name="Otperror">Resend</string>
+
+
+
 </resources>

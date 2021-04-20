@@ -28,7 +28,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DataDownload {
-    private String[] masterTables = {"state", "district", "block", "village", "post_office", "symptom", "disease", "medicine_list", "test", "sub_tests", "prescription_eating_schedule", "prescription_days", "prescription_interval", "blood_group"};
+    private String[] masterTables = {"state", "district", "block", "village", "post_office", "symptom", "disease", "medicine_list", "test", "sub_tests","prescription_eating_schedule","prescription_days","prescription_interval","blood_group","caste"};
     SharedPrefHelper sharedPrefHelper;
     Context context;
     ProgressDialog mProgressDialog;
@@ -65,7 +65,7 @@ public class DataDownload {
 
                                 for (int i = 0; i < data.size(); i++) {
                                     JSONObject singledata = new JSONObject(data.get(i).toString());
-                                   // JSONObject singledata = data.getJSONObject(i);
+                                    // JSONObject singledata = data.getJSONObject(i);
                                     //singledata.getString("id");
                                     Iterator keys = singledata.keys();
                                     ContentValues contentValues = new ContentValues();

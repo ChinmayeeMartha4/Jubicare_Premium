@@ -54,7 +54,11 @@ import com.androidbuts.multispinnerfilter.KeyPairBoolData;
 import com.androidbuts.multispinnerfilter.MultiSpinnerSearch;
 import com.androidbuts.multispinnerfilter.SpinnerListener;
 import com.example.jubicare_premium.HomeActivity;
+import com.example.jubicare_premium.Login;
+import com.example.jubicare_premium.WebViewImageActivity;
 import com.example.jubicare_premium.database.AppointmentInput;
+import com.example.jubicare_premium.database.DiseaseInput;
+import com.example.jubicare_premium.database.DoctorAssignmentInput;
 import com.example.jubicare_premium.database.SignUpModel;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -303,8 +307,8 @@ public class PatientFillAppointment extends AppCompatActivity {
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
     private static final int CAMERA_REQUEST = 2000;
 
-AppointmentInput appointmentInput;
-//DiseaseInput diseaseInput = new DiseaseInput();
+    AppointmentInput appointmentInput;
+    DiseaseInput diseaseInput = new DiseaseInput();
     SignUpModel signUpModel;
     ArrayList<String> symptoms = new ArrayList<>();
 
@@ -347,7 +351,7 @@ AppointmentInput appointmentInput;
     int doc_id = 0;
     String pin_code;
     ArrayList<Integer> dids = new ArrayList<>();
-//    DoctorAssignmentInput doctorAssignmentInput;
+    DoctorAssignmentInput doctorAssignmentInput;
     String not_assigned_appointments = "";
     boolean isEditable = false;
     String state_name = "";
@@ -366,8 +370,8 @@ AppointmentInput appointmentInput;
     String bloodGroupId = "";
     String contact_no;
     String coveredArea = "Y";
-    Dialog appointment_alert;
-    Dialog delete_alert;
+    android.app.Dialog appointment_alert;
+    android.app.Dialog delete_alert;
     SharedPreferences.Editor editor;
     public static final String MY_PREFS_NAME = "MyPrefsFile";
     SharedPreferences prefs;
@@ -491,7 +495,7 @@ AppointmentInput appointmentInput;
             tv_remarks_counselor.setVisibility(View.VISIBLE);
             setTitle("Not Assigned Appointments");
         } else {
-            setTitle("Fill Appointment");
+            setTitle("Take Appointment");
             ll_remarks_counselor.setVisibility(View.GONE);
             tv_remarks_counselor.setVisibility(View.GONE);
             tv_document.setVisibility(View.VISIBLE);
@@ -1023,6 +1027,7 @@ AppointmentInput appointmentInput;
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
@@ -1136,6 +1141,46 @@ AppointmentInput appointmentInput;
         spn_post_office.setAdapter(Adapter);
     }
 
+//    private void sendDoctorAssignment() {
+//
+//        mProgressDialog = ProgressDialog.show(PatientFillAppointment.this, "", "Please Wait...", true);
+//        Spinner disease_spinner;
+//        String diseaseData = "";
+//        final int childCount = customLinearLayout.getChildCount();
+//        for (int j = 0; j < childCount; j++) {
+//            View view = customLinearLayout.getChildAt(j);
+////            disease_spinner = view.findViewById(R.id.disease_spinner);
+//            String data1 = disease_spinner.getSelectedItem().toString().trim();
+//            String disease_id = sqliteHelper.getdisease_idFromDisease(data1);
+//            diseaseData = diseaseData + disease_id + ",";
+//
+//        }
+//        deseaseIds.add(diseaseData.substring(0, diseaseData.length() - 1));
+//        doctorAssignmentInput.setAssigned_by(sharedPrefHelper.getString("user_id", ""));
+//        doctorAssignmentInput.setIs_emergency(emergency); //added on 09-08-2020
+//        doctorAssignmentInput.setAssigned_doctor(String.valueOf(doc_id));
+//        doctorAssignmentInput.setCounsellor_remarks(et_remarks_counselor.getText().toString());
+//        doctorAssignmentInput.setPatient_appointment(patient_appointments_id);
+//        String s1 = deseaseIds.toString().trim().replace("[", "");
+//        String ss2 = s1.replace("]", "");
+//        doctorAssignmentInput.setDisease_id(ss2.trim());
+//        doctorAssignmentInput.setProfile_patient_id(profile_id);
+//        doctorAssignmentInput.setSymptom_id("2,5,5,8");
+//        /*calling ids according to screen type*/
+//        if (not_assigned_appointments.equalsIgnoreCase("not_assigned_appointments") &&
+//                !sharedPrefHelper.getString("call_id", "").equals("")) {
+//            doctorAssignmentInput.setType("counsellor_doctor_assigned");
+//            doctorAssignmentInput.setCall_id(sharedPrefHelper.getString("call_id", ""));
+//        }
+//
+//        Gson gson2 = new Gson();
+//        String data2 = gson2.toJson(doctorAssignmentInput);
+//        MediaType JSON2 = MediaType.parse("application/json; charset=utf-8");
+//        RequestBody body2 = RequestBody.create(JSON2, data2);
+//        /*send data here*/
+//        sendDoctorAssignmentData(body2);
+//
+//    }
 
     private void setEditableFalse() {
         et_patient_name.setEnabled(false);
@@ -1272,7 +1317,7 @@ AppointmentInput appointmentInput;
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == MY_CAMERA_PERMISSION_CODE) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(cameraIntent, CAMERA_REQUEST);
             } else {
                 Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
@@ -1319,11 +1364,11 @@ AppointmentInput appointmentInput;
         signUpModel.setDisability(disability);
 
 
-        if (spn_block.getSelectedItem().toString().equalsIgnoreCase("Other")
-                || spn_post_office.getSelectedItem().toString().equalsIgnoreCase("Other")
-                || spn_village.getSelectedItem().toString().equalsIgnoreCase("Other")) {
-            coveredArea = "N";
-        }
+//        if (spn_block.getSelectedItem().toString().equalsIgnoreCase("Other")
+//                || spn_post_office.getSelectedItem().toString().equalsIgnoreCase("Other")
+//                || spn_village.getSelectedItem().toString().equalsIgnoreCase("Other")) {
+//            coveredArea = "N";
+//        }
         signUpModel.setCovered_area(coveredArea);
 
         signUpModel.setRole_id(sharedPrefHelper.getString("role_id", ""));
@@ -1444,7 +1489,7 @@ AppointmentInput appointmentInput;
 
     }
 
-//    class DecimalDigitsInputFilter implements InputFilter {
+    //    class DecimalDigitsInputFilter implements InputFilter {
 //        private Pattern mPattern;
 //
 //        DecimalDigitsInputFilter(int digitsBeforeZero, int digitsAfterZero) {
@@ -1780,7 +1825,7 @@ AppointmentInput appointmentInput;
         sharedPrefHelper = new SharedPrefHelper(this);
         appointmentInput = new AppointmentInput();
         signUpModel = new SignUpModel();
-//        doctorAssignmentInput = new DoctorAssignmentInput();
+        doctorAssignmentInput = new DoctorAssignmentInput();
 
         stateNameHM = new HashMap<>();
         districtNameHM = new HashMap<>();
@@ -1816,21 +1861,20 @@ AppointmentInput appointmentInput;
                     mProgressDialog.dismiss();
                     Log.e("chjJC", "njkdvnv " + jsonObject.toString());
                     String success = jsonObject.optString("success");
-//                    if (success.equals("1")) {
-//                        String message = jsonObject.optString("message");
-//                        //Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
-//                        if (patient_by_mobile_search.equalsIgnoreCase("patient_by_mobile_search")) {
+                    if (success.equals("1")) {
+                        String message = jsonObject.optString("message");
+                        //Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
+                        if (patient_by_mobile_search.equalsIgnoreCase("patient_by_mobile_search")) {
 //                            showAlertDialogForCounsellorAppointment();
-//                        } else if (screen_type.equals("patient")) {
-//                            showAlertDialogForPatientAppointment();
-//                        } else {
+                        } else if (screen_type.equals("patient")) {
+                            showAlertDialogForPatientAppointment();
+                        } else {
 //                            showAlertDialogForCounsellorAppointment();
-//                        }
-//                    }
-//                    else {
-//                        mProgressDialog.dismiss();
-//                        Toast.makeText(context, "Something went wrong.", Toast.LENGTH_SHORT).show();
-//                    }
+                        }
+                    } else {
+                        mProgressDialog.dismiss();
+                        Toast.makeText(context, "Something went wrong.", Toast.LENGTH_SHORT).show();
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -1844,42 +1888,42 @@ AppointmentInput appointmentInput;
         });
     }
 
-//    private void showAlertDialogForPatientAppointment() {
-//        appointment_alert = new Dialog(this);
-//
-//        appointment_alert.setContentView(R.layout.submit_appointment_from_patient_dialog);
-//        appointment_alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//        WindowManager.LayoutParams params = appointment_alert.getWindow().getAttributes();
-//        params.gravity = Gravity.CENTER | Gravity.CENTER_HORIZONTAL;
-//
-//        TextView tv_appointment_added = (TextView) appointment_alert.findViewById(R.id.tv_appointment_added);
-//        TextView tv_appointment_msg = (TextView) appointment_alert.findViewById(R.id.tv_appointment_msg);
-//        Button btn_ok = (Button) appointment_alert.findViewById(R.id.btn_ok);
-//
-//        btn_ok.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                appointment_alert.dismiss();
-//                if (screen_type.equals("patient")) {
-//                    Intent intent = new Intent(context, AppointmentFor.class);
-//                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                    startActivity(intent);
-//                    finish();
+    private void showAlertDialogForPatientAppointment() {
+        appointment_alert = new android.app.Dialog(this);
+
+        appointment_alert.setContentView(R.layout.submit_appointment_dialog);
+        appointment_alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        WindowManager.LayoutParams params = appointment_alert.getWindow().getAttributes();
+        params.gravity = Gravity.CENTER | Gravity.CENTER_HORIZONTAL;
+
+        TextView tv_appointment_added = (TextView) appointment_alert.findViewById(R.id.tv_appointment_added);
+        TextView tv_appointment_msg = (TextView) appointment_alert.findViewById(R.id.tv_appointment_msg);
+        Button btn_ok = (Button) appointment_alert.findViewById(R.id.btn_ok);
+
+        btn_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                appointment_alert.dismiss();
+                if (screen_type.equals("patient")) {
+                    Intent intent = new Intent(context, HomeActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    finish();
 //                } else if (patient_by_mobile_search.equals("patient_by_mobile_search")) {
 //                    Intent intent = new Intent(context, AppointmentStatus.class);
 //                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 //                    startActivity(intent);
 //                    finish();
-//                }
-//            }
-//        });
-//
-//        appointment_alert.show();
-//        appointment_alert.setCanceledOnTouchOutside(false);
-//    }
+                }
+            }
+        });
+
+        appointment_alert.show();
+        appointment_alert.setCanceledOnTouchOutside(false);
+    }
 
 //    private void showAlertDialogForCounsellorAppointment() {
-//        appointment_alert = new Dialog(this);
+//        appointment_alert = new android.app.Dialog(this);
 //
 //        appointment_alert.setContentView(R.layout.submit_appointment_from_counsellor_dialog);
 //        appointment_alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -1890,29 +1934,29 @@ AppointmentInput appointmentInput;
 //        TextView tv_appointment_msg = (TextView) appointment_alert.findViewById(R.id.tv_appointment_msg);
 //        Button btn_ok = (Button) appointment_alert.findViewById(R.id.btn_ok);
 //        Button btn_assigned_doctor = (Button) appointment_alert.findViewById(R.id.btn_assigned_doctor);
-
-//        btn_ok.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                appointment_alert.dismiss();
-//                if (fromCounselorSearch.equals("fromCounselorSearch")) {
-//                    Intent intent = new Intent(context, AppointmentStatus.class);
-//                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                    startActivity(intent);
-//                    finish();
-//                } else if (fromCounselor.equals("")) {
-//                    Intent intent = new Intent(context, AppointmentFor.class);
-//                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                    startActivity(intent);
-//                    finish();
-//                } else {
-//                    Intent intent = new Intent(context, AppointmentStatus.class);
-//                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                    startActivity(intent);
-//                    finish();
-//                }
-//            }
-//        });
+//
+////        btn_ok.setOnClickListener(new View.OnClickListener() {
+////            @Override
+////            public void onClick(View v) {
+////                appointment_alert.dismiss();
+////                if (fromCounselorSearch.equals("fromCounselorSearch")) {
+////                    Intent intent = new Intent(context, AppointmentStatus.class);
+////                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+////                    startActivity(intent);
+////                    finish();
+////                } else if (fromCounselor.equals("")) {
+////                    Intent intent = new Intent(context, AppointmentFor.class);
+////                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+////                    startActivity(intent);
+////                    finish();
+////                } else {
+////                    Intent intent = new Intent(context, AppointmentStatus.class);
+////                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+////                    startActivity(intent);
+////                    finish();
+////                }
+////            }
+////        });
 //        btn_assigned_doctor.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -1942,7 +1986,7 @@ AppointmentInput appointmentInput;
                     if (success.equals("1")) {
                         String message = jsonObject.optString("message");
                         //Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
-//                        showAlertDialogForDoctorAssignment();
+                        showAlertDialogForDoctorAssignment();
                     } else {
                         Toast.makeText(context, "Something went wrong.", Toast.LENGTH_SHORT).show();
                     }
@@ -1960,36 +2004,36 @@ AppointmentInput appointmentInput;
         });
     }
 
-//    private void showAlertDialogForDoctorAssignment() {
-//        appointment_alert = new Dialog(this);
-//
-//        appointment_alert.setContentView(R.layout.submit_appointment_dialog);
-//        appointment_alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//        WindowManager.LayoutParams params = appointment_alert.getWindow().getAttributes();
-//        params.gravity = Gravity.CENTER | Gravity.CENTER_HORIZONTAL;
-//
-//        TextView tv_appointment_added = (TextView) appointment_alert.findViewById(R.id.tv_appointment_added);
-//        TextView tv_appointment_msg = (TextView) appointment_alert.findViewById(R.id.tv_appointment_msg);
-//        Button btn_ok = (Button) appointment_alert.findViewById(R.id.btn_ok);
-//
-//        /*change text dynamically*/
-//        tv_appointment_added.setText("Doctor Assigned");
-//        tv_appointment_msg.setText("Doctor has been assigned to patient successfully.");
-//
-//        btn_ok.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                appointment_alert.dismiss();
-//                Intent intent = new Intent(context, AppointmentStatus.class);
-//                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                startActivity(intent);
-//                finish();
-//            }
-//        });
-//
-//        appointment_alert.show();
-//        appointment_alert.setCanceledOnTouchOutside(false);
-//    }
+    private void showAlertDialogForDoctorAssignment() {
+        appointment_alert = new android.app.Dialog(this);
+
+        appointment_alert.setContentView(R.layout.submit_appointment_dialog);
+        appointment_alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        WindowManager.LayoutParams params = appointment_alert.getWindow().getAttributes();
+        params.gravity = Gravity.CENTER | Gravity.CENTER_HORIZONTAL;
+
+        TextView tv_appointment_added = (TextView) appointment_alert.findViewById(R.id.tv_appointment_added);
+        TextView tv_appointment_msg = (TextView) appointment_alert.findViewById(R.id.tv_appointment_msg);
+        Button btn_ok = (Button) appointment_alert.findViewById(R.id.btn_ok);
+
+        /*change text dynamically*/
+        tv_appointment_added.setText("Doctor Assigned");
+        tv_appointment_msg.setText("Doctor has been assigned to patient successfully.");
+
+        btn_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                appointment_alert.dismiss();
+                Intent intent = new Intent(context, HomeActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        appointment_alert.show();
+        appointment_alert.setCanceledOnTouchOutside(false);
+    }
 
     private void getDetailsPatientAlreadyFilled(RequestBody body) {
         mProgressDialog = ProgressDialog.show(context, "", "Please wait", true);
@@ -2100,16 +2144,16 @@ AppointmentInput appointmentInput;
                                             if (!acctchment.equalsIgnoreCase("")) {
                                                 tv_attached_doc.setVisibility(View.VISIBLE);
                                                 tv_attached_doc.setText(acctchment);
-//                                                tv_attached_doc.setOnClickListener(new View.OnClickListener() {
-//                                                    @Override
-//
-//                                                    public void onClick(View view) {
-//                                                        String url = APIClient.IMAGE_URL_DOC_APPO + acctchment;
-//                                                        Intent intent = new Intent(context, WebViewImageActivity.class);
-//                                                        intent.putExtra("url", url);
-//                                                        context.startActivity(intent);
-//                                                    }
-//                                                });
+                                                tv_attached_doc.setOnClickListener(new View.OnClickListener() {
+                                                    @Override
+
+                                                    public void onClick(View view) {
+                                                        String url = APIClient.IMAGE_URL_DOC_APPO + acctchment;
+                                                        Intent intent = new Intent(context, WebViewImageActivity.class);
+                                                        intent.putExtra("url", url);
+                                                        context.startActivity(intent);
+                                                    }
+                                                });
                                             } else {
                                                 tv_attached_doc.setVisibility(View.GONE);
                                             }
@@ -2398,9 +2442,9 @@ AppointmentInput appointmentInput;
                     //TODO
                     currentTextView.setText(String.format("%04d-%02d-%02d", year, monthOfYear + 1, dayOfMonth));
 
-                    mCalendar.set(Calendar.MONTH, monthOfYear);
-                    mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                    mCalendar.set(Calendar.YEAR, year);
+                    mCalendar.set(java.util.Calendar.MONTH, monthOfYear);
+                    mCalendar.set(java.util.Calendar.DAY_OF_MONTH, dayOfMonth);
+                    mCalendar.set(java.util.Calendar.YEAR, year);
 
                 }
             }, year, month, day);
@@ -2536,34 +2580,34 @@ AppointmentInput appointmentInput;
             et_patient_name.requestFocus();
             return false;
         }
-        if (rg_gender.getVisibility() == View.VISIBLE) {
-            int selected_id = rg_gender.getCheckedRadioButtonId();
-            if (selected_id <= 0) {
-                Toast.makeText(context, "Please select gender!", Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        }
-        if (rg_age.getVisibility() == View.VISIBLE) {
-            int selectedId = rg_age.getCheckedRadioButtonId();
-            if (selectedId <= 0) {
-                Toast.makeText(context, "Please choose option 'age or date of birth'.", Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        }
-        if (rb_age.isChecked() && et_age.getText().toString().trim().length() == 0) {
-            flagEditfield = et_age;
-            msg = "Please enter age!";
-            flagEditfield.setError(msg);
-            et_age.requestFocus();
-            return false;
-        }
-        if (rb_dob.isChecked() && et_date_of_birth.getText().toString().trim().length() == 0) {
-            flagEditfield = et_date_of_birth;
-            msg = "Please select date of birth!";
-            flagEditfield.setError(msg);
-            et_date_of_birth.requestFocus();
-            return false;
-        }
+//        if (rg_gender.getVisibility() == View.VISIBLE) {
+//            int selected_id = rg_gender.getCheckedRadioButtonId();
+//            if (selected_id <= 0) {
+//                Toast.makeText(context, "Please select gender!", Toast.LENGTH_SHORT).show();
+//                return false;
+//            }
+//        }
+//        if (rg_age.getVisibility() == View.VISIBLE) {
+//            int selectedId = rg_age.getCheckedRadioButtonId();
+//            if (selectedId <= 0) {
+//                Toast.makeText(context, "Please choose option 'age or date of birth'.", Toast.LENGTH_SHORT).show();
+//                return false;
+//            }
+//        }
+//        if (rb_age.isChecked() && et_age.getText().toString().trim().length() == 0) {
+//            flagEditfield = et_age;
+//            msg = "Please enter age!";
+//            flagEditfield.setError(msg);
+//            et_age.requestFocus();
+//            return false;
+//        }
+//        if (rb_dob.isChecked() && et_date_of_birth.getText().toString().trim().length() == 0) {
+//            flagEditfield = et_date_of_birth;
+//            msg = "Please select date of birth!";
+//            flagEditfield.setError(msg);
+//            et_date_of_birth.requestFocus();
+//            return false;
+//        }
         if (et_contact_number_for_counsellor.getText().toString().trim().length() == 0) {
             flagEditfield = et_contact_number_for_counsellor;
             msg = "Please enter contact number!";
@@ -2578,92 +2622,92 @@ AppointmentInput appointmentInput;
             et_contact_number_for_counsellor.requestFocus();
             return false;
         }
-        if (et_pin_code.getText().toString().trim().length() == 0) {
-            flagEditfield = et_pin_code;
-            msg = "Please enter pin code!";
-            flagEditfield.setError(msg);
-            et_pin_code.requestFocus();
-            return false;
-        }
-        if (spn_state.getSelectedItem().toString().trim().equalsIgnoreCase("Select State")) {
-            TextView errorText = (TextView) spn_state.getSelectedView();
-            errorText.setError("");
-            errorText.setTextColor(Color.RED);//just to highlight that this is an error
-            errorText.setText("Please select state!");
-            Toast.makeText(context, "Please select state!", Toast.LENGTH_LONG).show();
-            errorText.requestFocus();
-            return false;
-        }
-        if (spn_district.getSelectedItem().toString().trim().equalsIgnoreCase("Select District")) {
-            TextView errorText = (TextView) spn_district.getSelectedView();
-            errorText.setError("");
-            errorText.setTextColor(Color.RED);//just to highlight that this is an error
-            errorText.setText("Please select district!");
-            Toast.makeText(context, "Please select district!", Toast.LENGTH_LONG).show();
-            errorText.requestFocus();
-            return false;
-        }
-        if (spn_block.getSelectedItem().toString().trim().equalsIgnoreCase("Select Block")) {
-            TextView errorText = (TextView) spn_block.getSelectedView();
-            errorText.setError("");
-            errorText.setTextColor(Color.RED);//just to highlight that this is an error
-            errorText.setText("Please select block!");
-            Toast.makeText(context, "Please select block!", Toast.LENGTH_LONG).show();
-            errorText.requestFocus();
-            return false;
-        }
-        if (spn_post_office.getSelectedItem().toString().trim().equalsIgnoreCase("Select Post Office")) {
-            TextView errorText = (TextView) spn_post_office.getSelectedView();
-            errorText.setError("");
-            errorText.setTextColor(Color.RED);//just to highlight that this is an error
-            errorText.setText("Please select post office!");
-            Toast.makeText(context, "Please select post office!", Toast.LENGTH_LONG).show();
-            errorText.requestFocus();
-            return false;
-        }
-        if (spn_village.getSelectedItem().toString().trim().equalsIgnoreCase("Select Village")) {
-            TextView errorText = (TextView) spn_village.getSelectedView();
-            errorText.setError("");
-            errorText.setTextColor(Color.RED);//just to highlight that this is an error
-            errorText.setText("Please select village!");
-            Toast.makeText(context, "Please select village!", Toast.LENGTH_LONG).show();
-            errorText.requestFocus();
-            return false;
-        }
-        if (et_address.getText().toString().trim().length() == 0) {
-            flagEditfield = et_address;
-            msg = "Please enter address!";
-            flagEditfield.setError(msg);
-            et_address.requestFocus();
-            return false;
-        }
+//        if (et_pin_code.getText().toString().trim().length() == 0) {
+//            flagEditfield = et_pin_code;
+//            msg = "Please enter pin code!";
+//            flagEditfield.setError(msg);
+//            et_pin_code.requestFocus();
+//            return false;
+//        }
+//        if (spn_state.getSelectedItem().toString().trim().equalsIgnoreCase("Select State")) {
+//            TextView errorText = (TextView) spn_state.getSelectedView();
+//            errorText.setError("");
+//            errorText.setTextColor(Color.RED);//just to highlight that this is an error
+//            errorText.setText("Please select state!");
+//            Toast.makeText(context, "Please select state!", Toast.LENGTH_LONG).show();
+//            errorText.requestFocus();
+//            return false;
+//        }
+//        if (spn_district.getSelectedItem().toString().trim().equalsIgnoreCase("Select District")) {
+//            TextView errorText = (TextView) spn_district.getSelectedView();
+//            errorText.setError("");
+//            errorText.setTextColor(Color.RED);//just to highlight that this is an error
+//            errorText.setText("Please select district!");
+//            Toast.makeText(context, "Please select district!", Toast.LENGTH_LONG).show();
+//            errorText.requestFocus();
+//            return false;
+//        }
+//        if (spn_block.getSelectedItem().toString().trim().equalsIgnoreCase("Select Block")) {
+//            TextView errorText = (TextView) spn_block.getSelectedView();
+//            errorText.setError("");
+//            errorText.setTextColor(Color.RED);//just to highlight that this is an error
+//            errorText.setText("Please select block!");
+//            Toast.makeText(context, "Please select block!", Toast.LENGTH_LONG).show();
+//            errorText.requestFocus();
+//            return false;
+//        }
+//        if (spn_post_office.getSelectedItem().toString().trim().equalsIgnoreCase("Select Post Office")) {
+//            TextView errorText = (TextView) spn_post_office.getSelectedView();
+//            errorText.setError("");
+//            errorText.setTextColor(Color.RED);//just to highlight that this is an error
+//            errorText.setText("Please select post office!");
+//            Toast.makeText(context, "Please select post office!", Toast.LENGTH_LONG).show();
+//            errorText.requestFocus();
+//            return false;
+//        }
+//        if (spn_village.getSelectedItem().toString().trim().equalsIgnoreCase("Select Village")) {
+//            TextView errorText = (TextView) spn_village.getSelectedView();
+//            errorText.setError("");
+//            errorText.setTextColor(Color.RED);//just to highlight that this is an error
+//            errorText.setText("Please select village!");
+//            Toast.makeText(context, "Please select village!", Toast.LENGTH_LONG).show();
+//            errorText.requestFocus();
+//            return false;
+//        }
+//        if (et_address.getText().toString().trim().length() == 0) {
+//            flagEditfield = et_address;
+//            msg = "Please enter address!";
+//            flagEditfield.setError(msg);
+//            et_address.requestFocus();
+//            return false;
+//        }
         return true;
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu, menu);
-//        /*show hide toolbar item here*/
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu, menu);
+        /*show hide toolbar item here*/
 //        if (not_assigned_appointments.equalsIgnoreCase("not_assigned_appointments")) {
-//            MenuItem item = menu.findItem(R.id.deleteAppointment);
+////            MenuItem item = menu.findItem(R.id.deleteAppointment);
 //            item.setVisible(true);
 //        }
-//        return true;
-//    }
+        return true;
+    }
 
 //    @Override
 //    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 //        if (item.getItemId() == android.R.id.home) finish();
 //
-//        if (item.getItemId() == R.id.deleteAppointment) {
-//            showDeleteAppointmentPopup();
-//        }
+////        if (item.getItemId() == R.id.deleteAppointment) {
+////            showDeleteAppointmentPopup();
+////        }
 //        return super.onOptionsItemSelected(item);
 //    }
-//
+
 //    private void showDeleteAppointmentPopup() {
-//        delete_alert = new Dialog(this);
+//        delete_alert = new android.app.Dialog(this);
 //
 //        delete_alert.setContentView(R.layout.delete_appointment_alert_dialog);
 //        delete_alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -2708,46 +2752,46 @@ AppointmentInput appointmentInput;
         return true;
     }
 
-    private void deleteAppointmentApiCall(EditText et_reason) {
-        mProgressDialog = ProgressDialog.show(this, "Deleting", "Please Wait...", true);
-        AppointmentInput appointmentInput = new AppointmentInput();
-        appointmentInput.setUser_id(sharedPrefHelper.getString("user_id", ""));
-        appointmentInput.setRemarks(et_reason.getText().toString().trim());
-        appointmentInput.setPatient_appointment_id(patient_appointments_id);
-
-        Gson mGson = new Gson();
-        String data = mGson.toJson(appointmentInput);
-        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        RequestBody body = RequestBody.create(JSON, data);
-        APIClient.getClient().create(TELEMEDICINE_API.class).deleteAppointmentApi(body).enqueue(new Callback<JsonObject>() {
-            @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response.body().toString());
-                    mProgressDialog.dismiss();
-                    Log.e("mcxnmc", "xhxb " + jsonObject.toString());
-
-                    if (jsonObject.optString("success").equalsIgnoreCase("1")) {
+//    private void deleteAppointmentApiCall(EditText et_reason) {
+//        mProgressDialog = ProgressDialog.show(this, "Deleting", "Please Wait...", true);
+//        AppointmentInput appointmentInput = new AppointmentInput();
+//        appointmentInput.setUser_id(sharedPrefHelper.getString("user_id", ""));
+//        appointmentInput.setRemarks(et_reason.getText().toString().trim());
+//        appointmentInput.setPatient_appointment_id(patient_appointments_id);
+//
+//        Gson mGson = new Gson();
+//        String data = mGson.toJson(appointmentInput);
+//        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+//        RequestBody body = RequestBody.create(JSON, data);
+//        APIClient.getClient().create(TELEMEDICINE_API.class).deleteAppointmentApi(body).enqueue(new Callback<JsonObject>() {
+//            @Override
+//            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+//                try {
+//                    JSONObject jsonObject = new JSONObject(response.body().toString());
+//                    mProgressDialog.dismiss();
+//                    Log.e("mcxnmc", "xhxb " + jsonObject.toString());
+//
+//                    if (jsonObject.optString("success").equalsIgnoreCase("1")) {
 //                        showAlertAppointmentDeleted();
-                    } else {
-                        Toast.makeText(context, "Something went Wrong..!", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    mProgressDialog.dismiss();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
-                Toast.makeText(context, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
-                mProgressDialog.dismiss();
-            }
-        });
-    }
+//                    } else {
+//                        Toast.makeText(context, "Something went Wrong..!", Toast.LENGTH_SHORT).show();
+//                    }
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                    mProgressDialog.dismiss();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<JsonObject> call, Throwable t) {
+//                Toast.makeText(context, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
+//                mProgressDialog.dismiss();
+//            }
+//        });
+//    }
 
 //    private void showAlertAppointmentDeleted() {
-//        appointment_alert = new Dialog(this);
+//        appointment_alert = new android.app.Dialog(this);
 //
 //        appointment_alert.setContentView(R.layout.submit_appointment_from_patient_dialog);
 //        appointment_alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -2762,29 +2806,46 @@ AppointmentInput appointmentInput;
 //        tv_appointment_added.setText("Appointment Deleted");
 //        tv_appointment_msg.setText("Your appointment deleted successfully.");
 //
-////        btn_ok.setOnClickListener(new View.OnClickListener() {
-////            @Override
-////            public void onClick(View v) {
-////                appointment_alert.dismiss();
-////                Intent intent = new Intent(context, AppointmentStatus.class);
-////                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-////                startActivity(intent);
-////                finish();
-////            }
-////        });
+//        btn_ok.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                appointment_alert.dismiss();
+//                Intent intent = new Intent(context, AppointmentStatus.class);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                startActivity(intent);
+//                finish();
+//            }
+//        });
 //
 //        appointment_alert.show();
 //        appointment_alert.setCanceledOnTouchOutside(false);
 //    }
-
+@Override
+public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+    if (item.getItemId() == android.R.id.home) {
+        Intent intent = new Intent(PatientFillAppointment.this, HomeActivity.class);
+        startActivity(intent);
+        finish();
+    }
+    return super.onOptionsItemSelected(item);
+}
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-
+//        super.onBackPressed();
             Intent intent = new Intent(context, HomeActivity.class);
             startActivity(intent);
             finish();
+        }
+//        if (patient_by_mobile_search.equalsIgnoreCase("patient_by_mobile_search")) {
+//            Intent intent = new Intent(context, PatientListReplicaforSearch.class);
+//            startActivity(intent);
+//            finish();
+//        }
+//        if (not_assigned_appointments.equalsIgnoreCase("not_assigned_appointments")) {
+//            Intent intent = new Intent(context, NotAssignedAppointments.class);
+//            intent.putExtra("fromNotAssignment", "fromNotAssignment");
+//            startActivity(intent);
+//            finish();
+//        }
 
-
-    }
 }

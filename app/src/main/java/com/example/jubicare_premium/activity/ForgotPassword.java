@@ -203,7 +203,11 @@ public class ForgotPassword extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == android.R.id.home) finish();
+        if (item.getItemId() == android.R.id.home) {
+            Intent intent = new Intent(ForgotPassword.this, Login.class);
+            startActivity(intent);
+            finish();
+        }
         return super.onOptionsItemSelected(item);
     }
 }

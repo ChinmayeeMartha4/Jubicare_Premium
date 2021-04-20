@@ -228,7 +228,7 @@
                             android:layout_height="wrap_content"
                             android:background="@android:color/transparent"
                             android:editable="false"
-                            android:focusable="false"
+                            android:drawableRight="@drawable/ic_baseline_date_range_24"                            android:focusable="false"
                             android:focusableInTouchMode="false"
                             android:fontFamily="@font/robotoregular"
                             android:inputType="date"
