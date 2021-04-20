@@ -49,19 +49,19 @@ private static String splashLoaded = "No";
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                String role_id = sharedPrefHelper.getString("role_id", "");
-                splashLoaded = sharedPrefHelper.getString("isSplashLoaded", "No");
-                if (splashLoaded.equals("No")) {
-                    DataDownload dataDownload = new DataDownload();
-                    dataDownload.getMasterTables(SplashScreen.this);
-                } else {
-                    if (role_id.equalsIgnoreCase("")) {
-                        Intent intent = new Intent(context, Login.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                }
+                splashLoaded = sharedPrefHelper.getString("isSplashLoaded", "");
+                if (splashLoaded.equals("")) {
+//                    DataDownload dataDownload = new DataDownload();
+//                    dataDownload.getMasterTables(SplashScreen.this);
+                    Intent intent=new Intent(SplashScreen.this,Login.class);
+                    startActivity(intent);
+                    finish();
 
+                } else {
+                    Intent intent = new Intent(SplashScreen.this, HomeActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         }, SPLASH_DISPLAY_LENGTH);
     }

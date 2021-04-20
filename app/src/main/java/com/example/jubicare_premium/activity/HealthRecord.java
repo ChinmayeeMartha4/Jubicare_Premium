@@ -199,7 +199,7 @@ public class HealthRecord  extends AppCompatActivity {
     String blood_group_name = "";
     android.app.Dialog add_profile_alert;
     String coveredArea = "Y";
-    private String[] masterTables = {"state", "district", "block", "village", "post_office", "symptom", "disease", "medicine_list", "test", "sub_tests", "prescription_eating_schedule", "prescription_days", "prescription_interval", "blood_group"};
+    private String[] masterTables = {"state", "district", "block", "village", "post_office", "symptom", "disease", "medicine_list", "test", "sub_tests","prescription_eating_schedule","prescription_days","prescription_interval","blood_group","caste"};
     @BindView(R.id.rg_age)
     RadioGroup rg_age;
     @BindView(R.id.rb_age)
@@ -1384,51 +1384,51 @@ SignUpModel signUpModel;
             et_pin_code.requestFocus();
             return false;
         }
-//        if (spn_state.getSelectedItem().toString().trim().equalsIgnoreCase("Select State")) {
-//            TextView errorText = (TextView) spn_state.getSelectedView();
-//            errorText.setError("");
-//            errorText.setTextColor(Color.RED);//just to highlight that this is an error
-//            errorText.setText("Please select state!");
-//            Toast.makeText(context, "Please select state!", Toast.LENGTH_LONG).show();
-//            errorText.requestFocus();
-//            return false;
-//        }
-//        if (spn_district.getSelectedItem().toString().trim().equalsIgnoreCase("Select District")) {
-//            TextView errorText = (TextView) spn_district.getSelectedView();
-//            errorText.setError("");
-//            errorText.setTextColor(Color.RED);//just to highlight that this is an error
-//            errorText.setText("Please select district!");
-//            Toast.makeText(context, "Please select district!", Toast.LENGTH_LONG).show();
-//            errorText.requestFocus();
-//            return false;
-//        }
-//        if (spn_block.getSelectedItem().toString().trim().equalsIgnoreCase("Select Block")) {
-//            TextView errorText = (TextView) spn_block.getSelectedView();
-//            errorText.setError("");
-//            errorText.setTextColor(Color.RED);//just to highlight that this is an error
-//            errorText.setText("Please select block!");
-//            Toast.makeText(context, "Please select block!", Toast.LENGTH_LONG).show();
-//            errorText.requestFocus();
-//            return false;
-//        }
-//        if (spn_post_office.getSelectedItem().toString().trim().equalsIgnoreCase("Select Post Office")) {
-//            TextView errorText = (TextView) spn_post_office.getSelectedView();
-//            errorText.setError("");
-//            errorText.setTextColor(Color.RED);//just to highlight that this is an error
-//            errorText.setText("Please select post office!");
-//            Toast.makeText(context, "Please select post office!", Toast.LENGTH_LONG).show();
-//            errorText.requestFocus();
-//            return false;
-//        }
-//        if (spn_village.getSelectedItem().toString().trim().equalsIgnoreCase("Select Village")) {
-//            TextView errorText = (TextView) spn_village.getSelectedView();
-//            errorText.setError("");
-//            errorText.setTextColor(Color.RED);//just to highlight that this is an error
-//            errorText.setText("Please select village!");
-//            Toast.makeText(context, "Please select village!", Toast.LENGTH_LONG).show();
-//            errorText.requestFocus();
-//            return false;
-//        }
+        if (spn_state.getSelectedItem().toString().trim().equalsIgnoreCase("Select State")) {
+            TextView errorText = (TextView) spn_state.getSelectedView();
+            errorText.setError("");
+            errorText.setTextColor(Color.RED);//just to highlight that this is an error
+            errorText.setText("Please select state!");
+            Toast.makeText(context, "Please select state!", Toast.LENGTH_LONG).show();
+            errorText.requestFocus();
+            return false;
+        }
+        if (spn_district.getSelectedItem().toString().trim().equalsIgnoreCase("Select District")) {
+            TextView errorText = (TextView) spn_district.getSelectedView();
+            errorText.setError("");
+            errorText.setTextColor(Color.RED);//just to highlight that this is an error
+            errorText.setText("Please select district!");
+            Toast.makeText(context, "Please select district!", Toast.LENGTH_LONG).show();
+            errorText.requestFocus();
+            return false;
+        }
+        if (spn_block.getSelectedItem().toString().trim().equalsIgnoreCase("Select Block")) {
+            TextView errorText = (TextView) spn_block.getSelectedView();
+            errorText.setError("");
+            errorText.setTextColor(Color.RED);//just to highlight that this is an error
+            errorText.setText("Please select block!");
+            Toast.makeText(context, "Please select block!", Toast.LENGTH_LONG).show();
+            errorText.requestFocus();
+            return false;
+        }
+        if (spn_post_office.getSelectedItem().toString().trim().equalsIgnoreCase("Select Post Office")) {
+            TextView errorText = (TextView) spn_post_office.getSelectedView();
+            errorText.setError("");
+            errorText.setTextColor(Color.RED);//just to highlight that this is an error
+            errorText.setText("Please select post office!");
+            Toast.makeText(context, "Please select post office!", Toast.LENGTH_LONG).show();
+            errorText.requestFocus();
+            return false;
+        }
+        if (spn_village.getSelectedItem().toString().trim().equalsIgnoreCase("Select Village")) {
+            TextView errorText = (TextView) spn_village.getSelectedView();
+            errorText.setError("");
+            errorText.setTextColor(Color.RED);//just to highlight that this is an error
+            errorText.setText("Please select village!");
+            Toast.makeText(context, "Please select village!", Toast.LENGTH_LONG).show();
+            errorText.requestFocus();
+            return false;
+        }
         if (et_address.getText().toString().trim().length() == 0) {
             flagEditfield = et_address;
             msg = "Please enter address!";

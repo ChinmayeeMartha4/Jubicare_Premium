@@ -171,7 +171,7 @@ public class Login extends AppCompatActivity {
                         JSONObject jsonObject = new JSONObject(response.body().toString());
                         mProgressDialog.dismiss();
                         if (jsonObject.optString("success").equalsIgnoreCase("1")) {
-                            sharedPrefHelper.setString("is_login", "1");
+                            sharedPrefHelper.setString("isSplashLoaded", "1");
                             String user_id = jsonObject.optString("user_id");
                             String message = jsonObject.optString("message");
                             String success = jsonObject.optString("success");

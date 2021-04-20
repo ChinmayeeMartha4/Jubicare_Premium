@@ -120,6 +120,35 @@
     <string name="Otphint2">Please type the verification code sent to</string>
     <string name="Otphint3">Please type the verification code shown on your popup window.</string>
     <string name="Otperror">Resend</string>
+    <string name="patient_symptoms">Patient symptoms</string>
+    <string name="diagnosis">Diagnosis</string>
+    <string name="medicine">Medicine</string>
+    <string name="days_of_prescription">Days of prescription</string>
+    <string name="prescription_interval">Prescription interval</string>
+    <string name="prescription_eating_schedule">Prescription eating schedule</string>
+    <string name="prescription_sos">Prescription sos</string>
+    <string name="test_name">Test name</string>
+    <string name="sub_test_name">Sub test name</string>
+    <string name="test_document">Test document</string>
+    <string name="if_any_current_medicine_prescription">if any current medicine prescription</string>
+    <string name="date_of_prescribed_medication">Date of prescribed medication</string>
+    <string name="test_conducted_if_any">Test conducted if any</string>
+    <string name="date_of_test">Date of test</string>
+    <string name="emergency_case">Emergency case</string>
+    <string name="assigned_doctor">Assigned doctor</string>
+    <string name="date_of_assigned_doctor">Date of assigned doctor</string>
+    <string name="assigned_pharmacist">Assigned pharmacist</string>
+    <string name="pharmacist_assignment_date">Pharmacist assignment date</string>
+    <string name="medicine_delivered">Medicine delivered</string>
+    <string name="is_verified">Is verified</string>
+    <string name="assigned_by">Assigned by</string>
+    <string name="appointment_type">Appointment type</string>
+    <string name="doctor_s_advisory">Doctor\'s advisory</string>
+    <string name="consultation_status">Consultation status</string>
+    <string name="consultation_completion_time">Consultation completion time</string>
+    <string name="pharmacist_drugs_delivery_status">Pharmacist drugs delivery status</string>
+    <string name="date_of_phamacists_done">Date of phamacists done</string>
+    <string name="view_prescription_click">View prescription click</string>
 
 
 

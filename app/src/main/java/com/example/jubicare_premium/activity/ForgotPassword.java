@@ -78,7 +78,7 @@ public class ForgotPassword extends AppCompatActivity {
                     forgetPasswordMode = new ForgetPasswordModel();
                     mobile = etMobileNo.getText().toString().trim();
                     forgetPasswordMode.setContact_no(mobile);
-                    forgetPassword(mobile);
+//                    forgetPassword(mobile);
 
                     mProgressDialog = ProgressDialog.show(context, "", "Please Wait...", true);
                     Gson gson = new Gson();
@@ -93,51 +93,51 @@ public class ForgotPassword extends AppCompatActivity {
     }
 
 
-    private void forgetPassword(String mobile) {
-        dialog = ProgressDialog.show(context, "", "Please Wait", true);
-
-        ForgetPasswordModel forgetPasswordModel = new ForgetPasswordModel();
-
-
-
-        forgetPasswordModel.setContact_no(mobile);
-
-        Gson mGson = new Gson();
-        String data = mGson.toJson(forgetPasswordModel);
-        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        RequestBody body = RequestBody.create(JSON, data);
-
-        APIClient.getClient().create(TELEMEDICINE_API.class).sendForgetPassword(body).enqueue(new Callback<JsonObject>() {
-            @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                JSONObject jsonObject = null;
-                try {
-                    jsonObject = new JSONObject(response.body().toString());
-                    dialog.dismiss();
-                    String status_ = jsonObject.optString("success");
-                    String message_ = jsonObject.optString("message");
-                    if (status_.equals("1")) {
-
-                        Intent intent = new Intent(context, Login.class);
-                        startActivity(intent);
-                        finish();
-
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
-                // Log.e("OTP SCREEN ","===="+t.getMessage());
-                dialog.dismiss();
-            }
-        });
-
-    }
+//    private void forgetPassword(String mobile) {
+//        dialog = ProgressDialog.show(context, "", "Please Wait", true);
+//
+//        ForgetPasswordModel forgetPasswordModel = new ForgetPasswordModel();
+//
+//
+//
+//        forgetPasswordModel.setContact_no(mobile);
+//
+//        Gson mGson = new Gson();
+//        String data = mGson.toJson(forgetPasswordModel);
+//        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+//        RequestBody body = RequestBody.create(JSON, data);
+//
+//        APIClient.getClient().create(TELEMEDICINE_API.class).sendForgetPassword(body).enqueue(new Callback<JsonObject>() {
+//            @Override
+//            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+//                JSONObject jsonObject = null;
+//                try {
+//                    jsonObject = new JSONObject(response.body().toString());
+//                    dialog.dismiss();
+//                    String status_ = jsonObject.optString("success");
+//                    String message_ = jsonObject.optString("message");
+//                    if (status_.equals("1")) {
+//
+//                        Intent intent = new Intent(context, Login.class);
+//                        startActivity(intent);
+//                        finish();
+//
+//                    }
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<JsonObject> call, Throwable t) {
+//                // Log.e("OTP SCREEN ","===="+t.getMessage());
+//                dialog.dismiss();
+//            }
+//        });
+//
+//    }
 //    private void sendForgetPasswordData(final RequestBody forgetPasswordMode) {
 //        TELEMEDICINE_API api_service = APIClient.getClient().create(TELEMEDICINE_API.class);
 //        if (forgetPasswordMode != null && api_service != null) {
