@@ -441,13 +441,9 @@ public class PatientFillAppointment extends AppCompatActivity {
         setPostOfficeSpinner();
         setVillageSpinner();
 
-        //callPinCodeApi();
-        //setSpinnerDistrict();
-        //setSpinnerBlock();
-        //setSpinnerPostOffice();
         setBloodGroupSpinner();
 
-        setDoctorListSpinner();
+//        setDoctorListSpinner();
         simpleSwitch.setTextOn("Show");
         simpleSwitch.setTextOff("Hide");
         /*get intent values here*/
@@ -463,15 +459,8 @@ public class PatientFillAppointment extends AppCompatActivity {
         }
         if (not_assigned_appointments.equalsIgnoreCase("not_assigned_appointments")) {
             setEditableFalse();
-            //cb_emergency.setEnabled(false);
             et_height.setEnabled(false);
             et_weight.setEnabled(false);
-//            et_bplower.setEnabled(false);
-//            et_bpupper.setEnabled(false);
-//            et_blood_oxygen_level.setEnabled(false);
-//            et_temperature.setEnabled(false);
-//            et_sugar.setEnabled(false);
-//            et_pulse_in_bpm.setEnabled(false);
             rbYesMedicinePrescribed.setEnabled(false);
             rbNoMedicinePrescribed.setEnabled(false);
             tv_date_of_prescribed_medication.setEnabled(false);
@@ -526,7 +515,6 @@ public class PatientFillAppointment extends AppCompatActivity {
         } else {
             tv_contact_no_for_patient.setVisibility(View.GONE);
             et_contact_number.setVisibility(View.GONE);
-            //ll_et_postoffice.setVisibility(View.GONE);
         }
         if (!patient_appointments_id.equals("")) {
             tv_doctor_assignment.setVisibility(View.VISIBLE);
@@ -563,8 +551,7 @@ public class PatientFillAppointment extends AppCompatActivity {
             et_block.setEnabled(false);
             ll_state.setVisibility(View.VISIBLE);
             ll_village.setVisibility(View.VISIBLE);
-            //tv_is_covered_area.setVisibility(View.VISIBLE);
-            //ll_covered_area.setVisibility(View.VISIBLE);
+
             tv_what_you_know.setVisibility(View.VISIBLE);
             ll_what_you_know.setVisibility(View.VISIBLE);
             ll_dob.setVisibility(View.GONE);
@@ -595,15 +582,12 @@ public class PatientFillAppointment extends AppCompatActivity {
                 if (simpleSwitch.isChecked()) {
                     ll_first.setVisibility(View.VISIBLE);
                     ll_second.setVisibility(View.VISIBLE);
-                    //ll_third.setVisibility(View.VISIBLE);
                 } else {
                     ll_first.setVisibility(View.GONE);
                     ll_second.setVisibility(View.GONE);
-                    //ll_third.setVisibility(View.GONE);
                 }
             }
         });
-        //    mProgressDialog = ProgressDialog.show(context ,"", "Please wait", true);
         patientFilledDataModel.setProfile_patient_id(profile_id);
         patientFilledDataModel.setUser_id(sharedPrefHelper.getString("user_id", ""));
         patientFilledDataModel.setRole_id(sharedPrefHelper.getString("role_id", ""));
@@ -615,11 +599,10 @@ public class PatientFillAppointment extends AppCompatActivity {
         RequestBody body = RequestBody.create(JSON, data);
         /*send data here*/
         if (!fromCounselor.equals("fromCounselor")) {
-            getDetailsPatientAlreadyFilled(body);
+//            getDetailsPatientAlreadyFilled(body);
         }
 
         setCasteSpinner();
-        /*calling api for counsellor*/
 
 
         iv_image_call.setOnClickListener(v -> {
@@ -634,7 +617,7 @@ public class PatientFillAppointment extends AppCompatActivity {
                 RequestBody body1 = RequestBody.create(JSON1, data1);
 
                 mProgressDialog = ProgressDialog.show(context, "", "Please Wait...", true);
-                callFormCounsellorFillApp(body1);
+//                callFormCounsellorFillApp(body1);
             } else {
                 PatientFilledDataModel appointmentInput = new PatientFilledDataModel();
                 appointmentInput.setUser_id(sharedPrefHelper.getString("user_id", ""));
@@ -653,7 +636,7 @@ public class PatientFillAppointment extends AppCompatActivity {
                 RequestBody body1 = RequestBody.create(JSON1, data1);
 
                 mProgressDialog = ProgressDialog.show(context, "", "Please Wait...", true);
-                callDoctor(body1);
+//                callDoctor(body1);
             }
 
         });
@@ -715,20 +698,22 @@ public class PatientFillAppointment extends AppCompatActivity {
 
 
         btn_submit.setOnClickListener(v -> {
-            if (screen_type.equals("patient") || patient_by_mobile_search.equals("patient_by_mobile_search")) {
 
-                int size = spn_symptoms.getSelectedIds().size();
+            int size = spn_symptoms.getSelectedIds().size();
+                    if (size != 0) {
+                        sendAppointment();
+                    }
+            if (screen_type.equals("patient") || patient_by_mobile_search.equals("patient_by_mobile_search")) {
+//                int size = spn_symptoms.getSelectedIds().size();
                 if (size != 0) {
                     sendAppointment();
-
                 } else {
                     Toast.makeText(context, "Please Select Symptoms", Toast.LENGTH_SHORT).show();
                 }
             }
             else if (!patient_appointments_id.equals("")) {
-//                sendDoctorAssignment();
             } else {
-                int size = spn_symptoms.getSelectedIds().size();
+//                int size = spn_symptoms.getSelectedIds().size();
                 if (size != 0) {
                     if (checkValidation()) {
                         sendProfileAndAppointment();
@@ -769,16 +754,6 @@ public class PatientFillAppointment extends AppCompatActivity {
         symptoms.add(2, "Vomating");
         symptoms.add(3, "Viral");
 
-//        DiseaseAdapter diseaseAdapter = new DiseaseAdapter(this, symptoms);
-
-//        for (int i = 0; i < symptoms.size(); i++) {
-//            customLinearLayout.addView(diseaseAdapter.getView(i, null, null));
-//
-//        }
-//statid
-
-//
-//        spn_block.setSelection(((ArrayAdapter)spn_block.getAdapter()).getPosition("Ashuran"));
 
         /*get date of birth form age*/
         rg_age.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -797,22 +772,20 @@ public class PatientFillAppointment extends AppCompatActivity {
                 }
             }
         });
-        /*if (et_date_of_birth.getText().toString().trim().equalsIgnoreCase("")) {
-            getDateOfBirthFromAge();
-        }*/
+
     }
 
-    private void getAllCasteFromTable() {
-        casteArrayList.clear();
-        casteNameHM = sqliteHelper.getAllCaste();
-        for (int i = 0; i < casteNameHM.size(); i++) {
-            casteArrayList.add(casteNameHM.keySet().toArray()[i].toString().trim());
-        }
-        casteArrayList.add(0, getString(R.string.select_caste));
-        final ArrayAdapter Adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, casteArrayList);
-        Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spn_caste.setAdapter(Adapter);
-    }
+//    private void getAllCasteFromTable() {
+//        casteArrayList.clear();
+//        casteNameHM = sqliteHelper.getAllCaste();
+//        for (int i = 0; i < casteNameHM.size(); i++) {
+//            casteArrayList.add(casteNameHM.keySet().toArray()[i].toString().trim());
+//        }
+//        casteArrayList.add(0, getString(R.string.select_caste));
+//        final ArrayAdapter Adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, casteArrayList);
+//        Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spn_caste.setAdapter(Adapter);
+//    }
 
     private void getDateOfBirthFromAge() {
         et_age.addTextChangedListener(new TextWatcher() {
@@ -887,107 +860,74 @@ public class PatientFillAppointment extends AppCompatActivity {
         spn_caste.setAdapter(Adapter);
     }
 
-    private void callFormCounsellorFillApp(RequestBody body1) {
-        APIClient.getClient().create(TELEMEDICINE_API.class).callFromCounsellorFillFormApi(body1).enqueue(new Callback<JsonObject>() {
-            @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response.body().toString());
-                    mProgressDialog.dismiss();
-                    Log.e("hdss", "sbhdd " + jsonObject.toString());
-                    String success = jsonObject.optString("success");
-                    String message = jsonObject.optString("message");
-                    String caller_no = jsonObject.optString("caller_no");
+//    private void callFormCounsellorFillApp(RequestBody body1) {
+//        APIClient.getClient().create(TELEMEDICINE_API.class).callFromCounsellorFillFormApi(body1).enqueue(new Callback<JsonObject>() {
+//            @Override
+//            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+//                try {
+//                    JSONObject jsonObject = new JSONObject(response.body().toString());
+//                    mProgressDialog.dismiss();
+//                    Log.e("hdss", "sbhdd " + jsonObject.toString());
+//                    String success = jsonObject.optString("success");
+//                    String message = jsonObject.optString("message");
+//                    String caller_no = jsonObject.optString("caller_no");
+//
+//                    if (success.equalsIgnoreCase("1")) {
+//                        et_contact_number_for_counsellor.setText(caller_no);
+//                        Toast.makeText(context, "" + message, Toast.LENGTH_LONG).show();
+//                    } else {
+//                        Toast.makeText(context, "Mobile number not found. Please enter mobile number.", Toast.LENGTH_LONG).show();
+//                    }
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                    mProgressDialog.dismiss();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<JsonObject> call, Throwable t) {
+//                Toast.makeText(context, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
+//                mProgressDialog.dismiss();
+//            }
+//        });
+//
+//    }
 
-                    if (success.equalsIgnoreCase("1")) {
-                        et_contact_number_for_counsellor.setText(caller_no);
-                        Toast.makeText(context, "" + message, Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(context, "Mobile number not found. Please enter mobile number.", Toast.LENGTH_LONG).show();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    mProgressDialog.dismiss();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
-                Toast.makeText(context, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
-                mProgressDialog.dismiss();
-            }
-        });
-
-    }
-
-    private void callDoctor(RequestBody body) {
-        APIClient.getClient().create(TELEMEDICINE_API.class).callFromDoctorApi(body).enqueue(new Callback<JsonObject>() {
-            @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response.body().toString());
-                    mProgressDialog.dismiss();
-                    Log.e("hdss", "sbhdd " + jsonObject.toString());
-                    String success = jsonObject.optString("success");
-                    String message = jsonObject.optString("message");
-                    String did_no = jsonObject.optString("did_no");
-                    String call_id = jsonObject.optString("call_id");
-                    /*save call id in preference and send at the time of doctor assignment*/
-                    sharedPrefHelper.setString("call_id", call_id);
-
-                    if (success.equalsIgnoreCase("1")) {
-                        //dial call
-                        Intent callIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + did_no));
-                        startActivity(callIntent);
-                    } else {
-                        Toast.makeText(context, "Please check your internet connection.", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    mProgressDialog.dismiss();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
-                Toast.makeText(context, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
-                mProgressDialog.dismiss();
-            }
-        });
-
-        //old api call
-        /*TELEMEDICINE_API api_service = APIClient.getClient().create(TELEMEDICINE_API.class);
-        if (body != null && api_service != null) {
-            Call<JsonObject> server_response = api_service.getDoctorCall(body);
-            try {
-                if (server_response != null) {
-                    server_response.enqueue(new Callback<JsonObject>() {
-                        @Override
-                        public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-
-                            if (response.isSuccessful()) {
-                                mProgressDialog.dismiss();
-                                JsonObject singledataP = response.body();
-                                {
-                                    Toast.makeText(context, "calling...", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<JsonObject> call, Throwable t) {
-                            Toast.makeText(context, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
-                            mProgressDialog.dismiss();
-                        }
-
-                    });
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-
-            }
-        }*/
-    }
+//    private void callDoctor(RequestBody body) {
+//        APIClient.getClient().create(TELEMEDICINE_API.class).callFromDoctorApi(body).enqueue(new Callback<JsonObject>() {
+//            @Override
+//            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+//                try {
+//                    JSONObject jsonObject = new JSONObject(response.body().toString());
+//                    mProgressDialog.dismiss();
+//                    Log.e("hdss", "sbhdd " + jsonObject.toString());
+//                    String success = jsonObject.optString("success");
+//                    String message = jsonObject.optString("message");
+//                    String did_no = jsonObject.optString("did_no");
+//                    String call_id = jsonObject.optString("call_id");
+//                    /*save call id in preference and send at the time of doctor assignment*/
+//                    sharedPrefHelper.setString("call_id", call_id);
+//
+//                    if (success.equalsIgnoreCase("1")) {
+//                        //dial call
+//                        Intent callIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + did_no));
+//                        startActivity(callIntent);
+//                    } else {
+//                        Toast.makeText(context, "Please check your internet connection.", Toast.LENGTH_SHORT).show();
+//                    }
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                    mProgressDialog.dismiss();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<JsonObject> call, Throwable t) {
+//                Toast.makeText(context, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
+//                mProgressDialog.dismiss();
+//            }
+//        });
+//    }
 
     private void setSpinnerDistrict() {
         spn_district.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -1079,48 +1019,6 @@ public class PatientFillAppointment extends AppCompatActivity {
         });
     }
 
-//    private void sendPinCodeData() {
-//        String pinCode = et_pin_code.getText().toString().trim();
-//
-//        APIClient.getClientAddress().create(TELEMEDICINE_API.class).getPinCode(pinCode).enqueue(new Callback<JsonObject>() {
-//            @Override
-//            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-//                try {
-//                    JsonObject singledataP = response.body();
-//                    Log.e("bcjhbHJB", "onResponse: " + singledataP.toString());
-//                    String status = singledataP.get("Status").toString().trim();
-//
-//                    JsonArray jsonArrayPostOffice = singledataP.getAsJsonArray("PostOffice");
-//                    if (!jsonArrayPostOffice.isJsonNull() && jsonArrayPostOffice.size() > 0) {
-//                        for (int i = 0; i < jsonArrayPostOffice.size(); i++) {
-//                            JSONObject jsonObjectPostOffice = new JSONObject(jsonArrayPostOffice.get(i).toString());
-//                            String post_office_name = jsonObjectPostOffice.get("Name").toString().trim();
-//                            String state = jsonObjectPostOffice.get("State").toString().trim();
-//                            String district = jsonObjectPostOffice.get("District").toString().trim();
-//                            String block = jsonObjectPostOffice.get("Taluk").toString().trim();
-//                            et_state.setText(state);
-//                            et_district.setText(district);
-//                            et_block.setText(block);
-//
-//                            /*add all name in array list*/
-//                            postOfficeNameAL.add(post_office_name);
-//                            districtAL.add(district);
-//                            blockAL.add(block);
-//                        }
-//                    }
-//
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<JsonObject> call, Throwable t) {
-//                Toast.makeText(context, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
-
     private void setSpinnerPostOffice() {
         spn_post_office.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -1141,46 +1039,7 @@ public class PatientFillAppointment extends AppCompatActivity {
         spn_post_office.setAdapter(Adapter);
     }
 
-//    private void sendDoctorAssignment() {
-//
-//        mProgressDialog = ProgressDialog.show(PatientFillAppointment.this, "", "Please Wait...", true);
-//        Spinner disease_spinner;
-//        String diseaseData = "";
-//        final int childCount = customLinearLayout.getChildCount();
-//        for (int j = 0; j < childCount; j++) {
-//            View view = customLinearLayout.getChildAt(j);
-////            disease_spinner = view.findViewById(R.id.disease_spinner);
-//            String data1 = disease_spinner.getSelectedItem().toString().trim();
-//            String disease_id = sqliteHelper.getdisease_idFromDisease(data1);
-//            diseaseData = diseaseData + disease_id + ",";
-//
-//        }
-//        deseaseIds.add(diseaseData.substring(0, diseaseData.length() - 1));
-//        doctorAssignmentInput.setAssigned_by(sharedPrefHelper.getString("user_id", ""));
-//        doctorAssignmentInput.setIs_emergency(emergency); //added on 09-08-2020
-//        doctorAssignmentInput.setAssigned_doctor(String.valueOf(doc_id));
-//        doctorAssignmentInput.setCounsellor_remarks(et_remarks_counselor.getText().toString());
-//        doctorAssignmentInput.setPatient_appointment(patient_appointments_id);
-//        String s1 = deseaseIds.toString().trim().replace("[", "");
-//        String ss2 = s1.replace("]", "");
-//        doctorAssignmentInput.setDisease_id(ss2.trim());
-//        doctorAssignmentInput.setProfile_patient_id(profile_id);
-//        doctorAssignmentInput.setSymptom_id("2,5,5,8");
-//        /*calling ids according to screen type*/
-//        if (not_assigned_appointments.equalsIgnoreCase("not_assigned_appointments") &&
-//                !sharedPrefHelper.getString("call_id", "").equals("")) {
-//            doctorAssignmentInput.setType("counsellor_doctor_assigned");
-//            doctorAssignmentInput.setCall_id(sharedPrefHelper.getString("call_id", ""));
-//        }
-//
-//        Gson gson2 = new Gson();
-//        String data2 = gson2.toJson(doctorAssignmentInput);
-//        MediaType JSON2 = MediaType.parse("application/json; charset=utf-8");
-//        RequestBody body2 = RequestBody.create(JSON2, data2);
-//        /*send data here*/
-//        sendDoctorAssignmentData(body2);
-//
-//    }
+
 
     private void setEditableFalse() {
         et_patient_name.setEnabled(false);
@@ -1212,15 +1071,14 @@ public class PatientFillAppointment extends AppCompatActivity {
 
     private void sendAppointment() {
         mProgressDialog = ProgressDialog.show(PatientFillAppointment.this, "", "Please Wait...", true);
-        // patientFilledDataModel.setId(sharedPrefHelper.getString("profile_patient_id",""));
         appointmentInput.setUser_id(sharedPrefHelper.getString("user_id", ""));
-        appointmentInput.setProfile_patient_id(profile_id);
+        appointmentInput.setProfile_patient_id("1");
         appointmentInput.setIs_emergency(emergency);
         appointmentInput.setPrescribed_medicine(medicinePrescribed);
         appointmentInput.setRemarks(et_remarks.getText().toString().trim());
         appointmentInput.setPrescribed_medicine_date(tv_date_of_prescribed_medication.getText().toString().trim());
-        appointmentInput.setHeight(et_height.getText().toString().trim());
-        appointmentInput.setWeight(et_weight.getText().toString().trim());
+//        appointmentInput.setHeight(et_height.getText().toString().trim());
+//        appointmentInput.setWeight(et_weight.getText().toString().trim());
         appointmentInput.setBp_upper(et_bpupper.getText().toString().trim());
         appointmentInput.setBp_lower(et_bplower.getText().toString().trim());
         appointmentInput.setSugar(et_sugar.getText().toString().trim());
@@ -1228,38 +1086,35 @@ public class PatientFillAppointment extends AppCompatActivity {
         appointmentInput.setBlood_oxygen_level(et_blood_oxygen_level.getText().toString().trim());
         appointmentInput.setPulse(et_pulse_in_bpm.getText().toString().trim());
 
-        String age = et_date_of_birth.getText().toString();
-        String str1[] = age.split("-");
-        int year_age = Integer.parseInt(str1[2]);
-        int month_age = Integer.parseInt(str1[1]);
-        int day_age = Integer.parseInt(str1[0]);
-        String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-        String str[] = date.split("-");
-        int year_current = Integer.parseInt(str[0]);
-        int month_current = Integer.parseInt(str[1]);
-        int day_current = Integer.parseInt(str[2]);
-        int years = year_current - year_age;
+//        String age = et_date_of_birth.getText().toString();
+//        String str1[] = age.split("-");
+//        int year_age = Integer.parseInt(str1[2]);
+//        int month_age = Integer.parseInt(str1[1]);
+//        int day_age = Integer.parseInt(str1[0]);
+//        String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+//        String str[] = date.split("-");
+//        int year_current = Integer.parseInt(str[0]);
+//        int month_current = Integer.parseInt(str[1]);
+//        int day_current = Integer.parseInt(str[2]);
+//        int years = year_current - year_age;
 
         // If birth date is greater than todays date (after 2 days adjustment of leap year) then decrement age one year
-        if ((day_age - day_current > 3) || (month_age > month_current)) {
-            years--;
-
-            // If birth date and todays date are of same month and birth day of month is greater than todays day of month then decrement age
-        } else if ((month_age == month_current) && (day_age > day_current)) {
-            years--;
-        }
-        appointmentInput.setAppointment_age(String.valueOf(years));
-
-
+//        if ((day_age - day_current > 3) || (month_age > month_current)) {
+//            years--;
+//
+//            // If birth date and todays date are of same month and birth day of month is greater than todays day of month then decrement age
+//        } else if ((month_age == month_current) && (day_age > day_current)) {
+//            years--;
+//        }
+//        appointmentInput.setAppointment_age(String.valueOf(years));
+//
+//
         int size = spn_symptoms.getSelectedIds().size();
         dids = addDiseasesIds(size);
         String s1 = dids.toString().trim().replace("[", "");
         String ss2 = s1.replace("]", "");
         appointmentInput.setDisease_id(ss2.trim());
-        //  String symIds = spn_symptoms.getSelectedIds().toString().trim();
 
-        //String s = symIds.replace("[", "");
-        //String ss = s.replace("]", "");
         String idsd = "";
         List<KeyPairBoolData> dds = spn_symptoms.getSelectedItems();
         for (int i = 0; i < dds.size(); i++) {
@@ -1273,11 +1128,11 @@ public class PatientFillAppointment extends AppCompatActivity {
         }
 
         appointmentInput.setSymptom_id(idsd.trim());
-        if (screen_type.equalsIgnoreCase("patient")) {
-            appointmentInput.setAppointment_type("0");
-        } else {
+//        if (screen_type.equalsIgnoreCase("patient")) {
+//            appointmentInput.setAppointment_type("0");
+//        }
             appointmentInput.setAppointment_type("1");
-        }
+
         appointmentInput.setApp_version(FINAL_VAR.app_version); //app version for patient
         appointmentInput.setAppointment_file(image64);
 
@@ -1293,7 +1148,6 @@ public class PatientFillAppointment extends AppCompatActivity {
         ArrayList<Integer> ids = new ArrayList<>();
 
         for (int i = 0; i < size; i++) {
-
             ids.add(0);
         }
 
@@ -1341,13 +1195,6 @@ public class PatientFillAppointment extends AppCompatActivity {
         signUpModel.setHeight(et_height.getText().toString().trim());
         signUpModel.setWeight(et_weight.getText().toString().trim());
 
-//        signUpModel.setBp_lower(et_bplower.getText().toString().trim());
-//        signUpModel.setBp_upper(et_bpupper.getText().toString().trim());
-//        signUpModel.setSugar(et_sugar.getText().toString().trim());
-//        signUpModel.setTemperature(et_temperature.getText().toString().trim());
-//        signUpModel.setBlood_oxygen_level(et_blood_oxygen_level.getText().toString().trim());
-//        signUpModel.setPulse(et_pulse_in_bpm.getText().toString().trim());
-
         signUpModel.setAadhar_no(aadhar_card);
         signUpModel.setAddress(address);
         signUpModel.setEmergency_contact_no(et_emergency_contact.getText().toString().trim());
@@ -1355,22 +1202,14 @@ public class PatientFillAppointment extends AppCompatActivity {
         signUpModel.setGender(gender);
         signUpModel.setPin_code(et_pin_code.getText().toString().trim());
         signUpModel.setBlood_group_id(bloodGroupId);
-        signUpModel.setState_id(String.valueOf(state_id));
+        signUpModel.setState_id((state_id));
         signUpModel.setDistrict_id(String.valueOf(district_id));
         signUpModel.setBlock_id(String.valueOf(block_id));
         signUpModel.setPost_office_id(String.valueOf(post_office_id));
-        signUpModel.setVillage_id(String.valueOf(village_id));
+        signUpModel.setVillage_id((village_id));
         signUpModel.setCaste_id(String.valueOf(caste_id));
         signUpModel.setDisability(disability);
-
-
-//        if (spn_block.getSelectedItem().toString().equalsIgnoreCase("Other")
-//                || spn_post_office.getSelectedItem().toString().equalsIgnoreCase("Other")
-//                || spn_village.getSelectedItem().toString().equalsIgnoreCase("Other")) {
-//            coveredArea = "N";
-//        }
         signUpModel.setCovered_area(coveredArea);
-
         signUpModel.setRole_id(sharedPrefHelper.getString("role_id", ""));
         signUpModel.setProfile_pic(encodedImage);
         signUpModel.setMobile_token("1234");
@@ -1457,7 +1296,7 @@ public class PatientFillAppointment extends AppCompatActivity {
                                         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
                                         RequestBody body = RequestBody.create(JSON, data);
                                         /*send data here*/
-                                        sendAppointmentData(body);
+                                     //   sendAppointmentData(body);
 
                                     }
                                 } catch (JSONException e) {
@@ -1480,76 +1319,55 @@ public class PatientFillAppointment extends AppCompatActivity {
 
             }
         }
-//        et_sugar.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(5, 2)});
-//        et_pulse_in_bpm.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(5, 2)});
-//        et_temperature.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(5, 2)});
-//        et_bpupper.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(5, 2)});
-//        et_bplower.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(5, 2)});
-//        et_blood_oxygen_level.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(5, 2)});
 
     }
 
-    //    class DecimalDigitsInputFilter implements InputFilter {
-//        private Pattern mPattern;
+//    private void setDoctorListSpinner() {
+//        SignUpModel signUpModel = new SignUpModel();
+//        signUpModel.setUser_id(sharedPrefHelper.getString("user_id", ""));
+//        Gson gson = new Gson();
+//        String data = gson.toJson(signUpModel);
+//        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+//        RequestBody body = RequestBody.create(JSON, data);
 //
-//        DecimalDigitsInputFilter(int digitsBeforeZero, int digitsAfterZero) {
-//            mPattern = Pattern.compile("[0-9]{0," + (digitsBeforeZero - 1) + "}+((\\.[0-9]{0," + (digitsAfterZero - 1) + "})?)||(\\.)?");
-//        }
+//        APIClient.getClient().create(TELEMEDICINE_API.class).download_DoctortList(body).enqueue(new Callback<JsonObject>() {
+//            @Override
+//            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+//                if (response.isSuccessful()) {
+//                    JsonObject singledataP = response.body();
+//                    JsonArray data = singledataP.getAsJsonArray("tableData");
+//                    for (int i = 0; i < data.size(); i++) {
+//                        try {
+//                            JSONObject singledata = new JSONObject(data.get(i).toString());
+//                            String name = singledata.get("full_name").toString().trim();
+//                            String id = singledata.get("id").toString().trim();
+//                            docNameListHm.put(name, Integer.valueOf(id));
+//                            docName.clear();
+//                            for (int j = 0; j < docNameListHm.size(); j++) {
+//                                docName.add(docNameListHm.keySet().toArray()[j].toString().trim());
+//                                //docName.add(0,"Select Doctor");
+//                                final ArrayAdapter Adapter = new ArrayAdapter(PatientFillAppointment.this, android.R.layout.simple_spinner_item, docName);
+//                                Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                                spn_doctor_assignment.setAdapter(Adapter);
+//                            }
 //
-//        @Override
-//        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
-//            Matcher matcher = mPattern.matcher(dest);
-//            if (!matcher.matches())
-//                return "";
-//            return null;
-//        }
-    ///}
-    private void setDoctorListSpinner() {
-        SignUpModel signUpModel = new SignUpModel();
-        signUpModel.setUser_id(sharedPrefHelper.getString("user_id", ""));
-        Gson gson = new Gson();
-        String data = gson.toJson(signUpModel);
-        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        RequestBody body = RequestBody.create(JSON, data);
-
-        APIClient.getClient().create(TELEMEDICINE_API.class).download_DoctortList(body).enqueue(new Callback<JsonObject>() {
-            @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                if (response.isSuccessful()) {
-                    JsonObject singledataP = response.body();
-                    JsonArray data = singledataP.getAsJsonArray("tableData");
-                    for (int i = 0; i < data.size(); i++) {
-                        try {
-                            JSONObject singledata = new JSONObject(data.get(i).toString());
-                            String name = singledata.get("full_name").toString().trim();
-                            String id = singledata.get("id").toString().trim();
-                            docNameListHm.put(name, Integer.valueOf(id));
-                            docName.clear();
-                            for (int j = 0; j < docNameListHm.size(); j++) {
-                                docName.add(docNameListHm.keySet().toArray()[j].toString().trim());
-                                //docName.add(0,"Select Doctor");
-                                final ArrayAdapter Adapter = new ArrayAdapter(PatientFillAppointment.this, android.R.layout.simple_spinner_item, docName);
-                                Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                spn_doctor_assignment.setAdapter(Adapter);
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
-                Toast.makeText(context, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
-                mProgressDialog.dismiss();
-            }
-        });
-
-
-    }
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<JsonObject> call, Throwable t) {
+//                Toast.makeText(context, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
+//                mProgressDialog.dismiss();
+//            }
+//        });
+//
+//
+//    }
 
     private void getSpinnerValue() {
         symptomHM = sqliteHelper.getSymptoms();
@@ -1581,9 +1399,6 @@ public class PatientFillAppointment extends AppCompatActivity {
                     if (items.get(i).isSelected()) {
                         symptomAl.add(sortedMapAsc.keySet().toArray()[i].toString().trim());
                         symptomValueAl.add(String.valueOf(sortedMapAsc.get(symptomAl.get(i))));
-
-
-//                      Log.i(TAG, i + " : " + items.get(i).getName() + " : " + items.get(i).isSelected());
                     }
                 }
             }
@@ -1737,11 +1552,7 @@ public class PatientFillAppointment extends AppCompatActivity {
         for (int i = 0; i < postOfficeNameHM.size(); i++) {
             postOfficeArrayList.add(postOfficeNameHM.keySet().toArray()[i].toString().trim());
         }
-        /*if (postOfficeArrayList.size() == 1) {
-            final ArrayAdapter Adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, postOfficeArrayList);
-            Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spn_post_office.setAdapter(Adapter);
-        } else {*/
+
         postOfficeArrayList.add(0, getString(R.string.select_post_office));
         final ArrayAdapter Adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, postOfficeArrayList);
         Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -1777,16 +1588,6 @@ public class PatientFillAppointment extends AppCompatActivity {
             villageArrayList.add(villageNameHM.keySet().toArray()[i].toString().trim());
         }
 
-        /*if (villageArrayList.size() == 1) {
-            if (isEditable) {
-                villageArrayList.add(0, village_name);
-            } else {
-                //villageArrayList.add(0, getString(R.string.select_village));
-            }
-            final ArrayAdapter Adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, villageArrayList);
-            Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spn_village.setAdapter(Adapter);
-        } else {*/
         if (isEditable) {
             villageArrayList.add(0, village_name);
         } else {
@@ -1863,10 +1664,12 @@ public class PatientFillAppointment extends AppCompatActivity {
                     String success = jsonObject.optString("success");
                     if (success.equals("1")) {
                         String message = jsonObject.optString("message");
+                        Intent intent = new Intent(context, HomeActivity.class);
+                        startActivity(intent);
+                        finish();
                         //Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
-                        if (patient_by_mobile_search.equalsIgnoreCase("patient_by_mobile_search")) {
-//                            showAlertDialogForCounsellorAppointment();
-                        } else if (screen_type.equals("patient")) {
+
+                         if (screen_type.equals("patient")) {
                             showAlertDialogForPatientAppointment();
                         } else {
 //                            showAlertDialogForCounsellorAppointment();
@@ -1909,99 +1712,13 @@ public class PatientFillAppointment extends AppCompatActivity {
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     finish();
-//                } else if (patient_by_mobile_search.equals("patient_by_mobile_search")) {
-//                    Intent intent = new Intent(context, AppointmentStatus.class);
-//                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                    startActivity(intent);
-//                    finish();
+
                 }
             }
         });
 
         appointment_alert.show();
         appointment_alert.setCanceledOnTouchOutside(false);
-    }
-
-//    private void showAlertDialogForCounsellorAppointment() {
-//        appointment_alert = new android.app.Dialog(this);
-//
-//        appointment_alert.setContentView(R.layout.submit_appointment_from_counsellor_dialog);
-//        appointment_alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//        WindowManager.LayoutParams params = appointment_alert.getWindow().getAttributes();
-//        params.gravity = Gravity.CENTER | Gravity.CENTER_HORIZONTAL;
-//
-//        TextView tv_appointment_added = (TextView) appointment_alert.findViewById(R.id.tv_appointment_added);
-//        TextView tv_appointment_msg = (TextView) appointment_alert.findViewById(R.id.tv_appointment_msg);
-//        Button btn_ok = (Button) appointment_alert.findViewById(R.id.btn_ok);
-//        Button btn_assigned_doctor = (Button) appointment_alert.findViewById(R.id.btn_assigned_doctor);
-//
-////        btn_ok.setOnClickListener(new View.OnClickListener() {
-////            @Override
-////            public void onClick(View v) {
-////                appointment_alert.dismiss();
-////                if (fromCounselorSearch.equals("fromCounselorSearch")) {
-////                    Intent intent = new Intent(context, AppointmentStatus.class);
-////                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-////                    startActivity(intent);
-////                    finish();
-////                } else if (fromCounselor.equals("")) {
-////                    Intent intent = new Intent(context, AppointmentFor.class);
-////                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-////                    startActivity(intent);
-////                    finish();
-////                } else {
-////                    Intent intent = new Intent(context, AppointmentStatus.class);
-////                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-////                    startActivity(intent);
-////                    finish();
-////                }
-////            }
-////        });
-//        btn_assigned_doctor.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                appointment_alert.dismiss();
-//                Intent intent = new Intent(context, NotAssignedAppointments.class);
-//                intent.putExtra("fromNotAssignment", "fromNotAssignment");
-//                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                startActivity(intent);
-//                finish();
-//            }
-//        });
-//
-//        appointment_alert.show();
-//        appointment_alert.setCanceledOnTouchOutside(false);
-//    }
-
-    private void sendDoctorAssignmentData(RequestBody body) {
-        APIClient.getClient().create(TELEMEDICINE_API.class).sendDoctorAssignmentdata(body).enqueue(new Callback<JsonObject>() {
-            @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-
-                try {
-                    JSONObject jsonObject = new JSONObject(response.body().toString());
-                    mProgressDialog.dismiss();
-                    Log.e("chjJC", "njkdvnv " + jsonObject.toString());
-                    String success = jsonObject.optString("success");
-                    if (success.equals("1")) {
-                        String message = jsonObject.optString("message");
-                        //Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
-                        showAlertDialogForDoctorAssignment();
-                    } else {
-                        Toast.makeText(context, "Something went wrong.", Toast.LENGTH_SHORT).show();
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
-                Toast.makeText(context, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
-                mProgressDialog.dismiss();
-            }
-        });
     }
 
     private void showAlertDialogForDoctorAssignment() {
@@ -2148,10 +1865,10 @@ public class PatientFillAppointment extends AppCompatActivity {
                                                     @Override
 
                                                     public void onClick(View view) {
-                                                        String url = APIClient.IMAGE_URL_DOC_APPO + acctchment;
-                                                        Intent intent = new Intent(context, WebViewImageActivity.class);
-                                                        intent.putExtra("url", url);
-                                                        context.startActivity(intent);
+//                                                        String url = APIClient.IMAGE_URL_DOC_APPO + acctchment;
+//                                                        Intent intent = new Intent(context, WebViewImageActivity.class);
+//                                                        intent.putExtra("url", url);
+//                                                        context.startActivity(intent);
                                                     }
                                                 });
                                             } else {
@@ -2566,20 +2283,20 @@ public class PatientFillAppointment extends AppCompatActivity {
     }
 
     private boolean checkValidation() {
-        if (et_patient_name.getText().toString().trim().length() == 0) {
-            flagEditfield = et_patient_name;
-            msg = "Please enter name!";
-            flagEditfield.setError(msg);
-            et_patient_name.requestFocus();
-            return false;
-        }
-        if (!et_patient_name.getText().toString().trim().matches("[a-zA-Z ]+")) {
-            flagEditfield = et_patient_name;
-            msg = "The name can only consist of alphabets!";
-            flagEditfield.setError(msg);
-            et_patient_name.requestFocus();
-            return false;
-        }
+//        if (et_patient_name.getText().toString().trim().length() == 0) {
+//            flagEditfield = et_patient_name;
+//            msg = "Please enter name!";
+//            flagEditfield.setError(msg);
+//            et_patient_name.requestFocus();
+//            return false;
+//        }
+//        if (!et_patient_name.getText().toString().trim().matches("[a-zA-Z ]+")) {
+//            flagEditfield = et_patient_name;
+//            msg = "The name can only consist of alphabets!";
+//            flagEditfield.setError(msg);
+//            et_patient_name.requestFocus();
+//            return false;
+//        }
 //        if (rg_gender.getVisibility() == View.VISIBLE) {
 //            int selected_id = rg_gender.getCheckedRadioButtonId();
 //            if (selected_id <= 0) {
@@ -2608,20 +2325,20 @@ public class PatientFillAppointment extends AppCompatActivity {
 //            et_date_of_birth.requestFocus();
 //            return false;
 //        }
-        if (et_contact_number_for_counsellor.getText().toString().trim().length() == 0) {
-            flagEditfield = et_contact_number_for_counsellor;
-            msg = "Please enter contact number!";
-            flagEditfield.setError(msg);
-            et_contact_number_for_counsellor.requestFocus();
-            return false;
-        }
-        if (et_contact_number_for_counsellor.getText().toString().trim().length() < 10) {
-            flagEditfield = et_contact_number_for_counsellor;
-            msg = "Please enter 10 digits contact number!";
-            flagEditfield.setError(msg);
-            et_contact_number_for_counsellor.requestFocus();
-            return false;
-        }
+//        if (et_contact_number_for_counsellor.getText().toString().trim().length() == 0) {
+//            flagEditfield = et_contact_number_for_counsellor;
+//            msg = "Please enter contact number!";
+//            flagEditfield.setError(msg);
+//            et_contact_number_for_counsellor.requestFocus();
+//            return false;
+//        }
+//        if (et_contact_number_for_counsellor.getText().toString().trim().length() < 10) {
+//            flagEditfield = et_contact_number_for_counsellor;
+//            msg = "Please enter 10 digits contact number!";
+//            flagEditfield.setError(msg);
+//            et_contact_number_for_counsellor.requestFocus();
+//            return false;
+//        }
 //        if (et_pin_code.getText().toString().trim().length() == 0) {
 //            flagEditfield = et_pin_code;
 //            msg = "Please enter pin code!";
@@ -2752,74 +2469,7 @@ public class PatientFillAppointment extends AppCompatActivity {
         return true;
     }
 
-//    private void deleteAppointmentApiCall(EditText et_reason) {
-//        mProgressDialog = ProgressDialog.show(this, "Deleting", "Please Wait...", true);
-//        AppointmentInput appointmentInput = new AppointmentInput();
-//        appointmentInput.setUser_id(sharedPrefHelper.getString("user_id", ""));
-//        appointmentInput.setRemarks(et_reason.getText().toString().trim());
-//        appointmentInput.setPatient_appointment_id(patient_appointments_id);
-//
-//        Gson mGson = new Gson();
-//        String data = mGson.toJson(appointmentInput);
-//        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-//        RequestBody body = RequestBody.create(JSON, data);
-//        APIClient.getClient().create(TELEMEDICINE_API.class).deleteAppointmentApi(body).enqueue(new Callback<JsonObject>() {
-//            @Override
-//            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-//                try {
-//                    JSONObject jsonObject = new JSONObject(response.body().toString());
-//                    mProgressDialog.dismiss();
-//                    Log.e("mcxnmc", "xhxb " + jsonObject.toString());
-//
-//                    if (jsonObject.optString("success").equalsIgnoreCase("1")) {
-//                        showAlertAppointmentDeleted();
-//                    } else {
-//                        Toast.makeText(context, "Something went Wrong..!", Toast.LENGTH_SHORT).show();
-//                    }
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                    mProgressDialog.dismiss();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<JsonObject> call, Throwable t) {
-//                Toast.makeText(context, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
-//                mProgressDialog.dismiss();
-//            }
-//        });
-//    }
 
-//    private void showAlertAppointmentDeleted() {
-//        appointment_alert = new android.app.Dialog(this);
-//
-//        appointment_alert.setContentView(R.layout.submit_appointment_from_patient_dialog);
-//        appointment_alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//        WindowManager.LayoutParams params = appointment_alert.getWindow().getAttributes();
-//        params.gravity = Gravity.CENTER | Gravity.CENTER_HORIZONTAL;
-//
-//        TextView tv_appointment_added = (TextView) appointment_alert.findViewById(R.id.tv_appointment_added);
-//        TextView tv_appointment_msg = (TextView) appointment_alert.findViewById(R.id.tv_appointment_msg);
-//        Button btn_ok = (Button) appointment_alert.findViewById(R.id.btn_ok);
-//
-//        /*set Text dynamicall*/
-//        tv_appointment_added.setText("Appointment Deleted");
-//        tv_appointment_msg.setText("Your appointment deleted successfully.");
-//
-//        btn_ok.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                appointment_alert.dismiss();
-//                Intent intent = new Intent(context, AppointmentStatus.class);
-//                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                startActivity(intent);
-//                finish();
-//            }
-//        });
-//
-//        appointment_alert.show();
-//        appointment_alert.setCanceledOnTouchOutside(false);
-//    }
 @Override
 public boolean onOptionsItemSelected(@NonNull MenuItem item) {
     if (item.getItemId() == android.R.id.home) {

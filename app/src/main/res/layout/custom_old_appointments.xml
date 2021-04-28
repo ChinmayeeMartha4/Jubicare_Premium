@@ -94,7 +94,7 @@
                                     android:background="@drawable/btn_background"
                                     android:layout_marginHorizontal="10dp"
                                     android:textColor="@color/colorPrimaryDark"
-                                    android:src="@drawable/eye"
+                                    android:src="@drawable/ic_baseline_remove_red_eye_24"
                                     />
 
 

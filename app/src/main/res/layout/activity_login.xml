@@ -75,8 +75,8 @@
                     android:paddingLeft="@dimen/_10dp"
                     android:singleLine="true"
                     android:text=""
-                    android:inputType="number"
-                    android:maxLength="10"
+                    android:inputType="text"
+                    android:maxLength="100"
                     android:textSize="@dimen/text_16" />
 
 

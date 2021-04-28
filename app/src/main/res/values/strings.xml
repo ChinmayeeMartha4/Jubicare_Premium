@@ -49,7 +49,7 @@
 
     <string name="date">Date</string>
     <string name="doctor_s_name">Doctor\'s name</string>
-    <string name="view_prescription">View prescription</string>
+    <string name="view_appontment">View appointment</string>
     <string name="title">Title</string>
     <string name="view">View</string>
 
@@ -149,6 +149,12 @@
     <string name="pharmacist_drugs_delivery_status">Pharmacist drugs delivery status</string>
     <string name="date_of_phamacists_done">Date of phamacists done</string>
     <string name="view_prescription_click">View prescription click</string>
+
+
+
+    <string name="pay_now">Pay Now</string>
+    <string name="enteryourorg">Enter your organization</string>
+    <string name="enteryourempid">Enter your employee id</string>
 
 
 

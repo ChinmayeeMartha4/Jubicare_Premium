@@ -176,25 +176,24 @@ public AppointmentPojo saveappointmentsData(AppointmentPojo appointmentPojo) {
     }
     return appointmentPojo;
 }
-    public OldAppointmentPojo saveAppointmentList(OldAppointmentPojo oldAppointmentPojo) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        //     long meeting1id = 0;
-        try {
-            if (db != null && db.isOpen() && !db.isReadOnly()) {
-                ContentValues values = new ContentValues();
-                values.put("date", oldAppointmentPojo.getDate());
-                values.put("doctor_name", oldAppointmentPojo.getDoctor_name());
-                values.put("date1", oldAppointmentPojo.getDate1());
-                values.put("doctor_name1", oldAppointmentPojo.getDoctor_name1());
-                db.insert("appointment", null, values);
-                db.close(); // Closing database connection
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            db.close();
-        }
-        return oldAppointmentPojo;
-    }
+//    public OldAppointmentPojo saveAppointmentList(OldAppointmentPojo oldAppointmentPojo) {
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        //     long meeting1id = 0;
+//        try {
+//            if (db != null && db.isOpen() && !db.isReadOnly()) {
+//                ContentValues values = new ContentValues();
+//                values.put("date", oldAppointmentPojo.getDate());
+//                values.put("doctor_name", oldAppointmentPojo.getDoctor_name());
+//                values.put("doctor_name1", oldAppointmentPojo.getDoctor_name1());
+//                db.insert("appointment", null, values);
+//                db.close(); // Closing database connection
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            db.close();
+//        }
+//        return oldAppointmentPojo;
+//    }
     public ReportsPojo saveReportList(ReportsPojo reportsPojo) {
         SQLiteDatabase db = this.getWritableDatabase();
         //     long meeting1id = 0;
@@ -215,37 +214,37 @@ public AppointmentPojo saveappointmentsData(AppointmentPojo appointmentPojo) {
     }
 
 
-
-    public ArrayList<OldAppointmentPojo> getAppointementData() {
-        ArrayList<OldAppointmentPojo> arrayList = new ArrayList<OldAppointmentPojo>();
-        String query;
-        SQLiteDatabase db = this.getReadableDatabase();
-        try {
-            if (db != null && db.isOpen() && !db.isReadOnly()) {
-                query = "select  * from appointment";
-
-                Cursor cursor = db.rawQuery(query, null);
-
-                if (cursor != null && cursor.getCount() > 0) {
-                    cursor.moveToFirst();
-                    while (!cursor.isAfterLast()) {
-
-                        OldAppointmentPojo oldAppointmentPojo = new OldAppointmentPojo();
-                        oldAppointmentPojo.setDate(cursor.getString(cursor.getColumnIndex("date")));
-                        oldAppointmentPojo.setDoctor_name(cursor.getString(cursor.getColumnIndex("doctor_name")));
-                        oldAppointmentPojo.setDate1(cursor.getString(cursor.getColumnIndex("date1")));
-                        oldAppointmentPojo.setDoctor_name1(cursor.getString(cursor.getColumnIndex("doctor_name1")));
-                        cursor.moveToNext();
-                        arrayList.add(oldAppointmentPojo);
-                    }
-                    db.close();
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return arrayList;
-    }
+//
+//    public ArrayList<OldAppointmentPojo> getAppointementData() {
+//        ArrayList<OldAppointmentPojo> arrayList = new ArrayList<OldAppointmentPojo>();
+//        String query;
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        try {
+//            if (db != null && db.isOpen() && !db.isReadOnly()) {
+//                query = "select  * from appointment";
+//
+//                Cursor cursor = db.rawQuery(query, null);
+//
+//                if (cursor != null && cursor.getCount() > 0) {
+//                    cursor.moveToFirst();
+//                    while (!cursor.isAfterLast()) {
+//
+//                        OldAppointmentPojo oldAppointmentPojo = new OldAppointmentPojo();
+//                        oldAppointmentPojo.setDate(cursor.getString(cursor.getColumnIndex("date")));
+//                        oldAppointmentPojo.setDoctor_name(cursor.getString(cursor.getColumnIndex("doctor_name")));
+//                        oldAppointmentPojo.setDate1(cursor.getString(cursor.getColumnIndex("date1")));
+//                        oldAppointmentPojo.setDoctor_name1(cursor.getString(cursor.getColumnIndex("doctor_name1")));
+//                        cursor.moveToNext();
+//                        arrayList.add(oldAppointmentPojo);
+//                    }
+//                    db.close();
+//                }
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return arrayList;
+//    }
     public ArrayList<ReportsPojo> getReportsData() {
         ArrayList<ReportsPojo> arrayList = new ArrayList<ReportsPojo>();
         String query;
@@ -795,7 +794,7 @@ public AppointmentPojo saveappointmentsData(AppointmentPojo appointmentPojo) {
                         village.setId(cursor.getInt(cursor.getColumnIndex("id")));
                         village.setName(cursor.getString(cursor.getColumnIndex("name")));
                         cursor.moveToNext();
-                        village1.put(village.getName(), village.getId());
+                        village1.put(village.getName().trim(), village.getId());
                         //}
                     }
                 }

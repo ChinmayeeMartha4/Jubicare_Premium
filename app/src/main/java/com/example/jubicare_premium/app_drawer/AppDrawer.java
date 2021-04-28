@@ -2,6 +2,7 @@ package com.example.jubicare_premium.app_drawer;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
@@ -17,10 +18,13 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.jubicare_premium.Login;
 import com.example.jubicare_premium.R;
 
 import androidx.annotation.LayoutRes;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -168,20 +172,40 @@ public class AppDrawer  extends AppCompatActivity {
                             case R.id.option_Contact_us:
 
                             case R.id.option_logout:
-                                if (isInternetOn()) {
-
-//                                    callLogoutApi(context,mProgressDialog);
-
-                                } else {
-                                    Toast.makeText(context, "Please Check Internet Connection!", Toast.LENGTH_SHORT).show();
-                                }
-                                overridePendingTransition(R.anim.open_next, R.anim.close_next);
+                                logoutDialog();
+//                                if (isInternetOn()) {
+//
+////                                    callLogoutApi(context,mProgressDialog);
+//
+//                                } else {
+//                                    Toast.makeText(context, "Please Check Internet Connection!", Toast.LENGTH_SHORT).show();
+//                                }
+//                                overridePendingTransition(R.anim.open_next, R.anim.close_next);
                                 break;
                         }
                         return true;
                     }
                 });
             }
+
+    private void logoutDialog() {
+        new AlertDialog.Builder(context)
+                .setTitle("Logout!")
+                .setMessage("Are you sure you want to Logout?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        sharedPrefHelper.setString("is_login","");
+                        Intent i = new Intent(AppDrawer.this, Login.class);
+                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(i);
+                    }
+                })
+                .setNegativeButton(android.R.string.no, null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
+
 
     public boolean isInternetOn() {
         ConnectivityManager connec = (ConnectivityManager) getSystemService(getBaseContext().CONNECTIVITY_SERVICE);

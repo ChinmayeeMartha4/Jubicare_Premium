@@ -3,15 +3,44 @@ package com.example.jubicare_premium.database;
 public class OldAppointmentPojo {
     private String date;
     private String doctor_name;
-    private String date1;
+    private String user_id;
+    private String profile_patient_id;
 
-    public String getDate1() {
-        return date1;
+    public String getProfile_patient_id() {
+        return profile_patient_id;
     }
 
-    public void setDate1(String date1) {
-        this.date1 = date1;
+    public void setProfile_patient_id(String profile_patient_id) {
+        this.profile_patient_id = profile_patient_id;
     }
+
+    public String getPatient_appointment_id() {
+        return patient_appointment_id;
+    }
+
+    public void setPatient_appointment_id(String patient_appointment_id) {
+        this.patient_appointment_id = patient_appointment_id;
+    }
+
+    private String patient_appointment_id;
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
+    }
+
+    public String getRole_id() {
+        return role_id;
+    }
+
+    public void setRole_id(String role_id) {
+        this.role_id = role_id;
+    }
+
+    private String role_id;
 
     public String getDoctor_name1() {
         return doctor_name1;

@@ -4,19 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="example.javatpoint.com.optionmenu.MainActivity">
 
-<!--    <item  android:id="@+id/addAppointment"-->
-<!--        android:title="Add appointment"-->
-<!--        android:icon="@drawable/editprofile"-->
-<!--        app:showAsAction="always"-->
-<!--        android:visible="false"-->
-<!--        />-->
+    <item  android:id="@+id/addAppointment"
+        android:title="Add appointment"
+        android:icon="@drawable/editprofile"
+        app:showAsAction="always"
+        android:visible="false"
+        />
 
-<!--    <item  android:id="@+id/callPatient"-->
-<!--        android:title="Calling"-->
-<!--        android:icon="@drawable/call"-->
-<!--        app:showAsAction="always"-->
-<!--        android:visible="false"-->
-<!--        />-->
+    <item  android:id="@+id/callPatient"
+        android:title="Calling"
+        android:icon="@drawable/call"
+        app:showAsAction="always"
+        android:visible="false"
+        />
 <!--    <item  android:id="@+id/deleteAppointment"-->
 <!--        android:title="Delete Appointment"-->
 <!--        android:icon="@drawable/ic_delete_forever_black_24dp"-->

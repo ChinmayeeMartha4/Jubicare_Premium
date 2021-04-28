@@ -6,11 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jubicare_premium.R;
+import com.example.jubicare_premium.app_drawer.AppDrawer;
 import com.example.jubicare_premium.database.ReportsPojo;
 
 import java.util.ArrayList;
@@ -41,6 +43,8 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.ViewHold
         holder.view1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(context, "Need discussion", Toast.LENGTH_SHORT).show();
+
 //                Intent intentDetailActivity=new Intent(context, .class);
 //                context.startActivity(intentDetailActivity);
 //                ((Activity)context).finish();

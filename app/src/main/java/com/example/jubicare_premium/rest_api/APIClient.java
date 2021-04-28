@@ -12,14 +12,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class APIClient {
     //testing
-    public static final String BASE_URL = "http://telemedicine.nutrisoft.in/apiV1-17/";
-    public static final String IMAGE_URL = "http://telemedicine.nutrisoft.in/admin/assets/images/patient/";
-    public static final String IMAGE_URL_COUNSELOR = "http://telemedicine.nutrisoft.in/admin/assets/images/counselor/";
-    public static final String IMAGE_URL_DOCTOR = "http://telemedicine.nutrisoft.in/admin/assets/images/doctors/";
-    public static final String IMAGE_URL_PHARMACIST = "http://telemedicine.nutrisoft.in/admin/assets/images/pharmacist/";
-    public static final String IMAGE_URL_DOC = "http://telemedicine.nutrisoft.in/admin/assets/images/tests/";
-    public static final String IMAGE_URL_DOC_APPO = "http://telemedicine.nutrisoft.in/admin/assets/images/appointment/";
-    public static final String ADDRESS_URL = "http://www.postalpincode.in/api/pincode/";
+    public static final String BASE_URL = "http://telemedicine.nutrisoft.in/jubicare/premium_api/";
+//    public static final String BASE_URL = "http://telemedicine.nutrisoft.in/apiV1-17/";
+//    public static final String IMAGE_URL = "http://telemedicine.nutrisoft.in/admin/assets/images/patient/";
+//    public static final String IMAGE_URL_COUNSELOR = "http://telemedicine.nutrisoft.in/admin/assets/images/counselor/";
+//    public static final String IMAGE_URL_DOCTOR = "http://telemedicine.nutrisoft.in/admin/assets/images/doctors/";
+//    public static final String IMAGE_URL_PHARMACIST = "http://telemedicine.nutrisoft.in/admin/assets/images/pharmacist/";
+//    public static final String IMAGE_URL_DOC = "http://telemedicine.nutrisoft.in/admin/assets/images/tests/";
+//    public static final String IMAGE_URL_DOC_APPO = "http://telemedicine.nutrisoft.in/admin/assets/images/appointment/";
+//    public static final String ADDRESS_URL = "http://www.postalpincode.in/api/pincode/";
 
     private static Retrofit retrofit = null;
 

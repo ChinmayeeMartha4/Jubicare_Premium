@@ -46,13 +46,15 @@
                     android:text="@string/patientName"
                     android:textColor="@color/menuTextColor"
                     android:textSize="@dimen/text_16"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:visibility="gone"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_of_edittext"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <EditText
                         android:id="@+id/et_patient_name"
@@ -296,13 +298,15 @@
                     android:text="@string/height"
                     android:textColor="@color/menuTextColor"
                     android:textSize="@dimen/text_16"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:visibility="gone"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_of_edittext"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <EditText
                         android:id="@+id/et_height"
@@ -326,13 +330,15 @@
                     android:text="@string/weight"
                     android:textColor="@color/menuTextColor"
                     android:textSize="@dimen/text_16"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:visibility="gone"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_of_edittext"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <EditText
                         android:id="@+id/et_weight"
@@ -564,7 +570,8 @@
                     android:text="@string/blood"
                     android:textColor="@color/menuTextColor"
                     android:textSize="@dimen/text_16"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:visibility="gone"/>
 
                 <LinearLayout
                     android:id="@+id/ll_spn_blood_Group"
@@ -572,7 +579,8 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_of_edittext"
                     android:orientation="vertical"
-                    android:padding="@dimen/_10dp">
+                    android:padding="@dimen/_10dp"
+                    android:visibility="gone">
 
                     <Spinner
                         android:id="@+id/spn_bloodGroup"
@@ -683,13 +691,15 @@
                     android:text="@string/PatientContact"
                     android:textColor="@color/menuTextColor"
                     android:textSize="@dimen/text_16"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:visibility="gone"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_of_edittext"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <EditText
                         android:id="@+id/et_contact_number"
@@ -716,12 +726,14 @@
                     android:text="@string/PatientContact"
                     android:textColor="@color/menuTextColor"
                     android:textSize="@dimen/text_16"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:visibility="gone"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <LinearLayout
                         android:id="@+id/ll_contact_number_for_counsellor"
@@ -729,7 +741,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="8"
                         android:background="@drawable/shape_of_edittext"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="gone">
 
                         <EditText
                             android:id="@+id/et_contact_number_for_counsellor"

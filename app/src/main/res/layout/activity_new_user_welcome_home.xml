@@ -48,12 +48,12 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp">
                 <TextView
-                    android:id="@+id/Tv_pay"
+                    android:id="@+id/tv_pay"
                     android:layout_marginTop="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:textColor="@color/white"
-                    android:text="Pay Now"
+                    android:text="@string/pay_now"
                     android:textSize="16sp"
                     android:gravity="center"
                     android:background="@drawable/submitbutton">

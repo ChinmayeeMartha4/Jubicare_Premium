@@ -13,6 +13,7 @@ import com.example.jubicare_premium.R;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.jubicare_premium.activity.CommonPrescription;
 import com.example.jubicare_premium.activity.ViewPrescription;
 import com.example.jubicare_premium.database.OldAppointmentPojo;
 
@@ -44,7 +45,8 @@ public class OldAppointmentAdapter extends RecyclerView.Adapter<OldAppointmentAd
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentDetailActivity=new Intent(context, ViewPrescription.class);
+
+                Intent intentDetailActivity=new Intent(context, CommonPrescription.class);
                 context.startActivity(intentDetailActivity);
                 ((Activity)context).finish();
             }

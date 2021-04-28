@@ -39,7 +39,7 @@
             android:id="@+id/tv_headerSubName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="chinmayee.martha@gmail.com"
+            android:text="9668658573"
             android:textSize="@dimen/text_14"
             android:layout_marginStart="@dimen/margin5"
             android:layout_marginTop="@dimen/margin5"

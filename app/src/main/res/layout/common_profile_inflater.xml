@@ -4,6 +4,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:orientation="vertical"
+    android:background="@drawable/login_bg"
     >
 
 <!--<LinearLayout
@@ -457,19 +458,19 @@ android:orientation="vertical"
     android:app_bg_theme="@color/colorBlack" />-->
 <!--end of general details-->
 <!--medical information-->
-<Button
-    android:id="@+id/btn_show_medical_info"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="click here"
-    android:textAllCaps="false"
-    android:textColor="@color/black"
-    android:layout_gravity="end"
-    android:paddingLeft="@dimen/_5dp"
-    android:paddingRight="@dimen/_5dp"
-    android:layout_marginTop="@dimen/_5dp"
-    android:background="@drawable/medical_info_btn_shape"
-    />
+<!--<Button-->
+<!--    android:id="@+id/btn_show_medical_info"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:text="click here"-->
+<!--    android:textAllCaps="false"-->
+<!--    android:textColor="@color/black"-->
+<!--    android:layout_gravity="end"-->
+<!--    android:paddingLeft="@dimen/_5dp"-->
+<!--    android:paddingRight="@dimen/_5dp"-->
+<!--    android:layout_marginTop="@dimen/_5dp"-->
+<!--    android:background="@drawable/medical_info_btn_shape"-->
+<!--    />-->
 <LinearLayout
     android:id="@+id/ll_medical_info"
     android:layout_width="match_parent"
@@ -1476,14 +1477,16 @@ android:orientation="vertical"
         android:text="@string/consultation_status"
         android:textColor="@color/colorBlack"
         android:textSize="@dimen/text_16"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:visibility="gone"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_5dp"
         android:orientation="vertical"
-        android:textColor="@android:color/black">
+        android:textColor="@android:color/black"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/tv_doctor_is_done"
@@ -1536,14 +1539,16 @@ android:orientation="vertical"
         android:text="@string/pharmacist_drugs_delivery_status"
         android:textColor="@color/colorBlack"
         android:textSize="@dimen/text_16"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:visibility="gone"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_5dp"
         android:orientation="vertical"
-        android:textColor="@android:color/black">
+        android:textColor="@android:color/black"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/tv_pharmacists_is_done"

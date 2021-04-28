@@ -90,6 +90,8 @@ public class HealthRecord  extends AppCompatActivity {
     private int mDay;
     @BindView(R.id.et_name)
     EditText et_name;
+    @BindView(R.id.ll_name)
+    LinearLayout ll_name;
     static EditText et_date_of_birth;
     static EditText et_age;
     @BindView(R.id.et_aadhar_card)
@@ -158,7 +160,7 @@ public class HealthRecord  extends AppCompatActivity {
     private Context context = this;
     SharedPrefHelper sharedPrefHelper;
     SqliteHelper sqliteHelper;
-//    ProfilePojo profilePojo;
+    //    ProfilePojo profilePojo;
     ProgressDialog mProgressDialog;
     String name = "", gender = "", date_of_birth = "",
             aadhar_card = "", contact_number = "", address = "",
@@ -170,6 +172,7 @@ public class HealthRecord  extends AppCompatActivity {
     String commomProfile = "";
 
     String profile_id = "";
+//    String user_id = "";
     int state_id, district_id, block_id, post_office_id, village_id;
     HashMap<String, Integer> stateNameHM, districtNameHM, blockNameHM, postOfficeNameHM, villageNameHM, casteNameHM;
     ArrayList<String> stateArrayList, distrcitArrayList, blockArrayList, postOfficeArrayList, villageArrayList, casteArrayList;
@@ -198,8 +201,10 @@ public class HealthRecord  extends AppCompatActivity {
     String post_office_name = "";
     String blood_group_name = "";
     android.app.Dialog add_profile_alert;
+    String fromCounselor = "";
+
     String coveredArea = "Y";
-    private String[] masterTables = {"state", "district", "block", "village", "post_office", "symptom", "disease", "medicine_list", "test", "sub_tests","prescription_eating_schedule","prescription_days","prescription_interval","blood_group","caste"};
+    private String[] masterTables = {"state", "district", "block", "village", "post_office", "symptom", "disease", "medicine_list", "test", "sub_tests","prescription_eating_schedule","prescription_days","prescription_interval","blood_group"};
     @BindView(R.id.rg_age)
     RadioGroup rg_age;
     @BindView(R.id.rb_age)
@@ -213,8 +218,8 @@ public class HealthRecord  extends AppCompatActivity {
     LinearLayout ll_dob;
     String disability = "N/A";
     String caste_id;
-PatientFilledDataModel patientFilledDataModel;
-SignUpModel signUpModel;
+    PatientFilledDataModel patientFilledDataModel;
+    SignUpModel signUpModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -222,6 +227,16 @@ SignUpModel signUpModel;
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        /*for change title dynamically*/
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+
+            commomProfile = bundle.getString("commomProfile", "");
+            profile_id = bundle.getString("profile_id", "");
+//            user_id = bundle.getString("user_id", "");
+        }
+
+
         initViews();
 
         Calendar c = Calendar.getInstance();
@@ -232,22 +247,11 @@ SignUpModel signUpModel;
         /*download master tables here*/
         getMasterTables(HealthRecord.this);
 
-        /*for change title dynamically*/
-        Bundle bundle = getIntent().getExtras();
-        if (bundle != null) {
-            add = bundle.getString("addMember", "");
-            commomProfile = bundle.getString("commomProfile", "");
-            profile_id = bundle.getString("profile_id", "");
-        }
+
 
         //change dynamically title here
-        if (add.equalsIgnoreCase("addMember")) {
-            setTitle("Add Member");
-        } else if (commomProfile.equals("commomProfile")) {
-            setTitle("Edit Profile");
-        } else {
-            setTitle("Add Profile");
-        }
+            setTitle("Update Profile");
+
 
         rg_disability.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -264,11 +268,10 @@ SignUpModel signUpModel;
             }
         });
 
-
-
-        if (commomProfile.equals("commomProfile")) {
-            //mProgressDialog = ProgressDialog.show(context ,"", "Please wait", true);
+//        if (commomProfile.equals("commomProfile")) {
+            mProgressDialog = ProgressDialog.show(context ,"", "Please wait", true);
             patientFilledDataModel.setProfile_patient_id(profile_id);
+//            patientFilledDataModel.setProfile_patient_id(user_id);
             patientFilledDataModel.setUser_id(sharedPrefHelper.getString("user_id", ""));
             patientFilledDataModel.setRole_id(sharedPrefHelper.getString("role_id", ""));
 
@@ -277,7 +280,9 @@ SignUpModel signUpModel;
             MediaType JSON = MediaType.parse("application/json; charset=utf-8");
             RequestBody body = RequestBody.create(JSON, data);
             getDetailsPatientAlreadyFilled(body);
-        }
+
+//        }
+
         //send sign up data
         getTextFromFields();
 
@@ -366,7 +371,6 @@ SignUpModel signUpModel;
                     int index = spn_caste.getSelectedItemPosition();
                     caste = casteArrayList.get(index);
                     caste_id = sqliteHelper.getSelectedItemId("caste",caste);
-                    //Toast.makeText(context, "" + bloodGroupId, Toast.LENGTH_SHORT).show();
                 } else {
                     caste_id = String.valueOf(1);
                 }
@@ -392,7 +396,6 @@ SignUpModel signUpModel;
                     int index = spn_blood_Group.getSelectedItemPosition();
                     bloodGroup = bloodGroupArrayList.get(index);
                     bloodGroupId = sqliteHelper.getSelectedItemId("blood_group",bloodGroup);
-                    //Toast.makeText(context, "" + bloodGroupId, Toast.LENGTH_SHORT).show();
                 } else {
                     bloodGroupId = String.valueOf(9);
                 }
@@ -409,71 +412,7 @@ SignUpModel signUpModel;
         spn_blood_Group.setAdapter(Adapter);
     }
 
-    private void setSpinnerDistrict() {
 
-        spn_district.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                int index = spn_district.getSelectedItemPosition();
-                districtName = districtAL.get(index);
-                //Toast.makeText(context, ""+districtName, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        districtAL.add(0, getString(R.string.select_district));
-        final ArrayAdapter Adapter = new ArrayAdapter(this, R.layout.simple_spinner_item, districtAL);
-        Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spn_district.setAdapter(Adapter);
-    }
-
-    private void setSpinnerBlock() {
-        spn_block.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                int index = spn_block.getSelectedItemPosition();
-                blockName = blockAL.get(index);
-                //Toast.makeText(context, ""+blockName, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        blockAL.add(0, getString(R.string.select_block));
-        final ArrayAdapter Adapter = new ArrayAdapter(this, R.layout.simple_spinner_item, blockAL);
-        Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spn_block.setAdapter(Adapter);
-    }
-
-    private void setSpinnerPostOffice() {
-        spn_post_office.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                int index = spn_post_office.getSelectedItemPosition();
-                postOfficeName = postOfficeNameAL.get(index);
-                //Toast.makeText(context, ""+postOfficeName, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        postOfficeNameAL.add(0, getString(R.string.select_post_office));
-        final ArrayAdapter Adapter = new ArrayAdapter(this, R.layout.simple_spinner_item, postOfficeNameAL);
-        Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spn_post_office.setAdapter(Adapter);
-    }
-
-    private void setEditableFalse() {
-        et_state.setEnabled(false);
-
-    }
 
     private void getDetailsPatientAlreadyFilled(RequestBody body) {
         TELEMEDICINE_API api_service = APIClient.getClient().create(TELEMEDICINE_API.class);
@@ -527,11 +466,10 @@ SignUpModel signUpModel;
                                         }else if (disability.equals("No")){
                                             rb_no.setChecked(true);
                                         }
-                                        if (caste_name.equals("") || caste_name!=null){
-                                            caste_id = sqliteHelper.getSelectedItemId("caste",caste_name);
+                                        if (caste_name.equals("") || caste_name != null) {
+                                            caste_id = sqliteHelper.getSelectedItemId("caste", caste_name);
                                             spn_caste.setSelection(Integer.parseInt(caste_id));
                                         }
-
                                         et_name.setText(full_name);
                                         if (gender.equalsIgnoreCase("M")) {
                                             rb_male.setChecked(true);
@@ -611,68 +549,8 @@ SignUpModel signUpModel;
         }
     }
 
-    private void callPinCodeApi() {
-        et_pin_code.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                et_state.setText("");
-                et_district.setText("");
-                et_block.setText("");
-            }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                //sendPinCodeData();
-            }
-        });
-    }
-
-//    private void sendPinCodeData() {
-//        String pinCode = et_pin_code.getText().toString().trim();
-//
-//        APIClient.getClientAddress().create(TELEMEDICINE_API.class).getPinCode(pinCode).enqueue(new Callback<JsonObject>() {
-//            @Override
-//            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-//                try {
-//                    JsonObject singledataP = response.body();
-//                    Log.e("bcjhbHJB", "onResponse: " + singledataP.toString());
-//                    String status = singledataP.get("Status").toString();
-//
-//                    JsonArray jsonArrayPostOffice = singledataP.getAsJsonArray("PostOffice");
-//                    if (!jsonArrayPostOffice.isJsonNull() && jsonArrayPostOffice.size() > 0) {
-//                        for (int i = 0; i < jsonArrayPostOffice.size(); i++) {
-//                            JSONObject jsonObjectPostOffice = new JSONObject(jsonArrayPostOffice.get(i).toString());
-//                            String post_office_name = jsonObjectPostOffice.get("Name").toString();
-//                            String state = jsonObjectPostOffice.get("State").toString();
-//                            String district = jsonObjectPostOffice.get("District").toString();
-//                            String block = jsonObjectPostOffice.get("Taluk").toString();
-//                            et_state.setText(state);
-//                            /*et_district.setText(district);
-//                            et_block.setText(block);*/
-//
-//                            /*add all name in array list*/
-//                            districtAL.add(district);
-//                            blockAL.add(block);
-//                            postOfficeNameAL.add(post_office_name);
-//                        }
-//                    }
-//
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<JsonObject> call, Throwable t) {
-//                Toast.makeText(context, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
 
     private void getAllStateFromTable() {
         stateArrayList.clear();
@@ -696,7 +574,6 @@ SignUpModel signUpModel;
 
 
 
-
     private void setStateSpinner() {
         spn_state.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -717,6 +594,8 @@ SignUpModel signUpModel;
             }
         });
     }
+
+
 
     private void getAllDistrictFromTable(int state_id) {
         distrcitArrayList.clear();
@@ -805,7 +684,6 @@ SignUpModel signUpModel;
             postOfficeArrayList.add(0, post_office_name);
         } else {
             postOfficeArrayList.add(0, getString(R.string.select_post_office));
-            //postOfficeArrayList.add(1, getString(R.string.Other));
         }
 
         final ArrayAdapter Adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, postOfficeArrayList);
@@ -833,23 +711,25 @@ SignUpModel signUpModel;
             }
         });
     }
-
     private void getAllVillageFromTable(int post_office_id) {
         villageArrayList.clear();
         villageNameHM = sqliteHelper.getAllVillage(post_office_id);
         for (int i = 0; i < villageNameHM.size(); i++) {
             villageArrayList.add(villageNameHM.keySet().toArray()[i].toString().trim());
         }
+
+
         if (isEditable) {
             villageArrayList.add(0, village_name);
         } else {
             villageArrayList.add(0, getString(R.string.select_village));
-            //villageArrayList.add(1, getString(R.string.Other));
         }
         final ArrayAdapter Adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, villageArrayList);
         Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spn_village.setAdapter(Adapter);
+
     }
+
 
     private void setVillageSpinner() {
         spn_village.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -936,10 +816,7 @@ SignUpModel signUpModel;
         datePickerDialog.show();
     }
 
-    private void setDateOfBirthClick() {
-        DialogFragment newFragment = new DatePickerFragment();
-        newFragment.show(getFragmentManager(), "datePicker");
-    }
+
 
     @SuppressLint("NewApi")
     public static class DatePickerFragment extends DialogFragment implements
@@ -1124,11 +1001,11 @@ SignUpModel signUpModel;
                     signUpModel.setWeight(weight);
                     signUpModel.setHeight(height);
                     signUpModel.setPin_code(et_pin_code.getText().toString().trim());
-                    signUpModel.setState_id(String.valueOf(state_id));
+                    signUpModel.setState_id((state_id));
                     signUpModel.setDistrict_id(String.valueOf(district_id));
                     signUpModel.setBlock_id(String.valueOf(block_id));
                     signUpModel.setPost_office_id(String.valueOf(post_office_id));
-                    signUpModel.setVillage_id(String.valueOf(village_id));
+                    signUpModel.setVillage_id((village_id));
                     signUpModel.setCaste_id(String.valueOf(caste_id));
                     signUpModel.setDisability(disability);
 
@@ -1180,6 +1057,8 @@ SignUpModel signUpModel;
                         mProgressDialog = ProgressDialog.show(context, "", "Please Wait...", true);
                         sendSignUpData(body);
                     }
+
+
                 }
             }
         });
@@ -1529,9 +1408,9 @@ SignUpModel signUpModel;
     public void onBackPressed() {
         super.onBackPressed();
 
-            Intent intent = new Intent(context, HomeActivity.class);
-            startActivity(intent);
-            finish();
+        Intent intent = new Intent(context, HomeActivity.class);
+        startActivity(intent);
+        finish();
 
     }
 }

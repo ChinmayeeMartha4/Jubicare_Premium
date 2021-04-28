@@ -25,6 +25,8 @@ public interface TELEMEDICINE_API {
     @POST("edit_profile_patient.php")
     Call<JsonObject> sendEditProfileData(@Body RequestBody body);
 
+    @POST("payment.php")
+    Call<JsonObject> setpaymentData(@Body RequestBody body);
 
     @POST("download_listing_doctors.php")
     Call<JsonObject> download_DoctortList(@Body RequestBody body);
@@ -32,12 +34,11 @@ public interface TELEMEDICINE_API {
     @POST("profile.php")
     Call<JsonObject> download_profile(@Body RequestBody body);
 
+    @POST("payment.php")
+    Call<JsonObject> payment(@Body RequestBody body);
+
     @POST("patient_appointments.php")
     Call<JsonObject> sendAppointdata(@Body RequestBody body);
-
-
-
-
 
     @POST("doctor_assign.php")
     Call<JsonObject> sendDoctorAssignmentdata(@Body RequestBody body);

@@ -5,11 +5,11 @@ public class SignUpModel {
     private String contact_no;
     private String dob;
     private String aadhar_no;
-    private String state_id;
+    private int state_id;
     private String district_id;
     private String block_id;
     private String post_office_id;
-    private String village_id;
+    private int village_id;
     private String address;
     private String date_of_birth;
     private String emergency_contact_no;
@@ -276,11 +276,11 @@ public class SignUpModel {
         this.aadhar_no = aadhar_no;
     }
 
-    public String getState_id() {
+    public int getState_id() {
         return state_id;
     }
 
-    public void setState_id(String state_id) {
+    public void setState_id(int state_id) {
         this.state_id = state_id;
     }
 
@@ -300,11 +300,11 @@ public class SignUpModel {
         this.block_id = block_id;
     }
 
-    public String getVillage_id() {
+    public int getVillage_id() {
         return village_id;
     }
 
-    public void setVillage_id(String village_id) {
+    public void setVillage_id(int village_id) {
         this.village_id = village_id;
     }
 

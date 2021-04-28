@@ -1,10 +1,13 @@
 package com.example.jubicare_premium;
 
+import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 
 import com.example.jubicare_premium.activity.HealthRecord;
@@ -17,33 +20,21 @@ import com.example.jubicare_premium.database.OldAppointmentPojo;
 import com.example.jubicare_premium.database.ReportsPojo;
 import com.example.jubicare_premium.sqlitehelper.SqliteHelper;
 
+import java.util.ArrayList;
+
 public class HomeActivity extends AppDrawer {
     CardView cv_appointment,cv_prescription,cv_report,cv_profile;
 
+    ArrayList<ContentValues> patientContentValue = new ArrayList<ContentValues>();
 
     String stroa1="12 Sep 2020";
-    String stroav1="Dr. Sheetal";
-    String stroa2="18 Aug 2020";
-    String stroav2="Dr.Anuradha Singh";
-    String stroa3="23 Aug 2020";
-    String stroav3="Dr. Ashok Agrawal";
-    String stroa4="29 Aug 2020";
-    String stroav4="Dr. Anuradha Singh";
-    String stroa5="29 Feb 2020";
-    String stroav5="Dr. Himilka";
+    String stroav1="Dr. Sujinder Phogat";
+
 
 
 
     String strre1="12 Sep 2020";
     String strrev1="T3, T4, TSH";
-    String strre2="18 Aug 2020";
-    String strrev2="Lipid Profile";
-    String strre3="23 Aug 2020";
-    String strrev3="KFTT, LFT,Uric Acid";
-    String strre4="23 Aug 2020";
-    String strrev4="Vitamin D3";
-    String strre5="29 Jan 2020";
-    String strrev5="Complete Blood Count";
 
 
 
@@ -83,7 +74,7 @@ public class HomeActivity extends AppDrawer {
                 oldAppointmentPojo.setDoctor_name(stroav1);
 //                appointmentPojo.setDate1(stroa2);
 //                appointmentPojo.setDoctor_name1(stroav2);
-                sqliteHelper.saveAppointmentList(oldAppointmentPojo);
+//                sqliteHelper.saveAppointmentList(oldAppointmentPojo);
 
                 Intent intent = new Intent(HomeActivity.this, Prescription.class);
                 startActivity(intent);
@@ -111,16 +102,42 @@ public class HomeActivity extends AppDrawer {
             public void onClick(View view) {
 
                 Intent intent = new Intent(HomeActivity.this, HealthRecord.class);
+                intent.putExtra("commomProfile", "commomProfile");
+                intent.putExtra("profile_id", "1");
                 startActivity(intent);
                 finish();
+//                startActivity(intent);
+//                finish();
+
             }
         });
-
     }
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(HomeActivity.this, Login.class);
-        startActivity(intent);
-        finish();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false);
+        builder.setTitle("Alert!");
+        builder.setMessage("Are you sure to want to exit application?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //if user pressed "yes", then he is allowed to exit from application
+                finish();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //if user select "No", just cancel this dialog and continue with app
+                dialog.cancel();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+
     }
+//        Intent intent = new Intent(HomeActivity.this, Login.class);
+//        startActivity(intent);
+//        finish();
+//    }
 }
