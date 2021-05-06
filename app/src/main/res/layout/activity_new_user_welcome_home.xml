@@ -17,18 +17,31 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_5dp">
             <TextView
-                android:id="@+id/tv_welcomeName"
+                android:id="@+id/tv_welcomeName1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/robotoregular"
                 android:layout_marginTop="10dp"
                 android:textSize="24sp"
                 android:textColor="@color/colorPrimaryDark"
                 android:text="@string/welcomename"/>
             <TextView
+                android:id="@+id/tv_welcomeName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/tv_welcomeName1"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:fontFamily="@font/robotoregular"
+                android:textSize="24sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="@string/welcomename1"/>
+            <TextView
                 android:id="@+id/tv_carefor"
                 android:layout_below="@+id/tv_welcomeName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/robotoregular"
                 android:layout_marginTop="@dimen/_15dp"
                 android:text="@string/discount"
                 android:textSize="@dimen/text_18" />
@@ -37,6 +50,7 @@
                 android:layout_below="@+id/tv_carefor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/robotoregular"
                 android:layout_marginTop="@dimen/_8dp"
                 android:text="@string/discountRs"
                 android:textSize="@dimen/text_18" />
@@ -52,6 +66,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:fontFamily="@font/robotoregular"
                     android:textColor="@color/white"
                     android:text="@string/pay_now"
                     android:textSize="16sp"

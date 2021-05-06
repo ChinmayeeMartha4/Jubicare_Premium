@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".activity.Reports">
 
 
@@ -16,13 +17,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="40dp"
             android:layout_weight="1"
-            android:background="@color/purple_700"
+            android:background="@color/colorPrimaryDark"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="100dp"
+                android:layout_width="200dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
 
@@ -30,14 +31,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/tableborder"
-                    android:gravity="center"
+                    android:layout_gravity="center"
                     android:padding="7dp"
+                    android:fontFamily="@font/robotoregular"
                     android:text="@string/date"
                     android:textColor="@color/colorWhite" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="150dp"
+                android:layout_width="280dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
 
@@ -45,8 +47,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/tableborder"
-                    android:gravity="center"
+                    android:layout_gravity="center"
                     android:padding="7dp"
+                    android:fontFamily="@font/robotoregular"
                     android:text="@string/title"
                     android:textColor="@color/colorWhite" />
             </LinearLayout>
@@ -54,7 +57,6 @@
             <LinearLayout
                 android:layout_width="200dp"
                 android:layout_height="50dp"
-                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:background="@drawable/tableborder"
                 android:orientation="vertical">
@@ -70,8 +72,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/tableborder"
-                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:padding="7dp"
+                        android:fontFamily="@font/robotoregular"
                         android:text="@string/view"
                         android:textColor="@color/colorWhite" />
                 </LinearLayout>
@@ -88,5 +91,18 @@
             android:orientation="vertical"
             />
     </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="@dimen/_18sp"
+        android:src="@drawable/ic_baseline_add_24"
+        android:tint="@color/colorWhite"
+        app:backgroundTint="@color/colorPrimary" />
+
+
 
 </RelativeLayout>

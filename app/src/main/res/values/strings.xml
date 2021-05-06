@@ -5,6 +5,7 @@
     <string name="DateofBirth">Date of birth</string>
     <string name="Male">Male</string>
     <string name="Female">Female</string>
+    <string name="family">Profile List</string>
     <string name="Other">Other</string>
     <string name="age_age">Age</string>
     <string name="age">Age (in years)</string>
@@ -23,8 +24,9 @@
     <string name="welcome">Welcome to</string>
     <string name="jubicarepremium">JUBICARE PREMIUM </string>
     <string name="wecareforyourhealth">(We care for your health) </string>
-    <string name="enteryourmobileno">Enter your mobile no</string>
-    <string name="welcomename">Welcome guest</string>
+    <string name="enteryourmobileno">Enter your mobile no.</string>
+    <string name="welcomename">Welcome</string>
+    <string name="welcomename1">gust</string>
     <string name="discount">You are eligible for a discounted corporate offer.</string>
     <string name="discountRs">You will have to pay Rs. 99 for availing this service.</string>
 
@@ -33,7 +35,7 @@
     <string name="Password">Password</string>
     <string name="login">Login</string>
     <string name="forgot_password">Forgot password</string>
-    <string name="don_t_have_an_account">Don\'t have an account ?</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
     <string name="signup">Sign up</string>
     <string name="new_user">New user</string>
     <string name="age1">Age</string>
@@ -44,15 +46,18 @@
     <string name="home">Home</string>
     <string name="take_an_appointment">Take an appointment</string>
     <string name="prescriptions">Old prescriptions</string>
+    <string name="appointment">Old appointments</string>
     <string name="report">Reports</string>
     <string name="profile">My profile</string>
 
     <string name="date">Date</string>
     <string name="doctor_s_name">Doctor\'s name</string>
-    <string name="view_appontment">View appointment</string>
+    <string name="view_appontment">View prescription</string>
+    <string name="view_appontment1">View Appointment</string>
     <string name="title">Title</string>
     <string name="view">View</string>
 
+    <string name="Othereligibility">Other eligibility</string>
 
     <string name="blood">Blood group</string>
     <string name="caste">Caste</string>
@@ -69,7 +74,7 @@
     <string name="Address">Address</string>
     <string name="PatientEmergencyContact">Emergency contact</string>
     <string name="patient_image">Profile photo</string>
-    <string name="symptom_of_patient">Symptoms of the patient</string>
+    <string name="symptom_of_patient">Symptom(s) of the patient</string>
     <string name="Symptom">Symptom</string>
     <string name="select_disease">Diseases</string>
     <string name="current_medications">Currently taking any prescribed medication</string>
@@ -82,7 +87,7 @@
     <string name="emergency">Emergency</string>
     <string name="blood_oxy">Blood oxygen level (SpO2) in %</string>
     <string name="people">People with disability (PwDs)</string>
-    <string name="all_fields_are_mandatory_with_star_in_this_screen">Note: All fields are mandatory with star (*) in this screen.</string>
+    <string name="all_fields_are_mandatory_with_star_in_this_screen">Note: All fields are mandatory with star (<font color='#FF0000'>*</font>) in this screen.</string>
 
 
 
@@ -153,9 +158,21 @@
 
 
     <string name="pay_now">Pay Now</string>
-    <string name="enteryourorg">Enter your organization</string>
-    <string name="enteryourempid">Enter your employee id</string>
+    <string name="enteryourorg">Select your organization</string>
+    <string name="enteryourempid">Enter your employee ID</string>
 
+    <string name="charges">Charges Rs. <font color='#2A66CC'>199</font> per patient</string>
+
+    <string name="search_by_mobile_or_aadhaar">Search by mobile</string>
+    <string name="add_profile">Add profile</string>
+    <string name="go_home">Go home</string>
+    <string name="permanent_address">Permanent address</string>
+    <string name="emergency_contact_number">Emergency contact number</string>
+    <string name="click_on_button_for_view_medical_information_details">Click on button for view medical information details</string>
+    <string name="location">Location</string>
+    <string name="appointment_count">Appointment count</string>
+    <string name="no_data_found">No data found</string>
+    <string name="select_organization">Select organization</string>
 
 
 </resources>

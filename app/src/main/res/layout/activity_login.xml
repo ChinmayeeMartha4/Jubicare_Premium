@@ -63,8 +63,9 @@
                     android:layout_height="match_parent"
                     android:text="@string/mobile_no"
                     android:textStyle="bold"
+                    android:fontFamily="@font/robotoregular"
                     android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/text_18" />
+                    android:textSize="@dimen/text_16" />
 
                 <EditText
                     android:id="@+id/et_mobile"
@@ -74,10 +75,11 @@
                     android:drawableRight="@drawable/ic_baseline_phone_android_24"
                     android:paddingLeft="@dimen/_10dp"
                     android:singleLine="true"
+                    android:fontFamily="@font/robotoregular"
                     android:text=""
-                    android:inputType="text"
+                    android:inputType="number"
                     android:maxLength="100"
-                    android:textSize="@dimen/text_16" />
+                    android:textSize="@dimen/text_18" />
 
 
                 <TextView
@@ -86,20 +88,21 @@
                     android:layout_marginTop="@dimen/_15dp"
                     android:text="@string/Password"
                     android:textStyle="bold"
-
+                    android:fontFamily="@font/robotoregular"
                     android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/text_18" />
+                    android:textSize="@dimen/text_16" />
 
                 <EditText
                     android:id="@+id/et_password"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/margin45"
+                    android:fontFamily="@font/robotoregular"
                     android:layout_marginTop="@dimen/_10dp"
                     android:drawableRight="@drawable/ic_baseline_lock_24"
                     android:inputType="textPassword"
                     android:paddingLeft="@dimen/_10dp"
                     android:singleLine="true"
-                    android:textSize="@dimen/text_16" />
+                    android:textSize="@dimen/text_18" />
             </LinearLayout>
 
             <CheckBox
@@ -107,6 +110,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
+                android:fontFamily="@font/robotoregular"
                 android:layout_marginRight="@dimen/_20dp"
                 android:text="@string/show_password" />
 
@@ -131,6 +135,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/btn_login"
                 android:gravity="center"
+                android:fontFamily="@font/robotoregular"
                 android:layout_marginTop="@dimen/_15dp"
                 android:text="@string/forgot_password"
                 android:textColor="@android:color/black"
@@ -154,8 +159,9 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/tv_forgot_password"
                         android:layout_marginTop="@dimen/_15dp"
+                        android:fontFamily="@font/robotoregular"
                         android:text="@string/don_t_have_an_account"
-                        android:textColor="@color/colorGray"
+                        android:textColor="@color/color_gray"
                         android:textSize="@dimen/text_16" />
                 </LinearLayout>
 
@@ -170,9 +176,18 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_15dp"
                         android:gravity="center"
+                        android:fontFamily="@font/robotoregular"
+                        android:layout_marginLeft="5dp"
                         android:text="@string/new_user"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/text_16" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
                 </LinearLayout>
 
             </LinearLayout>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.jubicare_premium">
+    package="com.indev.jubicare_premium">
 
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -42,51 +42,78 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".activity.ViewPrescription"
+            android:name="com.indev.jubicare_premium.activity.ViewPrescription"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".activity.NewUserWelcomeHome"
+            android:name="com.indev.jubicare_premium.activity.NewUserWelcomeHome"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".activity.NewUserHome"
+            android:name="com.indev.jubicare_premium.activity.NewUserHome"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".Login"
+            android:name="com.indev.jubicare_premium.Login"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".HomeActivity"
+            android:name="com.indev.jubicare_premium.activity.CommonProfile"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.ForgotPassword"
+        android:name="com.indev.jubicare_premium.activity.PatientActivity"
+        android:screenOrientation="portrait" />
+        <activity
+            android:name="com.indev.jubicare_premium.activity.SignUp"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.CommonPrescription"
+            android:name="com.indev.jubicare_premium.HomeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.PatientFillAppointment"
+            android:name="com.indev.jubicare_premium.activity.ForgotPassword"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.HealthRecord"
+            android:name="com.indev.jubicare_premium.activity.CommonPrescription"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.indev.jubicare_premium.activity.PatientFillAppointment"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.indev.jubicare_premium.activity.HealthRecord"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.TakeAppointment"
+            android:name="com.indev.jubicare_premium.activity.TakeReport"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.Prescription"
+            android:name="com.indev.jubicare_premium.activity.OldPrescription"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".WebViewImageActivity"
+            android:name="com.indev.jubicare_premium.activity.OldAppointment"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.indev.jubicare_premium.activity.TakeOldPrescription"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.indev.jubicare_premium.WebViewImageActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".change_password.ChangePassword"
+            android:name="com.indev.jubicare_premium.activity.CommonAppointment"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.indev.jubicare_premium.activity.CommonReport"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.indev.jubicare_premium.activity.Family"
+            android:screenOrientation="portrait" />
+<!--        <activity-->
+<!--            android:name=".activity.FamilyActivity"-->
+<!--            android:screenOrientation="portrait" />-->
+        <activity
+            android:name="com.indev.jubicare_premium.change_password.ChangePassword"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.Reports"
+            android:name="com.indev.jubicare_premium.activity.Reports"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.SplashScreen"
+        <activity android:name="com.indev.jubicare_premium.activity.SplashScreen"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SplashScreen">
             <intent-filter>
@@ -97,7 +124,7 @@
         </activity>
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.jubicare_premium"
+            android:authorities="com.indev.jubicare_premium"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -109,16 +136,7 @@
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/logo" />
 
-
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="com.indev.telemedicine"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths" />
-        </provider> <!-- firebase notification -->
+<!-- firebase notification -->
 <!--        <receiver android:name=".acitivities.utils.MyReceiver">-->
 <!--            <intent-filter>-->
 <!--                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />-->
@@ -135,7 +153,7 @@
 <!--                <action android:name="com.google.android.c2dm.intent.RECEIVE" />-->
 <!--            </intent-filter>-->
 <!--        </service>-->
-        <service android:name=".service.MyFirebaseInstanceIDService">
+        <service android:name="com.indev.jubicare_premium.service.MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>

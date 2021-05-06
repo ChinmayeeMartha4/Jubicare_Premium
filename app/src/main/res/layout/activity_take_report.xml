@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/login_bg"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        tools:context=".acitivity.PatientFillAppointment">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/_5dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical"
+                android:padding="@dimen/_3dp">
+
+                <Switch
+                    android:id="@+id/simpleSwitch"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:gravity="left"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15dp"
+                    android:layout_marginBottom="3dp"
+                    android:drawableRight="@drawable/ic_star"
+                    android:fontFamily="@font/robotoregular"
+                    android:text="@string/patientName"
+                    android:textColor="@color/menuTextColor"
+                    android:textSize="@dimen/text_16"
+                    android:textStyle="bold"
+                    android:visibility="gone"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_of_edittext"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <EditText
+                        android:id="@+id/et_patient_name"
+                        style="@style/StyleTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/robotoregular"
+                        android:inputType="textCapSentences"
+                        android:padding="@dimen/margin12" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_first"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_15dp"
+                        android:layout_marginBottom="@dimen/_3dp"
+                        android:drawableRight="@drawable/ic_star"
+                        android:fontFamily="@font/robotoregular"
+                        android:text="@string/Gender"
+                        android:textColor="@color/menuTextColor"
+                        android:textSize="@dimen/text_16"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <RadioGroup
+                            android:id="@+id/rg_gender"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb_male"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/robotoregular"
+                                android:text="@string/Male" />
+
+                            <RadioButton
+                                android:id="@+id/rb_female"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/robotoregular"
+                                android:text="@string/Female" />
+
+                            <RadioButton
+                                android:id="@+id/rb_other"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/robotoregular"
+                                android:text="@string/Other" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                    <!--for age change-->
+                    <TextView
+                        android:id="@+id/tv_what_you_know"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_15dp"
+                        android:layout_marginBottom="@dimen/_3dp"
+                        android:drawableRight="@drawable/ic_star"
+                        android:fontFamily="@font/robotoregular"
+                        android:text="What did you know?"
+                        android:textColor="@color/menuTextColor"
+                        android:textSize="@dimen/text_16"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_what_you_know"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <RadioGroup
+                            android:id="@+id/rg_age"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb_age"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/robotoregular"
+                                android:text="@string/age_age"
+
+                                />
+
+                            <RadioButton
+                                android:id="@+id/rb_dob"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/robotoregular"
+                                android:text="@string/DateofBirth" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_age"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_20dp"
+                            android:layout_marginBottom="@dimen/_3dp"
+                            android:drawableRight="@drawable/ic_star"
+                            android:fontFamily="@font/robotoregular"
+                            android:text="@string/age"
+                            android:textColor="@color/menuTextColor"
+                            android:textSize="@dimen/text_16"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/shape_of_edittext"
+                            android:orientation="vertical">
+
+                            <EditText
+                                android:id="@+id/et_age"
+                                style="@style/StyleTheme"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@android:color/transparent"
+                                android:fontFamily="@font/robotoregular"
+                                android:inputType="number"
+                                android:maxLength="3"
+                                android:padding="@dimen/margin12" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_dob"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_20dp"
+                            android:layout_marginBottom="@dimen/_3dp"
+                            android:drawableRight="@drawable/ic_star"
+                            android:fontFamily="@font/robotoregular"
+                            android:text="@string/DateofBirth"
+                            android:textColor="@color/menuTextColor"
+                            android:textSize="@dimen/text_16"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/shape_of_edittext"
+                            android:orientation="vertical">
+
+                            <EditText
+                                android:id="@+id/et_date_of_birth"
+                                style="@style/StyleTheme"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@android:color/transparent"
+                                android:drawableRight="@drawable/ic_baseline_date_range_24"
+                                android:editable="false"
+                                android:focusable="false"
+                                android:focusableInTouchMode="false"
+                                android:fontFamily="@font/robotoregular"
+                                android:inputType="date"
+                                android:padding="@dimen/margin10" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="3dp"
+                        android:fontFamily="@font/robotoregular"
+                        android:text="@string/aadhar"
+                        android:textColor="@color/menuTextColor"
+                        android:textSize="@dimen/text_16"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/shape_of_edittext"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:id="@+id/et_aadhar_card"
+                            style="@style/StyleTheme"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:fontFamily="@font/robotoregular"
+                            android:inputType="number"
+                            android:maxLength="12"
+                            android:padding="@dimen/margin12" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20dp"
+                    android:layout_marginBottom="@dimen/_3dp"
+                    android:fontFamily="@font/robotoregular"
+                    android:text="@string/height"
+                    android:textColor="@color/menuTextColor"
+                    android:textSize="@dimen/text_16"
+                    android:textStyle="bold"
+                    android:visibility="gone"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_of_edittext"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <EditText
+                        android:id="@+id/et_height"
+                        style="@style/StyleTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/robotoregular"
+                        android:inputType="number"
+                        android:maxLength="3"
+                        android:padding="@dimen/margin12" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20dp"
+                    android:layout_marginBottom="@dimen/_3dp"
+                    android:fontFamily="@font/robotoregular"
+                    android:text="@string/weight"
+                    android:textColor="@color/menuTextColor"
+                    android:textSize="@dimen/text_16"
+                    android:textStyle="bold"
+                    android:visibility="gone"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_of_edittext"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <EditText
+                        android:id="@+id/et_weight"
+                        style="@style/StyleTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/robotoregular"
+                        android:inputType="number"
+                        android:maxLength="3"
+                        android:padding="@dimen/margin12" />
+
+                </LinearLayout>
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20dp"
+                    android:layout_marginBottom="@dimen/_3dp"
+                    android:fontFamily="@font/robotoregular"
+                    android:text=" Date"
+                    android:textColor="@color/menuTextColor"
+                    android:textSize="@dimen/text_16"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_of_edittext"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/tv_date"
+                        style="@style/StyleTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/shape_of_edittext"
+                        android:drawableRight="@drawable/ic_baseline_date_range_24"
+                        android:fontFamily="@font/robotoregular"
+                        android:inputType="text"
+                        android:padding="@dimen/_10dp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20dp"
+                    android:layout_marginBottom="@dimen/_3dp"
+                    android:fontFamily="@font/robotoregular"
+                    android:text=" Doctor's name"
+                    android:textColor="@color/menuTextColor"
+                    android:textSize="@dimen/text_16"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_of_edittext"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/et_doctor_name"
+                        style="@style/StyleTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/robotoregular"
+                        android:inputType="text"
+                        android:maxLength="30"
+                        android:padding="@dimen/margin12" />
+
+                </LinearLayout>
+
+
+
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20dp"
+                    android:layout_marginBottom="@dimen/_3dp"
+                    android:fontFamily="@font/robotoregular"
+                    android:text="Test"
+                    android:textColor="@color/menuTextColor"
+                    android:textSize="@dimen/text_16"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_of_edittext"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/et_test"
+                        style="@style/StyleTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/robotoregular"
+                        android:inputType="text"
+                        android:maxLength="50"
+                        android:padding="@dimen/margin12" />
+
+                </LinearLayout>
+
+
+
+                <TextView
+                    android:id="@+id/tv_document"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:layout_marginBottom="@dimen/_3dp"
+                    android:fontFamily="@font/robotoregular"
+                    android:text="@string/DocumentAttachment"
+                    android:textColor="@color/menuTextColor"
+                    android:textSize="@dimen/text_16"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/ll_document"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/iv_attachments"
+                        android:layout_width="@dimen/margin70"
+                        android:layout_height="@dimen/margin70"
+                        android:src="@drawable/camera_icon" />
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin10"
+                    android:layout_marginBottom="3dp"
+                    android:fontFamily="@font/robotoregular"
+                    android:text="@string/all_fields_are_mandatory_with_star_in_this_screen"
+                    android:textColor="@color/menuTextColor"
+                    android:textSize="@dimen/text_16"
+                    android:textStyle="bold" />
+
+
+                <Button
+                    android:id="@+id/btn_submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/btn_background"
+                    android:text="@string/Submit"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/margin18" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

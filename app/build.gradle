@@ -8,7 +8,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "com.example.jubicare_premium"
+        applicationId "com.indev.jubicare_premium"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1

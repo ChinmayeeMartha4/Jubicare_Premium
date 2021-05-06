@@ -372,7 +372,7 @@
                             android:layout_marginTop="@dimen/_20dp"
                             android:layout_marginBottom="@dimen/_3dp"
                             android:fontFamily="@font/robotoregular"
-                            android:text="BP Low"
+                            android:text="BP Systolic"
                             android:textColor="@color/menuTextColor"
                             android:textSize="@dimen/text_16"
                             android:textStyle="bold" />
@@ -412,7 +412,7 @@
                             android:layout_marginTop="@dimen/_20dp"
                             android:layout_marginBottom="@dimen/_3dp"
                             android:fontFamily="@font/robotoregular"
-                            android:text="BP High"
+                            android:text="BP Diastolic"
                             android:textColor="@color/menuTextColor"
                             android:textSize="@dimen/text_16"
                             android:textStyle="bold" />
@@ -968,7 +968,7 @@
                         android:orientation="vertical"
                         android:padding="@dimen/margin8">
 
-                        <com.example.jubicare_premium.searchable_spinner.SearchableSpinner
+                        <com.indev.jubicare_premium.searchable_spinner.SearchableSpinner
                             android:id="@+id/spn_post_office"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -1016,7 +1016,7 @@
                         android:padding="@dimen/margin10"
                         android:visibility="gone">
 
-                        <com.example.jubicare_premium.searchable_spinner.SearchableSpinner
+                        <com.indev.jubicare_premium.searchable_spinner.SearchableSpinner
                             android:id="@+id/spn_village"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -1202,7 +1202,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_of_edittext"
                     android:orientation="vertical"
-                    android:padding="@dimen/margin3">
+                    android:padding="@dimen/margin7">
 
                     <!--<Spinner
                         android:id="@+id/spn_symptoms"
@@ -1626,16 +1626,20 @@
 
                 <Button
                     android:id="@+id/btn_submit"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/_30dp"
-                    android:layout_marginBottom="@dimen/_20dp"
-                    android:background="@color/color_sky_blue"
+                    android:layout_marginBottom="@dimen/_30dp"
+                    android:background="@drawable/btn_background"
                     android:fontFamily="@font/robotoregular"
                     android:text="@string/Submit"
                     android:textColor="@color/colorWhite"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginHorizontal="20dp"
+
+                    android:textAllCaps="false"
+                   />
 
             </LinearLayout>
 

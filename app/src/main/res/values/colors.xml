@@ -4,13 +4,15 @@
     <color name="colorPrimaryDark">#2A66CC</color>
     <color name="colorAccent">#D81B60</color>
     <color name="menuTextColor">#030303</color>
+    <color name="color_navy">#483D8B</color>
 
     <color name="colorTheme">#008dc9</color>
     <color name="yellow">#FFEB3B</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorBlack">#000000</color>
-    <color name="colorGray">#838181</color>
+    <color name="colorGray">#F0F0F0</color>
     <color name="color_light_gray">#D1CECE</color>
+    <color name="color_gray">#808080</color>
     <color name="color_light_gray_one">#ECF3F7</color>
     <color name="color_sky_blue">#4285F4</color>
     <color name="google_yellow">#F4B400</color>
