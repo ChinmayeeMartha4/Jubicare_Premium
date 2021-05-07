@@ -29,11 +29,11 @@ public class OrganizationModel {
         this.user_id = user_id;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -90,7 +90,7 @@ public class OrganizationModel {
     }
     private String role_id;
     private String user_id;
-    private String id;
+    private int id;
     private String name;
     private String email;
     private String no_of_emp;

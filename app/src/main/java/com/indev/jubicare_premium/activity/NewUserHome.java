@@ -39,6 +39,7 @@ import com.indev.jubicare_premium.sqlitehelper.SqliteHelper;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -70,7 +71,8 @@ public class NewUserHome extends AppCompatActivity {
     TextView tv_welcome1;
     TextView tv_mobileNo;
     TextView tv_emp_id;
-    String organization = "";
+//    String organization = "";
+    int organization;
 
     String org_id;
 //    String organization;
@@ -87,6 +89,8 @@ public class NewUserHome extends AppCompatActivity {
     OrganizationModel organizationModel;
     SqliteHelper sqliteHelper;
     String organization_id;
+    boolean isEditable = false;
+    String org_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,15 +110,49 @@ public class NewUserHome extends AppCompatActivity {
             emp_id = bundle.getString("emp_id");
 
         }
-        setOrganizationSpinner();
+//        setOrganizationSpinner();
         download_participant("organization");
 
+        organizationArrayList.clear();
+        organizationNameHM = sqliteHelper.getAllOrganization();
+        for (int i = 0; i < organizationNameHM.size(); i++) {
+            organizationArrayList.add(organizationNameHM.keySet().toArray()[i].toString().trim());
+        }
+        Collections.sort(organizationArrayList);
 
+        if (isEditable) {
+            organizationArrayList.add(0, org_name);
+        } else {
+            organizationArrayList.add(0, getString(R.string.select_organization));
+        }
+        final ArrayAdapter q = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, organizationArrayList);
+        q.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spn_org.setAdapter(q);
+
+
+
+        spn_org.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (!spn_org.getSelectedItem().toString().trim().equalsIgnoreCase(getString(R.string.select_organization))) {
+                    if (spn_org.getSelectedItem().toString().trim() != null) {
+                        String value = spn_org.getSelectedItem().toString().trim();
+                        organization = organizationNameHM.get(value);
+                        Log.e("org : ", "===" + organization);
+
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
         ll_next.setOnClickListener(new View.OnClickListener() {
             @Override
 
             public void onClick(View view) {
-                if (spn_org.getSelectedItem().toString().equalsIgnoreCase("not affiliated with organization")) {
+                if (spn_org.getSelectedItem().toString().equalsIgnoreCase("Not Affiliated")) {
                     Intent intent = new Intent(NewUserHome.this, SignUp.class);
                     startActivity(intent);
                     finish();
@@ -154,37 +192,39 @@ public class NewUserHome extends AppCompatActivity {
         sqliteHelper=new SqliteHelper(this);
     }
 
-    private void setOrganizationSpinner() {
-        organizationArrayList = sqliteHelper.getspnOrganizationData();
-        spn_org.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (!spn_org.getSelectedItem().toString().trim().equalsIgnoreCase(getString(R.string.select_organization))) {
-                    int index = spn_org.getSelectedItemPosition();
-                    organization = organizationArrayList.get(index);
-                    organization_id = sqliteHelper.getSelectedItemId("organization",organization);
-                    //Toast.makeText(context, "" + bloodGroupId, Toast.LENGTH_SHORT).show();
-                } else {
-                    organization_id = String.valueOf(1);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        organizationArrayList.add(0, getString(R.string.select_organization));
-        final ArrayAdapter Adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, organizationArrayList);
-        Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spn_org.setAdapter(Adapter);
-    }
 
 
+//    private void setOrganizationSpinner() {
+//        organizationArrayList = sqliteHelper.getspnOrganizationData();
+//        spn_org.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                if (!spn_org.getSelectedItem().toString().trim().equalsIgnoreCase(getString(R.string.select_organization))) {
+//                    int index = spn_org.getSelectedItemPosition();
+//                    organization = organizationArrayList.get(index);
+//                    organization_id = sqliteHelper.getSelectedItemId("organization",organization);
+//                    //Toast.makeText(context, "" + bloodGroupId, Toast.LENGTH_SHORT).show();
+//                } else {
+//                    organization_id = String.valueOf(1);
+//                }
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
+//        organizationArrayList.add(0, getString(R.string.select_organization));
+//        final ArrayAdapter Adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, organizationArrayList);
+//        Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spn_org.setAdapter(Adapter);
+//    }
 
 
 
-public void download_participant(String table) {
+
+
+private void download_participant(String table) {
     organizationModel.setTable_name(table);
 
 
@@ -192,43 +232,92 @@ public void download_participant(String table) {
     String data = mGson.toJson(organizationModel);
     MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     RequestBody body = RequestBody.create(JSON, data);
-    APIClient.getClient().create(TELEMEDICINE_API.class).download_organization(body).enqueue(new Callback<JsonObject>() {
-        @Override
-        public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-            try {
-                JsonObject jsonObject = response.body();
-                Log.e("Organization", "bhvhbv " + data.toString());
-                mProgressDialog.dismiss();
-//                JsonArray data = jsonObject.getAsJsonArray("Organization");
-                if (jsonObject != null) {
-                    if (jsonObject.size() > 0) {
+    TELEMEDICINE_API api_service = APIClient.getClient().create(TELEMEDICINE_API.class);
+    if (body != null && api_service != null) {
+        Call<JsonObject> server_response = api_service.download_organization(body);
+        try {
+            if (server_response != null) {
+                server_response.enqueue(new Callback<JsonObject>() {
+                    @Override
+                    public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
 
-                    for (int i = 0; i < jsonObject.size(); i++) {
-                        JSONObject object = new JSONObject(jsonObject.get(String.valueOf(i)).toString());
-                        Iterator keys = object.keys();
-                        ContentValues contentValues = new ContentValues();
-                        while (keys.hasNext()) {
-                            String currentDynamicKey = (String) keys.next();
-                            contentValues.put(currentDynamicKey, object.get(currentDynamicKey).toString());
+                        if (response.isSuccessful()) {
+                            try {
+                                JsonObject singledataP = response.body();
+                                Log.e("nxjknx", "yxjhjxj " + singledataP.toString());
+                                mProgressDialog.dismiss();
+                                JsonArray data = singledataP.getAsJsonArray("tableData");
+                                //comment by vimal because they send Appointmenthistory = null instead of Appointmenthistory = []
+                                JsonArray data2 = singledataP.getAsJsonArray("Appointmenthistory");
 
+//                                JSONObject singledata = null;
+                                JSONObject singledata2 = null;
+
+//                                sqliteHelper.saveMasterTable(contentValues, "organization");
+
+                                if (data.size() > 0) {
+                                    for (int i = 0; i < data.size(); i++) {
+                                        JSONObject singledata = new JSONObject(data.get(i).toString());
+                                        Log.e("bcjhdbjcb", "onResponse: " + singledata.toString());
+
+                                        Iterator keys = singledata.keys();
+                                        ContentValues contentValues = new ContentValues();
+                                        while (keys.hasNext()) {
+                                            String currentDynamicKey = (String) keys.next();
+                                            contentValues.put(currentDynamicKey, singledata.get(currentDynamicKey).toString());
+                                        }
+                                        sqliteHelper.saveMasterTable(contentValues, "organization");
+                                    }}
+
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
-                        sqliteHelper.saveMasterTable(contentValues, "organization");
-
                     }
-                }
-            }
 
-                    mProgressDialog.dismiss();
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+//    APIClient.getClient().create(TELEMEDICINE_API.class).download_organization(body).enqueue(new Callback<JsonObject>() {
+//        @Override
+//        public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+//            try {
+//                JsonObject jsonObject = response.body();
+//                Log.e("Organization", "bhvhbv " + data.toString());
+//                mProgressDialog.dismiss();
+////                JsonArray data = jsonObject.getAsJsonArray("Organization");
+//                if (jsonObject != null) {
+//                    if (jsonObject.size() > 0) {
+//
+//                    for (int i = 0; i < jsonObject.size(); i++) {
+//                        JSONObject object = new JSONObject(jsonObject.get(String.valueOf(i)).toString());
+//                        Iterator keys = object.keys();
+//                        ContentValues contentValues = new ContentValues();
+//                        while (keys.hasNext()) {
+//                            String currentDynamicKey = (String) keys.next();
+//                            contentValues.put(currentDynamicKey, object.get(currentDynamicKey).toString());
+//
+//                        }
+//                        sqliteHelper.saveMasterTable(contentValues, "organization");
+//
+//                    }
+//                }
+//            }
+//
+//                    mProgressDialog.dismiss();
+//
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
 
         @Override
         public void onFailure(Call<JsonObject> call, Throwable t) {
         }
     });
+}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
 
 

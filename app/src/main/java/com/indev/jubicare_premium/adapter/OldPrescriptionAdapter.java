@@ -47,8 +47,8 @@ public class OldPrescriptionAdapter extends RecyclerView.Adapter<OldPrescription
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.tv_date.setText(new StringBuilder().append(listModels.get(position).get("date").toString()).append(", ").toString());
-        holder.tv_doctor.setText(new StringBuilder().append(listModels.get(position).get("doctor_name").toString()).append(", ").toString());
+        holder.tv_date.setText(new StringBuilder().append(listModels.get(position).get("date").toString()).toString());
+        holder.tv_doctor.setText(new StringBuilder().append(listModels.get(position).get("doctor_name").toString()).toString());
 
 //        holder.tv_date.setText(arrayList.get(position).getDate());
 //        holder.tv_doctor.setText(arrayList.get(position).getDoctor_name());

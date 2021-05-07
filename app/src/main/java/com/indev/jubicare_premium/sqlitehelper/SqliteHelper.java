@@ -64,7 +64,7 @@ public class SqliteHelper extends SQLiteOpenHelper {
         db.execSQL(Village.CREATE_TABLE);
         db.execSQL(SymptomModel.CREATE_TABLE);
         db.execSQL(OldAppointmentPojo.CREATE_TABLE);
-        db.execSQL(ReportsPojo.CREATE_TABLE);
+//        db.execSQL(ReportsPojo.CREATE_TABLE);
         db.execSQL(SubTestsModel.CREATE_TABLE);
 //        db.execSQL(AppointmentMedicinePrescribedModel.CREATE_TABLE);
 //        db.execSQL(AppointmentTestModel.CREATE_TABLE);
@@ -446,6 +446,49 @@ public class SqliteHelper extends SQLiteOpenHelper {
         }
         return arrayList;
     }
+
+    public HashMap<String, Integer> getAllOrganization() {
+        HashMap<String, Integer> designation = new HashMap<>();
+        OrganizationModel organizationModel;
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        try {
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen() && !sqLiteDatabase.isReadOnly()) {
+                String query = "select id,name from organization ";
+
+                Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+                if (cursor != null && cursor.getCount() > 0) {
+                    cursor.moveToFirst();
+                    while (!cursor.isAfterLast()) {
+                        organizationModel = new OrganizationModel();
+                        organizationModel.setId(cursor.getInt(cursor.getColumnIndex("id")));
+                        organizationModel.setName(cursor.getString(cursor.getColumnIndex("name")));
+                        cursor.moveToNext();
+                        designation.put(organizationModel.getName().trim(), organizationModel.getId());
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            sqLiteDatabase.close();
+        }
+        return designation;
+    }
+
+
+
+
+    public String getorganizationName(int id, String table) {
+        String sum = "";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select name from   " + table + " where id = '" + id + "' ", null);
+        if (cursor.moveToFirst())
+            sum = cursor.getString(cursor.getColumnIndex("name")).trim();
+        return sum;
+    }
+
+
+
 //    public HashMap<String, Integer> getAllCaste() {
 //        HashMap<String, Integer> caste = new HashMap<>();
 //        Caste state1;

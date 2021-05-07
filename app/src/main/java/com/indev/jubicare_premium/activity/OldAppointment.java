@@ -42,38 +42,120 @@ import retrofit2.Response;
 public class OldAppointment extends AppCompatActivity {
     OldAppointmentAdapter oldAppointmentAdapter;
     SqliteHelper sqliteHelper;
-    AppointmentPojo appointmentPojo;
-    private ArrayList<OldAppointmentPojo> oldAppointmentPojo;
+//    AppointmentPojo appointmentPojo;
+//    private ArrayList<OldAppointmentPojo> oldAppointmentPojo;
+    OldAppointmentPojo oldAppointmentPojo = new OldAppointmentPojo();
+    ArrayList<ContentValues> patientContentValue = new ArrayList<ContentValues>();
 
     RecyclerView appointment_recyclerView;
     private ProgressDialog mProgressDialog;
     private Context context=this;
     SharedPrefHelper sharedPrefHelper;
-    ArrayList<ContentValues> patientContentValue = new ArrayList<ContentValues>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_old_appointment);
         setTitle(Html.fromHtml("<font color=\"#FFFFFFFF\">" + "Old Appointment" + "</font>"));
-        appointmentPojo=new AppointmentPojo();
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        initViews();
+
+
+
+        /*send data here*/
+        getAppointmentProfileDetails();
+//        oldAppointmentPojo = sqliteHelper.getAppointementData();
+//        oldAppointmentAdapter = new OldAppointmentAdapter(this, oldAppointmentPojo);
+////        callPrescriptionListApi();
+//
+//
+//        appointment_recyclerView = (RecyclerView) findViewById(R.id.appointment_recyclerView);
+//
+//
+//        appointment_recyclerView.setHasFixedSize(true);
+//        appointment_recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        appointment_recyclerView.setAdapter(oldAppointmentAdapter);
+
+    }
+
+    private void getAppointmentProfileDetails() {
+        mProgressDialog = ProgressDialog.show(context, "", "Please Wait...", true);
+//        oldPrescriptionPojo.setProfile_patient_id(profile_id);
+        oldAppointmentPojo.setUser_id(sharedPrefHelper.getString("user_id", ""));
+        oldAppointmentPojo.setRole_id(sharedPrefHelper.getString("role_id", ""));
+
+        Gson gson = new Gson();
+        String data = gson.toJson(oldAppointmentPojo);
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        RequestBody body = RequestBody.create(JSON, data);
+
+        TELEMEDICINE_API api_service = APIClient.getClient().create(TELEMEDICINE_API.class);
+        if (body != null && api_service != null) {
+            Call<JsonObject> server_response = api_service.download_appointments(body);
+            try {
+                if (server_response != null) {
+                    server_response.enqueue(new Callback<JsonObject>() {
+                        @Override
+                        public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+                            if (response.isSuccessful()) {
+                                try {
+                                    JsonObject singledataP = response.body();
+                                    Log.e("nxjknx", "yxjhjxj " + singledataP.toString());
+                                    mProgressDialog.dismiss();
+                                    JsonArray data = singledataP.getAsJsonArray("data");
+                                    //comment by vimal because they send Appointmenthistory = null instead of Appointmenthistory = []
+                                    JsonArray data2 = singledataP.getAsJsonArray("Appointmenthistory");
+
+//                                    JSONObject singledata = null;
+                                    JSONObject singledata2 = null;
+
+                                    if (data.size() > 0) {
+                                        for (int i = 0; i < data.size(); i++) {
+                                            JSONObject singledata = new JSONObject(data.get(i).toString());
+                                            Log.e("bcjhdbjcb", "onResponse: " + singledata.toString());
+
+                                            Iterator keys = singledata.keys();
+                                            ContentValues contentValues = new ContentValues();
+                                            while (keys.hasNext()) {
+                                                String currentDynamicKey = (String) keys.next();
+                                                contentValues.put(currentDynamicKey, singledata.get(currentDynamicKey).toString());
+                                            }
+                                            patientContentValue.add(contentValues);
+
+                                            LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
+                                            oldAppointmentAdapter = new OldAppointmentAdapter(context, patientContentValue);
+                                            appointment_recyclerView.setLayoutManager(mLayoutManager);
+                                            appointment_recyclerView.setAdapter(oldAppointmentAdapter);
+
+                                        }
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<JsonObject> call, Throwable t) {
+                            Toast.makeText(context, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                            mProgressDialog.dismiss();
+                        }
+                    });
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void initViews() {
         sqliteHelper = new SqliteHelper(this);
         sharedPrefHelper = new SharedPrefHelper(this);
         mProgressDialog = new ProgressDialog(context);
-
-        oldAppointmentPojo = sqliteHelper.getAppointementData();
-        oldAppointmentAdapter = new OldAppointmentAdapter(this, oldAppointmentPojo);
-//        callPrescriptionListApi();
-
-
         appointment_recyclerView = (RecyclerView) findViewById(R.id.appointment_recyclerView);
-
-
-        appointment_recyclerView.setHasFixedSize(true);
-        appointment_recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        appointment_recyclerView.setAdapter(oldAppointmentAdapter);
 
     }
 

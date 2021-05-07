@@ -89,7 +89,7 @@ public class CommonAppointment extends AppCompatActivity {
 
 
         mProgressDialog = ProgressDialog.show(context, "", "Please Wait...", true);
-        patientFilledDataModel.setProfile_patient_id("27");
+        patientFilledDataModel.setProfile_patient_id("1");
         patientFilledDataModel.setUser_id(sharedPrefHelper.getString("user_id", ""));
         patientFilledDataModel.setRole_id(sharedPrefHelper.getString("role_id", ""));
 
@@ -105,7 +105,7 @@ public class CommonAppointment extends AppCompatActivity {
 
         TELEMEDICINE_API api_service = APIClient.getClient().create(TELEMEDICINE_API.class);
         if (body != null && api_service != null) {
-            Call<JsonObject> server_response = api_service.download_appointments(body);
+            Call<JsonObject> server_response = api_service.getCommonProfile(body);
             try {
                 if (server_response != null) {
                     server_response.enqueue(new Callback<JsonObject>() {
@@ -117,9 +117,9 @@ public class CommonAppointment extends AppCompatActivity {
                                     JsonObject singledataP = response.body();
                                     Log.e("nxjknx", "yxjhjxj " + singledataP.toString());
                                     mProgressDialog.dismiss();
-                                    JsonArray data = singledataP.getAsJsonArray("Appointmenthistory");
+                                    JsonArray data = singledataP.getAsJsonArray("tableData");
                                     //comment by vimal because they send Appointmenthistory = null instead of Appointmenthistory = []
-                                    JsonArray data2 = singledataP.getAsJsonArray("tableData");
+                                    JsonArray data2 = singledataP.getAsJsonArray("Appointmenthistory");
 
                                     JSONObject singledata = null;
                                     JSONObject singledata2 = null;
@@ -134,8 +134,6 @@ public class CommonAppointment extends AppCompatActivity {
                                             Date newDate = sdf.parse(incomingDateDob);
                                             sdf = new SimpleDateFormat("dd-MM-yyyy");
                                             String outputDateDob = sdf.format(newDate);
-
-
                                             String url = APIClient.IMAGE_URL + singledata.getString("profile_pic");
 
                                             }
@@ -145,6 +143,7 @@ public class CommonAppointment extends AppCompatActivity {
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }
+
 
                                 } catch (Exception e) {
                                     e.printStackTrace();
@@ -916,7 +915,7 @@ public class CommonAppointment extends AppCompatActivity {
         for (int i = 0; i < data2.size(); i++) {
             Log.e("addmkmm", "addDynamicProfile: " + data2.toString());
             View inflatedView = getLayoutInflater().inflate(
-                    R.layout.custom_profile_patient_inflater, ll_for_dynamic_add, false);
+                    R.layout.common_profile_inflater, ll_for_dynamic_add, false);
             TestDocsAdapterInProfile testDocsAdapterInProfile;
             final ImageView iv_test_docs;
             final RecyclerView rv_test_docs_inprofile;
@@ -997,7 +996,7 @@ public class CommonAppointment extends AppCompatActivity {
             rv_test_docs_inprofile = inflatedView.findViewById(R.id.rv_test_docs_inprofile);
             tv_patient_remarks = inflatedView.findViewById(R.id.tv_patient_remarks);
             tv_patient_remarkss = inflatedView.findViewById(R.id.tv_patient_remarkss);
-            btn_show_medical_info = inflatedView.findViewById(R.id.btn_show_medical_info);
+//            btn_show_medical_info = inflatedView.findViewById(R.id.btn_show_medical_info);
             ll_medical_info = inflatedView.findViewById(R.id.ll_medical_info);
             view_prescription_click = inflatedView.findViewById(R.id.view_prescription_click);
             tv_bplowerP = inflatedView.findViewById(R.id.tv_bplowerP);
@@ -1019,9 +1018,9 @@ public class CommonAppointment extends AppCompatActivity {
 
 
             /*click here for button*/
-            btn_show_medical_info.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+//            btn_show_medical_info.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
                     //btn_show_medical_info.setVisibility(View.GONE);
                     //ll_medical_info.setVisibility(View.VISIBLE);
                     scrollView.fullScroll(ScrollView.FOCUS_DOWN);
@@ -1031,8 +1030,8 @@ public class CommonAppointment extends AppCompatActivity {
                         ll_medical_info.setVisibility(View.VISIBLE);
                         scrollView.fullScroll(ScrollView.FOCUS_DOWN);
                     }
-                }
-            });
+//                }
+//            });
 
             try {
                 //appointments details of patient
@@ -1044,7 +1043,7 @@ public class CommonAppointment extends AppCompatActivity {
                         Date newDate = sdf.parse(incommingDate);
                         sdf = new SimpleDateFormat("dd MMM yyyy HH:mm a");
                         String outputDate = sdf.format(newDate);
-                        btn_show_medical_info.setText("Appointment on: " + outputDate);
+//                        btn_show_medical_info.setText("Appointment on: " + outputDate);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
