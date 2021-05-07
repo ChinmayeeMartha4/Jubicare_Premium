@@ -266,39 +266,18 @@ public class TakeOldPrescription extends AppCompatActivity {
             if (!fromCounselor.equals("fromCounselor")) {
 //            getDetailsPatientAlreadyFilled(body);
             }
-
-
-
-
-
-
-
-
             btn_submit.setOnClickListener(v -> {
 
                 int size = spn_symptoms.getSelectedIds().size();
                 if (size != 0) {
                     sendAppointment();
                 }
-
-
             });
-
-
             symptoms.add(0, "Fever");
             symptoms.add(1, "Headache");
             symptoms.add(2, "Vomating");
             symptoms.add(3, "Viral");
-
-
-
-
         }
-
-
-
-
-
 
         private void setEditableFalse() {
             tv_date.setEnabled(false);
@@ -314,7 +293,7 @@ public class TakeOldPrescription extends AppCompatActivity {
             mProgressDialog = ProgressDialog.show(TakeOldPrescription.this, "", "Please Wait...", true);
             prescriptionModel.setUser_id(sharedPrefHelper.getString("user_id", ""));
             prescriptionModel.setProfile_patient_id("1");
-            prescriptionModel.setPrescribed_medicine_date(tv_date.getText().toString().trim());
+            prescriptionModel.setDate(tv_date.getText().toString().trim());
             prescriptionModel.setDoctor_name(et_doctor_name.getText().toString().trim());
             prescriptionModel.setMedicine(et_medicine.getText().toString().trim());
 
@@ -342,7 +321,7 @@ public class TakeOldPrescription extends AppCompatActivity {
             prescriptionModel.setSymptom_id(idsd.trim());
 
 
-            prescriptionModel.setAppointment_file(image64);
+            prescriptionModel.setPhoto(image64);
 
             Gson gson1 = new Gson();
             String data1 = gson1.toJson(prescriptionModel);

@@ -571,7 +571,6 @@ public class PatientFillAppointment extends AppCompatActivity {
             ll_camera.setVisibility(View.GONE);
             ll_emergenct_et.setVisibility(View.GONE);
             tv_pic.setVisibility(View.GONE);
-
         }
         getSpinnerValue();
         simpleSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -599,7 +598,6 @@ public class PatientFillAppointment extends AppCompatActivity {
         if (!fromCounselor.equals("fromCounselor")) {
 //            getDetailsPatientAlreadyFilled(body);
         }
-
         setCasteSpinner();
 
 
@@ -608,7 +606,6 @@ public class PatientFillAppointment extends AppCompatActivity {
                 PatientFilledDataModel appointmentInput = new PatientFilledDataModel();
                 appointmentInput.setUser_id(sharedPrefHelper.getString("user_id", ""));
                 appointmentInput.setRole_id(sharedPrefHelper.getString("role_id", ""));
-
                 Gson gson1 = new Gson();
                 String data1 = gson1.toJson(appointmentInput);
                 MediaType JSON1 = MediaType.parse("application/json; charset=utf-8");

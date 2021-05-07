@@ -29,13 +29,13 @@ public class PrescriptionModel {
         this.symptom_id = symptom_id;
     }
 
-    public String getAppointment_file() {
-        return appointment_file;
-    }
-
-    public void setAppointment_file(String appointment_file) {
-        this.appointment_file = appointment_file;
-    }
+//    public String getAppointment_file() {
+//        return appointment_file;
+//    }
+//
+//    public void setAppointment_file(String appointment_file) {
+//        this.appointment_file = appointment_file;
+//    }
 
     public String getProfile_patient_id() {
         return profile_patient_id;
@@ -45,13 +45,13 @@ public class PrescriptionModel {
         this.profile_patient_id = profile_patient_id;
     }
 
-    public String getPrescribed_medicine_date() {
-        return prescribed_medicine_date;
-    }
-
-    public void setPrescribed_medicine_date(String prescribed_medicine_date) {
-        this.prescribed_medicine_date = prescribed_medicine_date;
-    }
+//    public String getPrescribed_medicine_date() {
+//        return prescribed_medicine_date;
+//    }
+//
+//    public void setPrescribed_medicine_date(String prescribed_medicine_date) {
+//        this.prescribed_medicine_date = prescribed_medicine_date;
+//    }
 
     public String getDoctor_name() {
         return doctor_name;
@@ -69,9 +69,25 @@ public class PrescriptionModel {
         this.medicine = medicine;
     }
 
-    private String appointment_file;
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    private String photo;
     private String profile_patient_id;
-    private String prescribed_medicine_date;
+    private String date;
     private String doctor_name;
     private String medicine;
 

@@ -28,6 +28,7 @@ public class OldPrescriptionAdapter extends RecyclerView.Adapter<OldPrescription
     private Context context;
     private List<ContentValues> listModels;
     SharedPrefHelper sharedPrefHelper;
+    OldPrescriptionAdapter.ClickListener clickListener;
 
     public OldPrescriptionAdapter(Context context, List<ContentValues> listModels) {
         this.context = context;
@@ -83,4 +84,14 @@ public class OldPrescriptionAdapter extends RecyclerView.Adapter<OldPrescription
             ButterKnife.bind(this, itemView);
         }
     }
+    public interface ClickListener {
+        void onItemClick(int position);
+
+        void onListItemClick(int position);
+    }
+
+    public void onItemClick(ClickListener listener) {
+        this.clickListener = listener;
+    }
+
 }

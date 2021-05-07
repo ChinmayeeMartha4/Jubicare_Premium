@@ -45,6 +45,9 @@ public interface TELEMEDICINE_API {
     @POST("patient_appointments.php")
     Call<JsonObject> sendAppointdata(@Body RequestBody body);
 
+    @POST("reports.php ")
+    Call<JsonObject> sendReportdata(@Body RequestBody body);
+
     @POST("doctor_assign.php")
     Call<JsonObject> sendDoctorAssignmentdata(@Body RequestBody body);
 
@@ -94,8 +97,6 @@ public interface TELEMEDICINE_API {
     @POST("doctor_calling.php")
     Call<JsonObject> getDoctorCall(@Body RequestBody body);
 
-    @GET
-    Call<JsonObject> getPinCode(@Url String PinCode);
 
     @POST("downloaded_notification.php")
     Call<JsonObject> getNotificationData(@Body RequestBody body);
