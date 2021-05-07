@@ -86,7 +86,7 @@ public class CommonPrescription extends AppCompatActivity {
 
 
         mProgressDialog = ProgressDialog.show(context, "", "Please Wait...", true);
-        patientFilledDataModel.setProfile_patient_id("profile_id");
+        patientFilledDataModel.setProfile_patient_id("1");
         patientFilledDataModel.setUser_id(sharedPrefHelper.getString("user_id", ""));
         patientFilledDataModel.setRole_id(sharedPrefHelper.getString("role_id", ""));
 
@@ -102,7 +102,7 @@ public class CommonPrescription extends AppCompatActivity {
 
         TELEMEDICINE_API api_service = APIClient.getClient().create(TELEMEDICINE_API.class);
         if (body != null && api_service != null) {
-            Call<JsonObject> server_response = api_service.getCommonProfile(body);
+            Call<JsonObject> server_response = api_service.download_old_prescription(body);
             try {
                 if (server_response != null) {
                     server_response.enqueue(new Callback<JsonObject>() {
@@ -114,8 +114,8 @@ public class CommonPrescription extends AppCompatActivity {
                                     JsonObject singledataP = response.body();
                                     Log.e("nxjknx", "yxjhjxj " + singledataP.toString());
                                     mProgressDialog.dismiss();
-                                    JsonArray data = singledataP.getAsJsonArray("tableData");
-                                    JsonArray data2 = singledataP.getAsJsonArray("Appointmenthistory");
+                                    JsonArray data = singledataP.getAsJsonArray("Appointmenthistory");
+                                    JsonArray data2 = singledataP.getAsJsonArray("data");
                                     //comment by vimal because they send Appointmenthistory = null instead of Appointmenthistory = []
 
                                     JSONObject singledata = null;

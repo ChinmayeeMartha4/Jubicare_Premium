@@ -80,7 +80,7 @@ public class OldPrescription extends AppCompatActivity {
 //        String data = gson.toJson(oldPrescriptionPojo);
 //        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 //        RequestBody body = RequestBody.create(JSON, data);
-        callPrescriptionListApi();
+//        callPrescriptionListApi();
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,71 +105,71 @@ public class OldPrescription extends AppCompatActivity {
 
 
 
-    private void callPrescriptionListApi() {
-        mProgressDialog = ProgressDialog.show(context, "", "Please Wait...", true);
-        oldPrescriptionPojo.setUser_id(sharedPrefHelper.getString("user_id", ""));
-        oldPrescriptionPojo.setRole_id(sharedPrefHelper.getString("role_id", ""));
-        Gson mGson = new Gson();
-        String data = mGson.toJson(oldPrescriptionPojo);
-
-        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        RequestBody body = RequestBody.create(JSON, data);
-
-        APIClient.getClient().create(TELEMEDICINE_API.class).download_old_prescription(body).enqueue(new Callback<JsonObject>() {
-            @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                if (response.isSuccessful()) {
-                    try {
-                        JSONObject jsonObject = new JSONObject(response.body().toString());
-                        Log.e("bchjb", "jhjhcs_ cn " + jsonObject.toString());
-                        mProgressDialog.dismiss();
-//                        patientContentValue.clear();
-                        String success = jsonObject.getString("success");
-                        if (success.equals("1")) {
-
-                        }
-                        JsonObject singledataP = response.body();
-//                        Log.e("jcbjhcd", "onResponse: " + singledataP.toString());
-
-
-                        JsonArray data = singledataP.getAsJsonArray("tableData");
-//                        if (data.size() > 0) {
-//                        if (data != null) {
-                            if (data.size() > 0) {
-                                for (int i = 0; i < data.size(); i++) {
-                                    JSONObject singledata = new JSONObject(data.get(i).toString());
-                                    Log.e("bcjhdbjcb", "onResponse: " + singledata.toString());
-
-                                    Iterator keys = singledata.keys();
-                                    ContentValues contentValues = new ContentValues();
-                                    while (keys.hasNext()) {
-                                        String currentDynamicKey = (String) keys.next();
-                                        contentValues.put(currentDynamicKey, singledata.get(currentDynamicKey).toString());
-                                    }
-                                    patientContentValue.add(contentValues);
-
-                                    LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
-                                    oldPrescriptionAdapter = new OldPrescriptionAdapter(context, patientContentValue);
-                                    prescription_recyclerView.setLayoutManager(mLayoutManager);
-                                    prescription_recyclerView.setAdapter(oldPrescriptionAdapter);
-
-                                }
+//    private void callPrescriptionListApi() {
+//        mProgressDialog = ProgressDialog.show(context, "", "Please Wait...", true);
+//        oldPrescriptionPojo.setUser_id(sharedPrefHelper.getString("user_id", ""));
+//        oldPrescriptionPojo.setRole_id(sharedPrefHelper.getString("role_id", ""));
+//        Gson mGson = new Gson();
+//        String data = mGson.toJson(oldPrescriptionPojo);
+//
+//        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+//        RequestBody body = RequestBody.create(JSON, data);
+//
+//        APIClient.getClient().create(TELEMEDICINE_API.class).download_old_prescription(body).enqueue(new Callback<JsonObject>() {
+//            @Override
+//            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+//                if (response.isSuccessful()) {
+//                    try {
+//                        JSONObject jsonObject = new JSONObject(response.body().toString());
+//                        Log.e("bchjb", "jhjhcs_ cn " + jsonObject.toString());
+//                        mProgressDialog.dismiss();
+////                        patientContentValue.clear();
+//                        String success = jsonObject.getString("success");
+//                        if (success.equals("1")) {
+//
 //                        }
-                            }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
-                Toast.makeText(context, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
-                mProgressDialog.dismiss();
-            }
-        });
-    }
+//                        JsonObject singledataP = response.body();
+////                        Log.e("jcbjhcd", "onResponse: " + singledataP.toString());
+//
+//
+//                        JsonArray data = singledataP.getAsJsonArray("tableData");
+////                        if (data.size() > 0) {
+////                        if (data != null) {
+//                            if (data.size() > 0) {
+//                                for (int i = 0; i < data.size(); i++) {
+//                                    JSONObject singledata = new JSONObject(data.get(i).toString());
+//                                    Log.e("bcjhdbjcb", "onResponse: " + singledata.toString());
+//
+//                                    Iterator keys = singledata.keys();
+//                                    ContentValues contentValues = new ContentValues();
+//                                    while (keys.hasNext()) {
+//                                        String currentDynamicKey = (String) keys.next();
+//                                        contentValues.put(currentDynamicKey, singledata.get(currentDynamicKey).toString());
+//                                    }
+//                                    patientContentValue.add(contentValues);
+//
+//                                    LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
+//                                    oldPrescriptionAdapter = new OldPrescriptionAdapter(context, patientContentValue);
+//                                    prescription_recyclerView.setLayoutManager(mLayoutManager);
+//                                    prescription_recyclerView.setAdapter(oldPrescriptionAdapter);
+//
+//                                }
+////                        }
+//                            }
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<JsonObject> call, Throwable t) {
+//                Toast.makeText(context, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
+//                mProgressDialog.dismiss();
+//            }
+//        });
+//    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

@@ -46,15 +46,13 @@ public class  ViewPrescription extends AppCompatActivity {
         setTitle(Html.fromHtml("<font color=\"#FFFFFFFF\">" + "View Prescription" + "</font>"));
         patientFilledDataModel = new PatientFilledDataModel();
         sharedPrefHelper = new SharedPrefHelper(this);
-//        initViews();
+        initViews();
         /*get intent here*/
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
 //            profile_id = bundle.getString("profile_patient_id", "");
             view_prescription_url = bundle.getString("url", "");
         }
-
-
 
 
         webView.getSettings().setJavaScriptEnabled(true);

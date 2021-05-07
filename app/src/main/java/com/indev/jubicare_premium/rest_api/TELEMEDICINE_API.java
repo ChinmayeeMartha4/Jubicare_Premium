@@ -36,6 +36,12 @@ public interface TELEMEDICINE_API {
     @POST("download_org.php")
     Call<JsonObject> download_organization(@Body RequestBody body);
 
+    @POST("download_appointments.php")
+    Call<JsonObject> download_appointments(@Body RequestBody body);
+
+    @POST("download_reports.php")
+    Call<JsonObject> download_reports(@Body RequestBody body);
+
     @POST("payment.php")
     Call<JsonObject> payment(@Body RequestBody body);
 

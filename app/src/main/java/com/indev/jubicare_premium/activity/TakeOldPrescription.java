@@ -690,33 +690,6 @@ public class TakeOldPrescription extends AppCompatActivity {
         }
 
 
-        private void selectDate() {
-            datePickerDialog = new DatePickerDialog(TakeOldPrescription.this, new DatePickerDialog.OnDateSetListener() {
-
-                @Override
-                public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                    mmYear = i;
-                    mmMonth = i1;
-                    mmDay = i2;
-                    Calendar c = Calendar.getInstance();
-                    c.set(i, i1, i2);
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
-                    String dob = sdf1.format(c.getTime());
-                    String formattedDate = sdf.format(c.getTime());
-                    et_date_of_birth.setText(formattedDate);
-//                    et_age.setText(getAge(dob));
-                }
-
-            }, mmYear, mmMonth, mmDay);
-
-            datePickerDialog.show();
-        }
-
-        public void setDateOfBirthClick() {
-            DialogFragment newFragment = new PatientFillAppointment.DatePickerFragment();
-            newFragment.show(getFragmentManager(), "datePicker");
-        }
 
         @SuppressLint("NewApi")
         public static class DatePickerFragment extends DialogFragment implements
