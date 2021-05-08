@@ -60,7 +60,7 @@
                 android:background="@drawable/shape_of_edittext"
                 android:orientation="vertical"
                 android:layout_marginTop="@dimen/_8dp"
-                android:padding="@dimen/margin10">
+                android:padding="@dimen/margin2">
 
 <!--                <EditText-->
 <!--                    android:id="@+id/et_org"-->

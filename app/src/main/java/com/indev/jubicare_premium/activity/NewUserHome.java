@@ -140,8 +140,26 @@ public class NewUserHome extends AppCompatActivity {
                         organization = organizationNameHM.get(value);
                         Log.e("org : ", "===" + organization);
 
+                        if (spn_org.getSelectedItem().toString().equalsIgnoreCase("Not Affiliated")) {
+
+                            et_emp_id.setVisibility(View.GONE);
+                            tv_emp_id.setVisibility(View.GONE);
+                            tv_mobileNo.setVisibility(View.GONE);
+                            et_mobileNo.setVisibility(View.GONE);
+                            tv_welcome1.setText(Html.fromHtml("Changes Rs. <font color=\"#2A66CC\">" + "199" + "</font> per patient"));
+
+
+                        }
+                        else{
+                            et_emp_id.setVisibility(View.VISIBLE);
+                            tv_emp_id.setVisibility(View.VISIBLE);
+                            tv_mobileNo.setVisibility(View.VISIBLE);
+                            et_mobileNo.setVisibility(View.VISIBLE);
+                            tv_welcome1.setText(Html.fromHtml("Changes Rs. <font color=\"#2A66CC\">" + "99" + "</font> per patient"));
+
+
                     }
-                }
+                }}
             }
 
             @Override
