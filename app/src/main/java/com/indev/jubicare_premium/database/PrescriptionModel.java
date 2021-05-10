@@ -14,6 +14,16 @@ public class PrescriptionModel {
 
     private String symptoms;
 
+    public int getSymptom() {
+        return symptom;
+    }
+
+    public void setSymptom(int symptom) {
+        this.symptom = symptom;
+    }
+
+    private int symptom;
+
     public String getUser_id() {
         return user_id;
     }

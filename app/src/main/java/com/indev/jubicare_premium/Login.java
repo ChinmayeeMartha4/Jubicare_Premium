@@ -160,6 +160,7 @@ SqliteHelper sqliteHelper;
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .show();
         } else {
+
             mProgressDialog = ProgressDialog.show(context, "Login", "Please Wait...", true);
             LoginModel mLoginModel = new LoginModel();
             mLoginModel.setPassword(password);
@@ -193,27 +194,13 @@ SqliteHelper sqliteHelper;
                             sharedPrefHelper.setString("profile_pic", profile_pic);
                             sharedPrefHelper.setString("userName", username);
                             sharedPrefHelper.setString("mobile_token", mobile_token);
-//                            download_batch();
-
-//                           // if (success.equalsIgnoreCase("1") && role_id.equalsIgnoreCase("8")) {
-//                                Intent intent = new Intent(LoginAcivity.this, HomeActivity.class);
-//                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                                                    /*.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-//                                                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);*/
-//                                startActivity(intent);
-//                                finish();
-//                            }
-                            if (success.equalsIgnoreCase("1") && role_id.equalsIgnoreCase("7")) {
-//                                if (!mPushTokenIsRegistered) {
-//                                    getSinchServiceInterface().getManagedPush(userName).registerPushToken(this);
-//                                }
+                            if (success.equalsIgnoreCase("1") && role_id.equalsIgnoreCase("8")) {
                                 String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
-
 
                                 Intent intent = new Intent(Login.this, HomeActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                                    /*.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                                                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);*/
+
+
                                 startActivity(intent);
                                 finish();
                             }
@@ -235,122 +222,7 @@ SqliteHelper sqliteHelper;
             });
         }
     }
-//    public void download_batch() {
-//        mProgressDialog = ProgressDialog.show(context, "", "Please Wait...", true);
-//        Gson mGson = new Gson();
-//        String data = mGson.toJson(organizationModel);
-//        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-//        RequestBody body = RequestBody.create(JSON, data);
-//        APIClient.getClient().create(TELEMEDICINE_API.class).download_organization(body).enqueue(new Callback<JsonObject>() {
-//            @Override
-//            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-//                try {
-//                    JsonObject jsonObject = response.body();
-//                    Log.e("cnccnnc", "bhvhbv " + jsonObject.toString());
-//                    mProgressDialog.dismiss();
-//                    JsonArray data = jsonObject.getAsJsonArray("Organization");
-//                    if (data != null) {
-//                        if (data.size() > 0) {
-//                            for (int i = 0; i < data.size(); i++) {
-//                                JSONObject object = new JSONObject(data.get(i).toString());
-//                                Iterator keys = object.keys();
-//                                ContentValues contentValues = new ContentValues();
-//                                while (keys.hasNext()) {
-//                                    String currentDynamicKey = (String) keys.next();
-//                                    contentValues.put(currentDynamicKey, object.get(currentDynamicKey).toString());
-//                                }
-//                                sqliteHelper.saveMasterTable(contentValues, "organization");
-//                            }
-//                            Intent intent = new Intent(Login.this, HomeActivity.class);
-//                            startActivity(intent);
-//                            finish();
-//
-//                        }
-//
-//                    } else {
-//                        mProgressDialog.dismiss();
-//                        // rv_product_category.setVisibility(View.GONE);
-//                        // tv_product_not_found.setVisibility(View.VISIBLE);
-//                    }
-//
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<JsonObject> call, Throwable t) {
-//                mProgressDialog.dismiss();
-//                new androidx.appcompat.app.AlertDialog.Builder(context).setTitle("Alert !")
-//                        .setMessage("Network Error, check your network connection.").
-//                        setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                dialog.dismiss();
-//
-//                            }
-//                        }).setIcon(android.R.drawable.ic_dialog_alert).show();
-//
-//
-//            }
-//        });
-//    }
-//    private void callPatientListApi() {
-//        mProgressDialog = ProgressDialog.show(context, "", "Please Wait...", true);
-//        pharmacyPatientModel.setUser_id(sharedPrefHelper.getString("user_id", ""));
-//        pharmacyPatientModel.setRole_id(sharedPrefHelper.getString("role_id", ""));
-////        pharmacyPatientModel.setMobile(searchInput);
-//
-//        Gson mGson = new Gson();
-//        String data = mGson.toJson(pharmacyPatientModel);
-//
-//        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-//        RequestBody body = RequestBody.create(JSON, data);
-//
-//        APIClient.getClient().create(TELEMEDICINE_API.class).patientListingApi(body).enqueue(new Callback<JsonObject>() {
-//            @Override
-//            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-//                if (response.isSuccessful()) {
-//                    try {
-//                        JSONObject jsonObject = new JSONObject(response.body().toString());
-//                        mProgressDialog.dismiss();
-//                        String success = jsonObject.getString("success");
-//                        if (success.equals("1")) {
-//
-//                        }
-//                        JsonObject singledataP = response.body();
-//                        JsonArray data = singledataP.getAsJsonArray("tableData");
-//                        if (data.size() > 0) {
-//                            for (int i = 0; i < data.size(); i++) {
-//                                JSONObject singledata = new JSONObject(data.get(i).toString());
-//                                Log.e("bcjhdbjcb", "onResponse: " + singledata.toString());
-//
-//                                Iterator keys = singledata.keys();
-//                                ContentValues contentValues = new ContentValues();
-//                                while (keys.hasNext()) {
-//                                    String currentDynamicKey = (String) keys.next();
-//                                    contentValues.put(currentDynamicKey, singledata.get(currentDynamicKey).toString());
-//                                }
-//
-//                                LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
-//
-//
-//                            }
-//                        }
-//
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<JsonObject> call, Throwable t) {
-//                Toast.makeText(context, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
-//                mProgressDialog.dismiss();
-//            }
-//        });
-//    }
+
     public static boolean checkInternetConnection(Context context) {
         try {
             ConnectivityManager conMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
