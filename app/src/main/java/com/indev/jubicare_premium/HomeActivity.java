@@ -10,6 +10,7 @@ import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ import com.indev.jubicare_premium.activity.OldAppointment;
 import com.indev.jubicare_premium.activity.PatientActivity;
 import com.indev.jubicare_premium.activity.PatientFillAppointment;
 import com.indev.jubicare_premium.activity.OldPrescription;
+import com.indev.jubicare_premium.activity.PatientModel;
 import com.indev.jubicare_premium.activity.Reports;
 import com.indev.jubicare_premium.adapter.FamilyListAdapter;
 import com.indev.jubicare_premium.adapter.PatientAdapter;
@@ -45,6 +47,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import okhttp3.MediaType;
@@ -54,31 +57,40 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HomeActivity extends AppDrawer {
-    CardView cv_appointment,cv_prescription,cv_report,cv_profile,cv_old_appointment,cv_family;
+    CardView cv_appointment, cv_prescription, cv_report, cv_profile, cv_old_appointment, cv_family;
 
-    ArrayList<ContentValues> patientContentValue = new ArrayList<ContentValues>();
-    private ArrayList<FamilyPojo> familyPojos;
+    ArrayList<FamilyPojo> patientContentValue = new ArrayList<FamilyPojo>();
+    private ArrayList<FamilyPojo> familyPojoArrayList;
     FamilyListAdapter familyListAdapter;
     Spinner spinner_person;
-   OldAppointmentPojo oldAppointmentPojo;
-   ReportsPojo reportsPojo;
-   SqliteHelper sqliteHelper;
+    OldAppointmentPojo oldAppointmentPojo;
+    ReportsPojo reportsPojo;
+    SqliteHelper sqliteHelper;
+    ProgressDialog mprogressDialog;
+    boolean isEditable = false;
+    String person_name;
+    PatientModel patientModel = new PatientModel();
     PharmacyPatientModel pharmacyPatientModel = new PharmacyPatientModel();
     private ProgressDialog mProgressDialog;
     /*normal widgets*/
+
+    HashMap<String, Integer> personHM = new HashMap<>();
+    ArrayList<String> personArrayList1 = new ArrayList<>();
+    ArrayList<String> personName = new ArrayList<>();
+
     private Context context = this;
     SharedPrefHelper sharedPrefHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         getSupportActionBar().hide();
         setTitle(Html.fromHtml("<font color=\"#FFFFFFFF\">" + "Home" + "</font>"));
-        oldAppointmentPojo =new OldAppointmentPojo();
+        oldAppointmentPojo = new OldAppointmentPojo();
         sqliteHelper = new SqliteHelper(this);
-        initList();
+        // initList();
         initview();
-        spinner_person.setAdapter(familyListAdapter);
 
         download_patient();
 
@@ -159,191 +171,108 @@ public class HomeActivity extends AppDrawer {
     }
 
     private void initview() {
-        cv_appointment=findViewById(R.id.cv_appointment);
-        cv_profile=findViewById(R.id.cv_profile);
-        cv_old_appointment=findViewById(R.id.cv_old_appointment);
-        cv_prescription=findViewById(R.id.cv_prescription);
-        cv_report=findViewById(R.id.cv_report);
-        cv_family=findViewById(R.id.cv_family);
-        spinner_person=findViewById(R.id.spinner_person);
+        cv_appointment = findViewById(R.id.cv_appointment);
+        cv_profile = findViewById(R.id.cv_profile);
+        cv_old_appointment = findViewById(R.id.cv_old_appointment);
+        cv_prescription = findViewById(R.id.cv_prescription);
+        cv_report = findViewById(R.id.cv_report);
+        cv_family = findViewById(R.id.cv_family);
+        spinner_person = findViewById(R.id.spinner_person);
 //        String name = sharedPrefHelper.getString("name", "");
 //        tv_welcomeName.setText(name);
         sharedPrefHelper = new SharedPrefHelper(this);
         mProgressDialog = new ProgressDialog(context);
-        familyListAdapter = new FamilyListAdapter(this,familyPojos );
+
     }
 
-//    private void callPatientListApi() {
-//        mProgressDialog = ProgressDialog.show(context, "", "Please Wait...", true);
-//        pharmacyPatientModel.setUser_id(sharedPrefHelper.getString("user_id", ""));
-//        pharmacyPatientModel.setRole_id(sharedPrefHelper.getString("role_id", ""));
-//
-//        Gson mGson = new Gson();
-//        String data = mGson.toJson(pharmacyPatientModel);
-//
-//        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-//        RequestBody body = RequestBody.create(JSON, data);
-//
-//        APIClient.getClient().create(TELEMEDICINE_API.class).patientListingApi(body).enqueue(new Callback<JsonObject>() {
-//            @Override
-//            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-//                if (response.isSuccessful()) {
-//                    try {
-//                        JSONObject jsonObject = new JSONObject(response.body().toString());
-//                        mProgressDialog.dismiss();
-//                        patientContentValue.clear();
-//                        String success = jsonObject.getString("success");
-//                        if (success.equals("1")) {
-//
-//                        }
-//                        JsonObject singledataP = response.body();
-//                        JsonArray data = singledataP.getAsJsonArray("tableData");
-//                        if (data.size() > 0) {
-//                            for (int i = 0; i < data.size(); i++) {
-//                                JSONObject singledata = new JSONObject(data.get(i).toString());
-//                                Log.e("bcjhdbjcb", "onResponse: " + singledata.toString());
-//
-//                                Iterator keys = singledata.keys();
-//                                ContentValues contentValues = new ContentValues();
-//                                while (keys.hasNext()) {
-//                                    String currentDynamicKey = (String) keys.next();
-//                                    contentValues.put(currentDynamicKey, singledata.get(currentDynamicKey).toString());
-//                                }
-//                                patientContentValue.add(contentValues);
-//
-//                                LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
-//                                familyListAdapter = new FamilyListAdapter(context, patientContentValue);
-////                                rv_Patient_patient_list.setLayoutManager(mLayoutManager);
-////                                rv_Patient_patient_list.setAdapter(familyListAdapter);
-////                                familyListAdapter.onItemClick(new PatientAdapter.ClickListener() {
-//                                    @Override
-//                                    public void onItemClick(int position) {
-//
-//                                    }
-//
-//                                    @Override
-//                                    public void onListItemClick(int position) {
-//                                        Intent intent = new Intent(context, CommonProfile.class);
-//                                        intent.putExtra("patient", "patient");
-//                                        intent.putExtra("profile_patient_id", patientContentValue.get(position).get("profile_patient_id").toString());
-//                                        startActivity(intent);
-//                                        finish();
-//                                    }
-//                                });
-//                            }
-//                    }
-////                        } else {
-////                            tv_list_count.setVisibility(View.GONE);
-////                            rv_Patient_patient_list.setVisibility(View.GONE);
-////                            tvNoDataFound.setVisibility(View.VISIBLE);
-////                            btn_go_home.setVisibility(View.VISIBLE);
-////                        }
-//
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<JsonObject> call, Throwable t) {
-//                Toast.makeText(context, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
-//                mProgressDialog.dismiss();
-//            }
-//        });
-//    }
-private void download_patient() {
+    private void download_patient() {
+        mProgressDialog = ProgressDialog.show(context, "", "Please Wait...", true);
+        patientModel.setUser_id(sharedPrefHelper.getString("user_id", ""));
+        Gson mGson = new Gson();
+        String data = mGson.toJson(patientModel);
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        RequestBody body = RequestBody.create(JSON, data);
 
+        APIClient.getClient().create(TELEMEDICINE_API.class).patientpartnr(body).enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.isSuccessful()) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response.body().toString());
+                        mProgressDialog.dismiss();
+                        personHM.clear();
+                        String success = jsonObject.getString("success");
+                        if (success.equals("1")) {
 
-    Gson mGson = new Gson();
-    String data = mGson.toJson(pharmacyPatientModel);
-    MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-    RequestBody body = RequestBody.create(JSON, data);
-    TELEMEDICINE_API api_service = APIClient.getClient().create(TELEMEDICINE_API.class);
-    if (body != null && api_service != null) {
-        Call<JsonObject> server_response = api_service.patientListingApi(body);
-        try {
-            if (server_response != null) {
-                server_response.enqueue(new Callback<JsonObject>() {
-                    @Override
-                    public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-
-                        if (response.isSuccessful()) {
+                        }
+                        JsonObject singledataP = response.body();
+                        JsonArray data = singledataP.getAsJsonArray("tableData");
+                        if (data.size() > 0) {
                             try {
-                                JsonObject singledataP = response.body();
-                                Log.e("nxjknx", "yxjhjxj " + singledataP.toString());
-                                mProgressDialog.dismiss();
-                                JsonArray data = singledataP.getAsJsonArray("tableData");
-                                //comment by vimal because they send Appointmenthistory = null instead of Appointmenthistory = []
-
-                                JSONObject singledata2 = null;
-
-//                                sqliteHelper.saveMasterTable(contentValues, "organization");
-
-                                if (data.size() > 0) {
-                                    for (int i = 0; i < data.size(); i++) {
-                                        JSONObject singledata = new JSONObject(data.get(i).toString());
-                                        Log.e("bcjhdbjcb", "onResponse: " + singledata.toString());
-
-                                        Iterator keys = singledata.keys();
-                                        ContentValues contentValues = new ContentValues();
-                                        while (keys.hasNext()) {
-                                            String currentDynamicKey = (String) keys.next();
-                                            contentValues.put(currentDynamicKey, singledata.get(currentDynamicKey).toString());
-                                        }
-//                                        patientContentValue.add(contentValues);
-                                        /*total count of list*/
-//                                        tv_list_count.setText("Total - " + patientContentValue.size());
-
-//                                        LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
-//                                        familyListAdapter = new PatientAdapter(context, patientContentValue);
-//                                        rv_Patient_patient_list.setLayoutManager(mLayoutManager);
-//                                        rv_Patient_patient_list.setAdapter(familyListAdapter);
-//                                        patientAdapter.onItemClick(new PatientAdapter.ClickListener() {
-//                                            @Override
-//                                            public void onItemClick(int position) {
-//
-//                                            }
-//
-//                                            @Override
-//                                            public void onListItemClick(int position) {
-//                                                Intent intent = new Intent(context, HomeActivity.class);
-//                                                intent.putExtra("patient", "patient");
-//                                                intent.putExtra("profile_patient_id", patientContentValue.get(position).get("profile_patient_id").toString());
-//                                                startActivity(intent);
-//                                                finish();
-//                                            }
-//                                        });
-//
-                                    }}
+                                for (int i = 0; i < data.size(); i++) {
+                                    JSONObject singledata = new JSONObject(data.get(i).toString());
+                                    String name = singledata.getString("full_name");
+                                    String id = singledata.getString("id");
+                                    personHM.put(name, Integer.valueOf(id));
+                                    personName.clear();
+                                    for (int j = 0; j < personHM.size(); j++) {
+                                        personName.add(personHM.keySet().toArray()[j].toString().trim());
+                                        //docName.add(0,"Select Doctor");
+                                        final ArrayAdapter Adapter = new ArrayAdapter(HomeActivity.this, android.R.layout.simple_spinner_item, personName);
+                                        Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                        spinner_person.setAdapter(Adapter);
+                                    }
 
 
+                                }
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(Call<JsonObject> call, Throwable t) {
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                });
+                }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                Toast.makeText(context, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                mProgressDialog.dismiss();
+            }
+        });
+    }
+
+    private void setpersonSpinnerData() {
+        personHM.clear();
+        personArrayList1.clear();
+
+        for (int i = 0; i < personHM.size(); i++) {
+            personArrayList1.add(personHM.keySet().toArray()[i].toString().trim());
         }
-    }
-}
+        if (isEditable) {
+            personArrayList1.add(0, person_name);
+        } else {
+            personArrayList1.add(0, "Select Person");
+        }
+        //  districtArrayList1.add(0, getString(R.string.selectDistrict));
+        final ArrayAdapter Adapter1 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, personArrayList1);
+        Adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_person.setAdapter(Adapter1);
 
 
-    private void initList() {
-        familyPojos = new ArrayList<>();
-//        tv_name.setText(familyPojos.getName()+"");
-        familyPojos.add(new FamilyPojo("Arun Tiwari"));
-        familyPojos.add(new FamilyPojo("Ram Tiwari"));
-        familyPojos.add(new FamilyPojo("Lav Singh"));
-        familyPojos.add(new FamilyPojo("Nikesh Singh"));
     }
+
+
+//    private void initList() {
+//        familyPojos = new ArrayList<>();
+////        tv_name.setText(familyPojos.getName()+"");
+//        familyPojos.add(new FamilyPojo("Arun Tiwari"));
+//        familyPojos.add(new FamilyPojo("Ram Tiwari"));
+//        familyPojos.add(new FamilyPojo("Lav Singh"));
+//        familyPojos.add(new FamilyPojo("Nikesh Singh"));
+//    }
 
     @Override
     public void onBackPressed() {

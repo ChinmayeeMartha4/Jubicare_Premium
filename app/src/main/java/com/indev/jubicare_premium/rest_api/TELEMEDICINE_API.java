@@ -163,6 +163,8 @@ public interface TELEMEDICINE_API {
 
     @POST("profile_patient_list.php")
     Call<JsonObject> patientListingApi(@Body RequestBody body);
+@POST("download_patient_partner.php")
+    Call<JsonObject> patientpartnr(@Body RequestBody body);
 
     @POST("delete_appointment.php")
     Call<JsonObject> deleteAppointmentApi(@Body RequestBody body);
