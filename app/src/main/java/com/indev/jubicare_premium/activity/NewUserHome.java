@@ -111,7 +111,7 @@ public class NewUserHome extends AppCompatActivity {
 
         }
 //        setOrganizationSpinner();
-        download_participant("organization");
+        download_organization("organization");
 
         organizationArrayList.clear();
         organizationNameHM = sqliteHelper.getAllOrganization();
@@ -147,8 +147,6 @@ public class NewUserHome extends AppCompatActivity {
                             tv_mobileNo.setVisibility(View.GONE);
                             et_mobileNo.setVisibility(View.GONE);
                             tv_welcome1.setText(Html.fromHtml("Changes Rs. <font color=\"#2A66CC\">" + "199" + "</font> per patient"));
-
-
                         }
                         else{
                             et_emp_id.setVisibility(View.VISIBLE);
@@ -212,37 +210,10 @@ public class NewUserHome extends AppCompatActivity {
 
 
 
-//    private void setOrganizationSpinner() {
-//        organizationArrayList = sqliteHelper.getspnOrganizationData();
-//        spn_org.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                if (!spn_org.getSelectedItem().toString().trim().equalsIgnoreCase(getString(R.string.select_organization))) {
-//                    int index = spn_org.getSelectedItemPosition();
-//                    organization = organizationArrayList.get(index);
-//                    organization_id = sqliteHelper.getSelectedItemId("organization",organization);
-//                    //Toast.makeText(context, "" + bloodGroupId, Toast.LENGTH_SHORT).show();
-//                } else {
-//                    organization_id = String.valueOf(1);
-//                }
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
-//        organizationArrayList.add(0, getString(R.string.select_organization));
-//        final ArrayAdapter Adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, organizationArrayList);
-//        Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spn_org.setAdapter(Adapter);
-//    }
 
 
 
-
-
-private void download_participant(String table) {
+private void download_organization(String table) {
     organizationModel.setTable_name(table);
 
 
@@ -378,6 +349,7 @@ private void download_participant(String table) {
                     if (success.equals("1")) {
                         Toast.makeText(NewUserHome.this, "" + message, Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(NewUserHome.this, NewUserWelcomeHome.class);
+
 
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);

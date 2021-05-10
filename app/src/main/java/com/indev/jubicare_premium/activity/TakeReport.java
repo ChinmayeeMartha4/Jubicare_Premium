@@ -216,7 +216,7 @@ public class TakeReport extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             screen_type = bundle.getString("patient", "");
-            profile_id = bundle.getString("profile_patient_id", "");
+            profile_id = bundle.getString("profile_id", "");
             patient_appointments_id = bundle.getString("patient_appointments_id", "");
             fromCounselor = bundle.getString("fromCounselor", "");
             fromCounselorSearch = bundle.getString("fromCounselorSearch", "");
@@ -263,35 +263,11 @@ public class TakeReport extends AppCompatActivity {
     private void sendAppointment() {
         mProgressDialog = ProgressDialog.show(TakeReport.this, "", "Please Wait...", true);
         takeReportModel.setUser_id(sharedPrefHelper.getString("user_id", ""));
-        takeReportModel.setProfile_patient_id("1");
+//        takeReportModel.setProfile_patient_id(profile_id);
         takeReportModel.setDate(tv_date.getText().toString().trim());
         takeReportModel.setDoctor_name(et_doctor_name.getText().toString().trim());
         takeReportModel.setTest(et_test.getText().toString().trim());
-
-
-
-
-//        dids = addDiseasesIds(size);
-//        String s1 = dids.toString().trim().replace("[", "");
-//        String ss2 = s1.replace("]", "");
-////            prescriptionModel.setDisease_id(ss2.trim());
-//
-//        String idsd = "";
-//        List<KeyPairBoolData> dds = spn_symptoms.getSelectedItems();
-//        for (int i = 0; i < dds.size(); i++) {
-//            String name = dds.get(i).getName();
-//
-//            if (i == 0) {
-//                idsd = String.valueOf(symptomHM.get(name));
-//            } else if (idsd != null) {
-//                idsd = idsd + "," + String.valueOf(symptomHM.get(name));
-//            }
-//        }
-
-
-
         takeReportModel.setPhoto(image64);
-
         Gson gson1 = new Gson();
         String data1 = gson1.toJson(takeReportModel);
         MediaType JSON1 = MediaType.parse("application/json; charset=utf-8");
@@ -302,7 +278,6 @@ public class TakeReport extends AppCompatActivity {
 
     private ArrayList<Integer> addDiseasesIds(int size) {
         ArrayList<Integer> ids = new ArrayList<>();
-
         for (int i = 0; i < size; i++) {
             ids.add(0);
         }

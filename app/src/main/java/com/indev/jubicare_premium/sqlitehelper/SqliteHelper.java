@@ -200,24 +200,24 @@ public class SqliteHelper extends SQLiteOpenHelper {
         }
         return oldAppointmentPojo;
     }
-    public ReportsPojo saveReportList(ReportsPojo reportsPojo) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        //     long meeting1id = 0;
-        try {
-            if (db != null && db.isOpen() && !db.isReadOnly()) {
-                ContentValues values = new ContentValues();
-                values.put("date", reportsPojo.getDate());
-                values.put("title", reportsPojo.getTitle());
-
-                db.insert("reports", null, values);
-                db.close(); // Closing database connection
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            db.close();
-        }
-        return reportsPojo;
-    }
+//    public ReportsPojo saveReportList(ReportsPojo reportsPojo) {
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        //     long meeting1id = 0;
+//        try {
+//            if (db != null && db.isOpen() && !db.isReadOnly()) {
+//                ContentValues values = new ContentValues();
+//                values.put("date", reportsPojo.getDate());
+//                values.put("title", reportsPojo.getTitle());
+//
+//                db.insert("reports", null, values);
+//                db.close(); // Closing database connection
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            db.close();
+//        }
+//        return reportsPojo;
+//    }
 
 
     //

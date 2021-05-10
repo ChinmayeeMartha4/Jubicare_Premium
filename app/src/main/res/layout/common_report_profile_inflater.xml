@@ -25,7 +25,7 @@
             android:layout_marginTop="@dimen/margin10"
             android:layout_marginBottom="3dp"
             android:fontFamily="@font/robotoregular"
-            android:text="@string/patient_symptoms"
+            android:text="Date"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/text_16"
             android:textStyle="bold" />

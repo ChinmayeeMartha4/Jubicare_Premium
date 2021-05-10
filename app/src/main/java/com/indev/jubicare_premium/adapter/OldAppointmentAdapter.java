@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,8 @@ private Context context;
     SharedPrefHelper sharedPrefHelper;
     OldAppointmentAdapter.ClickListener clickListener;
 public OldAppointmentAdapter(Context context, List<ContentValues> listModels) {
-        this.context = context;
+    this.context = context;
+    this.listModels = listModels;
     sharedPrefHelper=new SharedPrefHelper(context);    }
 
 
@@ -47,9 +49,11 @@ public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
 @Override
 public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-    holder.tv_date.setText(new StringBuilder().append(listModels.get(position).get("date").toString()).toString());
-    holder.tv_doctor.setText(new StringBuilder().append(listModels.get(position).get("doctor_name").toString()).toString());
-
+    holder.tv_date.setText(new StringBuilder().append(listModels.get(position).get("assigned_doctor_on").toString()).toString());
+    holder.tv_doctor.setText(new StringBuilder().append(listModels.get(position).get("assigned_doctor").toString()).toString());
+    if (holder.tv_doctor.getText().toString().equalsIgnoreCase("0")) {
+        holder.tv_doctor.setText(Html.fromHtml("Not assigned"));
+    }
 //        holder.tv_date.setText(arrayList.get(position).getDate());
 //        holder.tv_doctor.setText(arrayList.get(position).getDoctor_name());
 

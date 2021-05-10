@@ -42,8 +42,7 @@ import retrofit2.Response;
 public class OldAppointment extends AppCompatActivity {
     OldAppointmentAdapter oldAppointmentAdapter;
     SqliteHelper sqliteHelper;
-//    AppointmentPojo appointmentPojo;
-//    private ArrayList<OldAppointmentPojo> oldAppointmentPojo;
+
     OldAppointmentPojo oldAppointmentPojo = new OldAppointmentPojo();
     ArrayList<ContentValues> patientContentValue = new ArrayList<ContentValues>();
 
@@ -66,20 +65,15 @@ public class OldAppointment extends AppCompatActivity {
 
         /*send data here*/
         getAppointmentProfileDetails();
-//        oldAppointmentPojo = sqliteHelper.getAppointementData();
-//        oldAppointmentAdapter = new OldAppointmentAdapter(this, oldAppointmentPojo);
-////        callPrescriptionListApi();
-//
-//
-//        appointment_recyclerView = (RecyclerView) findViewById(R.id.appointment_recyclerView);
-//
-//
-//        appointment_recyclerView.setHasFixedSize(true);
-//        appointment_recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        appointment_recyclerView.setAdapter(oldAppointmentAdapter);
 
     }
+    private void initViews() {
+        sqliteHelper = new SqliteHelper(this);
+        sharedPrefHelper = new SharedPrefHelper(this);
+        mProgressDialog = new ProgressDialog(context);
+        appointment_recyclerView = (RecyclerView) findViewById(R.id.appointment_recyclerView);
 
+    }
     private void getAppointmentProfileDetails() {
         mProgressDialog = ProgressDialog.show(context, "", "Please Wait...", true);
 //        oldPrescriptionPojo.setProfile_patient_id(profile_id);
@@ -105,7 +99,7 @@ public class OldAppointment extends AppCompatActivity {
                                     JsonObject singledataP = response.body();
                                     Log.e("nxjknx", "yxjhjxj " + singledataP.toString());
                                     mProgressDialog.dismiss();
-                                    JsonArray data = singledataP.getAsJsonArray("data");
+                                    JsonArray data = singledataP.getAsJsonArray("tableData");
                                     //comment by vimal because they send Appointmenthistory = null instead of Appointmenthistory = []
                                     JsonArray data2 = singledataP.getAsJsonArray("Appointmenthistory");
 
@@ -151,86 +145,7 @@ public class OldAppointment extends AppCompatActivity {
         }
     }
 
-    private void initViews() {
-        sqliteHelper = new SqliteHelper(this);
-        sharedPrefHelper = new SharedPrefHelper(this);
-        mProgressDialog = new ProgressDialog(context);
-        appointment_recyclerView = (RecyclerView) findViewById(R.id.appointment_recyclerView);
 
-    }
-
-//    private void callPrescriptionListApi() {
-//        mProgressDialog = ProgressDialog.show(context, "", "Please Wait...", true);
-//        oldAppointmentPojo.setUser_id(sharedPrefHelper.getString("user_id", ""));
-//        oldAppointmentPojo.setRole_id(sharedPrefHelper.getString("role_id", ""));
-//        Gson mGson = new Gson();
-//        String data = mGson.toJson(oldAppointmentAdapter);
-//
-//        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-//        RequestBody body = RequestBody.create(JSON, data);
-//
-//        APIClient.getClient().create(TELEMEDICINE_API.class).patientListingApi(body).enqueue(new Callback<JsonObject>() {
-//            @Override
-//            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-//                if (response.isSuccessful()) {
-//                    try {
-//                        JSONObject jsonObject = new JSONObject(response.body().toString());
-//                        mProgressDialog.dismiss();
-//                        patientContentValue.clear();
-//                        String success = jsonObject.getString("success");
-//                        if (success.equals("1")) {
-//
-//                        }
-//                        JsonObject singledataP = response.body();
-//                        JsonArray data = singledataP.getAsJsonArray("tableData");
-//                        if (data.size() > 0) {
-//                            for (int i = 0; i < data.size(); i++) {
-//                                JSONObject singledata = new JSONObject(data.get(i).toString());
-//                                Log.e("bcjhdbjcb", "onResponse: " + singledata.toString());
-//
-//                                Iterator keys = singledata.keys();
-//                                ContentValues contentValues = new ContentValues();
-//                                while (keys.hasNext()) {
-//                                    String currentDynamicKey = (String) keys.next();
-//                                    contentValues.put(currentDynamicKey, singledata.get(currentDynamicKey).toString());
-//                                }
-//                                patientContentValue.add(contentValues);
-//
-//                                LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
-//                                oldAppointmentAdapter = new OldAppointmentAdapter(context, patientContentValue);
-//                                appointment_recyclerView.setLayoutManager(mLayoutManager);
-//                                appointment_recyclerView.setAdapter(oldAppointmentAdapter);
-////                                oldAppointmentAdapter.onItemClick(new OldAppointmentAdapter().ClickListener() {
-////                                    @Override
-////                                    public void onItemClick(int position) {
-////
-////                                    }
-////
-////                                    @Override
-////                                    public void onListItemClick(int position) {
-////                                        Intent intent = new Intent(context, Prescription.class);
-////                                        intent.putExtra("profile_tab", "profile_tab");
-////                                        intent.putExtra("profile_patient_id", patientContentValue.get(position).get("profile_patient_id").toString());
-////                                        startActivity(intent);
-////                                    }
-////                                });
-//                            }
-//                        }
-//
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-//
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<JsonObject> call, Throwable t) {
-//                Toast.makeText(context, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
-//                mProgressDialog.dismiss();
-//            }
-//        });
-//    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

@@ -448,7 +448,7 @@ public class PatientFillAppointment extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             screen_type = bundle.getString("patient", "");
-            profile_id = bundle.getString("profile_patient_id", "");
+            profile_id = bundle.getString("profile_id", "");
             patient_appointments_id = bundle.getString("patient_appointments_id", "");
             fromCounselor = bundle.getString("fromCounselor", "");
             fromCounselorSearch = bundle.getString("fromCounselorSearch", "");
@@ -998,7 +998,7 @@ public class PatientFillAppointment extends AppCompatActivity {
     private void sendAppointment() {
         mProgressDialog = ProgressDialog.show(PatientFillAppointment.this, "", "Please Wait...", true);
         appointmentInput.setUser_id(sharedPrefHelper.getString("user_id", ""));
-        appointmentInput.setProfile_patient_id("1");
+        appointmentInput.setProfile_patient_id(profile_id);
         appointmentInput.setIs_emergency(emergency);
         appointmentInput.setPrescribed_medicine(medicinePrescribed);
         appointmentInput.setRemarks(et_remarks.getText().toString().trim());

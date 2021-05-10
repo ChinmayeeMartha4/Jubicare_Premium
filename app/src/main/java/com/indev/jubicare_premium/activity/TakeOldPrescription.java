@@ -318,7 +318,7 @@ public class TakeOldPrescription extends AppCompatActivity {
                 }
             }
 
-            prescriptionModel.setSymptom_id(idsd.trim());
+            prescriptionModel.setSymptoms(idsd.trim());
 
 
             prescriptionModel.setPhoto(image64);

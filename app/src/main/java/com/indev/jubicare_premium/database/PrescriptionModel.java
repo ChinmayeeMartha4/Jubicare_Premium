@@ -3,7 +3,16 @@ package com.indev.jubicare_premium.database;
 public class PrescriptionModel {
     private String user_id;
     private String patient_appointment_id;
-    private String symptom_id;
+
+    public String getSymptoms() {
+        return symptoms;
+    }
+
+    public void setSymptoms(String symptoms) {
+        this.symptoms = symptoms;
+    }
+
+    private String symptoms;
 
     public String getUser_id() {
         return user_id;
@@ -21,13 +30,13 @@ public class PrescriptionModel {
         this.patient_appointment_id = patient_appointment_id;
     }
 
-    public String getSymptom_id() {
-        return symptom_id;
-    }
-
-    public void setSymptom_id(String symptom_id) {
-        this.symptom_id = symptom_id;
-    }
+//    public String getSymptom_id() {
+//        return symptoms;
+//    }
+//
+//    public void setSymptom_id(String symptom_id) {
+//        this.symptoms = symptom_id;
+//    }
 
 //    public String getAppointment_file() {
 //        return appointment_file;

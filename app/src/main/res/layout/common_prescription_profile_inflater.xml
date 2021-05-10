@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/login_bg"
+    >
+
+
+    <LinearLayout
+        android:id="@+id/ll_medical_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        >
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin10"
+            android:layout_marginBottom="3dp"
+            android:fontFamily="@font/robotoregular"
+            android:text="Date"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/text_16"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5dp"
+            android:orientation="vertical"
+            android:textColor="@android:color/black">
+
+            <TextView
+                android:id="@+id/tv_date2"
+                style="@style/StyleTheme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/robotoregular"
+                android:text="" />
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_symptoms_patient1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin10"
+            android:layout_marginBottom="3dp"
+            android:fontFamily="@font/robotoregular"
+            android:text="@string/symptom_of_patient"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/text_16"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5dp"
+            android:orientation="vertical"
+            android:textColor="@android:color/black">
+
+            <TextView
+                android:id="@+id/tv_patient_symptoms"
+                style="@style/StyleTheme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/robotoregular"
+                android:text="" />
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_medicine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin10"
+            android:layout_marginBottom="3dp"
+            android:fontFamily="@font/robotoregular"
+            android:text="Medicine"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/text_16"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5dp"
+            android:orientation="vertical"
+            android:textColor="@android:color/black">
+
+            <TextView
+                android:id="@+id/tv_medicine2"
+                style="@style/StyleTheme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/robotoregular"
+                android:text="" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tv_doctor_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin10"
+            android:layout_marginBottom="3dp"
+            android:fontFamily="@font/robotoregular"
+            android:text="Doctor Name"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/text_16"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5dp"
+            android:orientation="vertical"
+            android:textColor="@android:color/black">
+
+            <TextView
+                android:id="@+id/tv_doctor_name2"
+                style="@style/StyleTheme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/robotoregular"
+                android:text="" />
+
+        </LinearLayout>
+
+
+
+        <TextView
+            android:id="@+id/view_prescription_click"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/view_prescription_click"
+            android:textSize="@dimen/text_16"
+            android:layout_marginTop="@dimen/margin5"
+            android:layout_marginBottom="3dp"
+            android:paddingTop="@dimen/margin3"
+            android:paddingBottom="@dimen/margin3"
+            android:textColor="@color/colorWhite"
+            android:gravity="center"
+            android:background="@drawable/click_here_for_view_prescription"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1dp"
+            android:background="@color/colorBlack" />
+
+    </LinearLayout>
+
+</LinearLayout>

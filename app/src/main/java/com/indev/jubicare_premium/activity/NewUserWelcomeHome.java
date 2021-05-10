@@ -38,13 +38,15 @@ public class NewUserWelcomeHome extends AppCompatActivity {
     private Context context = this;
     @BindView(R.id.tv_pay)
     TextView tv_pay;
+    @BindView(R.id.tv_careforRs)
+    TextView tv_careforRs;
     @BindView(R.id.tv_welcomeName)
     TextView tv_welcomeName;
     SharedPrefHelper sharedPrefHelper;
     ProgressDialog mProgressDialog;
     String user_idd = "";
     String name = "";
-
+//    You will have to pay Rs. 99 for availing this service.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +67,7 @@ public class NewUserWelcomeHome extends AppCompatActivity {
 //            name = bundle.getString("name");
 //
 //        }
-
+//if()
         tv_pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -26,9 +26,11 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.indev.jubicare_premium.change_password.ChangePassword;
+import com.indev.jubicare_premium.rest_api.APIClient;
 import com.indev.jubicare_premium.sqlitehelper.SharedPrefHelper;
 import com.indev.jubicare_premium.sqlitehelper.SqliteHelper;
 import com.google.android.material.navigation.NavigationView;
+import com.squareup.picasso.Picasso;
 
 public class AppDrawer  extends AppCompatActivity {
     public View view;
@@ -39,7 +41,7 @@ public class AppDrawer  extends AppCompatActivity {
     public ActionBarDrawerToggle drawerToggle;
     public Menu menu;
     public Menu nav_menu;
-    public TextView tv_name, tv_email;
+    public TextView tv_name, tv_number;
     public ImageView iv_imageView;
     public TextView tvTitle;
     public RelativeLayout rl_bell_icon;
@@ -80,8 +82,25 @@ public class AppDrawer  extends AppCompatActivity {
         View header = navigationView.getHeaderView(0);
 
         tv_name = (TextView) header.findViewById(R.id.tv_header_name);
-        tv_email = (TextView) header.findViewById(R.id.tv_headerSubName);
+        tv_number = (TextView) header.findViewById(R.id.tv_headerSubName);
         iv_imageView = (ImageView) header.findViewById(R.id.iv_imageView);
+
+        //get preference user date here
+        String full_name = sharedPrefHelper.getString("full_name", "");
+        String profile_pic = sharedPrefHelper.getString("profile_pic", "");
+        String contact_no = sharedPrefHelper.getString("contact_no", "");
+
+
+        tv_name.setText(full_name);
+        tv_number.setText(contact_no);
+        if (profile_pic.equalsIgnoreCase("")) {
+            iv_imageView.setImageResource(R.drawable.user_placeholder);
+        } else {
+            Picasso.with(context)
+                    .load(APIClient.IMAGE_URL + profile_pic)
+                    .placeholder(R.drawable.user_placeholder)
+                    .into(iv_imageView);
+        }
 
         drawerToggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.app_name, R.string.app_name) {
             @Override

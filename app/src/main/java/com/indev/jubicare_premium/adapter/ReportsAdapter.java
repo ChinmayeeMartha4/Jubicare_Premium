@@ -51,7 +51,7 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.ViewHold
 //        holder.tv_title.setText(arrayList.get(position).getTitle());
 
         holder.tv_date1.setText(new StringBuilder().append(listModels.get(position).get("date").toString()).toString());
-//        holder.tv_title.setText(new StringBuilder().append(listModels.get(position).get("title").toString()).toString());
+        holder.tv_test.setText(new StringBuilder().append(listModels.get(position).get("test").toString()).toString());
 
 
         holder.view1.setOnClickListener(new View.OnClickListener() {
@@ -78,8 +78,8 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.ViewHold
 
         @BindView(R.id.tv_date1)
         TextView tv_date1;
-        @BindView(R.id.tv_title)
-        TextView tv_title;
+        @BindView(R.id.tv_test)
+        TextView tv_test;
         @BindView(R.id.view1)
         ImageView view1;
 
