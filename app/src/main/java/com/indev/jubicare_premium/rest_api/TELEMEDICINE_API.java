@@ -57,16 +57,16 @@ public interface TELEMEDICINE_API {
     @POST("doctor_assign.php")
     Call<JsonObject> sendDoctorAssignmentdata(@Body RequestBody body);
 
-   @POST("video_calling.php")
+    @POST("video_calling.php")
     Call<JsonObject> sendVideoData(@Query("user_id") String user_id,
                                    @Query("profile_patient_id") String profile_patient_id,
                                    @Query("patient_appointment_id") String patient_appointment_id,
                                    @Query("role_id") String role_id,
                                    @Query("calling_type") String calling_type,
                                    @Query("calling_screen") String calling_screen
-                                   );
+    );
 
-//    @POST("number_verification.php")
+    //    @POST("number_verification.php")
     @POST("emp_varification.php")
     Call<JsonObject> numbervarification(@Body RequestBody body);
 
@@ -109,7 +109,8 @@ public interface TELEMEDICINE_API {
 
     @POST("medicine-stock-list.php")
     Call<JsonObject> getMedicineStock(@Body RequestBody body);
-       @POST("pharmacist_medicine_stock.php")
+
+    @POST("pharmacist_medicine_stock.php")
     Call<JsonObject> pharmacist_medicine_stock(@Body RequestBody body);
 
 
@@ -163,7 +164,8 @@ public interface TELEMEDICINE_API {
 
     @POST("profile_patient_list.php")
     Call<JsonObject> patientListingApi(@Body RequestBody body);
-@POST("download_patient_partner.php")
+
+    @POST("download_patient_partner.php")
     Call<JsonObject> patientpartnr(@Body RequestBody body);
 
     @POST("delete_appointment.php")
@@ -174,6 +176,7 @@ public interface TELEMEDICINE_API {
 
     @POST("get_ivrcdr_number.php")
     Call<JsonObject> callFromCounsellorFillFormApi(@Body RequestBody body);
+
     @POST("check_last_login.php")
     Call<JsonObject> check_last_login(@Body RequestBody body);
 

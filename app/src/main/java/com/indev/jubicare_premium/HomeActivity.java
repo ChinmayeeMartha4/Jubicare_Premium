@@ -88,28 +88,28 @@ public class HomeActivity extends AppDrawer {
         getSupportActionBar().hide();
         setTitle(Html.fromHtml("<font color=\"#FFFFFFFF\">" + "Home" + "</font>"));
         oldAppointmentPojo = new OldAppointmentPojo();
+        sharedPrefHelper=new SharedPrefHelper(this);
         sqliteHelper = new SqliteHelper(this);
         // initList();
         initview();
 
         download_patient();
 
-        spinner_person.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                FamilyPojo clickedItem = (FamilyPojo) parent.getItemAtPosition(position);
-                String clickedCountryName = clickedItem.getName();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+//        spinner_person.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                FamilyPojo clickedItem = (FamilyPojo) parent.getItemAtPosition(position);
+//                String clickedCountryName = clickedItem.getName();
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
         cv_appointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(HomeActivity.this, PatientFillAppointment.class);
                 startActivity(intent);
                 finish();
@@ -118,7 +118,6 @@ public class HomeActivity extends AppDrawer {
         cv_prescription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(HomeActivity.this, OldPrescription.class);
                 startActivity(intent);
                 finish();
@@ -127,7 +126,6 @@ public class HomeActivity extends AppDrawer {
         cv_old_appointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(HomeActivity.this, OldAppointment.class);
                 startActivity(intent);
                 finish();
