@@ -85,7 +85,7 @@ OrganizationModel organizationModel;
                         startActivity(intent);
                         finish();
                     }
-                    if (role_id.equalsIgnoreCase("7")) {
+                    if (role_id.equalsIgnoreCase("8")) {
                         Intent intent = new Intent(context, HomeActivity.class);
                         startActivity(intent);
                         finish();
