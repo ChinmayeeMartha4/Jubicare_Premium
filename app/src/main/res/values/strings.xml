@@ -173,6 +173,7 @@
     <string name="appointment_count">Appointment count</string>
     <string name="no_data_found">No data found</string>
     <string name="select_organization">Select organization</string>
+    <string name="select_person">Select person</string>
 
 
 </resources>

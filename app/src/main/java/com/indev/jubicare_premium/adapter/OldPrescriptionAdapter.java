@@ -57,6 +57,12 @@ public class OldPrescriptionAdapter extends RecyclerView.Adapter<OldPrescription
             public void onClick(View view) {
 
                 Intent intentDetailActivity=new Intent(context, CommonPrescription.class);
+                intentDetailActivity.putExtra("date", listModels.get(position).get("date").toString());
+                intentDetailActivity.putExtra("doctor_name", listModels.get(position).get("doctor_name").toString());
+                intentDetailActivity.putExtra("medicine",listModels.get(position).get("medicine").toString());
+                intentDetailActivity.putExtra("id",listModels.get(position).get("id").toString());
+                intentDetailActivity.putExtra("symptoms",listModels.get(position).get("symptoms").toString());
+
                 context.startActivity(intentDetailActivity);
                 ((Activity)context).finish();
             }

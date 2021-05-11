@@ -29,11 +29,14 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.ViewHold
     private List<ContentValues> listModels;
     SharedPrefHelper sharedPrefHelper;
     ReportsAdapter.ClickListener clickListener;
+    ArrayList<ContentValues> patientContentValue = new ArrayList<ContentValues>();
 
     public ReportsAdapter(Context context, List<ContentValues> listModels) {
         this.context = context;
         this.listModels = listModels;
-        sharedPrefHelper=new SharedPrefHelper(context);    }
+        sharedPrefHelper=new SharedPrefHelper(context);
+
+    }
 
 
     @NonNull
@@ -59,6 +62,12 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.ViewHold
             public void onClick(View view) {
 //                Toast.makeText(context, "Need discussion", Toast.LENGTH_SHORT).show();
                 Intent intentDetailActivity=new Intent(context, CommonReport.class);
+                intentDetailActivity.putExtra("date", listModels.get(position).get("date").toString());
+                intentDetailActivity.putExtra("doctor_name", listModels.get(position).get("doctor_name").toString());
+                intentDetailActivity.putExtra("test",listModels.get(position).get("test").toString());
+                intentDetailActivity.putExtra("id",listModels.get(position).get("id").toString());
+
+
                 context.startActivity(intentDetailActivity);
                 ((Activity)context).finish();
 //                Intent intentDetailActivity=new Intent(context, .class);

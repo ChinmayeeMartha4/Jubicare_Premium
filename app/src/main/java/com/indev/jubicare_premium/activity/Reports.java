@@ -128,6 +128,16 @@ public class Reports extends AppCompatActivity {
                                         for (int i = 0; i < data.size(); i++) {
                                             JSONObject singledata = new JSONObject(data.get(i).toString());
                                             Log.e("bcjhdbjcb", "onResponse: " + singledata.toString());
+//                                            String id = singledata.optString("id");
+//                                            String date = singledata.optString("date");
+//                                            String doctor_name = singledata.optString("doctor_name");
+//                                            String test = singledata.optString("test");
+//                                            sharedPrefHelper.setString("id", id);
+//                                            sharedPrefHelper.setString("date", date);
+//                                            sharedPrefHelper.setString("doctor_name", doctor_name);
+//                                            sharedPrefHelper.setString("test", test);
+                                            String id = singledata.getString("id");
+                                            reportsPojo.setId(id);
 
                                             Iterator keys = singledata.keys();
                                             ContentValues contentValues = new ContentValues();

@@ -15,6 +15,35 @@ public class AppointmentInput {
     private String bp_low;
     private String bp_lower;
     private String bp_upper;
+    private String image;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    private String id;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getPerson() {
+        return person;
+    }
+
+    public void setPerson(String person) {
+        this.person = person;
+    }
+
+    private String person;
 
 
     private String sugar;

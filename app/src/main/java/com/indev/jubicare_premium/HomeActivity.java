@@ -1,10 +1,12 @@
 package com.indev.jubicare_premium;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
@@ -22,6 +24,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.indev.jubicare_premium.activity.CommonAppointment;
 import com.indev.jubicare_premium.activity.CommonProfile;
 import com.indev.jubicare_premium.activity.Family;
 import com.indev.jubicare_premium.activity.HealthRecord;
@@ -81,7 +84,8 @@ public class HomeActivity extends AppDrawer {
 
     private Context context = this;
     SharedPrefHelper sharedPrefHelper;
-
+    String id = "";
+    String full_name = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,9 +102,12 @@ public class HomeActivity extends AppDrawer {
 
         spinner_person.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                sharedPrefHelper.setString("id", "id");
-                sharedPrefHelper.setString("name", "name");
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id1) {
+
+                sharedPrefHelper.setString("id", "3");
+                sharedPrefHelper.setString("full_name", "full_name");
+                patientModel.setId(id);
+                patientModel.setFull_name(full_name);
 
             }
 
@@ -211,20 +218,25 @@ public class HomeActivity extends AppDrawer {
                             try {
                                 for (int i = 0; i < data.size(); i++) {
                                     JSONObject singledata = new JSONObject(data.get(i).toString());
-                                    String name = singledata.getString("full_name");
+                                    String full_name = singledata.getString("full_name");
                                     String id = singledata.getString("id");
+                                    patientModel.setId(id);
+                                    patientModel.setFull_name(full_name);
                                     sharedPrefHelper.setString("id", id);
-                                    sharedPrefHelper.setString("name", name);
-                                    personHM.put(name, Integer.valueOf(id));
+                                    sharedPrefHelper.setString("full_name", full_name);
+                                    personHM.put(full_name, Integer.valueOf(id));
                                     personName.clear();
                                     for (int j = 0; j < personHM.size(); j++) {
                                         personName.add(personHM.keySet().toArray()[j].toString().trim());
+
                                         //docName.add(0,"Select Doctor");
 //                                        final ArrayAdapter Adapter = new ArrayAdapter(HomeActivity.this, android.R.layout.simple_spinner_item, personName);
                                         final ArrayAdapter Adapter = new ArrayAdapter(HomeActivity.this, R.layout.simple_spinner_items, personName);
 
                                         Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
                                         spinner_person.setAdapter(Adapter);
+
 
                                     }
 

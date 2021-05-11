@@ -3,8 +3,37 @@ package com.indev.jubicare_premium.database;
 public class ReportsPojo {
     private String date;
     private String title;
+
+    public String getDoctor_name() {
+        return doctor_name;
+    }
+
+    public void setDoctor_name(String doctor_name) {
+        this.doctor_name = doctor_name;
+    }
+
+    private String doctor_name;
     private String user_id;
     private String profile_patient_id;
+    private String test;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    private String id;
+
+    public String getTest() {
+        return test;
+    }
+
+    public void setTest(String test) {
+        this.test = test;
+    }
 
     public String getUser_id() {
         return user_id;

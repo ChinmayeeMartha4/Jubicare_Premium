@@ -63,7 +63,7 @@ public class SqliteHelper extends SQLiteOpenHelper {
         db.execSQL(MedicineListModel.CREATE_TABLE);
         db.execSQL(Village.CREATE_TABLE);
         db.execSQL(SymptomModel.CREATE_TABLE);
-        db.execSQL(OldAppointmentPojo.CREATE_TABLE);
+//        db.execSQL(OldAppointmentPojo.CREATE_TABLE);
 //        db.execSQL(ReportsPojo.CREATE_TABLE);
         db.execSQL(SubTestsModel.CREATE_TABLE);
 //        db.execSQL(AppointmentMedicinePrescribedModel.CREATE_TABLE);

@@ -150,7 +150,8 @@ public class OldPrescription extends AppCompatActivity {
                                         for (int i = 0; i < data.size(); i++) {
                                             JSONObject singledata = new JSONObject(data.get(i).toString());
                                             Log.e("bcjhdbjcb", "onResponse: " + singledata.toString());
-
+                                            String id = singledata.getString("id");
+                                            oldPrescriptionPojo.setId(id);
                                             Iterator keys = singledata.keys();
                                             ContentValues contentValues = new ContentValues();
                                             while (keys.hasNext()) {

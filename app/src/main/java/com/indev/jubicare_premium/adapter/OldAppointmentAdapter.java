@@ -62,7 +62,21 @@ public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 public void onClick(View view) {
 
         Intent intentDetailActivity=new Intent(context, CommonAppointment.class);
-        context.startActivity(intentDetailActivity);
+        intentDetailActivity.putExtra("id",listModels.get(position).get("id").toString());
+        intentDetailActivity.putExtra("prescribed_medicine",listModels.get(position).get("prescribed_medicine").toString());
+        intentDetailActivity.putExtra("prescribed_medicine_date",listModels.get(position).get("prescribed_medicine_date").toString());
+        intentDetailActivity.putExtra("is_emergency",listModels.get(position).get("is_emergency").toString());
+        intentDetailActivity.putExtra("remarks",listModels.get(position).get("remarks").toString());
+        intentDetailActivity.putExtra("bp_lower",listModels.get(position).get("bp_lower").toString());
+        intentDetailActivity.putExtra("bp_upper",listModels.get(position).get("bp_upper").toString());
+        intentDetailActivity.putExtra("sugar",listModels.get(position).get("sugar").toString());
+        intentDetailActivity.putExtra("temperature",listModels.get(position).get("temperature").toString());
+        intentDetailActivity.putExtra("blood_oxygen_level",listModels.get(position).get("blood_oxygen_level").toString());
+        intentDetailActivity.putExtra("pulse",listModels.get(position).get("pulse").toString());
+//        intentDetailActivity.putExtra("symptom",listModels.get(position).get("symptom").toString());
+
+
+    context.startActivity(intentDetailActivity);
         ((Activity)context).finish();
         }
         });

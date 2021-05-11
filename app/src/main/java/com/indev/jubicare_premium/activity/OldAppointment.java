@@ -114,6 +114,8 @@ String id="";
                                         for (int i = 0; i < data.size(); i++) {
                                             JSONObject singledata = new JSONObject(data.get(i).toString());
                                             Log.e("bcjhdbjcb", "onResponse: " + singledata.toString());
+                                            String id = singledata.getString("id");
+                                            oldAppointmentPojo.setId(id);
 
                                             Iterator keys = singledata.keys();
                                             ContentValues contentValues = new ContentValues();
