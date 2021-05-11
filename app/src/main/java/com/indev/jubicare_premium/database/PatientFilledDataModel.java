@@ -4,6 +4,15 @@ public class PatientFilledDataModel {
     private String user_id;
     private String patient_contact_no;
     private String reciver_no;
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getCalling_type() {
         return calling_type;

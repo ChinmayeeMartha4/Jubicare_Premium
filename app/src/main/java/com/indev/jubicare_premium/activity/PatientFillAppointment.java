@@ -351,6 +351,7 @@ public class PatientFillAppointment extends AppCompatActivity {
     ArrayList<Integer> dids = new ArrayList<>();
     DoctorAssignmentInput doctorAssignmentInput;
     String not_assigned_appointments = "";
+    String id = "";
     boolean isEditable = false;
     String state_name = "";
     String district_name = "";
@@ -382,7 +383,9 @@ public class PatientFillAppointment extends AppCompatActivity {
     private int mmYear;
     private int mmMonth;
     private int mmDay;
-
+//    @BindView(R.id.iv_image1)
+//    ImageView iv_image1;
+//    TextView person1;
     @BindView(R.id.rg_age)
     RadioGroup rg_age;
     @BindView(R.id.rb_age)
@@ -454,7 +457,21 @@ public class PatientFillAppointment extends AppCompatActivity {
             fromCounselorSearch = bundle.getString("fromCounselorSearch", "");
             not_assigned_appointments = bundle.getString("not_assigned_appointments", "");
             patient_by_mobile_search = bundle.getString("patient_by_mobile_search", "");
+            id = bundle.getString("id", "");
+            name = bundle.getString("name", "");
         }
+
+//        person1 = findViewById(R.id.person1);
+//        iv_image1 = findViewById(R.id.iv_image1);
+
+        //get preference user date here
+//        String name = sharedPrefHelper.getString("name", "");
+//        String iv_image1 = sharedPrefHelper.getString("iv_image1", "");
+//
+//
+//        person1.setText(name);
+//
+
         if (not_assigned_appointments.equalsIgnoreCase("not_assigned_appointments")) {
             setEditableFalse();
             et_height.setEnabled(false);
@@ -769,18 +786,6 @@ public class PatientFillAppointment extends AppCompatActivity {
         });
 
     }
-
-//    private void getAllCasteFromTable() {
-//        casteArrayList.clear();
-//        casteNameHM = sqliteHelper.getAllCaste();
-//        for (int i = 0; i < casteNameHM.size(); i++) {
-//            casteArrayList.add(casteNameHM.keySet().toArray()[i].toString().trim());
-//        }
-//        casteArrayList.add(0, getString(R.string.select_caste));
-//        final ArrayAdapter Adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, casteArrayList);
-//        Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spn_caste.setAdapter(Adapter);
-//    }
 
     private void getDateOfBirthFromAge() {
         et_age.addTextChangedListener(new TextWatcher() {

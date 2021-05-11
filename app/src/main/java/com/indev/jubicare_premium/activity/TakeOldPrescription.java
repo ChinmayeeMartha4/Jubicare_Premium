@@ -181,6 +181,7 @@ public class TakeOldPrescription extends AppCompatActivity {
     ArrayList<Integer> dids = new ArrayList<>();
     DoctorAssignmentInput doctorAssignmentInput;
     String not_assigned_appointments = "";
+    String id = "";
     boolean isEditable = false;
     String state_name = "";
     String district_name = "";
@@ -249,6 +250,7 @@ public class TakeOldPrescription extends AppCompatActivity {
                 fromCounselor = bundle.getString("fromCounselor", "");
                 fromCounselorSearch = bundle.getString("fromCounselorSearch", "");
                 not_assigned_appointments = bundle.getString("not_assigned_appointments", "");
+                id = bundle.getString("id", "");
             }
 
             getSpinnerValue();

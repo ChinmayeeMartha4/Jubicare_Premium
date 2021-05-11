@@ -150,6 +150,7 @@ public class TakeReport extends AppCompatActivity {
     String medicinePrescribed = "";
     String emergency = "N";
     String encodedImage = "";
+    String id = "";
     int doc_id = 0;
     String pin_code;
     ArrayList<Integer> dids = new ArrayList<>();
@@ -221,6 +222,8 @@ public class TakeReport extends AppCompatActivity {
             fromCounselor = bundle.getString("fromCounselor", "");
             fromCounselorSearch = bundle.getString("fromCounselorSearch", "");
             not_assigned_appointments = bundle.getString("not_assigned_appointments", "");
+            id = bundle.getString("id", "");
+
         }
 
 
@@ -343,7 +346,7 @@ public class TakeReport extends AppCompatActivity {
                     String success = jsonObject.optString("success");
                     if (success.equals("1")) {
                         String message = jsonObject.optString("message");
-                        Intent intent = new Intent(context, OldPrescription.class);
+                        Intent intent = new Intent(context, Reports.class);
                         startActivity(intent);
                         finish();
 

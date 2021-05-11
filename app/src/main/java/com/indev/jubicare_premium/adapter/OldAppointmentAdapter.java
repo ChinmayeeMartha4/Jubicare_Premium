@@ -52,7 +52,7 @@ public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
     holder.tv_date.setText(new StringBuilder().append(listModels.get(position).get("assigned_doctor_on").toString()).toString());
     holder.tv_doctor.setText(new StringBuilder().append(listModels.get(position).get("assigned_doctor").toString()).toString());
     if (holder.tv_doctor.getText().toString().equalsIgnoreCase("0")) {
-        holder.tv_doctor.setText(Html.fromHtml("Not assigned"));
+        holder.tv_doctor.setText(Html.fromHtml("Doctor's name not assigned"));
     }
 //        holder.tv_date.setText(arrayList.get(position).getDate());
 //        holder.tv_doctor.setText(arrayList.get(position).getDoctor_name());

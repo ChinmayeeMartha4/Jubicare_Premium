@@ -50,7 +50,7 @@ public class OldAppointment extends AppCompatActivity {
     private ProgressDialog mProgressDialog;
     private Context context=this;
     SharedPrefHelper sharedPrefHelper;
-
+String id="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +58,10 @@ public class OldAppointment extends AppCompatActivity {
         setTitle(Html.fromHtml("<font color=\"#FFFFFFFF\">" + "Old Appointment" + "</font>"));
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            id = bundle.getString("id", "");
+        }
 
         initViews();
 
@@ -76,7 +80,6 @@ public class OldAppointment extends AppCompatActivity {
     }
     private void getAppointmentProfileDetails() {
         mProgressDialog = ProgressDialog.show(context, "", "Please Wait...", true);
-//        oldPrescriptionPojo.setProfile_patient_id(profile_id);
         oldAppointmentPojo.setUser_id(sharedPrefHelper.getString("user_id", ""));
         oldAppointmentPojo.setRole_id(sharedPrefHelper.getString("role_id", ""));
 
@@ -89,6 +92,7 @@ public class OldAppointment extends AppCompatActivity {
         if (body != null && api_service != null) {
             Call<JsonObject> server_response = api_service.download_appointments(body);
             try {
+
                 if (server_response != null) {
                     server_response.enqueue(new Callback<JsonObject>() {
                         @Override

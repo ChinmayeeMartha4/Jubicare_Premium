@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
@@ -73,7 +74,7 @@ public class HomeActivity extends AppDrawer {
     PharmacyPatientModel pharmacyPatientModel = new PharmacyPatientModel();
     private ProgressDialog mProgressDialog;
     /*normal widgets*/
-
+    FamilyPojo familyPojo;
     HashMap<String, Integer> personHM = new HashMap<>();
     ArrayList<String> personArrayList1 = new ArrayList<>();
     ArrayList<String> personName = new ArrayList<>();
@@ -92,21 +93,22 @@ public class HomeActivity extends AppDrawer {
         sqliteHelper = new SqliteHelper(this);
         // initList();
         initview();
-
+//        setpersonSpinnerData();
         download_patient();
 
-//        spinner_person.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                FamilyPojo clickedItem = (FamilyPojo) parent.getItemAtPosition(position);
-//                String clickedCountryName = clickedItem.getName();
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
+        spinner_person.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                sharedPrefHelper.setString("id", "id");
+                sharedPrefHelper.setString("name", "name");
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         cv_appointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -211,14 +213,19 @@ public class HomeActivity extends AppDrawer {
                                     JSONObject singledata = new JSONObject(data.get(i).toString());
                                     String name = singledata.getString("full_name");
                                     String id = singledata.getString("id");
+                                    sharedPrefHelper.setString("id", id);
+                                    sharedPrefHelper.setString("name", name);
                                     personHM.put(name, Integer.valueOf(id));
                                     personName.clear();
                                     for (int j = 0; j < personHM.size(); j++) {
                                         personName.add(personHM.keySet().toArray()[j].toString().trim());
                                         //docName.add(0,"Select Doctor");
-                                        final ArrayAdapter Adapter = new ArrayAdapter(HomeActivity.this, android.R.layout.simple_spinner_item, personName);
+//                                        final ArrayAdapter Adapter = new ArrayAdapter(HomeActivity.this, android.R.layout.simple_spinner_item, personName);
+                                        final ArrayAdapter Adapter = new ArrayAdapter(HomeActivity.this, R.layout.simple_spinner_items, personName);
+
                                         Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                         spinner_person.setAdapter(Adapter);
+
                                     }
 
 
@@ -242,25 +249,26 @@ public class HomeActivity extends AppDrawer {
         });
     }
 
-    private void setpersonSpinnerData() {
-        personHM.clear();
-        personArrayList1.clear();
-
-        for (int i = 0; i < personHM.size(); i++) {
-            personArrayList1.add(personHM.keySet().toArray()[i].toString().trim());
-        }
-        if (isEditable) {
-            personArrayList1.add(0, person_name);
-        } else {
-            personArrayList1.add(0, "Select Person");
-        }
-        //  districtArrayList1.add(0, getString(R.string.selectDistrict));
-        final ArrayAdapter Adapter1 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, personArrayList1);
-        Adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_person.setAdapter(Adapter1);
-
-
-    }
+//    private void setpersonSpinnerData() {
+//        personHM.clear();
+//        personArrayList1.clear();
+//
+//        for (int i = 0; i < personHM.size(); i++) {
+//            personArrayList1.add(personHM.keySet().toArray()[i].toString().trim());
+//        }
+//        if (isEditable) {
+//            personArrayList1.add(0, person_name);
+//        } else {
+//            personArrayList1.add(0, "Select Person");
+//        }
+//        //  districtArrayList1.add(0, getString(R.string.selectDistrict));
+////        final ArrayAdapter Adapter1 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, personArrayList1);
+//        final ArrayAdapter Adapter1 = new ArrayAdapter(this, R.layout.simple_spinner_items, personArrayList1);
+//
+//        Adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinner_person.setAdapter(Adapter1);
+//
+//    }
 
 
 //    private void initList() {

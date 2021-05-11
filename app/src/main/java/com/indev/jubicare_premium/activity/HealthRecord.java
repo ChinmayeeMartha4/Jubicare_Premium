@@ -1246,6 +1246,9 @@ public class HealthRecord  extends AppCompatActivity {
                     if (success.equals("1")) {
 
                         Toast.makeText(HealthRecord.this, "" + message, Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(context, HomeActivity.class);
+                        startActivity(intent);
+
                         finish();
 
                     } else {

@@ -61,7 +61,7 @@ public class OldPrescription extends AppCompatActivity {
     private ProgressDialog mProgressDialog;
     private Context context=this;
     SharedPrefHelper sharedPrefHelper;
-
+    String id="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +72,10 @@ public class OldPrescription extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
        initViews();
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            id = bundle.getString("id", "");
+        }
 
 
 

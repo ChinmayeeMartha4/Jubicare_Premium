@@ -87,7 +87,7 @@ public class CommonAppointment extends AppCompatActivity {
         }
 
         mProgressDialog = ProgressDialog.show(context, "", "Please Wait...", true);
-        patientFilledDataModel.setProfile_patient_id("1");
+//        patientFilledDataModel.setPatient_appointment_id("1");
         patientFilledDataModel.setUser_id(sharedPrefHelper.getString("user_id", ""));
         patientFilledDataModel.setRole_id(sharedPrefHelper.getString("role_id", ""));
         Gson gson = new Gson();

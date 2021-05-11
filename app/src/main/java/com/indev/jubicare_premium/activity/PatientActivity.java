@@ -198,10 +198,23 @@ public class PatientActivity  extends AppCompatActivity {
         mProgressDialog = new ProgressDialog(context);
     }
 
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == android.R.id.home) finish();
+        if (item.getItemId() == android.R.id.home) {
+            Intent intent = new Intent(PatientActivity.this, HomeActivity.class);
+            startActivity(intent);
+            finish();
+        }
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(context, HomeActivity.class);
+        startActivity(intent);
+        finish();
+
     }
 }
 
