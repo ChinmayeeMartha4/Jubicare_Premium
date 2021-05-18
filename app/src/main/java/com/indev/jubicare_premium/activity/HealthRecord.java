@@ -223,9 +223,9 @@ public class HealthRecord  extends AppCompatActivity {
         /*for change title dynamically*/
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-
             commomProfile = bundle.getString("commomProfile", "");
             profile_id = bundle.getString("profile_id", "");
+
         }
 
 
@@ -260,7 +260,7 @@ public class HealthRecord  extends AppCompatActivity {
             }
         });
 
-//            mProgressDialog = ProgressDialog.show(context ,"", "Please wait", true);
+//      mProgressDialog = ProgressDialog.show(context ,"", "Please wait", true);
         patientFilledDataModel.setProfile_patient_id(profile_id);
         patientFilledDataModel.setUser_id(sharedPrefHelper.getString("user_id", ""));
         patientFilledDataModel.setRole_id(sharedPrefHelper.getString("role_id", ""));
@@ -278,7 +278,7 @@ public class HealthRecord  extends AppCompatActivity {
 
         getAllStateFromTable();
         setCasteSpinner();
-        getAllCasteFromTable();
+//      getAllCasteFromTable();
         setStateSpinner();
         setDistrictSpinner();
         setBlockSpinner();
@@ -522,6 +522,9 @@ public class HealthRecord  extends AppCompatActivity {
                                         }else if (disability.equals("No")){
                                             rb_no.setChecked(true);
                                         }
+                                        else if (disability.equals("N/A")){
+                                            rb_no.setChecked(true);
+                                        }
 //                                        if (age.equals(ll_age)){
 //                                            rb_age.setChecked(true);
 //                                        }else if (age.equals(ll_dob)){
@@ -593,6 +596,9 @@ public class HealthRecord  extends AppCompatActivity {
                                         }
                                         if (blood_group_name.equalsIgnoreCase("AB-")) {
                                             spn_blood_Group.setSelection(8);//spinner set selected with item position
+                                        }
+                                        if (blood_group_name.equalsIgnoreCase("Unkonw")) {
+                                            spn_blood_Group.setSelection(9);//spinner set selected with item position
                                         }
                                     }
                                     isEditable = true;

@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
@@ -53,6 +54,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -62,9 +64,9 @@ import retrofit2.Response;
 
 public class HomeActivity extends AppDrawer {
     CardView cv_appointment, cv_prescription, cv_report, cv_profile, cv_old_appointment, cv_family;
+//    private List<ContentValues> listModels;
+    ArrayList<ContentValues> listModels = new ArrayList<ContentValues>();
 
-    ArrayList<FamilyPojo> patientContentValue = new ArrayList<FamilyPojo>();
-    private ArrayList<FamilyPojo> familyPojoArrayList;
     FamilyListAdapter familyListAdapter;
     Spinner spinner_person;
     OldAppointmentPojo oldAppointmentPojo;
@@ -72,7 +74,6 @@ public class HomeActivity extends AppDrawer {
     SqliteHelper sqliteHelper;
     ProgressDialog mprogressDialog;
     boolean isEditable = false;
-    String person_name;
     PatientModel patientModel = new PatientModel();
     PharmacyPatientModel pharmacyPatientModel = new PharmacyPatientModel();
     private ProgressDialog mProgressDialog;
@@ -81,11 +82,12 @@ public class HomeActivity extends AppDrawer {
     HashMap<String, Integer> personHM = new HashMap<>();
     ArrayList<String> personArrayList1 = new ArrayList<>();
     ArrayList<String> personName = new ArrayList<>();
-
+    ArrayList<Integer> personID = new ArrayList<>();
     private Context context = this;
     SharedPrefHelper sharedPrefHelper;
     String id = "";
     String full_name = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,32 +96,21 @@ public class HomeActivity extends AppDrawer {
         setTitle(Html.fromHtml("<font color=\"#FFFFFFFF\">" + "Home" + "</font>"));
         oldAppointmentPojo = new OldAppointmentPojo();
         sharedPrefHelper=new SharedPrefHelper(this);
+//        familyPojo = new FamilyPojo();
         sqliteHelper = new SqliteHelper(this);
         // initList();
         initview();
 //        setpersonSpinnerData();
         download_patient();
 
-        spinner_person.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id1) {
+//        spinner_person.setSelection(Integer.parseInt(String.valueOf(personName)));
 
-                sharedPrefHelper.setString("id", "3");
-                sharedPrefHelper.setString("full_name", "full_name");
-                patientModel.setId(id);
-                patientModel.setFull_name(full_name);
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
         cv_appointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HomeActivity.this, PatientFillAppointment.class);
+                intent.putExtra("personID",sharedPrefHelper.getInt("personID" ,0));
+                intent.putExtra("personName",sharedPrefHelper.getString("personName", ""));
                 startActivity(intent);
                 finish();
             }
@@ -128,6 +119,10 @@ public class HomeActivity extends AppDrawer {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HomeActivity.this, OldPrescription.class);
+//                intent.putExtra("id", sharedPrefHelper.getString("id", ""));
+//                intent.putExtra("full_name", sharedPrefHelper.getString("full_name", ""));
+                intent.putExtra("personID",sharedPrefHelper.getInt("personID" ,0));
+                intent.putExtra("personName",sharedPrefHelper.getString("personName", ""));
                 startActivity(intent);
                 finish();
             }
@@ -136,6 +131,10 @@ public class HomeActivity extends AppDrawer {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HomeActivity.this, OldAppointment.class);
+//                intent.putExtra("id", sharedPrefHelper.getString("id", ""));
+//                intent.putExtra("full_name", sharedPrefHelper.getString("full_name", ""));
+                intent.putExtra("personID",sharedPrefHelper.getInt("personID" ,0));
+                intent.putExtra("personName",sharedPrefHelper.getString("personName", ""));
                 startActivity(intent);
                 finish();
             }
@@ -145,9 +144,11 @@ public class HomeActivity extends AppDrawer {
         cv_report.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 Intent intent = new Intent(HomeActivity.this, Reports.class);
+//                intent.putExtra("id", sharedPrefHelper.getString("id", ""));
+                intent.putExtra("personID",sharedPrefHelper.getInt("personID" ,0));
+                intent.putExtra("personName",sharedPrefHelper.getString("personName", ""));
+//                intent.putExtra("full_name", sharedPrefHelper.getString("full_name", ""));
                 startActivity(intent);
                 finish();
             }
@@ -155,7 +156,6 @@ public class HomeActivity extends AppDrawer {
         cv_family.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(HomeActivity.this, PatientActivity.class);
                 startActivity(intent);
                 finish();
@@ -164,17 +164,14 @@ public class HomeActivity extends AppDrawer {
         cv_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(HomeActivity.this, HealthRecord.class);
                 intent.putExtra("commomProfile", "commomProfile");
                 intent.putExtra("profile_id", "1");
                 startActivity(intent);
                 finish();
-//                startActivity(intent);
-//                finish();
-
             }
         });
+
     }
 
     private void initview() {
@@ -185,10 +182,9 @@ public class HomeActivity extends AppDrawer {
         cv_report = findViewById(R.id.cv_report);
         cv_family = findViewById(R.id.cv_family);
         spinner_person = findViewById(R.id.spinner_person);
-//        String name = sharedPrefHelper.getString("name", "");
-//        tv_welcomeName.setText(name);
         sharedPrefHelper = new SharedPrefHelper(this);
         mProgressDialog = new ProgressDialog(context);
+        personHM = new HashMap<>();
 
     }
 
@@ -199,7 +195,6 @@ public class HomeActivity extends AppDrawer {
         String data = mGson.toJson(patientModel);
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         RequestBody body = RequestBody.create(JSON, data);
-
         APIClient.getClient().create(TELEMEDICINE_API.class).patientpartnr(body).enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
@@ -218,29 +213,20 @@ public class HomeActivity extends AppDrawer {
                             try {
                                 for (int i = 0; i < data.size(); i++) {
                                     JSONObject singledata = new JSONObject(data.get(i).toString());
+                                    Log.e("TAG", "onResponse: "+singledata.toString());
                                     String full_name = singledata.getString("full_name");
                                     String id = singledata.getString("id");
-                                    patientModel.setId(id);
-                                    patientModel.setFull_name(full_name);
-                                    sharedPrefHelper.setString("id", id);
-                                    sharedPrefHelper.setString("full_name", full_name);
                                     personHM.put(full_name, Integer.valueOf(id));
+
                                     personName.clear();
                                     for (int j = 0; j < personHM.size(); j++) {
                                         personName.add(personHM.keySet().toArray()[j].toString().trim());
-
                                         //docName.add(0,"Select Doctor");
+
 //                                        final ArrayAdapter Adapter = new ArrayAdapter(HomeActivity.this, android.R.layout.simple_spinner_item, personName);
-                                        final ArrayAdapter Adapter = new ArrayAdapter(HomeActivity.this, R.layout.simple_spinner_items, personName);
-
-                                        Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-                                        spinner_person.setAdapter(Adapter);
-
+                                        setPatientSpinner(personName);
 
                                     }
-
-
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -261,36 +247,27 @@ public class HomeActivity extends AppDrawer {
         });
     }
 
-//    private void setpersonSpinnerData() {
-//        personHM.clear();
-//        personArrayList1.clear();
-//
-//        for (int i = 0; i < personHM.size(); i++) {
-//            personArrayList1.add(personHM.keySet().toArray()[i].toString().trim());
-//        }
-//        if (isEditable) {
-//            personArrayList1.add(0, person_name);
-//        } else {
-//            personArrayList1.add(0, "Select Person");
-//        }
-//        //  districtArrayList1.add(0, getString(R.string.selectDistrict));
-////        final ArrayAdapter Adapter1 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, personArrayList1);
-//        final ArrayAdapter Adapter1 = new ArrayAdapter(this, R.layout.simple_spinner_items, personArrayList1);
-//
-//        Adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinner_person.setAdapter(Adapter1);
-//
-//    }
 
 
-//    private void initList() {
-//        familyPojos = new ArrayList<>();
-////        tv_name.setText(familyPojos.getName()+"");
-//        familyPojos.add(new FamilyPojo("Arun Tiwari"));
-//        familyPojos.add(new FamilyPojo("Ram Tiwari"));
-//        familyPojos.add(new FamilyPojo("Lav Singh"));
-//        familyPojos.add(new FamilyPojo("Nikesh Singh"));
-//    }
+    private void setPatientSpinner(ArrayList<String> personName) {
+        final ArrayAdapter Adapter = new ArrayAdapter(HomeActivity.this, R.layout.simple_spinner_items, personName);
+        Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_person.setAdapter(Adapter);
+        spinner_person.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                int personID=personHM.get(spinner_person.getSelectedItem().toString().trim());
+                String personName=spinner_person.getSelectedItem().toString().trim();
+                Log.e("Sipnner>>>", "onItemClick>>> "+personName+"\n"+personID);
+                sharedPrefHelper.setInt("personID", personID);
+                sharedPrefHelper.setString("personName",personName);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
 
     @Override
     public void onBackPressed() {
@@ -316,8 +293,4 @@ public class HomeActivity extends AppDrawer {
         alert.show();
 
     }
-//        Intent intent = new Intent(HomeActivity.this, Login.class);
-//        startActivity(intent);
-//        finish();
-//    }
 }

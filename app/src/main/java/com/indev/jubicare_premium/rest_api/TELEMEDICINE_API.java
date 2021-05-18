@@ -51,13 +51,11 @@ public interface TELEMEDICINE_API {
     @POST("patient_appointments.php")
     Call<JsonObject> sendAppointdata(@Body RequestBody body);
 
-    @POST("reports.php ")
+    @POST("reports.php")
     Call<JsonObject> sendReportdata(@Body RequestBody body);
 
     @POST("doctor_assign.php")
     Call<JsonObject> sendDoctorAssignmentdata(@Body RequestBody body);
-
-
 
     //    @POST("number_verification.php")
     @POST("emp_varification.php")
@@ -71,7 +69,7 @@ public interface TELEMEDICINE_API {
 
 
     @POST("forget_password.php")
-    Call<JsonObject> sendForgetPassword(@Body RequestBody body);
+    Call<JsonObject>sendForgetPassword(@Body RequestBody body);
 
     @POST("change-password.php")
     Call<JsonObject> sendChangePassword(@Body RequestBody body);

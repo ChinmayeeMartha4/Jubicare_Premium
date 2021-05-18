@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
@@ -352,7 +353,8 @@ public class PatientFillAppointment extends AppCompatActivity {
     DoctorAssignmentInput doctorAssignmentInput;
     String not_assigned_appointments = "";
     String id = "";
-    String full_name = "";
+    int personID = 0;
+    String personName = "";
     boolean isEditable = false;
     String state_name = "";
     String district_name = "";
@@ -427,6 +429,8 @@ PatientModel patientModel;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_fill_appointment);
+        setTitle(Html.fromHtml("<font color=\"#FFFFFFFF\">" + "Take Appointment" + "</font>"));
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         ButterKnife.bind(this);
@@ -454,173 +458,27 @@ PatientModel patientModel;
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             screen_type = bundle.getString("patient", "");
-            profile_id = bundle.getString("profile_id", "");
-            patient_appointments_id = bundle.getString("patient_appointments_id", "");
+//            profile_id = bundle.getString("profile_id", "");
+
             fromCounselor = bundle.getString("fromCounselor", "");
             fromCounselorSearch = bundle.getString("fromCounselorSearch", "");
             not_assigned_appointments = bundle.getString("not_assigned_appointments", "");
             patient_by_mobile_search = bundle.getString("patient_by_mobile_search", "");
-            id = bundle.getString("id", "");
-            full_name = bundle.getString("full_name", "");
+            personID = bundle.getInt("personID", 0);
+            personName = bundle.getString("personName", "");
+            patient_appointments_id = bundle.getString("patient_appointments_id", "");
         }
 
-        patientModel.setId(sharedPrefHelper.getString("id", ""));
-        patientModel.setFull_name(sharedPrefHelper.getString("full_name", ""));
-
-
-//        ll_medical_info = inflatedView.findViewById(R.id.ll_medical_info);
-//        view_prescription_click = inflatedView.findViewById(R.id.view_prescription_click);
-//        String date = sharedPrefHelper.getString("date", "");
-//        String doctor_name = sharedPrefHelper.getString("doctor_name", "");
-//        String test = sharedPrefHelper.getString("test", "");
         getSpinnerValue();
 
-        person1 = findViewById(R.id.person1);
-        iv_image1 = findViewById(R.id.iv_image1);
-        person1.setText(full_name);
-
-////        get preference user date here
-//        String full_name = sharedPrefHelper.getString("full_name", "");
-//        String iv_image1 = sharedPrefHelper.getString("iv_image1", "");
-
-
-//        person1.setText(name);
-
-//
-//        if (not_assigned_appointments.equalsIgnoreCase("not_assigned_appointments")) {
-//            setEditableFalse();
-//            et_height.setEnabled(false);
-//            et_weight.setEnabled(false);
-//            rbYesMedicinePrescribed.setEnabled(false);
-//            rbNoMedicinePrescribed.setEnabled(false);
-//            tv_date_of_prescribed_medication.setEnabled(false);
-//            tv_symptoms_patient.setEnabled(false);
-//            tv_document.setVisibility(View.GONE);
-//            ll_document.setVisibility(View.GONE);
-//            ll_post_office.setVisibility(View.GONE);
-//            ll_block.setVisibility(View.GONE);
-//            ll_district.setVisibility(View.GONE);
-//            ll_et_postoffice.setVisibility(View.VISIBLE);
-//            ll_et_district.setVisibility(View.VISIBLE);
-//            ll_et_block.setVisibility(View.VISIBLE);
-//            ll_et_state.setVisibility(View.VISIBLE);
-//            ll_et_village.setVisibility(View.VISIBLE);
-//            ll_spn_blood_Group.setVisibility(View.GONE);
-//            ll_blood_group.setVisibility(View.VISIBLE);
-//            et_remarks.setVisibility(View.VISIBLE);
-//            tv_remarks.setVisibility(View.VISIBLE);
-//            et_remarks.setEnabled(false);
-//            ll_remarks_counselor.setVisibility(View.VISIBLE);
-//            tv_remarks_counselor.setVisibility(View.VISIBLE);
-//            setTitle("Not Assigned Appointments");
-//        } else {
-//            setTitle("Take Appointment");
-//            ll_remarks_counselor.setVisibility(View.GONE);
-//            tv_remarks_counselor.setVisibility(View.GONE);
-//            tv_document.setVisibility(View.VISIBLE);
-//            ll_document.setVisibility(View.VISIBLE);
-//
-//        }
-//        /*condition for show contact no according to screen type*/
-//        if (screen_type.equalsIgnoreCase("patient")
-//                || patient_by_mobile_search.equalsIgnoreCase("patient_by_mobile_search")) {
-//            tv_contact_no_for_counsellor.setVisibility(View.GONE);
-//            et_contact_number_for_counsellor.setVisibility(View.GONE);
-//            tv_doctor_assignment.setVisibility(View.GONE);
-//            ll_spn_doctor_assigned.setVisibility(View.GONE);
-//            ll_symptomdiease.setVisibility(View.GONE);
-//            simpleSwitch.setVisibility(View.VISIBLE);
-//            customLinearLayout.setVisibility(View.GONE);
-//            ll_post_office.setVisibility(View.GONE);
-//            ll_block.setVisibility(View.GONE);
-//            ll_district.setVisibility(View.GONE);
-//            ll_dateofPrescription.setVisibility(View.GONE);
-//            iv_image_call.setVisibility(View.GONE);
-//            ll_spn_blood_Group.setVisibility(View.GONE);
-//            ll_blood_group.setVisibility(View.VISIBLE);
-//            /*symptom text*/
-//            tv_symptoms_patient.setVisibility(View.GONE);
-//            tv_patient_symptoms.setVisibility(View.GONE);
-//            setEditableFalse();
-//        } else {
-//            tv_contact_no_for_patient.setVisibility(View.GONE);
-//            et_contact_number.setVisibility(View.GONE);
-//        }
-//        if (!patient_appointments_id.equals("")) {
-//            tv_doctor_assignment.setVisibility(View.VISIBLE);
-//            ll_spn_doctor_assigned.setVisibility(View.VISIBLE);
-//            simpleSwitch.setVisibility(View.VISIBLE);
-//            customLinearLayout.setVisibility(View.GONE);
-//            ll_symptomdiease.setVisibility(View.GONE);
-//            tv_emergency_conytact.setVisibility(View.GONE);
-//            ll_camera.setVisibility(View.GONE);
-//            ll_emergenct_et.setVisibility(View.GONE);
-//            tv_pic.setVisibility(View.GONE);
-//            tv_symtoms.setVisibility(View.GONE);
-//            ll_multiselect.setVisibility(View.GONE);
-//        }
-//        if (fromCounselor.equalsIgnoreCase("fromCounselor")) {
-//            tv_emergency_conytact.setVisibility(View.VISIBLE);
-//            ll_first.setVisibility(View.VISIBLE);
-//            ll_second.setVisibility(View.VISIBLE);
-//            ll_third.setVisibility(View.VISIBLE);
-//            ll_camera.setVisibility(View.GONE);
-//            ll_emergenct_et.setVisibility(View.VISIBLE);
-//            tv_pic.setVisibility(View.GONE);
-//            tv_doctor_assignment.setVisibility(View.GONE);
-//            ll_spn_doctor_assigned.setVisibility(View.GONE);
-//            ll_symptomdiease.setVisibility(View.GONE);
-//            customLinearLayout.setVisibility(View.GONE);
-//            ll_et_postoffice.setVisibility(View.GONE);
-//            ll_et_district.setVisibility(View.GONE);
-//            ll_et_state.setVisibility(View.GONE);
-//            ll_et_block.setVisibility(View.GONE);
-//            ll_et_village.setVisibility(View.GONE);
-//            et_state.setEnabled(false);
-//            et_district.setEnabled(false);
-//            et_block.setEnabled(false);
-//            ll_state.setVisibility(View.VISIBLE);
-//            ll_village.setVisibility(View.VISIBLE);
-//
-//            tv_what_you_know.setVisibility(View.VISIBLE);
-//            ll_what_you_know.setVisibility(View.VISIBLE);
-//            ll_dob.setVisibility(View.GONE);
-//            ll_age.setVisibility(View.GONE);
-//            ll_remarks_counselor.setVisibility(View.GONE);
-//            tv_remarks_counselor.setVisibility(View.GONE);
-//            tv_symptoms_patient.setVisibility(View.GONE);
-//            tv_patient_symptoms.setVisibility(View.GONE);
-//            tv_caste.setVisibility(View.VISIBLE);
-//            ll_spn_caste.setVisibility(View.VISIBLE);
-//            tv_disability.setVisibility(View.VISIBLE);
-//            rg_disability.setVisibility(View.VISIBLE);
-//        } else {
-//            tv_caste.setVisibility(View.GONE);
-//            ll_spn_caste.setVisibility(View.GONE);
-//            tv_disability.setVisibility(View.GONE);
-//            rg_disability.setVisibility(View.GONE);
-//            tv_emergency_conytact.setVisibility(View.GONE);
-//            ll_camera.setVisibility(View.GONE);
-//            ll_emergenct_et.setVisibility(View.GONE);
-//            tv_pic.setVisibility(View.GONE);
-//        }
-//        getSpinnerValue();
-//        simpleSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-//                if (simpleSwitch.isChecked()) {
-//                    ll_first.setVisibility(View.VISIBLE);
-//                    ll_second.setVisibility(View.VISIBLE);
-//                } else {
-//                    ll_first.setVisibility(View.GONE);
-//                    ll_second.setVisibility(View.GONE);
-//                }
-//            }
-//        });
-        patientFilledDataModel.setProfile_patient_id(profile_id);
+        patientFilledDataModel.setProfile_patient_id(String.valueOf(personID));
+        patientFilledDataModel.setFull_name(sharedPrefHelper.getString("personName", ""));
         patientFilledDataModel.setUser_id(sharedPrefHelper.getString("user_id", ""));
         patientFilledDataModel.setRole_id(sharedPrefHelper.getString("role_id", ""));
         patientFilledDataModel.setPatient_appointment_id(patient_appointments_id);
+//        String personName = sharedPrefHelper.getString("personName", "");
+
+        person1.setText(personName);
 
         Gson gson = new Gson();
         String data = gson.toJson(patientFilledDataModel);
@@ -628,7 +486,6 @@ PatientModel patientModel;
         RequestBody body = RequestBody.create(JSON, data);
         /*send data here*/
         if (!fromCounselor.equals("fromCounselor")) {
-//            getDetailsPatientAlreadyFilled(body);
         }
         setCasteSpinner();
 
@@ -648,7 +505,7 @@ PatientModel patientModel;
             } else {
                 PatientFilledDataModel appointmentInput = new PatientFilledDataModel();
                 appointmentInput.setUser_id(sharedPrefHelper.getString("user_id", ""));
-                appointmentInput.setProfile_patient_id(profile_id);
+                appointmentInput.setProfile_patient_id(id);
                 appointmentInput.setReciver_no(et_contact_number.getText().toString().trim());
                 appointmentInput.setCalling_type("Voice");
                 if (not_assigned_appointments.equalsIgnoreCase("not_assigned_appointments")) {
@@ -663,7 +520,6 @@ PatientModel patientModel;
                 RequestBody body1 = RequestBody.create(JSON1, data1);
 
                 mProgressDialog = ProgressDialog.show(context, "", "Please Wait...", true);
-//                callDoctor(body1);
             }
 
         });
@@ -875,25 +731,7 @@ PatientModel patientModel;
         spn_caste.setAdapter(Adapter);
     }
 
-    private void setSpinnerDistrict() {
-        spn_district.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                int index = spn_district.getSelectedItemPosition();
-                districtName = districtAL.get(index);
-                //Toast.makeText(context, ""+districtName, Toast.LENGTH_SHORT).show();
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        districtAL.add(0, getString(R.string.select_district));
-        final ArrayAdapter Adapter = new ArrayAdapter(this, R.layout.simple_spinner_item, districtAL);
-        Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spn_district.setAdapter(Adapter);
-    }
 
 
     private void setBloodGroupSpinner() {
@@ -924,107 +762,14 @@ PatientModel patientModel;
 
     }
 
-    private void setSpinnerBlock() {
-        spn_block.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                int index = spn_block.getSelectedItemPosition();
-                blockName = blockAL.get(index);
-                //Toast.makeText(context, ""+blockName, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        blockAL.add(0, getString(R.string.select_block));
-        final ArrayAdapter Adapter = new ArrayAdapter(this, R.layout.simple_spinner_item, blockAL);
-        Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spn_block.setAdapter(Adapter);
-    }
-
-    private void callPinCodeApi() {
-        et_pin_code.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                et_state.setText("");
-                et_district.setText("");
-                et_block.setText("");
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                //sendPinCodeData();
-            }
-        });
-    }
-
-    private void setSpinnerPostOffice() {
-        spn_post_office.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                int index = spn_post_office.getSelectedItemPosition();
-                postOfficeName = postOfficeNameAL.get(index);
-                //Toast.makeText(context, ""+postOfficeName, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        postOfficeNameAL.add(0, getString(R.string.select_post_office));
-        final ArrayAdapter Adapter = new ArrayAdapter(this, R.layout.simple_spinner_item, postOfficeNameAL);
-        Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spn_post_office.setAdapter(Adapter);
-    }
-
-
-
-    private void setEditableFalse() {
-        et_patient_name.setEnabled(false);
-        rb_male.setEnabled(false);
-        rb_female.setEnabled(false);
-        rb_other.setEnabled(false);
-        et_date_of_birth.setEnabled(false);
-        et_age.setEnabled(false);
-        et_aadhar_card.setEnabled(false);
-        et_contact_number.setEnabled(false);
-        et_contact_number_for_counsellor.setEnabled(false);
-        et_address.setEnabled(false);
-        et_pin_code.setEnabled(false);
-        spn_state.setEnabled(false);
-        spn_district.setEnabled(false);
-        spn_block.setEnabled(false);
-        spn_block.setEnabled(false);
-        spn_village.setEnabled(false);
-        et_state.setEnabled(false);
-        et_district.setEnabled(false);
-        et_block.setEnabled(false);
-        spn_post_office.setEnabled(false);
-        et_post_office.setEnabled(false);
-        et_village.setEnabled(false);
-        /*et_height.setEnabled(false);
-        et_weight.setEnabled(false);*/
-        et_blood_group.setEnabled(false);
-    }
-
     private void sendAppointment() {
         mProgressDialog = ProgressDialog.show(PatientFillAppointment.this, "", "Please Wait...", true);
         appointmentInput.setUser_id(sharedPrefHelper.getString("user_id", ""));
-        appointmentInput.setProfile_patient_id(profile_id);
+        appointmentInput.setProfile_patient_id(String.valueOf(personID));
         appointmentInput.setIs_emergency(emergency);
         appointmentInput.setPrescribed_medicine(medicinePrescribed);
         appointmentInput.setRemarks(et_remarks.getText().toString().trim());
         appointmentInput.setPrescribed_medicine_date(tv_date_of_prescribed_medication.getText().toString().trim());
-//        appointmentInput.setHeight(et_height.getText().toString().trim());
-//        appointmentInput.setWeight(et_weight.getText().toString().trim());
         appointmentInput.setBp_upper(et_bpupper.getText().toString().trim());
         appointmentInput.setBp_lower(et_bplower.getText().toString().trim());
         appointmentInput.setSugar(et_sugar.getText().toString().trim());
@@ -1101,148 +846,6 @@ PatientModel patientModel;
         }
     }
 
-//    private void sendProfileAndAppointment() {
-//        mProgressDialog = ProgressDialog.show(context, "", "Please Wait...", true);
-//        name = et_patient_name.getText().toString().trim();
-//        date_of_birth = et_date_of_birth.getText().toString().trim();
-//        aadhar_card = et_aadhar_card.getText().toString().trim();
-//        contact_number = et_contact_number_for_counsellor.getText().toString().trim();
-//        pin_code = et_pin_code.getText().toString().trim();
-//        address = et_address.getText().toString().trim();
-//        et_emergency_contact.getText().toString().trim();
-//        /*sign up model*/
-//        signUpModel = new SignUpModel();
-//        signUpModel.setFull_name(name);
-//        signUpModel.setDob(date_of_birth);
-//        signUpModel.setHeight(et_height.getText().toString().trim());
-//        signUpModel.setWeight(et_weight.getText().toString().trim());
-//
-//        signUpModel.setAadhar_no(aadhar_card);
-//        signUpModel.setAddress(address);
-//        signUpModel.setEmergency_contact_no(et_emergency_contact.getText().toString().trim());
-//        signUpModel.setContact_no(contact_number);
-//        signUpModel.setGender(gender);
-//        signUpModel.setPin_code(et_pin_code.getText().toString().trim());
-//        signUpModel.setBlood_group_id(bloodGroupId);
-//        signUpModel.setState_id((state_id));
-//        signUpModel.setDistrict_id(String.valueOf(district_id));
-//        signUpModel.setBlock_id(String.valueOf(block_id));
-//        signUpModel.setPost_office_id(String.valueOf(post_office_id));
-//        signUpModel.setVillage_id((village_id));
-//        signUpModel.setCaste_id(String.valueOf(caste_id));
-//        signUpModel.setDisability(disability);
-//        signUpModel.setCovered_area(coveredArea);
-//        signUpModel.setRole_id(sharedPrefHelper.getString("role_id", ""));
-//        signUpModel.setProfile_pic(encodedImage);
-//        signUpModel.setMobile_token("1234");
-//        /*here age condition for month*/
-//        if (et_age.getText().toString().trim().equalsIgnoreCase("0")) {
-//            if (age_in_month.length() == 1) {
-//                age_in_month = "0.0" + age_in_month;
-//            }
-//            if (age_in_month.length() == 2) {
-//                age_in_month = "0." + age_in_month;
-//            }
-//            signUpModel.setAge(age_in_month);
-//        } else {
-//            signUpModel.setAge(et_age.getText().toString().trim());
-//        }
-//
-//        signUpModel.setUser_id(sharedPrefHelper.getString("user_id", ""));
-//        signUpModel.setProfile_type("1");
-//        signUpModel.setApp_version(FINAL_VAR.app_version); //app version for counsellor
-//        Gson gson = new Gson();
-//        String data = gson.toJson(signUpModel);
-//        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-//        RequestBody body = RequestBody.create(JSON, data);
-//        /*send data here*/
-//        sendSignUpData(body);
-//    }
-
-//    private void sendSignUpData(final RequestBody signUpModel) {
-//        TELEMEDICINE_API api_service = APIClient.getClient().create(TELEMEDICINE_API.class);
-//        if (signUpModel != null && api_service != null) {
-//            Call<JsonObject> server_response = api_service.sendSignupData(signUpModel);
-//            try {
-//                if (server_response != null) {
-//                    server_response.enqueue(new Callback<JsonObject>() {
-//                        @Override
-//                        public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-//
-//                            if (response.isSuccessful()) {
-//                                try {
-//                                    JSONObject jsonObject = new JSONObject(response.body().toString());
-//                                    mProgressDialog.dismiss();
-//                                    String success = jsonObject.getString("success");
-//                                    if (success.equals("1")) {
-//                                        String profile_id = jsonObject.getString("profile_id");
-//                                        appointmentInput.setUser_id(sharedPrefHelper.getString("user_id", ""));
-//                                        appointmentInput.setProfile_patient_id(profile_id);
-//                                        appointmentInput.setIs_emergency(emergency);
-//                                        appointmentInput.setPrescribed_medicine(medicinePrescribed);
-//                                        appointmentInput.setPrescribed_medicine_date(tv_date_of_prescribed_medication.getText().toString().trim());
-//                                        appointmentInput.setRemarks(et_remarks.getText().toString().trim());
-//                                        appointmentInput.setApp_version(FINAL_VAR.app_version);
-//                                        int size = spn_symptoms.getSelectedIds().size();
-//                                        dids = addDiseasesIds(size);
-//                                        dids = addDiseasesIds(size);
-//                                        String s1 = dids.toString().trim().replace("[", "");
-//                                        String ss2 = s1.replace("]", "");
-//                                        appointmentInput.setDisease_id(ss2.trim());
-//                                        //String symIds = spn_symptoms.getSelectedIds().toString().trim();
-//                                        //String s = symIds.replace("[", "");
-//                                        //String ss = s.replace("]", "");
-//                                        String idsd = "";
-//                                        List<KeyPairBoolData> dds = spn_symptoms.getSelectedItems();
-//                                        for (int i = 0; i < dds.size(); i++) {
-//                                            String name = dds.get(i).getName();
-//
-//                                            if (i == 0) {
-//                                                idsd = String.valueOf(symptomHM.get(name));
-//                                            } else if (idsd != null) {
-//                                                idsd = idsd + "," + String.valueOf(symptomHM.get(name));
-//                                            }
-//                                        }
-//                                        appointmentInput.setSymptom_id(idsd.trim());
-//                                        appointmentInput.setAppointment_type("1");
-//                                        appointmentInput.setAppointment_file(image64);
-//                                        // Added by ram on 16 March 2020 for a newly added fields
-//                                        appointmentInput.setBp_upper(et_bpupper.getText().toString().trim());
-//                                        appointmentInput.setBp_lower(et_bplower.getText().toString().trim());
-//                                        appointmentInput.setSugar(et_sugar.getText().toString().trim());
-//                                        appointmentInput.setTemperature(et_temperature.getText().toString().trim());
-//                                        appointmentInput.setBlood_oxygen_level(et_blood_oxygen_level.getText().toString().trim());
-//                                        appointmentInput.setPulse(et_pulse_in_bpm.getText().toString().trim());
-//                                        Gson gson = new Gson();
-//                                        String data = gson.toJson(appointmentInput);
-//                                        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-//                                        RequestBody body = RequestBody.create(JSON, data);
-//                                        /*send data here*/
-//                                     //   sendAppointmentData(body);
-//
-//                                    }
-//                                } catch (JSONException e) {
-//                                    e.printStackTrace();
-//                                }
-//
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void onFailure(Call<JsonObject> call, Throwable t) {
-//                            Toast.makeText(context, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
-//                            mProgressDialog.dismiss();
-//                        }
-//
-//                    });
-//                }
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//
-//            }
-//        }
-//
-//    }
 
 
     private void getSpinnerValue() {
@@ -1506,6 +1109,8 @@ PatientModel patientModel;
         signUpModel = new SignUpModel();
         doctorAssignmentInput = new DoctorAssignmentInput();
 
+        person1 = findViewById(R.id.person1);
+        iv_image1 = findViewById(R.id.iv_image1);
         stateNameHM = new HashMap<>();
         districtNameHM = new HashMap<>();
         casteNameHM = new HashMap<>();
@@ -1630,228 +1235,6 @@ PatientModel patientModel;
         appointment_alert.setCanceledOnTouchOutside(false);
     }
 
-//    private void getDetailsPatientAlreadyFilled(RequestBody body) {
-//        mProgressDialog = ProgressDialog.show(context, "", "Please wait", true);
-//        TELEMEDICINE_API api_service = APIClient.getClient().create(TELEMEDICINE_API.class);
-//        if (body != null && api_service != null) {
-//            Call<JsonObject> server_response = api_service.download_profile(body);
-//            try {
-//                if (server_response != null) {
-//                    server_response.enqueue(new Callback<JsonObject>() {
-//                        @Override
-//                        public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-//
-//                            if (response.isSuccessful()) {
-//                                JsonObject singledataP = response.body();
-//                                Log.e("bjbjcbbd", "onResponsen " + singledataP.toString());
-//                                mProgressDialog.dismiss();
-//                                JsonArray data = singledataP.getAsJsonArray("tableData");
-//                                JsonArray data2 = singledataP.getAsJsonArray("Appointmenthistory"); //commented by vimal
-//                                // comment because they send Appointmenthistory = null instead of Appointmenthistory = [null]
-//
-//                                JSONObject singledata = null;
-//                                JSONObject singledata2 = null;
-//                                try {
-//                                    if (!data.isJsonNull() && data.size() > 0) {
-//                                        singledata = new JSONObject(data.get(0).toString());
-//
-//                                        String full_name = singledata.getString("full_name");
-//                                        String contact_no = singledata.getString("contact_no");
-//                                        String gender = singledata.getString("gender");
-//                                        String age = singledata.getString("age");
-//
-//                                        /*change date format here*/
-//                                        String incomingDateDob = singledata.get("dob").toString();
-//                                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//                                        Date newDate = sdf.parse(incomingDateDob);
-//                                        sdf = new SimpleDateFormat("dd-MM-yyyy");
-//                                        String outputDateDob = sdf.format(newDate);
-//                                        et_date_of_birth.setText(outputDateDob);
-//
-//                                        String aadhar_no = singledata.getString("aadhar_no");
-//                                        pin_code = singledata.getString("pin_code");
-//                                        String state_id = singledata.getString("state_id");
-//                                        state_name = singledata.getString("state_name");
-//                                        String district_id = singledata.getString("district_id");
-//                                        district_name = singledata.getString("district_name");
-//                                        String block_id = singledata.getString("block_id");
-//                                        block_name = singledata.getString("block_name");
-//                                        String village_id = singledata.getString("village_id");
-//                                        village_name = singledata.getString("village_name");
-//                                        String post_office_id = singledata.getString("post_office_id");
-//                                        post_office_name = singledata.getString("post_office_name");
-//                                        String address = singledata.getString("address");
-//                                        String blood_group_name = singledata.getString("blood_group_name");
-//                                        String emergency_contact_no = singledata.getString("emergency_contact_no");
-//                                        String pin_code = singledata.getString("pin_code");
-//                                        String height = singledata.getString("height");
-//                                        String weight = singledata.getString("weight");
-//
-//                                        et_patient_name.setText(full_name);
-//                                        if (gender.equalsIgnoreCase("M")) {
-//                                            rb_male.setChecked(true);
-//                                        } else if (gender.equalsIgnoreCase("F")) {
-//                                            rb_female.setChecked(true);
-//                                        } else {
-//                                            rb_other.setChecked(true);
-//                                        }
-//                                        et_age.setText(age);
-//                                        et_aadhar_card.setText(aadhar_no);
-//                                        et_contact_number.setText(contact_no);
-//                                        et_emergency_contact.setText(emergency_contact_no);
-//                                        et_contact_number_for_counsellor.setText(contact_no);
-//                                        et_address.setText(address);
-//                                        if (!pin_code.equalsIgnoreCase("") && !pin_code.equalsIgnoreCase("0")) {
-//                                            et_pin_code.setText(pin_code);
-//                                        } else {
-//                                            et_pin_code.setText("");
-//                                        }
-//                                        et_state.setText(state_name);
-//                                        et_district.setText(district_name);
-//                                        et_block.setText(block_name);
-//                                        et_post_office.setText(post_office_name);
-//                                        et_village.setText(village_name);
-//                                        et_height.setText(height);
-//                                        et_weight.setText(weight);
-//
-//
-//                                        et_blood_group.setText(blood_group_name);
-//                                    }
-//                                    isEditable = true;
-//                                    getAllStateFromTable();
-//
-//                                    //medical information
-//                                    if (!data2.isJsonNull() && data2.size() > 0) {
-//                                        singledata2 = new JSONObject(data2.get(0).toString());
-//                                        String prescribed_medicine = singledata2.getString("prescribed_medicine");
-//                                        String prescribed_medicine_date = singledata2.getString("prescribed_medicine_date");
-//                                        String is_emergency = singledata2.getString("is_emergency");
-//                                        String remarks = singledata2.getString("remarks");
-//                                        String bp_lower = singledata2.getString("bp_lower");
-//                                        String bp_upper = singledata2.getString("bp_upper");
-//                                        String sugar = singledata2.getString("sugar");
-//                                        String temperature = singledata2.getString("temperature");
-//                                        String blood_oxygen_level = singledata2.getString("blood_oxygen_level");
-//                                        String pulse = singledata2.getString("pulse");
-//                                        if (not_assigned_appointments.equalsIgnoreCase("not_assigned_appointments")) {
-//                                            String acctchment = singledata2.getString("appointment_file");
-//
-//                                            if (!acctchment.equalsIgnoreCase("")) {
-//                                                tv_attached_doc.setVisibility(View.VISIBLE);
-//                                                tv_attached_doc.setText(acctchment);
-//                                                tv_attached_doc.setOnClickListener(new View.OnClickListener() {
-//                                                    @Override
-//
-//                                                    public void onClick(View view) {
-////                                                        String url = APIClient.IMAGE_URL_DOC_APPO + acctchment;
-////                                                        Intent intent = new Intent(context, WebViewImageActivity.class);
-////                                                        intent.putExtra("url", url);
-////                                                        context.startActivity(intent);
-//                                                    }
-//                                                });
-//                                            } else {
-//                                                tv_attached_doc.setVisibility(View.GONE);
-//                                            }
-//
-//                                            /*remarks show here at the time of assigned doctor*/
-//                                            if (!remarks.equalsIgnoreCase("")) {
-//                                                et_remarks.setText(remarks);
-//                                            } else {
-//                                            }
-//
-//
-//                                        }
-//
-//                                        //set all fields value here
-//                                        if (!screen_type.equals("patient") ||
-//                                                !patient_by_mobile_search.equalsIgnoreCase("patient_by_mobile_search")) {
-//                                            if (prescribed_medicine.equalsIgnoreCase("Yes")) {
-//                                                rbYesMedicinePrescribed.setChecked(true);
-//                                            } else if (prescribed_medicine.equalsIgnoreCase("No")) {
-//                                                rbNoMedicinePrescribed.setChecked(true);
-//                                            }
-//                                            if (!prescribed_medicine_date.equalsIgnoreCase("")
-//                                                    && !prescribed_medicine_date.equalsIgnoreCase("0000-00-00")) {
-//                                                /*change date format here*/
-//                                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//                                                Date newDate = sdf.parse(prescribed_medicine_date);
-//                                                sdf = new SimpleDateFormat("dd-MM-yyyy");
-//                                                String outputDateDob = sdf.format(newDate);
-//                                                tv_date_of_prescribed_medication.setText(outputDateDob);
-//                                            } else {
-//                                                tv_date_of_prescribed_medication.setText("");
-//                                            }
-//                                        }
-//                                        if (!screen_type.equals("patient")) {
-//                                            if (is_emergency.equalsIgnoreCase("Y")) {
-//                                                cb_emergency.setChecked(true);
-//                                            } else {
-//                                                cb_emergency.setChecked(false);
-//                                            }
-//                                        }
-//
-//
-//                                        if (fromCounselorSearch.equals("fromCounselorSearch") || screen_type.equals("patient")) {
-//                                            cb_emergency.setChecked(false);
-//                                            tv_date_of_prescribed_medication.setText("");
-//                                            rbYesMedicinePrescribed.setChecked(false);
-//                                            rbNoMedicinePrescribed.setChecked(false);
-//
-//                                        }
-//
-//                                        String symptom = "";
-//                                        JSONArray symptomArray = singledata2.getJSONArray("symptom");
-//                                        if (symptomArray != null && symptomArray.length() > 0) {
-//                                            for (int i = 0; i < symptomArray.length(); i++) {
-//                                                JSONObject jsonObject = symptomArray.getJSONObject(i);
-//                                                if (i == 0) {
-//                                                    symptom = jsonObject.getString("symptom");
-//                                                } else {
-//                                                    if (symptom != null) {
-//                                                        symptom = symptom + ", " + jsonObject.getString("symptom");
-//                                                    }
-//                                                }
-//                                            }
-//                                            if (symptom != null) {
-//                                                tv_symptoms_patient.setText(symptom.trim());
-//                                            } else {
-//                                                tv_symptoms_patient.setVisibility(View.GONE);
-//                                                tv_patient_symptoms.setVisibility(View.GONE);
-//                                            }
-//                                        } else {
-//                                            tv_symptoms_patient.setVisibility(View.GONE);
-//                                            tv_patient_symptoms.setVisibility(View.GONE);
-//                                        }
-//
-//
-//                                        et_bplower.setText(bp_lower);
-//                                        et_bpupper.setText(bp_upper);
-//                                        et_sugar.setText(sugar);
-//                                        et_temperature.setText(temperature);
-//                                        et_blood_oxygen_level.setText(blood_oxygen_level);
-//                                        et_pulse_in_bpm.setText(pulse);
-//                                    }
-//                                } catch (Exception e) {
-//                                    e.printStackTrace();
-//
-//                                }
-//                            }
-//                        }
-//                        @Override
-//                        public void onFailure(Call<JsonObject> call, Throwable t) {
-//                            Toast.makeText(context, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
-//                            mProgressDialog.dismiss();
-//                        }
-//
-//                    });
-//                }
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//
-//            }
-//        }
-//    }
-
     @OnClick({R.id.btn_submit,
             R.id.et_contact_number_for_counsellor,
             R.id.et_date_of_birth,
@@ -1861,22 +1244,17 @@ PatientModel patientModel;
     void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_submit:
-                /*Intent intent = new Intent(context, CheckDetailOfPatientAppointment.class);
-                startActivity(intent);
-                finish();*/
                 break;
             case R.id.et_contact_number_for_counsellor:
                 //setCallOnEnteredNumber();
                 break;
             case R.id.et_date_of_birth:
-                //setDateOfBirthClick();
                 selectDate();
                 break;
             case R.id.tv_date_of_prescribed_medication:
                 setDate(tv_date_of_prescribed_medication);
                 break;
             case R.id.tv_test_done_date:
-                //setDate(tv_test_done_date);
                 break;
             case R.id.iv_attachments:
                 uploadImageOrDocuments(PICK_IMAGE_CAMERA, PICK_IMAGE_GALLERY);
@@ -1972,14 +1350,7 @@ PatientModel patientModel;
                     }
                     imagePath = destination.getAbsolutePath();
                     String[] file1 = imagePath.split("/storage/emulated/0/Android/data/com.indev.telemedicine/files/Pictures/");
-                    /*attachment.setDocument_source(file1[1]);
-                    attachment.setDocument_type("uam");
-                    attachment.setImage_latitude(sharedPrefHelper.getString("LAT", ""));
-                    attachment.setImage_longitude(sharedPrefHelper.getString("LONG", ""));
-                    attachment.setEnterprise_id(String.valueOf(enterpriseId));
-                    sqliteHelper.saveAttachments(attachment);*/
                 } else {
-                    //user simply backpressed from gallery
                 }
 
             } catch (Exception e) {
@@ -2044,9 +1415,6 @@ PatientModel patientModel;
                 }
             }, year, month, day);
 
-                    /*calendar.set(java.util.Calendar.YEAR, 1993);
-                    calendar.set(java.util.Calendar.MONTH, 0);
-                    calendar.set(java.util.Calendar.DAY_OF_MONTH, 1);*/
             mDatePickerDialog.setCanceledOnTouchOutside(true);
         }
 
@@ -2161,121 +1529,7 @@ PatientModel patientModel;
     }
 
     private boolean checkValidation() {
-//        if (et_patient_name.getText().toString().trim().length() == 0) {
-//            flagEditfield = et_patient_name;
-//            msg = "Please enter name!";
-//            flagEditfield.setError(msg);
-//            et_patient_name.requestFocus();
-//            return false;
-//        }
-//        if (!et_patient_name.getText().toString().trim().matches("[a-zA-Z ]+")) {
-//            flagEditfield = et_patient_name;
-//            msg = "The name can only consist of alphabets!";
-//            flagEditfield.setError(msg);
-//            et_patient_name.requestFocus();
-//            return false;
-//        }
-//        if (rg_gender.getVisibility() == View.VISIBLE) {
-//            int selected_id = rg_gender.getCheckedRadioButtonId();
-//            if (selected_id <= 0) {
-//                Toast.makeText(context, "Please select gender!", Toast.LENGTH_SHORT).show();
-//                return false;
-//            }
-//        }
-//        if (rg_age.getVisibility() == View.VISIBLE) {
-//            int selectedId = rg_age.getCheckedRadioButtonId();
-//            if (selectedId <= 0) {
-//                Toast.makeText(context, "Please choose option 'age or date of birth'.", Toast.LENGTH_SHORT).show();
-//                return false;
-//            }
-//        }
-//        if (rb_age.isChecked() && et_age.getText().toString().trim().length() == 0) {
-//            flagEditfield = et_age;
-//            msg = "Please enter age!";
-//            flagEditfield.setError(msg);
-//            et_age.requestFocus();
-//            return false;
-//        }
-//        if (rb_dob.isChecked() && et_date_of_birth.getText().toString().trim().length() == 0) {
-//            flagEditfield = et_date_of_birth;
-//            msg = "Please select date of birth!";
-//            flagEditfield.setError(msg);
-//            et_date_of_birth.requestFocus();
-//            return false;
-//        }
-//        if (et_contact_number_for_counsellor.getText().toString().trim().length() == 0) {
-//            flagEditfield = et_contact_number_for_counsellor;
-//            msg = "Please enter contact number!";
-//            flagEditfield.setError(msg);
-//            et_contact_number_for_counsellor.requestFocus();
-//            return false;
-//        }
-//        if (et_contact_number_for_counsellor.getText().toString().trim().length() < 10) {
-//            flagEditfield = et_contact_number_for_counsellor;
-//            msg = "Please enter 10 digits contact number!";
-//            flagEditfield.setError(msg);
-//            et_contact_number_for_counsellor.requestFocus();
-//            return false;
-//        }
-//        if (et_pin_code.getText().toString().trim().length() == 0) {
-//            flagEditfield = et_pin_code;
-//            msg = "Please enter pin code!";
-//            flagEditfield.setError(msg);
-//            et_pin_code.requestFocus();
-//            return false;
-//        }
-//        if (spn_state.getSelectedItem().toString().trim().equalsIgnoreCase("Select State")) {
-//            TextView errorText = (TextView) spn_state.getSelectedView();
-//            errorText.setError("");
-//            errorText.setTextColor(Color.RED);//just to highlight that this is an error
-//            errorText.setText("Please select state!");
-//            Toast.makeText(context, "Please select state!", Toast.LENGTH_LONG).show();
-//            errorText.requestFocus();
-//            return false;
-//        }
-//        if (spn_district.getSelectedItem().toString().trim().equalsIgnoreCase("Select District")) {
-//            TextView errorText = (TextView) spn_district.getSelectedView();
-//            errorText.setError("");
-//            errorText.setTextColor(Color.RED);//just to highlight that this is an error
-//            errorText.setText("Please select district!");
-//            Toast.makeText(context, "Please select district!", Toast.LENGTH_LONG).show();
-//            errorText.requestFocus();
-//            return false;
-//        }
-//        if (spn_block.getSelectedItem().toString().trim().equalsIgnoreCase("Select Block")) {
-//            TextView errorText = (TextView) spn_block.getSelectedView();
-//            errorText.setError("");
-//            errorText.setTextColor(Color.RED);//just to highlight that this is an error
-//            errorText.setText("Please select block!");
-//            Toast.makeText(context, "Please select block!", Toast.LENGTH_LONG).show();
-//            errorText.requestFocus();
-//            return false;
-//        }
-//        if (spn_post_office.getSelectedItem().toString().trim().equalsIgnoreCase("Select Post Office")) {
-//            TextView errorText = (TextView) spn_post_office.getSelectedView();
-//            errorText.setError("");
-//            errorText.setTextColor(Color.RED);//just to highlight that this is an error
-//            errorText.setText("Please select post office!");
-//            Toast.makeText(context, "Please select post office!", Toast.LENGTH_LONG).show();
-//            errorText.requestFocus();
-//            return false;
-//        }
-//        if (spn_village.getSelectedItem().toString().trim().equalsIgnoreCase("Select Village")) {
-//            TextView errorText = (TextView) spn_village.getSelectedView();
-//            errorText.setError("");
-//            errorText.setTextColor(Color.RED);//just to highlight that this is an error
-//            errorText.setText("Please select village!");
-//            Toast.makeText(context, "Please select village!", Toast.LENGTH_LONG).show();
-//            errorText.requestFocus();
-//            return false;
-//        }
-//        if (et_address.getText().toString().trim().length() == 0) {
-//            flagEditfield = et_address;
-//            msg = "Please enter address!";
-//            flagEditfield.setError(msg);
-//            et_address.requestFocus();
-//            return false;
-//        }
+
         return true;
     }
 
@@ -2284,58 +1538,9 @@ PatientModel patientModel;
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu, menu);
         /*show hide toolbar item here*/
-//        if (not_assigned_appointments.equalsIgnoreCase("not_assigned_appointments")) {
-////            MenuItem item = menu.findItem(R.id.deleteAppointment);
-//            item.setVisible(true);
-//        }
+
         return true;
     }
-
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        if (item.getItemId() == android.R.id.home) finish();
-//
-////        if (item.getItemId() == R.id.deleteAppointment) {
-////            showDeleteAppointmentPopup();
-////        }
-//        return super.onOptionsItemSelected(item);
-//    }
-
-//    private void showDeleteAppointmentPopup() {
-//        delete_alert = new android.app.Dialog(this);
-//
-//        delete_alert.setContentView(R.layout.delete_appointment_alert_dialog);
-//        delete_alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//        WindowManager.LayoutParams params = delete_alert.getWindow().getAttributes();
-//        params.gravity = Gravity.CENTER | Gravity.CENTER_HORIZONTAL;
-//
-//        TextView tv_appointment_added = (TextView) delete_alert.findViewById(R.id.tv_appointment_added);
-//        TextView tv_appointment_msg = (TextView) delete_alert.findViewById(R.id.tv_appointment_msg);
-//        EditText et_reason = (EditText) delete_alert.findViewById(R.id.et_reason);
-//        Button btn_yes = (Button) delete_alert.findViewById(R.id.btn_yes);
-//        Button btn_no = (Button) delete_alert.findViewById(R.id.btn_no);
-//
-//        btn_yes.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //TO DO
-//                if (checkValidationET(et_reason)) {
-//                    delete_alert.dismiss();
-//                    deleteAppointmentApiCall(et_reason);
-//                }
-//            }
-//        });
-//        btn_no.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //TO DO
-//                delete_alert.dismiss();
-//            }
-//        });
-//
-//        delete_alert.show();
-//        delete_alert.setCanceledOnTouchOutside(false);
-//    }
 
     private boolean checkValidationET(EditText et_reason) {
         if (et_reason.getText().toString().trim().length() == 0) {
@@ -2359,21 +1564,9 @@ public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 }
     @Override
     public void onBackPressed() {
-//        super.onBackPressed();
             Intent intent = new Intent(context, HomeActivity.class);
             startActivity(intent);
             finish();
         }
-//        if (patient_by_mobile_search.equalsIgnoreCase("patient_by_mobile_search")) {
-//            Intent intent = new Intent(context, PatientListReplicaforSearch.class);
-//            startActivity(intent);
-//            finish();
-//        }
-//        if (not_assigned_appointments.equalsIgnoreCase("not_assigned_appointments")) {
-//            Intent intent = new Intent(context, NotAssignedAppointments.class);
-//            intent.putExtra("fromNotAssignment", "fromNotAssignment");
-//            startActivity(intent);
-//            finish();
-//        }
 
 }

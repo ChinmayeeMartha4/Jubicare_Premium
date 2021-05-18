@@ -17,15 +17,25 @@ public class PatientModel {
     private String contact_no;
     private String block_name;
     private String district_name;
-    private String id;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
+
+    //    private String id;
+    private int id;
+
+//    public String getId() {
+//        return id;
+//    }
+//
+//    public void setId(String id) {
+//        this.id = id;
+//    }
 
     public String getPatient_name() {
         return patient_name;

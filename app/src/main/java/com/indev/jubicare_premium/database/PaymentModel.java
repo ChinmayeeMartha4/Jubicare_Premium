@@ -19,6 +19,10 @@ public class PaymentModel {
 
     String contact_no;
 
+
+
+    int org_id;
+
     public String getOtp() {
         return otp;
     }
@@ -40,6 +44,14 @@ public class PaymentModel {
 
     public String getEmp_id() {
         return emp_id;
+    }
+
+    public int getOrg_id() {
+        return org_id;
+    }
+
+    public void setOrg_id(int org_id) {
+        this.org_id = org_id;
     }
 
     public void setEmp_id(String emp_id) {

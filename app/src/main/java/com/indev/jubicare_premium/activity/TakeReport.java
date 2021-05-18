@@ -193,7 +193,10 @@ public class TakeReport extends AppCompatActivity {
     String caste_id;
     String caste;
 
-
+    int personID = 0;
+    String personName = "";
+    @BindView(R.id.personr)
+    TextView personr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -201,7 +204,7 @@ public class TakeReport extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         ButterKnife.bind(this);
-        setTitle(Html.fromHtml("<font color=\"#FFFFFFFF\">" + "Reports" + "</font>"));
+        setTitle(Html.fromHtml("<font color=\"#FFFFFFFF\">" + "Take Report" + "</font>"));
         initViews();
 
 
@@ -217,20 +220,23 @@ public class TakeReport extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             screen_type = bundle.getString("patient", "");
-            profile_id = bundle.getString("profile_id", "");
             patient_appointments_id = bundle.getString("patient_appointments_id", "");
             fromCounselor = bundle.getString("fromCounselor", "");
             fromCounselorSearch = bundle.getString("fromCounselorSearch", "");
             not_assigned_appointments = bundle.getString("not_assigned_appointments", "");
-            id = bundle.getString("id", "");
+            personID = bundle.getInt("personID", 0);
+            personName = bundle.getString("personName", "");
 
         }
 
 
-        patientFilledDataModel.setProfile_patient_id(profile_id);
         patientFilledDataModel.setUser_id(sharedPrefHelper.getString("user_id", ""));
         patientFilledDataModel.setRole_id(sharedPrefHelper.getString("role_id", ""));
         patientFilledDataModel.setPatient_appointment_id(patient_appointments_id);
+        patientFilledDataModel.setProfile_patient_id(String.valueOf(personID));
+        patientFilledDataModel.setFull_name(sharedPrefHelper.getString("personName", ""));
+
+        personr.setText(personName);
 
         Gson gson = new Gson();
         String data = gson.toJson(patientFilledDataModel);
@@ -266,7 +272,7 @@ public class TakeReport extends AppCompatActivity {
     private void sendAppointment() {
         mProgressDialog = ProgressDialog.show(TakeReport.this, "", "Please Wait...", true);
         takeReportModel.setUser_id(sharedPrefHelper.getString("user_id", ""));
-//        takeReportModel.setProfile_patient_id(profile_id);
+        takeReportModel.setProfile_patient_id(String.valueOf(personID));
         takeReportModel.setDate(tv_date.getText().toString().trim());
         takeReportModel.setDoctor_name(et_doctor_name.getText().toString().trim());
         takeReportModel.setTest(et_test.getText().toString().trim());

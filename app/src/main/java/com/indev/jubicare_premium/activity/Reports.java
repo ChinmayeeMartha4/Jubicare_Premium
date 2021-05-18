@@ -9,6 +9,7 @@ import android.text.Html;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -50,11 +51,17 @@ public class Reports extends AppCompatActivity {
 
     @BindView(R.id.add)
     FloatingActionButton add;
+    @BindView(R.id.person3)
+    TextView person4;
     RecyclerView reports_recyclerView;
     private ProgressDialog mProgressDialog;
     private Context context=this;
     SharedPrefHelper sharedPrefHelper;
     String id="";
+    String full_name="";
+    PatientModel patientModel;
+    int personID = 0;
+    String personName = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,8 +73,17 @@ public class Reports extends AppCompatActivity {
         initViews();
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            id = bundle.getString("id", "");
+            personID = bundle.getInt("personID", 0);
+            personName = bundle.getString("personName", "");
+
         }
+        reportsPojo.setProfile_patient_id(String.valueOf(personID));
+        reportsPojo.setFull_name(sharedPrefHelper.getString("personName", ""));
+
+        String personName = sharedPrefHelper.getString("personName", "");
+//        patientFilledDataModel.setProfile_patient_id(id);
+        person4.setText(personName);
+
 
         getPatientProfileDetails();
 
@@ -77,6 +93,8 @@ public class Reports extends AppCompatActivity {
 
             public void onClick(View view) {
                 Intent intent = new Intent(Reports.this, TakeReport.class);
+                intent.putExtra("personID",sharedPrefHelper.getInt("personID" ,0));
+                intent.putExtra("personName",sharedPrefHelper.getString("personName", ""));
                 startActivity(intent);
                 finish();
             }
@@ -89,7 +107,8 @@ public class Reports extends AppCompatActivity {
         mProgressDialog = new ProgressDialog(context);
         reports_recyclerView = (RecyclerView) findViewById(R.id.reports_recyclerView);
         add = (FloatingActionButton) findViewById(R.id.add);
-
+        patientModel = new PatientModel();
+        person4 = findViewById(R.id.person4);
 
     }
     private void getPatientProfileDetails() {

@@ -69,7 +69,7 @@ public class  ViewPrescription extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(ViewPrescription.this, OldAppointment.class);
+        Intent intent = new Intent(ViewPrescription.this, CommonProfile.class);
         startActivity(intent);
         finish();
     }

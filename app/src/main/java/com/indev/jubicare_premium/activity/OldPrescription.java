@@ -9,6 +9,7 @@ import android.text.Html;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -56,17 +57,24 @@ public class OldPrescription extends AppCompatActivity {
 
     @BindView(R.id.add)
     FloatingActionButton add;
+    @BindView(R.id.person3)
+    TextView person3;
     @BindView(R.id.prescription_recyclerView)
     RecyclerView prescription_recyclerView;
     private ProgressDialog mProgressDialog;
     private Context context=this;
     SharedPrefHelper sharedPrefHelper;
     String id="";
+    String full_name="";
+    PatientModel patientModel;
+    int personID = 0;
+    String personName = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_old_prescription);
-        setTitle(Html.fromHtml("<font color=\"#FFFFFFFF\">" + "Old Prescription" + "</font>"));
+        setTitle(Html.fromHtml("<font color=\"#FFFFFFFF\">" + "Old Prescriptions" + "</font>"));
 //        appointmentPojo=new AppointmentPojo();
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -74,8 +82,17 @@ public class OldPrescription extends AppCompatActivity {
        initViews();
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            id = bundle.getString("id", "");
+            personID = bundle.getInt("personID", 0);
+            personName = bundle.getString("personName", "");
+
+
         }
+        String personName = sharedPrefHelper.getString("personName", "");
+        oldPrescriptionPojo.setProfile_patient_id(String.valueOf(personID));
+        oldPrescriptionPojo.setFull_name(sharedPrefHelper.getString("personName", ""));
+
+//        patientFilledDataModel.setProfile_patient_id(id);
+        person3.setText(personName);
 
 
 
@@ -97,6 +114,8 @@ public class OldPrescription extends AppCompatActivity {
 
             public void onClick(View view) {
                 Intent intent = new Intent(OldPrescription.this, TakeOldPrescription.class);
+                intent.putExtra("personID",sharedPrefHelper.getInt("personID" ,0));
+                intent.putExtra("personName",sharedPrefHelper.getString("personName", ""));
                 startActivity(intent);
                 finish();
             }
@@ -111,6 +130,8 @@ public class OldPrescription extends AppCompatActivity {
         sqliteHelper = new SqliteHelper(this);
         sharedPrefHelper = new SharedPrefHelper(this);
         mProgressDialog = new ProgressDialog(context);
+        patientModel = new PatientModel();
+        person3 = findViewById(R.id.person3);
     }
 
 

@@ -1,4 +1,4 @@
-package com.indev.jubicare_premium.sqlitehelper;
+ package com.indev.jubicare_premium.sqlitehelper;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
@@ -362,6 +362,14 @@ public class SqliteHelper extends SQLiteOpenHelper {
             db.close();
         }
         return arrayList;
+    }
+    public String getsymptomNmae(int id, String table) {
+        String sum = "";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select symptom from " + table + " where id = '" + id + "' ", null);
+        if (cursor.moveToFirst())
+            sum = cursor.getString(cursor.getColumnIndex("symptom")).trim();
+        return sum;
     }
 
     public ArrayList<String> getspnBloodGroupData() {
@@ -817,7 +825,7 @@ public class SqliteHelper extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         try {
             if (sqLiteDatabase != null && sqLiteDatabase.isOpen() && !sqLiteDatabase.isReadOnly()) {
-                String query = "Select id, name from caste";
+                String query = "Select id, name from caste  order by name";
                 Cursor cursor = sqLiteDatabase.rawQuery(query, null);
                 if (cursor != null && cursor.getCount() > 0) {
                     cursor.moveToFirst();
@@ -826,7 +834,7 @@ public class SqliteHelper extends SQLiteOpenHelper {
                         state1.setId(cursor.getInt(cursor.getColumnIndex("id")));
                         state1.setName(cursor.getString(cursor.getColumnIndex("name")));
                         cursor.moveToNext();
-                        caste.put(state1.getName().trim(), state1.getId());
+                        caste.put(state1.getName(), state1.getId());
                     }
                 }
             }
@@ -836,6 +844,32 @@ public class SqliteHelper extends SQLiteOpenHelper {
             sqLiteDatabase.close();
         }
         return caste;
+    }
+    public HashMap<String, Integer> getAllBloodGroup() {
+        HashMap<String, Integer> blood = new HashMap<>();
+        BloodGroupModel blood1;
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        try {
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen() && !sqLiteDatabase.isReadOnly()) {
+                String query = "Select id, name from blood_group";
+                Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+                if (cursor != null && cursor.getCount() > 0) {
+                    cursor.moveToFirst();
+                    while (!cursor.isAfterLast()) {
+                        blood1 = new BloodGroupModel();
+                        blood1.setId(cursor.getInt(cursor.getColumnIndex("id")));
+                        blood1.setName(cursor.getString(cursor.getColumnIndex("name")));
+                        cursor.moveToNext();
+                        blood.put(blood1.getName().trim(), blood1.getId());
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            sqLiteDatabase.close();
+        }
+        return blood;
     }
 
 

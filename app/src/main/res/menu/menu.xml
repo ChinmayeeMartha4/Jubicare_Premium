@@ -9,7 +9,8 @@
         android:icon="@drawable/editprofile"
         app:showAsAction="always"
         android:visible="false"
-        />
+
+    />
 
     <item  android:id="@+id/callPatient"
         android:title="Calling"

@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.indev.jubicare_premium.R;
 import com.indev.jubicare_premium.database.OldPrescriptionPojo;
 import com.indev.jubicare_premium.database.PatientFilledDataModel;
+import com.indev.jubicare_premium.database.PrescriptionModel;
 import com.indev.jubicare_premium.rest_api.APIClient;
 import com.indev.jubicare_premium.rest_api.TELEMEDICINE_API;
 import com.indev.jubicare_premium.sqlitehelper.SharedPrefHelper;
@@ -74,6 +75,7 @@ public class CommonPrescription extends AppCompatActivity {
     private Context context = this;
     TextView  view_prescription_click,tv_patient_symptoms,tv_doctor_name2,tv_date2,tv_medicine2;
     OldPrescriptionPojo oldPrescriptionPojo;
+    PrescriptionModel prescriptionModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,11 +96,12 @@ public class CommonPrescription extends AppCompatActivity {
             id = bundle.getString("id", "");
             symptoms = bundle.getString("symptoms", "");
         }
-        oldPrescriptionPojo.setId(sharedPrefHelper.getString("id", ""));
-        oldPrescriptionPojo.setDate(sharedPrefHelper.getString("date", ""));
-        oldPrescriptionPojo.setDoctor_name(sharedPrefHelper.getString("doctor_name", ""));
-        oldPrescriptionPojo.setMedicine(sharedPrefHelper.getString("medicine", ""));
-        oldPrescriptionPojo.setSymptoms(sharedPrefHelper.getString("symptoms", ""));
+//        oldPrescriptionPojo.setId(sharedPrefHelper.getString("id", ""));
+//        oldPrescriptionPojo.setDate(sharedPrefHelper.getString("date", ""));
+//        oldPrescriptionPojo.setDoctor_name(sharedPrefHelper.getString("doctor_name", ""));
+//        oldPrescriptionPojo.setSymptoms(sharedPrefHelper.getString("symptoms", ""));
+////        String constable_name = sqliteHelper.getsymptomNmae(prescriptionModel.getSymptom(), "symptom");
+//        oldPrescriptionPojo.setMedicine(sharedPrefHelper.getString("medicine", ""));
 
 
 //        ll_medical_info = inflatedView.findViewById(R.id.ll_medical_info);
@@ -299,7 +302,10 @@ public class CommonPrescription extends AppCompatActivity {
         mProgressDialog = new ProgressDialog(context);
         patientFilledDataModel = new PatientFilledDataModel();
         oldPrescriptionPojo = new OldPrescriptionPojo();
+        prescriptionModel = new PrescriptionModel();
         sharedPrefHelper = new SharedPrefHelper(context);
+        sqliteHelper = new SqliteHelper(this);
+
         scrollView = findViewById(R.id.scrollView);
         tv_doctor_name2 = findViewById(R.id.tv_doctor_name2);
         tv_patient_symptoms =findViewById(R.id.tv_patient_symptoms);

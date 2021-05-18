@@ -30,6 +30,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.indev.jubicare_premium.HomeActivity;
 import com.indev.jubicare_premium.R;
 
 import com.indev.jubicare_premium.adapter.TestDocsAdapterInProfile;
@@ -1122,8 +1123,8 @@ public class CommonProfile extends AppCompatActivity {
             MenuItem item = menu.findItem(R.id.callPatient);
             item.setVisible(true);
         }
-        if (sharedPrefHelper.getString("role_id", "").equalsIgnoreCase("7")
-                || sharedPrefHelper.getString("role_id", "").equalsIgnoreCase("5")) {
+        if (sharedPrefHelper.getString("role_id", "").equalsIgnoreCase("8")
+                || sharedPrefHelper.getString("role_id", "").equalsIgnoreCase("8")) {
             MenuItem item = menu.findItem(R.id.addAppointment);
             item.setVisible(true);
         }
@@ -1171,10 +1172,7 @@ public class CommonProfile extends AppCompatActivity {
             }
             appointmentInput.setPatient_appointment_id(patient_appointments_id);
             appointmentInput.setRole_id(sharedPrefHelper.getString("role_id", ""));
-            /*contact_no = tv_contact_no.getText().toString().trim();
-            appointmentInput.setPatient_contact_no(contact_no);
-            appointmentInput.setUser_id(sharedPrefHelper.getString("user_id", ""));
-            appointmentInput.setPatient_appointment_id(patient_appointments_id);*/
+
             Gson gson1 = new Gson();
             String data1 = gson1.toJson(appointmentInput);
             MediaType JSON1 = MediaType.parse("application/json; charset=utf-8");
@@ -1205,9 +1203,10 @@ public class CommonProfile extends AppCompatActivity {
                         //dial call
                         Intent callIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + did_no));
                         startActivity(callIntent);
-
                     } else {
+
                         Toast.makeText(context, "Please check your internet connection.", Toast.LENGTH_SHORT).show();
+
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -1249,5 +1248,12 @@ public class CommonProfile extends AppCompatActivity {
                 e.printStackTrace();
             }
         }*/
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(CommonProfile.this, PatientActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

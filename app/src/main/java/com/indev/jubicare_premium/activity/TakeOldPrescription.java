@@ -12,7 +12,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -21,24 +20,17 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.text.Editable;
 import android.text.Html;
-import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RadioGroup;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,11 +42,7 @@ import com.androidbuts.multispinnerfilter.KeyPairBoolData;
 import com.androidbuts.multispinnerfilter.MultiSpinnerSearch;
 import com.androidbuts.multispinnerfilter.SpinnerListener;
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.indev.jubicare_premium.FINAL_VAR;
-import com.indev.jubicare_premium.HomeActivity;
-import com.indev.jubicare_premium.database.AppointmentInput;
 import com.indev.jubicare_premium.database.DiseaseInput;
 import com.indev.jubicare_premium.database.DoctorAssignmentInput;
 import com.indev.jubicare_premium.database.PrescriptionModel;
@@ -74,8 +62,6 @@ import com.indev.jubicare_premium.sqlitehelper.SqliteHelper;
 import com.indev.jubicare_premium.sqlitehelper.SharedPrefHelper;
 //import com.indev.telemedicine.acitivities.utils.WebViewImageActivity;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
@@ -105,8 +91,6 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static android.R.layout.simple_spinner_item;
 
 public class TakeOldPrescription extends AppCompatActivity {
 
@@ -214,20 +198,22 @@ public class TakeOldPrescription extends AppCompatActivity {
     private int mmMonth;
     private int mmDay;
 
-
+    @BindView(R.id.personp)
+    TextView personp;
     String disability = "N/A";
     String caste_id;
     String caste;
 
-
+    int personID = 0;
+    String personName = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_old_appointment_view);
+        setContentView(R.layout.activity_take_prescription);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         ButterKnife.bind(this);
-        setTitle(Html.fromHtml("<font color=\"#FFFFFFFF\">" + "Old Appointment" + "</font>"));
+        setTitle(Html.fromHtml("<font color=\"#FFFFFFFF\">" + "Old Prescription" + "</font>"));
 
         initViews();
         getSpinnerValue();
@@ -245,20 +231,24 @@ public class TakeOldPrescription extends AppCompatActivity {
             Bundle bundle = getIntent().getExtras();
             if (bundle != null) {
                 screen_type = bundle.getString("patient", "");
-                profile_id = bundle.getString("profile_patient_id", "");
                 patient_appointments_id = bundle.getString("patient_appointments_id", "");
                 fromCounselor = bundle.getString("fromCounselor", "");
                 fromCounselorSearch = bundle.getString("fromCounselorSearch", "");
                 not_assigned_appointments = bundle.getString("not_assigned_appointments", "");
-                id = bundle.getString("id", "");
+                personID = bundle.getInt("personID", 0);
+                personName = bundle.getString("personName", "");
+
             }
 
             getSpinnerValue();
 
-            patientFilledDataModel.setProfile_patient_id(profile_id);
             patientFilledDataModel.setUser_id(sharedPrefHelper.getString("user_id", ""));
             patientFilledDataModel.setRole_id(sharedPrefHelper.getString("role_id", ""));
             patientFilledDataModel.setPatient_appointment_id(patient_appointments_id);
+            patientFilledDataModel.setProfile_patient_id(String.valueOf(personID));
+            patientFilledDataModel.setFull_name(sharedPrefHelper.getString("personName", ""));
+            personp.setText(personName);
+
 
             Gson gson = new Gson();
             String data = gson.toJson(patientFilledDataModel);
@@ -294,7 +284,7 @@ public class TakeOldPrescription extends AppCompatActivity {
         private void sendAppointment() {
             mProgressDialog = ProgressDialog.show(TakeOldPrescription.this, "", "Please Wait...", true);
             prescriptionModel.setUser_id(sharedPrefHelper.getString("user_id", ""));
-            prescriptionModel.setProfile_patient_id("1");
+            prescriptionModel.setProfile_patient_id(String.valueOf(personID));
             prescriptionModel.setDate(tv_date.getText().toString().trim());
             prescriptionModel.setDoctor_name(et_doctor_name.getText().toString().trim());
             prescriptionModel.setMedicine(et_medicine.getText().toString().trim());
@@ -391,6 +381,21 @@ public class TakeOldPrescription extends AppCompatActivity {
                 listArray0.add(h);
             }
 
+
+
+//            final ArrayAdapter q = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, symptomArrayList);
+//            q.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//            spn_symptoms.setAdapter(q);
+//
+//            if (prescriptionModel.getSymptom() != 0) {
+//                int spinnerPosition = 0;
+//                String strpos1 = sqliteHelper.getsymptomNmae(prescriptionModel.getSymptom(), "symptom");
+//                if (strpos1 != null || !strpos1.equals(null) || !strpos1.equals("")) {
+//                    spinnerPosition = q.getPosition(strpos1);
+//                    spn_symptoms.setSelection(spinnerPosition);
+//                    spinnerPosition = 0;
+//                }
+//            }
             spn_symptoms.setItems(listArray0, -1, new SpinnerListener() {
                 @Override
                 public void onItemsSelected(List<KeyPairBoolData> items) {

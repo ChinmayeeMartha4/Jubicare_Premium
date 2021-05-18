@@ -323,10 +323,12 @@ private void download_organization(String table) {
 }
     private void callpaymentApi() {
         String emp_id = et_emp_id.getText().toString().trim();
+       int org_id = organization;
 
             mProgressDialog = ProgressDialog.show(context, "payment", "Please Wait...", true);
             PaymentModel paymentModel = new PaymentModel();
-            paymentModel.setEmp_id(emp_id);
+            paymentModel.setOrg_id(org_id);
+        paymentModel.setEmp_id(emp_id);
 
 
             Gson mGson = new Gson();

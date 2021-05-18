@@ -5,16 +5,33 @@ public class OldPrescriptionPojo {
     private String doctor_name;
     private String user_id;
     private String profile_patient_id;
+    private String full_name;
 
-    public String getSymptom_id() {
+    public String getFull_name() {
+        return full_name;
+    }
+
+    public void setFull_name(String full_name) {
+        this.full_name = full_name;
+    }
+
+//    public String getSymptom_id() {
+//        return symptom_id;
+//    }
+//
+//    public void setSymptom_id(String symptom_id) {
+//        this.symptom_id = symptom_id;
+//    }
+
+    public int getSymptom_id() {
         return symptom_id;
     }
 
-    public void setSymptom_id(String symptom_id) {
+    public void setSymptom_id(int symptom_id) {
         this.symptom_id = symptom_id;
     }
 
-    private String symptom_id;
+    private int symptom_id;
 
     public String getSymptoms() {
         return symptoms;

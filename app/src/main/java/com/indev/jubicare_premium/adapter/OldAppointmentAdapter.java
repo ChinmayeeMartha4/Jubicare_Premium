@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,11 +30,13 @@ import butterknife.ButterKnife;
 public class OldAppointmentAdapter extends RecyclerView.Adapter<OldAppointmentAdapter.ViewHolder> {
 private Context context;
     private List<ContentValues> listModels;
+    private List<ContentValues> listModels1;
     SharedPrefHelper sharedPrefHelper;
     OldAppointmentAdapter.ClickListener clickListener;
-public OldAppointmentAdapter(Context context, List<ContentValues> listModels) {
+public OldAppointmentAdapter(Context context, List<ContentValues> listModels,List<ContentValues> listModels1) {
     this.context = context;
     this.listModels = listModels;
+    this.listModels1 = listModels1;
     sharedPrefHelper=new SharedPrefHelper(context);    }
 
 
@@ -73,8 +76,10 @@ public void onClick(View view) {
         intentDetailActivity.putExtra("temperature",listModels.get(position).get("temperature").toString());
         intentDetailActivity.putExtra("blood_oxygen_level",listModels.get(position).get("blood_oxygen_level").toString());
         intentDetailActivity.putExtra("pulse",listModels.get(position).get("pulse").toString());
-//        intentDetailActivity.putExtra("symptom",listModels.get(position).get("symptom").toString());
-
+//        intentDetailActivity.putExtra("sys",listModels.get(position).get("sys").toString());
+//      intentDetailActivity.putParcelableArrayListExtra("sys", (ArrayList<>) sys);
+//      intentDetailActivity.putStringArrayListExtra("sys", arrayList);
+//       intent k throught data of array one activity to other
 
     context.startActivity(intentDetailActivity);
         ((Activity)context).finish();

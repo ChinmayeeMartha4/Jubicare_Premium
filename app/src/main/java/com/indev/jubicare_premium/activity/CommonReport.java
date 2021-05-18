@@ -79,7 +79,7 @@ ReportsPojo reportsPojo;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.common_report_profile_inflater);
         ButterKnife.bind(this);
-        setTitle(Html.fromHtml("<font color=\"#FFFFFFFF\">" + "View Prescription" + "</font>"));
+        setTitle(Html.fromHtml("<font color=\"#FFFFFFFF\">" + "View Report" + "</font>"));
         patientFilledDataModel = new PatientFilledDataModel();
 //        sharedPrefHelper = new SharedPrefHelper(this);
         initViews();
@@ -96,10 +96,10 @@ ReportsPojo reportsPojo;
 //        scrollView.fullScroll(ScrollView.FOCUS_DOWN);
 
 //        addDynamicProfile();
-        reportsPojo.setId(sharedPrefHelper.getString("id", ""));
-        reportsPojo.setDate(sharedPrefHelper.getString("date", ""));
-        reportsPojo.setDoctor_name(sharedPrefHelper.getString("doctor_name", ""));
-        reportsPojo.setTest(sharedPrefHelper.getString("test", ""));
+//        reportsPojo.setId(sharedPrefHelper.getString("id", ""));
+//        reportsPojo.setDate(sharedPrefHelper.getString("date", ""));
+//        reportsPojo.setDoctor_name(sharedPrefHelper.getString("doctor_name", ""));
+//        reportsPojo.setTest(sharedPrefHelper.getString("test", ""));
 
 
 //        ll_medical_info = inflatedView.findViewById(R.id.ll_medical_info);

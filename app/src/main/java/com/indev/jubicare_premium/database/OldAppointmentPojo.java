@@ -15,6 +15,15 @@ public class OldAppointmentPojo {
 
     private String id;
     private String profile_patient_id;
+    private String full_name;
+
+    public String getFull_name() {
+        return full_name;
+    }
+
+    public void setFull_name(String full_name) {
+        this.full_name = full_name;
+    }
 
     public String getProfile_patient_id() {
         return profile_patient_id;
@@ -71,6 +80,7 @@ public class OldAppointmentPojo {
         this.doctor_name = doctor_name;
     }
     private String prescribed_medicine;
+    private String assigned_doctor_on;
     private String prescribed_medicine_date;
     private String is_emergency;
     private String height;
@@ -179,6 +189,24 @@ public class OldAppointmentPojo {
     private String symptom_id;
     private String app_version;
     private String reason;
+
+    public String getAssigned_doctor_on() {
+        return assigned_doctor_on;
+    }
+
+    public void setAssigned_doctor_on(String assigned_doctor_on) {
+        this.assigned_doctor_on = assigned_doctor_on;
+    }
+
+    public String getAssigned_doctor() {
+        return assigned_doctor;
+    }
+
+    public void setAssigned_doctor(String assigned_doctor) {
+        this.assigned_doctor = assigned_doctor;
+    }
+
+    private String assigned_doctor;
 
     public String getReason() {
         return reason;

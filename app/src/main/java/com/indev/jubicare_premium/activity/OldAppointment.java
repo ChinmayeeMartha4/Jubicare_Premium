@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,6 +31,7 @@ import com.indev.jubicare_premium.sqlitehelper.SharedPrefHelper;
 import com.indev.jubicare_premium.sqlitehelper.SqliteHelper;
 import com.google.gson.JsonObject;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
@@ -45,29 +48,45 @@ public class OldAppointment extends AppCompatActivity {
 
     OldAppointmentPojo oldAppointmentPojo = new OldAppointmentPojo();
     ArrayList<ContentValues> patientContentValue = new ArrayList<ContentValues>();
-
+    ArrayList<ContentValues> patientContentValue1 = new ArrayList<ContentValues>();
+    TextView person2;
     RecyclerView appointment_recyclerView;
     private ProgressDialog mProgressDialog;
     private Context context=this;
     SharedPrefHelper sharedPrefHelper;
-String id="";
+
+    PatientModel patientModel;
+    String symptom = "";
+    int personID = 0;
+    String personName = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_old_appointment);
-        setTitle(Html.fromHtml("<font color=\"#FFFFFFFF\">" + "Old Appointment" + "</font>"));
+        setTitle(Html.fromHtml("<font color=\"#FFFFFFFF\">" + "Old Appointments" + "</font>"));
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        Bundle bundle = getIntent().getExtras();
-        if (bundle != null) {
-            id = bundle.getString("id", "");
-        }
 
         initViews();
+        sharedPrefHelper = new SharedPrefHelper(this);
 
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            personID = bundle.getInt("personID", 0);
+            personName = bundle.getString("personName", "");
 
+        }
+        oldAppointmentPojo.setProfile_patient_id(String.valueOf(personID));
+        oldAppointmentPojo.setFull_name(sharedPrefHelper.getString("personName", ""));
+        person2.setText(personName);
 
-        /*send data here*/
+//        if (personID.equals(personID)) {
+
+//        if (sharedPrefHelper.getString("personID", "").equalsIgnoreCase(String.valueOf(12042))) {
+//            appointment_recyclerView.setVisibility(View.VISIBLE);
+//
+//        }
+            /*send data here*/
         getAppointmentProfileDetails();
 
     }
@@ -75,7 +94,9 @@ String id="";
         sqliteHelper = new SqliteHelper(this);
         sharedPrefHelper = new SharedPrefHelper(this);
         mProgressDialog = new ProgressDialog(context);
+        patientModel = new PatientModel();
         appointment_recyclerView = (RecyclerView) findViewById(R.id.appointment_recyclerView);
+        person2 = findViewById(R.id.person2);
 
     }
     private void getAppointmentProfileDetails() {
@@ -92,7 +113,6 @@ String id="";
         if (body != null && api_service != null) {
             Call<JsonObject> server_response = api_service.download_appointments(body);
             try {
-
                 if (server_response != null) {
                     server_response.enqueue(new Callback<JsonObject>() {
                         @Override
@@ -105,10 +125,10 @@ String id="";
                                     mProgressDialog.dismiss();
                                     JsonArray data = singledataP.getAsJsonArray("tableData");
                                     //comment by vimal because they send Appointmenthistory = null instead of Appointmenthistory = []
-                                    JsonArray data2 = singledataP.getAsJsonArray("Appointmenthistory");
+                                    JsonArray data2 = singledataP.getAsJsonArray("sys");
 
 //                                    JSONObject singledata = null;
-                                    JSONObject singledata2 = null;
+//                                    JSONObject singledata2 = null;
 
                                     if (data.size() > 0) {
                                         for (int i = 0; i < data.size(); i++) {
@@ -116,6 +136,9 @@ String id="";
                                             Log.e("bcjhdbjcb", "onResponse: " + singledata.toString());
                                             String id = singledata.getString("id");
                                             oldAppointmentPojo.setId(id);
+                                            //sy[]=>yha pr sy ka array niklana hai
+                                            //loop
+                                            //add in string array
 
                                             Iterator keys = singledata.keys();
                                             ContentValues contentValues = new ContentValues();
@@ -125,14 +148,77 @@ String id="";
                                             }
                                             patientContentValue.add(contentValues);
 
-                                            LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
-                                            oldAppointmentAdapter = new OldAppointmentAdapter(context, patientContentValue);
-                                            appointment_recyclerView.setLayoutManager(mLayoutManager);
-                                            appointment_recyclerView.setAdapter(oldAppointmentAdapter);
-
+//                                            if (data2 != null && data2.size() > 0) {
+//                                                        for (int k = 0; k < data2.size(); k++) {
+////                                            JSONArray jsonArray = data2.getAsJsonArray(k);
+//
+//                                                            JSONArray singledata2 = new JSONArray(data.get(k).toString());
+////                                                    JSONArray singledata = data2.getJSONArray(i);
+//
+//                                                            if (k == 0) {
+//                                                                symptom = singledata2.getString(Integer.parseInt("sys")).trim();
+//                                                            } else {
+//                                                                if (symptom != null) {
+//                                                                    symptom = symptom + ", " + singledata2.getString(Integer.parseInt("sys")).trim();
+//                                                                }
+//                                                            }
+//
+//                                                            patientContentValue1.add(contentValues);
+//
+                                                            LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
+                                                            oldAppointmentAdapter = new OldAppointmentAdapter(context, patientContentValue, patientContentValue1);
+                                                            appointment_recyclerView.setLayoutManager(mLayoutManager);
+                                                            appointment_recyclerView.setAdapter(oldAppointmentAdapter);
+//                                                        }}
                                         }
                                     }
-                                } catch (Exception e) {
+//                                    if (data2.size()> 0) {
+//                                        for (int j = 0; j < data2.size(); j++) {
+//                                            JSONArray singledata2 = symptomArray.getJSONArray(j);
+//                                            if (j == 0) {
+//                                                symptom = singledata2.getString("symptom_name");
+//                                            } else {
+//                                                if (symptom != null) {
+//                                                    symptom = symptom + ", " + singledata2.getString("symptom_name");
+//                                                }
+//                                            }
+//                                        }
+//                                    }
+
+//                                    JSONArray symptomArray = singledata2.getJSONArray("sys");
+//                                    if (data2 != null && data2.size() > 0) {
+//                                        for (int k = 0; k < data2.size(); k++) {
+////                                            JSONArray jsonArray = data2.getAsJsonArray(k);
+//                                            JSONArray singledata2 = new JSONArray(data.get(k).toString());
+//
+//                                            if (k == 0) {
+//                                                symptom = singledata2.getString(Integer.parseInt("sys")).trim();
+//                                            } else {
+//                                                if (symptom != null) {
+//                                                    symptom = symptom + ", " + singledata2.getString(Integer.parseInt("sys")).trim();
+//                                                }
+//                                            }
+//                                            Iterator<JSONArray> keys = singledata2.keys();
+//                                            ContentValues contentValues = new ContentValues();
+//                                            while (keys.hasNext()) {
+//                                                String currentDynamicKey = (String) keys.next();
+//                                                contentValues.put(currentDynamicKey, singledata2.get(Integer.parseInt(currentDynamicKey)).toString());
+//                                            }
+//                                            patientContentValue1.add(contentValues);
+//
+//                                            LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
+//                                            oldAppointmentAdapter = new OldAppointmentAdapter(context, patientContentValue1);
+//                                            appointment_recyclerView.setLayoutManager(mLayoutManager);
+//                                            appointment_recyclerView.setAdapter(oldAppointmentAdapter);
+//
+//
+////                                            JSONArray array = (JSONArray)jsonObject.get("employee");
+//                                            Iterator<JSONObject> iterator = array.iterator();
+//                                            while (iterator.hasNext()) {
+//                                                System.out.println(iterator.next().toString());
+//
+
+                                    } catch (Exception e) {
                                     e.printStackTrace();
                                 }
                             }
