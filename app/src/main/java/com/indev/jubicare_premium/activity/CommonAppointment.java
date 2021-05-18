@@ -167,7 +167,7 @@ public class CommonAppointment extends AppCompatActivity {
 //            oldAppointmentPojo.setPulse(sharedPrefHelper.getString("pulse", ""));
 //            oldAppointmentPojo.setSymptom_id(sharedPrefHelper.getString("sys", ""));
 
-            tv_assigned_doctor1.setText(assigned_doctor_on);
+            tv_assigned_doctor1.setText(assigned_doctor);
             tv_date_assigned_doctor1.setText(assigned_doctor_on);
             tv_date_taking_any_prescription1.setText(prescribed_medicine_date);
             tv_taking_any_prescription1.setText(prescribed_medicine);

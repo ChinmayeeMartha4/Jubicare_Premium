@@ -76,6 +76,8 @@ public void onClick(View view) {
         intentDetailActivity.putExtra("temperature",listModels.get(position).get("temperature").toString());
         intentDetailActivity.putExtra("blood_oxygen_level",listModels.get(position).get("blood_oxygen_level").toString());
         intentDetailActivity.putExtra("pulse",listModels.get(position).get("pulse").toString());
+        intentDetailActivity.putExtra("assigned_doctor_on",listModels.get(position).get("assigned_doctor_on").toString());
+        intentDetailActivity.putExtra("assigned_doctor",listModels.get(position).get("assigned_doctor").toString());
 //        intentDetailActivity.putExtra("sys",listModels.get(position).get("sys").toString());
 //      intentDetailActivity.putParcelableArrayListExtra("sys", (ArrayList<>) sys);
 //      intentDetailActivity.putStringArrayListExtra("sys", arrayList);
@@ -115,14 +117,5 @@ public static class ViewHolder extends RecyclerView.ViewHolder {
     public void onItemClick(OldAppointmentAdapter.ClickListener listener) {
         this.clickListener = listener;
     }
-//    public TextView tv_date,tv_doctor;
-//    ImageView view;
-//
-//    public ViewHolder(View itemView) {
-//        super(itemView);
-//        this.tv_date = (TextView) itemView.findViewById(R.id.tv_date);
-//        this.tv_doctor = (TextView) itemView.findViewById(R.id.tv_doctor);
-//        this.view = (ImageView) itemView.findViewById(R.id.view);
-//
-//    }
+
 }

@@ -76,6 +76,9 @@ public class OldAppointment extends AppCompatActivity {
             personName = bundle.getString("personName", "");
 
         }
+
+        String personName = sharedPrefHelper.getString("personName", "");
+
         oldAppointmentPojo.setProfile_patient_id(String.valueOf(personID));
         oldAppointmentPojo.setFull_name(sharedPrefHelper.getString("personName", ""));
         person2.setText(personName);

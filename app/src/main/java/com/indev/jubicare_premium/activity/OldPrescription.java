@@ -98,16 +98,6 @@ public class OldPrescription extends AppCompatActivity {
 
         /*send data here*/
         getPatientProfileDetails();
-//        mProgressDialog = ProgressDialog.show(context, "", "Please Wait...", true);
-////        oldPrescriptionPojo.setProfile_patient_id(profile_id);
-//        oldPrescriptionPojo.setUser_id("2");
-//        oldPrescriptionPojo.setRole_id(sharedPrefHelper.getString("role_id", ""));
-//
-//        Gson gson = new Gson();
-//        String data = gson.toJson(oldPrescriptionPojo);
-//        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-//        RequestBody body = RequestBody.create(JSON, data);
-//        callPrescriptionListApi();
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
