@@ -113,9 +113,9 @@ public class Reports extends AppCompatActivity {
     }
     private void getPatientProfileDetails() {
         mProgressDialog = ProgressDialog.show(context, "", "Please Wait...", true);
-//        oldPrescriptionPojo.setProfile_patient_id(profile_id);
         reportsPojo.setUser_id(sharedPrefHelper.getString("user_id", ""));
         reportsPojo.setRole_id(sharedPrefHelper.getString("role_id", ""));
+        reportsPojo.setProfile_patient_id(String.valueOf(personID));
 
         Gson gson = new Gson();
         String data = gson.toJson(reportsPojo);

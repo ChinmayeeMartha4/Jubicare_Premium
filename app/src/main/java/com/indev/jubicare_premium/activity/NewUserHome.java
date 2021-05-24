@@ -57,8 +57,8 @@ public class NewUserHome extends AppCompatActivity {
     String add = "";
     @BindView(R.id.ll_next)
     LinearLayout ll_next;
-    @BindView(R.id.et_mobileNo)
-    EditText et_mobileNo;
+//    @BindView(R.id.et_mobileNo)
+//    EditText et_mobileNo;
     @BindView(R.id.et_emp_id)
     EditText et_emp_id;
     @BindView(R.id.spn_org)
@@ -144,15 +144,15 @@ public class NewUserHome extends AppCompatActivity {
 
                             et_emp_id.setVisibility(View.GONE);
                             tv_emp_id.setVisibility(View.GONE);
-                            tv_mobileNo.setVisibility(View.GONE);
-                            et_mobileNo.setVisibility(View.GONE);
+//                            tv_mobileNo.setVisibility(View.GONE);
+//                            et_mobileNo.setVisibility(View.GONE);
                             tv_welcome1.setText(Html.fromHtml("Changes Rs. <font color=\"#2A66CC\">" + "199" + "</font> per patient"));
                         }
                         else{
                             et_emp_id.setVisibility(View.VISIBLE);
                             tv_emp_id.setVisibility(View.VISIBLE);
-                            tv_mobileNo.setVisibility(View.VISIBLE);
-                            et_mobileNo.setVisibility(View.VISIBLE);
+//                            tv_mobileNo.setVisibility(View.VISIBLE);
+//                            et_mobileNo.setVisibility(View.VISIBLE);
                             tv_welcome1.setText(Html.fromHtml("Changes Rs. <font color=\"#2A66CC\">" + "99" + "</font> per patient"));
 
 
@@ -192,12 +192,12 @@ public class NewUserHome extends AppCompatActivity {
         ll_next = findViewById(R.id.ll_next);
         organizationModel=new OrganizationModel();
 
-        et_mobileNo = findViewById(R.id.et_mobileNo);
+//        et_mobileNo = findViewById(R.id.et_mobileNo);
         et_emp_id = findViewById(R.id.et_emp_id);
         spn_org = findViewById(R.id.spn_org);
         tv_emp_id = findViewById(R.id.tv_emp_id);
         spn_org = findViewById(R.id.spn_org);
-        tv_mobileNo = findViewById(R.id.tv_mobileNo);
+//        tv_mobileNo = findViewById(R.id.tv_mobileNo);
         tv_welcome1 = findViewById(R.id.tv_welcome1);
         organizationNameHM=new HashMap<>();
         organizationArrayList=new ArrayList<>();
@@ -308,8 +308,6 @@ private void download_organization(String table) {
         }
     }
 }
-
-
     private boolean checkValidation() {
         if (!et_emp_id.getText().toString().trim().matches("^[a-zA-Z0-9]+$")) {
             flagEditfield = et_emp_id;
@@ -324,13 +322,10 @@ private void download_organization(String table) {
     private void callpaymentApi() {
         String emp_id = et_emp_id.getText().toString().trim();
        int org_id = organization;
-
             mProgressDialog = ProgressDialog.show(context, "payment", "Please Wait...", true);
             PaymentModel paymentModel = new PaymentModel();
             paymentModel.setOrg_id(org_id);
-        paymentModel.setEmp_id(emp_id);
-
-
+            paymentModel.setEmp_id(emp_id);
             Gson mGson = new Gson();
             String data = mGson.toJson(paymentModel);
             MediaType JSON = MediaType.parse("application/json; charset=utf-8");
@@ -351,8 +346,7 @@ private void download_organization(String table) {
                     if (success.equals("1")) {
                         Toast.makeText(NewUserHome.this, "" + message, Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(NewUserHome.this, NewUserWelcomeHome.class);
-
-
+                        intent.putExtra("text","You will have to pay Rs. 99 for availing this service.");
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                         finish();
@@ -364,7 +358,6 @@ private void download_organization(String table) {
                     e.printStackTrace();
                 }
             }
-
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
                 Toast.makeText(context, "" + t.getMessage(), Toast.LENGTH_SHORT).show();

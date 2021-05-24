@@ -46,7 +46,7 @@ public class NewUserWelcomeHome extends AppCompatActivity {
     ProgressDialog mProgressDialog;
     String user_idd = "";
     String name = "";
-//    You will have to pay Rs. 99 for availing this service.
+    String name1 = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,31 +56,30 @@ public class NewUserWelcomeHome extends AppCompatActivity {
         setTitle(Html.fromHtml("<font color=\"#FFFFFFFF\">" + "Payment" + "</font>"));
         tv_pay=findViewById(R.id.tv_pay);
         tv_welcomeName=findViewById(R.id.tv_welcomeName);
+        tv_careforRs=findViewById(R.id.tv_careforRs);
         sharedPrefHelper = new SharedPrefHelper(this);
 
         String name = sharedPrefHelper.getString("name", "");
         tv_welcomeName.setText(name);
 
-//        Bundle bundle = getIntent().getExtras();
-//        if (bundle != null) {
-//            user_idd = bundle.getString("user_idd");
-//            name = bundle.getString("name");
-//
-//        }
-//if()
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            name1 = bundle.getString("text");
+
+        }
+
+        tv_careforRs.setText(name1);
+
+
         tv_pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 callpaymentApi(view);
-
-                Intent intent = new Intent(NewUserWelcomeHome.this, Login.class);
-                Toast.makeText(context, "Payment Successful", Toast.LENGTH_SHORT).show();
-                startActivity(intent);
-                finish();
             }
         });
     }
     private void callpaymentApi(View view) {
+
         if (checkInternetConnection(context) == false) {
             new AlertDialog.Builder(context)
                     .setTitle("Alert !")
@@ -95,7 +94,7 @@ public class NewUserWelcomeHome extends AppCompatActivity {
         } else {
             mProgressDialog = ProgressDialog.show(context, "payment", "Please Wait...", true);
             PaymentModel paymentModel = new PaymentModel();
-//            paymentModel.setMobile_no(mobile_no);
+            paymentModel.setUser_id(sharedPrefHelper.getString("user_id", ""));
 
             Gson mGson = new Gson();
             String data = mGson.toJson(paymentModel);
@@ -117,7 +116,6 @@ public class NewUserWelcomeHome extends AppCompatActivity {
                                 Toast.makeText(NewUserWelcomeHome.this, "" + message, Toast.LENGTH_SHORT).show();
                                 startActivity(intent);
                                 finish();
-
                             }
 
 

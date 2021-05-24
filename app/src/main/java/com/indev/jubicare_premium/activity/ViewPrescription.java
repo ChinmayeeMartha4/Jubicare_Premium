@@ -26,6 +26,7 @@ public class  ViewPrescription extends AppCompatActivity {
 //    LinearLayout ll_for_dynamic_add;
     public static ScrollView scrollView;
     String view_prescription_url="";
+    String view_prescription_click="";
     String commomProfile = "";
     PatientFilledDataModel patientFilledDataModel;
     String profile_id = "";
@@ -51,11 +52,13 @@ public class  ViewPrescription extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
 //            profile_id = bundle.getString("profile_patient_id", "");
+            view_prescription_click = bundle.getString("url", "");
             view_prescription_url = bundle.getString("url", "");
         }
 
 
         webView.getSettings().setJavaScriptEnabled(true);
+        webView.loadUrl(view_prescription_click);
         webView.loadUrl(view_prescription_url);
 
     }
@@ -67,10 +70,10 @@ public class  ViewPrescription extends AppCompatActivity {
         sharedPrefHelper = new SharedPrefHelper(context);
         scrollView = findViewById(R.id.scrollView);
     }
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(ViewPrescription.this, CommonProfile.class);
-        startActivity(intent);
-        finish();
-    }
+//    @Override
+//    public void onBackPressed() {
+//        Intent intent = new Intent(ViewPrescription.this, CommonProfile.class);
+//        startActivity(intent);
+//        finish();
+//    }
 }

@@ -74,10 +74,8 @@ public interface TELEMEDICINE_API {
     @POST("change-password.php")
     Call<JsonObject> sendChangePassword(@Body RequestBody body);
 
-
     @POST("profile.php")
     Call<JsonObject> getCommonProfile(@Body RequestBody body);
-
 
     @POST("pharmacist-village-list.php")
     Call<JsonObject> pharmacistVillageList(@Body RequestBody body);

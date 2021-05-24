@@ -58,6 +58,8 @@ public class CommonAppointment extends AppCompatActivity {
     /*for dynamic inflate layout*/
     @BindView(R.id.ll_for_dynamic_add)
     LinearLayout ll_for_dynamic_add;
+//    @BindView(R.id.view_prescription_click1)
+//    TextView view_prescription_click1;
     public static ScrollView scrollView;
     String view_prescription_url = "";
     String commomProfile = "";
@@ -86,6 +88,7 @@ public class CommonAppointment extends AppCompatActivity {
     String blood_oxygen_level="";
     String pulse="";
     String symptom="";
+    String view_prescription_click="";
     TextView tv_patient_symptoms1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,11 +121,9 @@ public class CommonAppointment extends AppCompatActivity {
             temperature = bundle.getString("temperature", "");
             blood_oxygen_level = bundle.getString("blood_oxygen_level", "");
             pulse = bundle.getString("pulse", "");
-            symptom = bundle.getString("sys", "");//get string array here
-            //itreate here and add to text view
-//            ArrayList<sys> myList = getIntent().getParcelableExtra("sys");
-//            ArrayList<String> numbersList = (ArrayList<String>) getIntent().getSerializableExtra("sys");
-//            tv_patient_symptoms1.setText(String.valueOf(numbersList));
+            view_prescription_click = bundle.getString("view_prescription_click", "");
+            symptom = bundle.getString("sy", "");
+
             initViews();
             addDynamicProfile();
         }
@@ -135,7 +136,7 @@ public class CommonAppointment extends AppCompatActivity {
             TestDocsAdapterInProfile testDocsAdapterInProfile;
             TextView tv_taking_prescription_any_date, tv_assigned_doctor1,tv_date_assigned_doctor1,tv_date_taking_any_prescription1,
                     tv_patient_symptoms1,tv_bpupperP1,tv_bplowerP1,tv_taking_any_prescription1,tv_sugarP1,tv_tempratureP1,
-                    tv_PulseP1, tv_blood_oxygen_levelP1,tv_any_emergency1,tv_patient_remarkss1,view_prescription_click;
+                    tv_PulseP1, tv_blood_oxygen_levelP1,tv_any_emergency1,tv_patient_remarkss1,view_prescription_click1;
             tv_date_assigned_doctor1 = inflatedView.findViewById(R.id.tv_date_assigned_doctor1);
             tv_assigned_doctor1 = inflatedView.findViewById(R.id.tv_assigned_doctor1);
             tv_patient_symptoms1 = inflatedView.findViewById(R.id.tv_patient_symptoms1);
@@ -144,28 +145,13 @@ public class CommonAppointment extends AppCompatActivity {
             tv_taking_prescription_any_date = inflatedView.findViewById(R.id.tv_taking_prescription_any_date);
             tv_any_emergency1 = inflatedView.findViewById(R.id.tv_any_emergency1);
             tv_patient_remarkss1 = inflatedView.findViewById(R.id.tv_patient_remarkss1);
-            view_prescription_click = inflatedView.findViewById(R.id.view_prescription_click);
+            view_prescription_click1 = inflatedView.findViewById(R.id.view_prescription_click1);
             tv_bpupperP1 = inflatedView.findViewById(R.id.tv_bpupperP1);
             tv_bplowerP1 =inflatedView.findViewById(R.id.tv_bplowerP1);
             tv_PulseP1 = inflatedView.findViewById(R.id.tv_PulseP1);
             tv_sugarP1 = inflatedView.findViewById(R.id.tv_sugarP1);
             tv_tempratureP1 = inflatedView.findViewById(R.id.tv_tempratureP1);
             tv_blood_oxygen_levelP1 =inflatedView.findViewById(R.id.tv_blood_oxygen_levelP1);
-
-//            oldAppointmentPojo.setId(sharedPrefHelper.getString("id", ""));
-//            oldAppointmentPojo.setDoctor_name(sharedPrefHelper.getString("assigned_doctor", ""));
-//            oldAppointmentPojo.setDate(sharedPrefHelper.getString("assigned_doctor_on", ""));
-//            oldAppointmentPojo.setPrescribed_medicine(sharedPrefHelper.getString("prescribed_medicine", ""));
-//            oldAppointmentPojo.setPrescribed_medicine_date(sharedPrefHelper.getString("prescribed_medicine_date", ""));
-//            oldAppointmentPojo.setIs_emergency(sharedPrefHelper.getString("is_emergency", ""));
-//            oldAppointmentPojo.setRemarks(sharedPrefHelper.getString("remarks", ""));
-//            oldAppointmentPojo.setBp_low(sharedPrefHelper.getString("bp_lower", ""));
-//            oldAppointmentPojo.setBp_upper(sharedPrefHelper.getString("bp_upper", ""));
-//            oldAppointmentPojo.setSugar(sharedPrefHelper.getString("sugar", ""));
-//            oldAppointmentPojo.setTemperature(sharedPrefHelper.getString("temperature", ""));
-//            oldAppointmentPojo.setBlood_oxygen_level(sharedPrefHelper.getString("blood_oxygen_level", ""));
-//            oldAppointmentPojo.setPulse(sharedPrefHelper.getString("pulse", ""));
-//            oldAppointmentPojo.setSymptom_id(sharedPrefHelper.getString("sys", ""));
 
             tv_assigned_doctor1.setText(assigned_doctor);
             tv_date_assigned_doctor1.setText(assigned_doctor_on);
@@ -179,8 +165,19 @@ public class CommonAppointment extends AppCompatActivity {
             tv_tempratureP1.setText(temperature);
             tv_blood_oxygen_levelP1.setText(blood_oxygen_level);
             tv_PulseP1.setText(pulse);
-//            tv_patient_symptoms1.setText(symptom);
-
+            System.out.println("Symptom>>>"+symptom);
+            tv_patient_symptoms1.setText(symptom);
+//        view_prescription_click1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //TO DO
+//                Intent intent = new Intent(context, ViewPrescription.class);
+//                intent.putExtra("url", view_prescription_click);
+////                intent.putExtra("view_prescription_click",sharedPrefHelper.getString("view_prescription_click", ""));
+//
+//                startActivity(intent);
+//            }
+//        });
             ll_for_dynamic_add.addView(inflatedView);
         }
 

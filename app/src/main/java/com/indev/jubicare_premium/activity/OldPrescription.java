@@ -127,9 +127,9 @@ public class OldPrescription extends AppCompatActivity {
 
     private void getPatientProfileDetails() {
         mProgressDialog = ProgressDialog.show(context, "", "Please Wait...", true);
-//        oldPrescriptionPojo.setProfile_patient_id(profile_id);
         oldPrescriptionPojo.setUser_id(sharedPrefHelper.getString("user_id", ""));
         oldPrescriptionPojo.setRole_id(sharedPrefHelper.getString("role_id", ""));
+        oldPrescriptionPojo.setProfile_patient_id(String.valueOf(personID));
 
         Gson gson = new Gson();
         String data = gson.toJson(oldPrescriptionPojo);
@@ -140,6 +140,7 @@ public class OldPrescription extends AppCompatActivity {
         if (body != null && api_service != null) {
             Call<JsonObject> server_response = api_service.download_old_prescription(body);
             try {
+
                 if (server_response != null) {
                     server_response.enqueue(new Callback<JsonObject>() {
                         @Override
@@ -169,6 +170,7 @@ public class OldPrescription extends AppCompatActivity {
                                                 String currentDynamicKey = (String) keys.next();
                                                 contentValues.put(currentDynamicKey, singledata.get(currentDynamicKey).toString());
                                             }
+
                                             patientContentValue.add(contentValues);
 
                                             LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);

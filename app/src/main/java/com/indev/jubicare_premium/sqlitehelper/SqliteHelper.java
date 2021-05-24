@@ -63,11 +63,7 @@ public class SqliteHelper extends SQLiteOpenHelper {
         db.execSQL(MedicineListModel.CREATE_TABLE);
         db.execSQL(Village.CREATE_TABLE);
         db.execSQL(SymptomModel.CREATE_TABLE);
-//        db.execSQL(OldAppointmentPojo.CREATE_TABLE);
-//        db.execSQL(ReportsPojo.CREATE_TABLE);
         db.execSQL(SubTestsModel.CREATE_TABLE);
-//        db.execSQL(AppointmentMedicinePrescribedModel.CREATE_TABLE);
-//        db.execSQL(AppointmentTestModel.CREATE_TABLE);
         db.execSQL(Test.CREATE_TABLE);
         db.execSQL(PrescriptionDays.CREATE_TABLE);
         db.execSQL(PrescriptionEatingSchedule.CREATE_TABLE);
@@ -381,7 +377,6 @@ public class SqliteHelper extends SQLiteOpenHelper {
                 Cursor cursor = db.rawQuery(query, null);
                 if (cursor != null && cursor.getCount() > 0) {
                     cursor.moveToFirst();
-
                     while (!cursor.isAfterLast()) {
                         String name = cursor.getString(cursor.getColumnIndex("name"));
 
@@ -1081,6 +1076,16 @@ public class SqliteHelper extends SQLiteOpenHelper {
         }
         return symptomsHM;
     }
+
+    public String getSymtomName(String id, String table) {
+        String sum = "";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select symptom from " + table + " where id = '" + id + "' ", null);
+        if (cursor.moveToFirst())
+            sum = cursor.getString(cursor.getColumnIndex("symptom"));
+        return sum;
+    }
+
 
     public HashMap<String, Integer> getPrescriptionDays() {
         HashMap<String, Integer> symptomsHM = new HashMap<>();

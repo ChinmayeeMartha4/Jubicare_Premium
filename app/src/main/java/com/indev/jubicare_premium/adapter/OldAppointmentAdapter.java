@@ -33,10 +33,11 @@ private Context context;
     private List<ContentValues> listModels1;
     SharedPrefHelper sharedPrefHelper;
     OldAppointmentAdapter.ClickListener clickListener;
-public OldAppointmentAdapter(Context context, List<ContentValues> listModels,List<ContentValues> listModels1) {
+    private String symptom;
+public OldAppointmentAdapter(Context context, List<ContentValues> listModels, String symptom) {
     this.context = context;
     this.listModels = listModels;
-    this.listModels1 = listModels1;
+    this.symptom = symptom;
     sharedPrefHelper=new SharedPrefHelper(context);    }
 
 
@@ -77,11 +78,10 @@ public void onClick(View view) {
         intentDetailActivity.putExtra("blood_oxygen_level",listModels.get(position).get("blood_oxygen_level").toString());
         intentDetailActivity.putExtra("pulse",listModels.get(position).get("pulse").toString());
         intentDetailActivity.putExtra("assigned_doctor_on",listModels.get(position).get("assigned_doctor_on").toString());
+//        intentDetailActivity.putExtra("view_prescription_click",listModels.get(position).get("view_prescription_click").toString());
         intentDetailActivity.putExtra("assigned_doctor",listModels.get(position).get("assigned_doctor").toString());
-//        intentDetailActivity.putExtra("sys",listModels.get(position).get("sys").toString());
-//      intentDetailActivity.putParcelableArrayListExtra("sys", (ArrayList<>) sys);
-//      intentDetailActivity.putStringArrayListExtra("sys", arrayList);
-//       intent k throught data of array one activity to other
+        intentDetailActivity.putExtra("sy",symptom);
+
 
     context.startActivity(intentDetailActivity);
         ((Activity)context).finish();

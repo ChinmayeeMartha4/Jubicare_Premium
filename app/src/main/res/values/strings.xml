@@ -161,7 +161,7 @@
     <string name="enteryourorg">Select your organization</string>
     <string name="enteryourempid">Enter your employee ID</string>
 
-    <string name="charges">Charges Rs. <font color='#2A66CC'>199</font> per patient</string>
+    <string name="charges">Charges Rs. <font color='#2A66CC'>99</font> per patient</string>
 
     <string name="search_by_mobile_or_aadhaar">Search by mobile</string>
     <string name="add_profile">Add profile</string>

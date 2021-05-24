@@ -1187,7 +1187,14 @@ public class SignUp extends AppCompatActivity {
                         sendSignUpData(body);
                     }
                 }
+//                Intent intent = new Intent(SignUp.this, NewUserWelcomeHome.class);
+//                intent.putExtra("text","You will have to pay Rs. 199 for availing this service.");
+//                startActivity(intent);
+//                finish();
+
             }
+
+
         });
 
         rg_gender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -1263,6 +1270,7 @@ public class SignUp extends AppCompatActivity {
                                         if (add.equals("")) {
                                             String otp = jsonObject.getString("otp");
                                             Intent intent = new Intent(context, NewUserWelcomeHome.class);
+                                            intent.putExtra("text","You will have to pay Rs. 199 for availing this service.");
                                             intent.putExtra("user_id", user_id);
                                             intent.putExtra("otp", otp);
                                             intent.putExtra("mobile", et_contact_number.getText().toString());
@@ -1272,27 +1280,29 @@ public class SignUp extends AppCompatActivity {
                                         } else {
                                             mProgressDialog.dismiss();
                                             showAlertDialogForAddProfile();
+//                                        }
+//                                    } else if (success.equals("2")) {
+//                                        String otp = jsonObject.getString("otp");
+//                                        String user_id = jsonObject.getString("user_id");
+//                                        mProgressDialog.dismiss();
+//                                        Toast.makeText(context, "Mobile number already registered and Otp varification Pending.", Toast.LENGTH_SHORT).show();
+//                                        Intent intent = new Intent(context, NewUserWelcomeHome.class);
+//                                        intent.putExtra("user_id", user_id);
+//                                        intent.putExtra("otp", otp);
+//                                        intent.putExtra("mobile", et_contact_number.getText().toString());
+//                                        intent.putExtra("mobile_for_show", et_contact_number.getText().toString());
+//                                        startActivity(intent);
+//                                        finish();
+//
+//                                    }else if (success.equals("3")){
+//                                        mProgressDialog.dismiss();
+//                                            Toast.makeText(context, "You have already registered with us to get your username and password", Toast.LENGTH_LONG).show();
+//                                            Intent intent = new Intent(SignUp.this, NewUserWelcomeHome.class);
+//                                            intent.putExtra("text","You will have to pay Rs. 199 for availing this service.");
+//                                            startActivity(intent);
+//                                            finish();
+
                                         }
-                                    } else if (success.equals("2")) {
-                                        String otp = jsonObject.getString("otp");
-                                        String user_id = jsonObject.getString("user_id");
-                                        mProgressDialog.dismiss();
-                                        Toast.makeText(context, "Mobile number already registered and Otp varification Pending.", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(context, NewUserWelcomeHome.class);
-                                        intent.putExtra("user_id", user_id);
-                                        intent.putExtra("otp", otp);
-                                        intent.putExtra("mobile", et_contact_number.getText().toString());
-                                        intent.putExtra("mobile_for_show", et_contact_number.getText().toString());
-                                        startActivity(intent);
-                                        finish();
-
-                                    }else if (success.equals("3")){
-                                        mProgressDialog.dismiss();
-                                        Toast.makeText(context, "You have already registered with us to get your username and password", Toast.LENGTH_LONG).show();
-                                        Intent intent =new Intent(SignUp.this,NewUserWelcomeHome.class);
-                                        startActivity(intent);
-                                        finish();
-
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();

@@ -119,8 +119,6 @@ public class HomeActivity extends AppDrawer {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HomeActivity.this, OldPrescription.class);
-//                intent.putExtra("id", sharedPrefHelper.getString("id", ""));
-//                intent.putExtra("full_name", sharedPrefHelper.getString("full_name", ""));
                 intent.putExtra("personID",sharedPrefHelper.getInt("personID" ,0));
                 intent.putExtra("personName",sharedPrefHelper.getString("personName", ""));
                 startActivity(intent);
@@ -131,8 +129,7 @@ public class HomeActivity extends AppDrawer {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HomeActivity.this, OldAppointment.class);
-//                intent.putExtra("id", sharedPrefHelper.getString("id", ""));
-//                intent.putExtra("full_name", sharedPrefHelper.getString("full_name", ""));
+
                 intent.putExtra("personID",sharedPrefHelper.getInt("personID" ,0));
                 intent.putExtra("personName",sharedPrefHelper.getString("personName", ""));
                 startActivity(intent);
@@ -145,14 +142,13 @@ public class HomeActivity extends AppDrawer {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HomeActivity.this, Reports.class);
-//                intent.putExtra("id", sharedPrefHelper.getString("id", ""));
                 intent.putExtra("personID",sharedPrefHelper.getInt("personID" ,0));
                 intent.putExtra("personName",sharedPrefHelper.getString("personName", ""));
-//                intent.putExtra("full_name", sharedPrefHelper.getString("full_name", ""));
                 startActivity(intent);
                 finish();
             }
         });
+
         cv_family.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

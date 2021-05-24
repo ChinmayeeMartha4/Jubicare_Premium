@@ -567,6 +567,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="30dp"
+                    android:layout_marginBottom="@dimen/_30dp"
                     android:background="@drawable/btn_background"
                     android:text="@string/Submit"
                     android:textAllCaps="false"
